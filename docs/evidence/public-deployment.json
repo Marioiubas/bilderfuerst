@@ -1,0 +1,41 @@
+{
+  "verifiedOn": "2026-10-05",
+  "url": "https://bilderfuerst.vercel.app",
+  "repository": "https://github.com/Marioiubas/bilderfuerst",
+  "repositoryVisibility": "PUBLIC",
+  "productionBranch": "main",
+  "projectId": "prj_cD8pDIKUPeykuvSAyO4DGRTA5xig",
+  "deploymentId": "dpl_5DGPzFbBSU6nKnwmifkhXPGeg2xV",
+  "target": "production",
+  "state": "READY",
+  "commit": "d855251590aea2814333bd4e9ec73f689983d752",
+  "framework": "nextjs",
+  "nodeVersion": "24.x",
+  "cloudBuildSeconds": 36,
+  "authenticationRequired": false,
+  "unauthenticatedHttpStatus": 200,
+  "routes": {
+    "tested": 189,
+    "passed": 189,
+    "failed": 0
+  },
+  "browser": {
+    "activeDesktopCanvas": 1,
+    "horizontalOverflow": false,
+    "brokenImages": 0,
+    "c41JpgPriceEUR": 12,
+    "paymentDisabled": true,
+    "checkoutInputAndFormCount": 0,
+    "consoleErrors": 0
+  },
+  "runtimeErrorScan": {
+    "window": "preceding hour",
+    "levels": [
+      "error",
+      "fatal"
+    ],
+    "matchingRows": 0
+  },
+  "externalLogDrains": 0,
+  "mode": "public owner review; live checkout disabled"
+}

@@ -2,6 +2,14 @@
 
 A complete German owner-review storefront, built from the public photostudio.de catalog and service content. Darkroom motion is concentrated in the homepage; the catalog, product selection and review cart stay calm and legible.
 
+## Public review
+
+- Website: https://bilderfuerst.vercel.app
+- Public repository: https://github.com/Marioiubas/bilderfuerst
+- Hosting: Vercel production, linked to `main`; pushed changes automatically deploy.
+
+Published at the user's explicit request on 05 October 2026. Access requires no login. This public review retains the demo banner, dated catalog, noindex and disabled checkout described below. See [publication verification](docs/PUBLIC-DEPLOYMENT.md).
+
 ## Run locally
 
 Node.js 22 or newer is required. No credentials are needed for this review build.
@@ -48,7 +56,7 @@ node scripts/verify-routes.mjs
 node scripts/browser-qa.mjs
 ```
 
-The last two checks require the local server at port 3000. Browser QA uses its own named browser session and resets that session's review cart; it never operates the original shop.
+The last two checks default to the local server at port 3000. The route sweep also accepts `BILDERFUERST_SITE_ORIGIN` and `BILDERFUERST_QA_OUTPUT` to verify the public deployment. Browser QA uses its own named browser session and resets that session's review cart; it never operates the original shop.
 
 The installed native `agent-browser` runner stalled during some keyboard/navigation sequences. Its partial results are preserved, and the affected cart refresh, keyboard, responsive and motion checks were completed directly in the Codex browser. See the QA report for this distinction; the CLI run is not claimed as a completely passing automated suite.
 

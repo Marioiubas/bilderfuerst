@@ -37,4 +37,10 @@ The native `agent-browser` CLI stalled during several keyboard/navigation sequen
 
 This remains an owner-review storefront. No live backend, payment, shipping/tax computation, inventory update, customer account, email receipt or order reconciliation has been integrated or accepted. Source legal text and image permissions require owner review. The conflicting legal emails/VAT IDs and unpublished shipping page are documented. Calenso and Maps links were verified without submitting a booking.
 
-No Safari/iOS hardware run, WCAG certification, measured Core Web Vitals or production performance score is claimed. No domain was moved and no public deployment was performed. See `OWNER-CONFIRMATION-LIST.md` for the concrete launch gates.
+No Safari/iOS hardware run, WCAG certification, measured Core Web Vitals or production performance score is claimed. No original business domain was moved. See `OWNER-CONFIRMATION-LIST.md` for the concrete full-commerce launch gates.
+
+## Public publication update · 05 October 2026
+
+At the user's explicit request, the review site was published to https://bilderfuerst.vercel.app and the source to the public https://github.com/Marioiubas/bilderfuerst repository. Vercel reports a READY production deployment. Access protection is disabled for this project, and an unauthenticated HTTP request returns 200.
+
+The public route sweep passes 189/189 routes. Direct browser checks confirm one active desktop Vanta canvas, no horizontal overflow or broken images, the real €12 C-41/JPG variant, a working preview cart and a disabled checkout with zero customer/payment forms. The browser console contains no errors in this check; the initial Vercel error/fatal log scan has no matching rows. No external log drain or continuous monitoring service is configured. See `PUBLIC-DEPLOYMENT.md` and `evidence/public-*` for the publication record. This publication does not enable live orders or establish pending asset rights.

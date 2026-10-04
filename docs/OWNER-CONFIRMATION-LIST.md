@@ -13,4 +13,4 @@ Audit date: 2026-10-04. Public, read-only evidence is in `evidence/crawl.json` a
 9. Consent/analytics, maps and owner dashboard workflow.
 10. Successful sandbox order, failed payment, email receipt, stock and reconciliation tests.
 
-These are production launch gates; they do not block a local, no-payment review build.
+These are full-commerce launch gates. On 05 October 2026 the user explicitly requested public publication of the no-payment review build; it is available at https://bilderfuerst.vercel.app. Publication does not establish the pending rights, legal approvals or live-commerce acceptance above.

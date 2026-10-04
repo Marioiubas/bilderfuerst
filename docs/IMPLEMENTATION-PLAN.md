@@ -12,3 +12,5 @@ Audit date: 2026-10-04. Public, read-only evidence is in `evidence/crawl.json` a
 8. Deliver local review URL, source evidence, validation result and explicit production blockers. No deployment or original-domain changes inferred.
 
 Completed: the owner-review build and optimized local preview are implemented. All 189 routes pass the production sweep, source catalog checks/types/build pass, and visual plus direct browser checks cover the core flows and motion fallbacks. See `QA-REPORT.md` for evidence and the CLI-driver limitation. Production commerce remains gated on owner access and acceptance.
+
+Publication update, 05 October 2026: the user explicitly requested a new public GitHub repository and public Vercel deployment. Both are complete at https://github.com/Marioiubas/bilderfuerst and https://bilderfuerst.vercel.app. The deployed review also passes all 189 routes; publication evidence is in `PUBLIC-DEPLOYMENT.md`. No original-domain migration or live-commerce activation was performed.
