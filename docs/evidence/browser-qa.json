@@ -1,0 +1,72 @@
+[
+  {
+    "name": "35mm C-41 JPG exact price and source variant",
+    "pass": true,
+    "detail": "https://www.photostudio.de/p/filmentwicklung-kleinbild-c-41-entwicklung-mit-large-scan-jpg"
+  },
+  {
+    "name": "110 excludes unavailable E-6 and Push/Pull",
+    "pass": true
+  },
+  {
+    "name": "110 C-41 TIFF source price",
+    "pass": true
+  },
+  {
+    "name": "110 B&W TIFF source price",
+    "pass": true
+  },
+  {
+    "name": "Review cart opens with selected readable variant",
+    "pass": true
+  },
+  {
+    "name": "Cart quantity updates",
+    "pass": true
+  },
+  {
+    "name": "Review cart stores selected quantities",
+    "pass": true
+  },
+  {
+    "name": "Remove cart item updates total",
+    "pass": true
+  },
+  {
+    "name": "Payment disabled and no customer/payment form",
+    "pass": true
+  },
+  {
+    "name": "Multiword catalog search finds Portra 400",
+    "pass": true
+  },
+  {
+    "name": "120 format filter narrows actual source formats",
+    "pass": true
+  },
+  {
+    "name": "Price filter excludes positive-price products at zero",
+    "pass": true
+  },
+  {
+    "name": "Reset restores catalog",
+    "pass": true
+  },
+  {
+    "name": "Unavailable product cannot be added",
+    "pass": true
+  },
+  {
+    "name": "Lens alternative accessible lightbox opens",
+    "pass": true
+  },
+  {
+    "name": "Search dialog returns actual products",
+    "pass": true
+  },
+  {
+    "name": "QA execution",
+    "pass": false,
+    "detail": "spawnSync ./node_modules/.bin/agent-browser ETIMEDOUT"
+  }
+]

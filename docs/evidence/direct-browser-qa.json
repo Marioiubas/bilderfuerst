@@ -1,0 +1,214 @@
+{
+  "verifiedOn": "2026-10-05",
+  "origin": "http://127.0.0.1:3000",
+  "results": [
+    {
+      "name": "Cart quantity and subtotal",
+      "pass": true,
+      "detail": {
+        "quantity": 2,
+        "unitPrice": 12,
+        "total": 24
+      },
+      "provider": "Codex in-app browser"
+    },
+    {
+      "name": "Escape closes cart and restores focus",
+      "pass": true,
+      "detail": {
+        "focused": "In den Vorschau-Warenkorb"
+      },
+      "provider": "Codex in-app browser"
+    },
+    {
+      "name": "Actual page refresh preserves review cart",
+      "pass": true,
+      "detail": {
+        "quantity": 2
+      },
+      "provider": "Codex in-app browser"
+    },
+    {
+      "name": "FineArt size selects source price",
+      "pass": true,
+      "detail": {
+        "size": "30 × 45 cm",
+        "price": "24,50 €"
+      },
+      "provider": "Codex in-app browser"
+    },
+    {
+      "name": "Desktop darkroom",
+      "pass": true,
+      "detail": {
+        "canvas": 1,
+        "h1": 1,
+        "overflow": false
+      },
+      "provider": "Codex in-app browser"
+    },
+    {
+      "name": "Darkroom offscreen cleanup",
+      "pass": true,
+      "detail": {
+        "canvas": 0
+      },
+      "provider": "Codex in-app browser"
+    },
+    {
+      "name": "Compare keyboard ArrowRight",
+      "pass": true,
+      "detail": {
+        "value": 51
+      },
+      "provider": "Codex in-app browser"
+    },
+    {
+      "name": "Reduced motion",
+      "pass": true,
+      "detail": {
+        "canvas": 0,
+        "h1Opacity": "1",
+        "galleryTransforms": [
+          "none",
+          "none",
+          "none"
+        ]
+      },
+      "provider": "Codex in-app browser"
+    },
+    {
+      "name": "Homepage responsive width",
+      "pass": true,
+      "detail": {
+        "width": 360,
+        "overflow": false
+      },
+      "provider": "Codex in-app browser"
+    },
+    {
+      "name": "Homepage responsive width",
+      "pass": true,
+      "detail": {
+        "width": 375,
+        "overflow": false
+      },
+      "provider": "Codex in-app browser"
+    },
+    {
+      "name": "Homepage responsive width",
+      "pass": true,
+      "detail": {
+        "width": 390,
+        "overflow": false
+      },
+      "provider": "Codex in-app browser"
+    },
+    {
+      "name": "Homepage responsive width",
+      "pass": true,
+      "detail": {
+        "width": 430,
+        "overflow": false
+      },
+      "provider": "Codex in-app browser"
+    },
+    {
+      "name": "Homepage responsive width",
+      "pass": true,
+      "detail": {
+        "width": 768,
+        "overflow": false
+      },
+      "provider": "Codex in-app browser"
+    },
+    {
+      "name": "Homepage responsive width",
+      "pass": true,
+      "detail": {
+        "width": 1024,
+        "overflow": false
+      },
+      "provider": "Codex in-app browser"
+    },
+    {
+      "name": "Homepage responsive width",
+      "pass": true,
+      "detail": {
+        "width": 1280,
+        "overflow": false
+      },
+      "provider": "Codex in-app browser"
+    },
+    {
+      "name": "Homepage responsive width",
+      "pass": true,
+      "detail": {
+        "width": 1440,
+        "overflow": false
+      },
+      "provider": "Codex in-app browser"
+    },
+    {
+      "name": "Mobile navigation",
+      "pass": true,
+      "detail": {
+        "opened": true,
+        "closed": true
+      },
+      "provider": "Codex in-app browser"
+    },
+    {
+      "name": "Mobile static darkroom",
+      "pass": true,
+      "detail": {
+        "canvas": 0
+      },
+      "provider": "Codex in-app browser"
+    },
+    {
+      "name": "Anime contact arrangement",
+      "pass": true,
+      "detail": {
+        "ariaPressed": "true"
+      },
+      "provider": "Codex in-app browser"
+    },
+    {
+      "name": "Mobile filters",
+      "pass": true,
+      "detail": {
+        "expanded": true,
+        "visible": true
+      },
+      "provider": "Codex in-app browser"
+    },
+    {
+      "name": "Gallery frame enlargement",
+      "pass": true,
+      "detail": {
+        "dialog": "Galeriefotografie",
+        "opened": true
+      },
+      "provider": "Codex in-app browser"
+    },
+    {
+      "name": "Digitization choices",
+      "pass": true,
+      "detail": {
+        "choice": "Audio",
+        "description": "Tonbänder, Schallplatten und Musikkassetten"
+      },
+      "provider": "Codex in-app browser"
+    },
+    {
+      "name": "Remove final test cart item",
+      "pass": true,
+      "detail": {
+        "quantity": 0,
+        "emptyState": true
+      },
+      "provider": "Codex in-app browser"
+    }
+  ]
+}
