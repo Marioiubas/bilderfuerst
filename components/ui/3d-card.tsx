@@ -10,6 +10,12 @@ import React, {
   useEffect,
 } from "react";
 
+/** Tilt is a desktop-only pointer effect (Direction C tiers): off for reduced motion, coarse pointers and < 1024 px. */
+const tiltDisabled = () =>
+  window.matchMedia("(prefers-reduced-motion: reduce), (pointer: coarse), (max-width: 1023px)").matches;
+/** Maximum tilt in degrees (bounded, mechanical — never a floaty card). */
+const MAX_TILT = 4;
+
 const MouseEnterContext = createContext<
   [boolean, React.Dispatch<React.SetStateAction<boolean>>] | undefined
 >(undefined);
@@ -27,23 +33,22 @@ export const CardContainer = ({
   const [isMouseEntered, setIsMouseEntered] = useState(false);
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!containerRef.current || window.matchMedia('(prefers-reduced-motion: reduce), (pointer: coarse)').matches) return;
+    if (!containerRef.current || tiltDisabled()) return;
     const { left, top, width, height } =
       containerRef.current.getBoundingClientRect();
-    const x = Math.max(-5, Math.min(5, (e.clientX - left - width / 2) / 80));
-    const y = Math.max(-5, Math.min(5, (e.clientY - top - height / 2) / 80));
-    containerRef.current.style.transform = `rotateY(${x}deg) rotateX(${y}deg)`;
+    const x = Math.max(-MAX_TILT, Math.min(MAX_TILT, ((e.clientX - left) / width - 0.5) * 2 * MAX_TILT));
+    const y = Math.max(-MAX_TILT, Math.min(MAX_TILT, ((e.clientY - top) / height - 0.5) * 2 * MAX_TILT));
+    containerRef.current.style.transform = `rotateY(${x}deg) rotateX(${-y}deg)`;
   };
 
-  const handleMouseEnter = (e: React.MouseEvent<HTMLDivElement>) => {
+  const handleMouseEnter = () => {
+    if (tiltDisabled()) return;
     setIsMouseEntered(true);
-    if (!containerRef.current || window.matchMedia('(prefers-reduced-motion: reduce), (pointer: coarse)').matches) return;
   };
 
-  const handleMouseLeave = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!containerRef.current || window.matchMedia('(prefers-reduced-motion: reduce), (pointer: coarse)').matches) return;
+  const handleMouseLeave = () => {
     setIsMouseEntered(false);
-    containerRef.current.style.transform = `rotateY(0deg) rotateX(0deg)`;
+    if (containerRef.current) containerRef.current.style.transform = "";
   };
   return (
     <MouseEnterContext.Provider value={[isMouseEntered, setIsMouseEntered]}>
@@ -123,7 +128,7 @@ export const CardItem = ({
 
   useEffect(() => {
 
-    if (!ref.current || window.matchMedia('(prefers-reduced-motion: reduce), (pointer: coarse)').matches) return;
+    if (!ref.current || tiltDisabled()) return;
     if (isMouseEntered) {
       ref.current.style.transform = `translateX(${translateX}px) translateY(${translateY}px) translateZ(${translateZ}px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) rotateZ(${rotateZ}deg)`;
     } else {

@@ -46,7 +46,7 @@ export function Header(){
 
  return <>
   <a className="skip-link" href="#main">Zum Inhalt springen</a>
-  <div className="utility" role="note">
+  <div className="utility" role="region" aria-label="Ladeninformation und Vorschau-Hinweis">
    <span className="utility-addr">Alexanderstraße 2 · 90762 Fürth</span>
    <span className="review-flag"><i className="led"/>Demo / Owner Review · keine Bestellungen</span>
    <Link className="utility-extra" href="/kontakt">Mo–Fr 9:30–18:30 · Sa 9:30–16:30 <ArrowUpRight size={11}/></Link>
