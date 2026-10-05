@@ -1,0 +1,303 @@
+{
+  "schema": "bilderfuerst/higgsfield-generation-log@1",
+  "generatedBy": "Higgsfield asset-studio pass, cinematic remake worktree",
+  "date": "2026-10-05",
+  "higgsfieldProject": {
+    "name": "Bilderfürst — Cinematic Remake Asset Studio",
+    "projectId": "1b1c2c3f-c022-481c-9c45-88ac11346184",
+    "folderId": "1b1c2c3f-c022-481c-9c45-88ac11346184",
+    "workspace": "private (plus plan)"
+  },
+  "balance": {
+    "before": 106,
+    "after": 86,
+    "spent": 20,
+    "percentOfStartingBalance": 18.9,
+    "budgetCapPercent": 30
+  },
+  "limits": {
+    "imageGenerations": {
+      "used": 9,
+      "cap": 10
+    },
+    "threeDGenerations": {
+      "used": 1,
+      "cap": 2
+    },
+    "video": {
+      "used": 0
+    }
+  },
+  "costNote": "Costs taken from the transactions ledger. Submission failures (below) created no job and were not charged.",
+  "submissionFailures": [
+    {
+      "batchIndex": 1,
+      "target": "darkroom-safelight B",
+      "at": "2026-10-05T19:40:15Z",
+      "error": "Out of credits on plus (monthly) plan in Private workspace.",
+      "charged": 0,
+      "resolution": "resubmitted alone → d8965180-…"
+    },
+    {
+      "batchIndex": 4,
+      "target": "film-base-amber A",
+      "at": "2026-10-05T19:40:15Z",
+      "error": "Out of credits on plus (monthly) plan in Private workspace.",
+      "charged": 0,
+      "resolution": "resubmitted alone → 7361f4dd-…"
+    },
+    {
+      "batchIndex": 6,
+      "target": "archival-paper A",
+      "at": "2026-10-05T19:40:15Z",
+      "error": "Out of credits on plus (monthly) plan in Private workspace.",
+      "charged": 0,
+      "resolution": "resubmitted alone → e54c8c63-…"
+    }
+  ],
+  "generations": [
+    {
+      "target": "darkroom-safelight",
+      "candidate": "A",
+      "model": "flux_2",
+      "modelName": "FLUX.2 [pro] (Black Forest Labs, via Higgsfield)",
+      "params": {
+        "variant": "pro",
+        "resolution": "2k"
+      },
+      "jobId": "84904107-f85d-432b-a7e7-f22200c45865",
+      "createdAt": "2026-10-05T19:40:16Z",
+      "ratio": "16:9",
+      "output": "1920x1088 PNG",
+      "costCredits": 1.5,
+      "prompt": "Abstract photographic background plate. Almost completely black darkness, like the air inside a sealed analog darkroom. One single soft, deep safelight-red glow, heavily diffused and out of focus, sits off-center in the upper right third and fades smoothly into black. Faint, barely visible chemical haze in the air catching the red light. Extremely subtle, low-key, underexposed, fine natural film grain, no hard edges. No objects, no lamp, no fixtures, no people, no text, no logos, no reflections, no neon, no bokeh circles, no lens flare. Matte, quiet, minimal, shot on medium-format film.",
+      "outcome": "rejected",
+      "reason": "Glow reads as a lumpy double-lobed blob rather than a single diffused source; painterly mottled noise over the whole field looks synthetic; too bright/saturated for an extremely subtle plate.",
+      "evidenceFile": "docs/evidence/higgsfield/generated/darkroom-safelight-A-flux2.rejected-preview.jpg",
+      "sourcePngSha256": "68b5d1b9b6a628b22bd9772f8ebd199eadc98c6c9ec9575c13080f8f4d6b599d"
+    },
+    {
+      "target": "darkroom-safelight",
+      "candidate": "B",
+      "model": "gpt_image_2_5",
+      "modelName": "GPT Image 2.5 Flare (OpenAI, via Higgsfield)",
+      "params": {
+        "variant": "flare",
+        "quality": "medium",
+        "resolution": "2k"
+      },
+      "jobId": "d8965180-9deb-40ca-8fcb-bc8388e67735",
+      "createdAt": "2026-10-05T19:40:44Z",
+      "ratio": "16:9",
+      "output": "2688x1520 PNG",
+      "costCredits": 1,
+      "prompt": "Abstract photographic background plate. Almost completely black darkness, like the air inside a sealed analog darkroom. One single soft, deep safelight-red glow, heavily diffused and out of focus, sits off-center in the upper right third and fades smoothly into black. Faint, barely visible chemical haze in the air catching the red light. Extremely subtle, low-key, underexposed, fine natural film grain, no hard edges. No objects, no lamp, no fixtures, no people, no text, no logos, no reflections, no neon, no bokeh circles, no lens flare. Matte, quiet, minimal, shot on medium-format film.",
+      "outcome": "accepted",
+      "reason": "Single soft deep-red diffused glow (centre ~70% x / 18% y, peak R=133) fading into near-black with faint haze and fine grain; no objects, no text, no neon. Reads as photographic darkness.",
+      "evidenceFile": "docs/evidence/higgsfield/generated/darkroom-safelight-B-gptimage25.webp",
+      "publicFile": "public/textures/darkroom-safelight.webp",
+      "sourcePngSha256": "c65f20ebce2d89f49ba9a60af4ee071c2cfb2ab13e70ff9b87b459f504a97433",
+      "note": "First submission in the parallel batch was refused by the API with \"Out of credits on plus (monthly) plan\" (no job created, no charge) although 99+ credits were available; resubmitted alone and succeeded."
+    },
+    {
+      "target": "scanner-light",
+      "candidate": "A",
+      "model": "flux_2",
+      "modelName": "FLUX.2 [pro] (Black Forest Labs, via Higgsfield)",
+      "params": {
+        "variant": "pro",
+        "resolution": "2k"
+      },
+      "jobId": "83b2bc8a-6dda-4039-b4f4-ccb0bcd52a5a",
+      "createdAt": "2026-10-05T19:40:16Z",
+      "ratio": "16:9",
+      "output": "1920x1088 PNG",
+      "costCredits": 1.5,
+      "prompt": "Abstract minimal photographic background plate. A dark graphite-grey field with a very subtle matte texture. A single thin, soft horizontal band of cool cyan-white light crosses the full width of the frame slightly below center, gently diffused with a soft blurred falloff above and below, like the light line of a film scanner seen through frosted glass. Low contrast, calm, fine natural grain. No devices, no machines, no glass edges, no interface, no grid, no text, no logos, no neon, no sci-fi, no particles, no reflections.",
+      "outcome": "rejected",
+      "reason": "Heavy stucco/plaster-wall relief texture reads as a physical wall, not a quiet graphite field; band is wide and white rather than thin and cool.",
+      "evidenceFile": "docs/evidence/higgsfield/generated/scanner-light-A-flux2.rejected-preview.jpg",
+      "sourcePngSha256": "59df32782583d97f8a63985adbfa57b10c237a966bc70b85d642180f86439556"
+    },
+    {
+      "target": "scanner-light",
+      "candidate": "B",
+      "model": "gpt_image_2_5",
+      "modelName": "GPT Image 2.5 Flare (OpenAI, via Higgsfield)",
+      "params": {
+        "variant": "flare",
+        "quality": "medium",
+        "resolution": "2k"
+      },
+      "jobId": "db15e373-73c2-47cf-a18c-ae88c42c44c6",
+      "createdAt": "2026-10-05T19:40:16Z",
+      "ratio": "16:9",
+      "output": "2688x1520 PNG",
+      "costCredits": 1,
+      "prompt": "Abstract minimal photographic background plate. A dark graphite-grey field with a very subtle matte texture. A single thin, soft horizontal band of cool cyan-white light crosses the full width of the frame slightly below center, gently diffused with a soft blurred falloff above and below, like the light line of a film scanner seen through frosted glass. Low contrast, calm, fine natural grain. No devices, no machines, no glass edges, no interface, no grid, no text, no logos, no neon, no sci-fi, no particles, no reflections.",
+      "outcome": "accepted",
+      "reason": "Dark graphite field (mean RGB 55/61/66) with one thin soft cool blue-cyan band at ~49% height (peak ~#BED6E5), soft falloff, fine grain; no device, UI or text.",
+      "evidenceFile": "docs/evidence/higgsfield/generated/scanner-light-B-gptimage25.webp",
+      "publicFile": "public/textures/scanner-light.webp",
+      "sourcePngSha256": "2d90ae2661afa264e876e8337726d100137f7508db501a09bccd3273ed7a41da"
+    },
+    {
+      "target": "film-base-amber",
+      "candidate": "A",
+      "model": "flux_2",
+      "modelName": "FLUX.2 [pro] (Black Forest Labs, via Higgsfield)",
+      "params": {
+        "variant": "pro",
+        "resolution": "2k"
+      },
+      "jobId": "7361f4dd-4b4a-4189-8b1b-dc678434b42a",
+      "createdAt": "2026-10-05T19:41:04Z",
+      "ratio": "16:9",
+      "output": "1920x1088 PNG",
+      "costCredits": 1.5,
+      "prompt": "Extreme macro photograph of blank, unexposed orange-amber colour negative film base, backlit on a light table, filling the entire frame edge to edge. Smooth translucent amber-orange surface with soft, uneven light transmission, gentle gradients from warm honey to deeper burnt orange, faint fine dust and very subtle surface texture, shallow depth of field. Pure abstraction. No frames, no image content, no sprocket holes, no edge printing, no numbers, no letters, no text, no logos, no borders.",
+      "outcome": "rejected",
+      "reason": "Too yellow-gold (not the orange C-41 mask tone); dense hair/fibre debris reads as dirt; dark vignette along the edges suggests a frame border.",
+      "evidenceFile": "docs/evidence/higgsfield/generated/film-base-amber-A-flux2.rejected-preview.jpg",
+      "sourcePngSha256": "97a58e4678fae71fde2460e4f14207b53a179a702472d23e710ca1e851fc3df7",
+      "note": "First submission refused by the API in the parallel batch (no job, no charge); resubmitted alone."
+    },
+    {
+      "target": "film-base-amber",
+      "candidate": "B",
+      "model": "gpt_image_2_5",
+      "modelName": "GPT Image 2.5 Flare (OpenAI, via Higgsfield)",
+      "params": {
+        "variant": "flare",
+        "quality": "medium",
+        "resolution": "2k"
+      },
+      "jobId": "26649052-4851-432a-a695-96d9f7d75284",
+      "createdAt": "2026-10-05T19:40:16Z",
+      "ratio": "16:9",
+      "output": "2688x1520 PNG",
+      "costCredits": 1,
+      "prompt": "Extreme macro photograph of blank, unexposed orange-amber colour negative film base, backlit on a light table, filling the entire frame edge to edge. Smooth translucent amber-orange surface with soft, uneven light transmission, gentle gradients from warm honey to deeper burnt orange, faint fine dust and very subtle surface texture, shallow depth of field. Pure abstraction. No frames, no image content, no sprocket holes, no edge printing, no numbers, no letters, no text, no logos, no borders.",
+      "outcome": "accepted",
+      "reason": "Warm orange-amber translucent field (dominant ~#C84808) with soft diagonal light transmission and sparse fine dust; no frames, sprockets, edge print or letters.",
+      "evidenceFile": "docs/evidence/higgsfield/generated/film-base-amber-B-gptimage25.webp",
+      "publicFile": "public/textures/film-base-amber.webp",
+      "sourcePngSha256": "0f3aaaa2ae406ca816f8058197df6c0e00a7cc860eaf4111f6cc382030526651"
+    },
+    {
+      "target": "archival-paper",
+      "candidate": "A",
+      "model": "flux_2",
+      "modelName": "FLUX.2 [pro] (Black Forest Labs, via Higgsfield)",
+      "params": {
+        "variant": "pro",
+        "resolution": "2k"
+      },
+      "jobId": "e54c8c63-7b40-4403-8bcc-9676ffa28d89",
+      "createdAt": "2026-10-05T19:41:39Z",
+      "ratio": "1:1",
+      "output": "1536x1536 PNG",
+      "costCredits": 1.5,
+      "prompt": "Flat top-down scan of a blank sheet of warm white, ivory fibre-based baryta photographic paper, unexposed. Very subtle natural paper fibre texture and faint tonal variation, soft even diffuse light, no shadows, no vignette, no visible edges, no folds, no stains, seamless surface filling the entire frame. No text, no watermark, no objects. Neutral, quiet, archival.",
+      "outcome": "rejected",
+      "reason": "Reads as rough cold-press watercolour paper in cream/beige rather than smooth ivory fibre-based photo paper; slight darkening along the left edge.",
+      "evidenceFile": "docs/evidence/higgsfield/generated/archival-paper-A-flux2.rejected-preview.jpg",
+      "sourcePngSha256": "3648d4d0431556336631592649dab615676cc4d9f10c511aa6af529b793c11f9",
+      "note": "First submission refused by the API in the parallel batch (no job, no charge); resubmitted alone."
+    },
+    {
+      "target": "archival-paper",
+      "candidate": "B",
+      "model": "gpt_image_2_5",
+      "modelName": "GPT Image 2.5 Flare (OpenAI, via Higgsfield)",
+      "params": {
+        "variant": "flare",
+        "quality": "medium",
+        "resolution": "2k"
+      },
+      "jobId": "d41a16c4-2392-4bad-85da-b4c3141518b0",
+      "createdAt": "2026-10-05T19:40:15Z",
+      "ratio": "1:1",
+      "output": "2048x2048 PNG",
+      "costCredits": 1,
+      "prompt": "Flat top-down scan of a blank sheet of warm white, ivory fibre-based baryta photographic paper, unexposed. Very subtle natural paper fibre texture and faint tonal variation, soft even diffuse light, no shadows, no vignette, no visible edges, no folds, no stains, seamless surface filling the entire frame. No text, no watermark, no objects. Neutral, quiet, archival.",
+      "outcome": "accepted",
+      "reason": "Flat, evenly lit warm-white/ivory surface (mean RGB 247/243/233) with fine natural fibre texture; no edges, stains, text or objects.",
+      "evidenceFile": "docs/evidence/higgsfield/generated/archival-paper-B-gptimage25.webp",
+      "publicFile": "public/textures/archival-paper.webp",
+      "sourcePngSha256": "e4d56d489617a0fe38ad3a94f4b66e626429028f4094d47a761c7eaefb3fd815"
+    },
+    {
+      "target": "film-cartridge (3D reference image)",
+      "candidate": "ref",
+      "model": "gpt_image_2_5",
+      "modelName": "GPT Image 2.5 Flare (OpenAI, via Higgsfield)",
+      "params": {
+        "variant": "flare",
+        "quality": "medium",
+        "resolution": "2k"
+      },
+      "jobId": "eb1a8b0f-d28d-4b0c-84e3-759cb82e5830",
+      "createdAt": "2026-10-05T19:40:16Z",
+      "ratio": "1:1",
+      "output": "2048x2048 PNG",
+      "costCredits": 1,
+      "prompt": "Neutral reference photograph for 3D reconstruction: one generic, unbranded 35mm film cartridge standing upright, three-quarter view from slightly above, centered and fully visible, isolated on a plain light grey seamless background with soft even studio light and a faint contact shadow. Cylindrical body of plain brushed dark gunmetal metal with no label at all, matte black plastic end caps at top and bottom, a short spool stub protruding from the top cap, and a short dark amber film leader tongue extending from the side slot. Absolutely no text, no letters, no numbers, no logos, no stickers, no barcodes, no printed patterns. Sharp focus, realistic proportions.",
+      "outcome": "accepted (as 3D input only, not published)",
+      "reason": "Generic unbranded cartridge: brushed gunmetal body, matte black caps, spool stub, amber leader with sprocket holes. Zoomed inspection of the top cap found only tiny molded marks, no legible text or logo. Used solely as input to image-to-3D.",
+      "evidenceFile": "docs/evidence/higgsfield/generated/film-cartridge-reference-gptimage25.webp",
+      "sourcePngSha256": "2162ce579b0bcd672de2dad8578875b56fd1eb975d139c4f73a0c40117a7ae1d"
+    },
+    {
+      "target": "film-cartridge",
+      "candidate": "3D",
+      "model": "tripo_h3_1_image_to_3d",
+      "modelName": "Tripo H3.1 Image to 3D (Tripo, via Higgsfield)",
+      "params": {
+        "face_limit": 20000,
+        "texture": true,
+        "pbr": true,
+        "texture_quality": "standard",
+        "geometry_quality": "standard"
+      },
+      "inputJobId": "eb1a8b0f-d28d-4b0c-84e3-759cb82e5830",
+      "jobId": "989fcdc6-e3b7-440c-a45e-fb66f0e318c5",
+      "createdAt": "2026-10-05T19:42:19Z",
+      "costCredits": 9,
+      "prompt": "(image-to-3D: no text prompt; input = reference image job eb1a8b0f-…)",
+      "outcome": "accepted",
+      "reason": "Coherent cylinder with black end caps, spool stub, light-trap lip and amber leader; no text/logos; 18,766 triangles. Verified by software-rendering four views of the raw and optimized GLB.",
+      "raw": {
+        "file": "docs/evidence/higgsfield/generated/film-cartridge-tripo-h31-raw.glb",
+        "fileBytes": 2828488,
+        "sha256": "58778b4c7e3b8f5f8717ff89bb2146af5968a3eddde41ba985ffe8418999eb43",
+        "triangles": 18766,
+        "vertices": 11489,
+        "textures": [
+          "baseColor 2048² JPEG 453,321 B",
+          "ORM 2048² JPEG 445,420 B",
+          "normal 2048² PNG 1,334,787 B"
+        ]
+      },
+      "optimized": {
+        "file": "public/models/film-cartridge.glb",
+        "fileBytes": 551632,
+        "triangles": 18766,
+        "textures": "3 × 1024² WebP (EXT_texture_webp)",
+        "pipeline": "gltf-transform 4.5.1: weld → resize 1024×1024 → webp q82 effort 80 → prune (no Draco, no Meshopt)"
+      },
+      "renderEvidence": "docs/evidence/higgsfield/generated/film-cartridge-accepted-views.jpg"
+    }
+  ],
+  "notGenerated": [
+    {
+      "type": "video",
+      "reason": "Skipped by design. Cheapest silent ≤6 s option preflighted (get_cost only, nothing submitted): seedance_2_0_mini 5 s 480p = 2.5 cr; grok_video_v15_lite 5 s 480p = 5 cr; wan3_0 5 s 480p = 5 cr; kling3_0_turbo 5 s 720p = 7.5 cr. None outputs a seamless loop natively, 480p is too soft for a full-bleed hero, and Vanta FOG + CSS/Anime.js already provide the bounded motion; static plates cover reduced-motion/mobile."
+    },
+    {
+      "type": "3D second attempt",
+      "reason": "Not needed — first Tripo H3.1 result accepted. sam_3_3d (1 cr) was preflighted as fallback only."
+    }
+  ],
+  "evidenceStorage": "Accepted 2D originals and the 3D reference are stored as lossless WebP, verified pixel-identical to the downloaded PNGs (sha256 of each PNG recorded above). Rejected candidates are kept as 1280px JPEG previews; their full originals remain in the Higgsfield project under the listed job IDs."
+}

@@ -1,0 +1,54 @@
+[
+  {
+    "name": "film-cartridge",
+    "file": "/models/film-cartridge.glb",
+    "source": "Higgsfield Tripo H3.1 Image to 3D (tripo_h3_1_image_to_3d)",
+    "generationId": "989fcdc6-e3b7-440c-a45e-fb66f0e318c5",
+    "referenceImageGenerationId": "eb1a8b0f-d28d-4b0c-84e3-759cb82e5830",
+    "referenceImageModel": "Higgsfield GPT Image 2.5 (gpt_image_2_5, flare, medium, 2k)",
+    "date": "2026-10-05",
+    "prompt": "Neutral reference photograph for 3D reconstruction: one generic, unbranded 35mm film cartridge standing upright, three-quarter view from slightly above, centered and fully visible, isolated on a plain light grey seamless background with soft even studio light and a faint contact shadow. Cylindrical body of plain brushed dark gunmetal metal with no label at all, matte black plastic end caps at top and bottom, a short spool stub protruding from the top cap, and a short dark amber film leader tongue extending from the side slot. Absolutely no text, no letters, no numbers, no logos, no stickers, no barcodes, no printed patterns. Sharp focus, realistic proportions.",
+    "promptAppliesTo": "reference image (the 3D step is image-only)",
+    "license": "AI-generated in the owner-operated Higgsfield account (Plus plan). The Higgsfield MCP exposes no per-model licence/commercial-use field; usage rights follow Higgsfield and upstream provider terms — confirm before production. Generic, unbranded; not a merchant product, not documentary.",
+    "triangles": 18766,
+    "vertices": 11489,
+    "textureSize": "1024x1024 (baseColor, ORM, normal; WebP via EXT_texture_webp)",
+    "materials": 1,
+    "fileBytes": 551632,
+    "bounds": {
+      "size": [
+        0.4941,
+        1,
+        0.6569
+      ],
+      "note": "Y-up, normalized to 1 unit tall, bbox-centred (body axis sits slightly off origin because the leader extends to one side)."
+    },
+    "loaderRequirements": "Plain three GLTFLoader (r186 handles EXT_texture_webp natively). No Draco/Meshopt/KTX2.",
+    "renderingNotes": "Material is metallic=1/roughness=1 driven by the ORM texture; without an environment map (e.g. PMREM RoomEnvironment) the body renders very dark — give it an env map or a soft key light.",
+    "usage": "Decorative hero/lab accent prop (e.g. slow bounded rotation next to film-lab copy).",
+    "fallback": "Procedural Three.js cartridge or static poster; hide on reduced-motion/low-power if desired.",
+    "decorative": true,
+    "documentary": false,
+    "rawEvidence": "docs/evidence/higgsfield/generated/film-cartridge-tripo-h31-raw.glb"
+  },
+  {
+    "name": "analog-craft",
+    "file": "/props/analog-craft.glb",
+    "source": "Higgsfield 3D Jutsu (scene builder, Blender/Eevee)",
+    "generationId": "project 9e1fa240-ae3d-49dd-b6f6-dc114bfbfd63, revision 1, scene sequence 0, model operation bilderfuerst-editable-props-model",
+    "date": "before 2026-10-05 (see docs/evidence/higgsfield/provenance.json)",
+    "prompt": "Procedural Blender script docs/evidence/higgsfield/create-props.py (six generic stylized roots: Aperture, Reel, Cassette, VHS, Negative, Prints).",
+    "license": "Created in the owner-operated Higgsfield account via 3D Jutsu; generic stylized illustrations only (see provenance.json purpose).",
+    "triangles": 12772,
+    "vertices": 16523,
+    "textureSize": "none (untextured materials)",
+    "materials": 7,
+    "animations": 8,
+    "fileBytes": 589592,
+    "loaderRequirements": "Plain GLTFLoader; uses KHR_lights_punctual (required).",
+    "usage": "Optical-craft props; aperture plays one 1400ms open/close on entry or explicit replay; mouse tilt ≈3.4°.",
+    "fallback": "Six WebP posters in /props/*.webp (400x300 Eevee renders).",
+    "decorative": true,
+    "documentary": false
+  }
+]

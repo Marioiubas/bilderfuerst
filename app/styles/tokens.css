@@ -27,8 +27,8 @@
  --amber-deep:#6b3f0c;
  --cyan:#4cc6cc;           /* scanner cyan: digitization only */
  --cyan-ink:#1c7a80;
- --blue:#4c78c2;           /* industrial blue: E-6 + technical drawing lines */
- --blue-ink:#2f5797;
+ --blue:#4d72d4;           /* industrial blue (sampled Noritsu HS-1800 blue #314bb2, lifted for dark zones): E-6 + technical lines */
+ --blue-ink:#314bb2;
 
  /* — Surfaces — */
  --surface-dark:var(--black);

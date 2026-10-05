@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import {ArrowUpRight} from 'lucide-react';
-import {ApertureMark} from './analog/primitives';
+import {BrandLogo} from './analog/primitives';
 const legal=[['Impressum','contact'],['Datenschutz','privacy'],['Cookies','cookiepolicy'],['AGB','tac'],['Widerruf','withdrawal']];
 export function Footer(){
  return <footer className="site-footer">
@@ -8,7 +8,7 @@ export function Footer(){
    <div className="footer-top">
     <p className="footer-claim">Bring deinen Film<br/><span>nach Fürth.</span></p>
     <div className="footer-visit">
-     <Link href="/" className="wordmark" aria-label="Bilderfürst Fürth – Startseite"><ApertureMark/><span><span className="wordmark-name">bilderfürst</span><span className="wordmark-sub">Fürth · Analog Store &amp; Film Lab</span></span></Link>
+     <Link href="/" className="wordmark" aria-label="Analog Store – Bilderfürst Fürth, Startseite"><BrandLogo/></Link>
      <address>Alexanderstraße 2<br/>90762 Fürth</address>
      <div style={{display:'flex',flexWrap:'wrap',gap:12}}><Link className="btn btn-light" href="/kontakt">Laden &amp; Drop-off <ArrowUpRight size={17} className="btn-arrow-up"/></Link><a className="btn btn-ghost" href="tel:+49911774202">0911 774202</a></div>
     </div>

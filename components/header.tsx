@@ -6,7 +6,7 @@ import {useEffect,useRef,useState} from 'react';
 import {Search,ShoppingBag,Menu,X,ChevronDown,ArrowUpRight} from 'lucide-react';
 import {useStore} from './store-context';
 import {Dialog} from './dialog';
-import {ApertureMark} from './analog/primitives';
+import {BrandLogo} from './analog/primitives';
 import {groupCount,shopGroupLabels,type ShopGroup} from '@/lib/catalog';
 import {registerSweep,watchHeaderThreshold} from '@/motion/navigation';
 
@@ -52,7 +52,7 @@ export function Header(){
    <Link className="utility-extra" href="/kontakt">Mo–Fr 9:30–18:30 · Sa 9:30–16:30 <ArrowUpRight size={11}/></Link>
   </div>
   <header className={`site-header ${compact?'is-compact':''}`} data-tone={dark?'dark':'light'} ref={megaRef}>
-   <Link href="/" className="wordmark" aria-label="Bilderfürst Fürth – Startseite"><ApertureMark/><span><span className="wordmark-name">bilderfürst</span><span className="wordmark-sub">Fürth · Analog Store &amp; Film Lab</span></span></Link>
+   <Link href="/" className="wordmark" aria-label="Analog Store – Bilderfürst Fürth, Startseite"><BrandLogo/><span className="brand-lab" aria-hidden="true">Film Lab<br/>seit 1973</span></Link>
    <nav className="primary-nav" aria-label="Hauptnavigation">
     <button className="nav-trigger" aria-expanded={mega} aria-controls="mega-shop" data-active={isActive('/shop')} onClick={()=>setMega(v=>!v)}>Shop <ChevronDown size={14} style={{transform:mega?'rotate(180deg)':undefined,transition:'transform .2s'}}/></button>
     {NAV.slice(1).map(n=><Link key={n.href} href={n.href} aria-current={isActive(n.href)?'page':undefined}>{n.label}</Link>)}
@@ -84,7 +84,7 @@ export function Header(){
   </header>
   <Dialog open={mobile} onClose={()=>setMobile(false)} label="Navigation" kind="full">
    <div className="mobile-nav">
-    <div className="dialog-head"><Link href="/" className="wordmark" onClick={()=>setMobile(false)}><ApertureMark/><span className="wordmark-name">bilderfürst</span></Link><button className="icon-btn" onClick={()=>setMobile(false)} aria-label="Menü schließen"><X/></button></div>
+    <div className="dialog-head"><Link href="/" className="wordmark" aria-label="Startseite" onClick={()=>setMobile(false)}><BrandLogo/></Link><button className="icon-btn" onClick={()=>setMobile(false)} aria-label="Menü schließen"><X/></button></div>
     <nav aria-label="Mobile Navigation">{[...NAV,{label:'Laden & Kontakt',href:'/kontakt',code:'FTH'}].map((n,i)=><Link key={n.href} href={n.href} data-stagger aria-current={isActive(n.href)?'page':undefined} onClick={()=>setMobile(false)}><span className="mono">{String(i+1).padStart(2,'0')} / {n.code}</span>{n.label}<ArrowUpRight size={20}/></Link>)}</nav>
     <div className="mobile-nav-foot"><span className="mono">Alexanderstraße 2 · 90762 Fürth</span><a href="tel:+49911774202">0911 774202</a><span>Mo–Fr 9:30–18:30 · Sa 9:30–16:30</span></div>
    </div>
