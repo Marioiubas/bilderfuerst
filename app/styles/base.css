@@ -229,7 +229,7 @@ input[type=range]{accent-color:var(--red)}
 /* ───────── Reduced motion ───────── */
 @media (prefers-reduced-motion:reduce){
  html{scroll-behavior:auto}
- *,*::before,*::after{animation-duration:1ms!important;animation-iteration-count:1!important;transition-duration:1ms!important}
+ *,*::before,*::after{animation-duration:1ms!important;animation-iteration-count:1!important;transition:none!important}
 }
 
 /* ───────── Atmosphere (Vanta host + static fallback) ───────── */
