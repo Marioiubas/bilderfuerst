@@ -11,7 +11,7 @@
     "brand": "Fujifilm",
     "category": "CAMERAS",
     "format": "",
-    "process": "Schwarzweiß",
+    "process": "",
     "iso": "",
     "description": "Instax WIDE Evo Hybrid Sofortbildkamera im klassischen hochwertigen Design, 3,5\" LCD-Display, Bildsensor: 1/3-Zoll-CMOS-Sensor m. Primärfarbfilter, Selbstauslöser, Kreativfunktionen m. 10 Linsen- und Filmeffekten + 6 Film Styles, inkl. integrierten Akku.",
     "images": [
@@ -30,7 +30,8 @@
     "attributes": [],
     "isPastEvent": false,
     "optionLabel": "",
-    "masterSlug": ""
+    "masterSlug": "",
+    "filmKind": ""
   },
   {
     "slug": "negativ-scan-ganze-rollen",
@@ -121,7 +122,8 @@
     ],
     "isPastEvent": false,
     "optionLabel": "",
-    "masterSlug": ""
+    "masterSlug": "",
+    "filmKind": ""
   },
   {
     "slug": "schwarz-weiss-entwicklungs-set-mit-jobo-lab-kit-m-patterson-wechselsack-adox-chemie-uvm",
@@ -135,7 +137,7 @@
     "brand": "Adox",
     "category": "ANALOG ENTWICKLUNGS-EQUIPMENT",
     "format": "",
-    "process": "Schwarzweiß",
+    "process": "",
     "iso": "",
     "description": "Mit diesem Set haben Sie alles was Sie zum entwicklen eines Kleinbild- oder Mittelformatfilm brauchen. - Jobo 1520 Unitank für 2 Kleinbild-oder einen Mittelformatfilm -Thermometer -Messbecher (1x 25ml, 1x 260ml) -Chemieflaschen (1x 1000ml, 1x 600ml) -Filmclips -Cascade -Wechselsack von Patterson -Adox Adonal Entwickler 100ml -Adox Adostop Stoppbad 100ml -Adox Adofix Fixierbad 100ml -Adox Adoflo II Netzmittel 100ml -Analog Store 35mm Schwarz Weiss Film (ISO 200)",
     "images": [
@@ -148,7 +150,8 @@
     "attributes": [],
     "isPastEvent": false,
     "optionLabel": "",
-    "masterSlug": ""
+    "masterSlug": "",
+    "filmKind": ""
   },
   {
     "slug": "analog-store-black-und-white-film-200-iso-135-36",
@@ -176,7 +179,8 @@
     "attributes": [],
     "isPastEvent": false,
     "optionLabel": "",
-    "masterSlug": ""
+    "masterSlug": "",
+    "filmKind": "Schwarzweiß"
   },
   {
     "slug": "analog-store-geschenk-gutschein-25-euro",
@@ -203,7 +207,8 @@
     "attributes": [],
     "isPastEvent": false,
     "optionLabel": "",
-    "masterSlug": ""
+    "masterSlug": "",
+    "filmKind": ""
   },
   {
     "slug": "cinestill-400d-36-135-kleinbildfilm",
@@ -218,7 +223,7 @@
     "category": "FILME",
     "format": "35mm",
     "process": "C-41",
-    "iso": "",
+    "iso": "400",
     "description": "CineStill 400Dynamic ist ein feinkörniger, tageslichtausgeglichener Farbnegativfilm, der eine weiche Farbpalette mit natürlicher Sättigung und satten, warmen Hauttönen liefert. Der Film hat einen großen Dynamikbereich mit einer Basisempfindlichkeit von ISO 400, kann aber von 200 bis 800 bewertet und auf 3200 erhöht werden. Dadurch ist der Film sehr vielseitig und kann sowohl im Innenbereich als auch im Studio unter praktisch allen Lichtverhältnissen verwendet werden. Dieser Film kann im C-41 Farbprozess im Filmlabor entwicklet werden.",
     "images": [
       "/images/cinestill-400d-36-135-kleinbildfilm.webp",
@@ -243,7 +248,8 @@
     "attributes": [],
     "isPastEvent": false,
     "optionLabel": "",
-    "masterSlug": ""
+    "masterSlug": "",
+    "filmKind": "Farbe"
   },
   {
     "slug": "cinestill-50d-c-41-135-36",
@@ -258,7 +264,7 @@
     "category": "FILME",
     "format": "35mm",
     "process": "C-41",
-    "iso": "",
+    "iso": "50",
     "description": "Der 50D ist der wohl feinkörnigste und schärfste Farbnegativfilm der Welt. Trotz seiner geringen Empfindlichkeit hat er einen überragenden Belichtungsspielraum so wie man es von einem Kinofilm erwartet. Fangen Sie Bilder ein wie die großen Hollywood Regisseure! Möglich wird diese Sortimentserweiterung dadurch, dass die Leute bei CineStill ein Verfahren entwickelt und zum Patent angemeldet haben, mit welchem sich die Rückseitenbeschichtung von Kodak Cinefilmen wieder entfernen lässt. Dadurch kann der Film in jedem Großlabor oder Minilab im C-41 Prozess entwickelt werden. Technische Daten Xpro C-41 50D: -Farbbalance Tageslicht (5500K) -ISO 50/18° in C-41 oder ECN-2 Process -36 Aufnahmen in standard 135er Casette. Kein DX Code. -Ohne Rückseitenbeschichtung mit einzigartigem Überstrahlungseffekt -Umworben als der feinkörnigste Farbfilm der Welt. -Unübertroffene Lichterzeichnung -Dynamische Farbetreue Farbübertragung -Höchste Auflösung und höchste Schärfe -Verbesserte Scaneigenschaften",
     "images": [
       "/images/cinestill-50d-c-41-135-36.webp",
@@ -280,7 +286,8 @@
     "attributes": [],
     "isPastEvent": false,
     "optionLabel": "",
-    "masterSlug": ""
+    "masterSlug": "",
+    "filmKind": "Farbe"
   },
   {
     "slug": "cinestill-cs-tcs-1000-temperature-control-system-fuer-die-filmentwicklung",
@@ -312,7 +319,8 @@
     "attributes": [],
     "isPastEvent": false,
     "optionLabel": "",
-    "masterSlug": ""
+    "masterSlug": "",
+    "filmKind": ""
   },
   {
     "slug": "cinestill-d-96-motion-picture-developer",
@@ -339,7 +347,8 @@
     "attributes": [],
     "isPastEvent": false,
     "optionLabel": "",
-    "masterSlug": ""
+    "masterSlug": "",
+    "filmKind": ""
   },
   {
     "slug": "filmentwicklung-kleinbild",
@@ -543,7 +552,8 @@
     ],
     "isPastEvent": false,
     "optionLabel": "",
-    "masterSlug": ""
+    "masterSlug": "",
+    "filmKind": ""
   },
   {
     "slug": "filmentwicklung-mittelformat",
@@ -704,7 +714,8 @@
     ],
     "isPastEvent": false,
     "optionLabel": "",
-    "masterSlug": ""
+    "masterSlug": "",
+    "filmKind": ""
   },
   {
     "slug": "filmentwicklung-pocket-110",
@@ -823,7 +834,8 @@
     ],
     "isPastEvent": false,
     "optionLabel": "",
-    "masterSlug": ""
+    "masterSlug": "",
+    "filmKind": ""
   },
   {
     "slug": "harmann-photo-poenix-ii-200-135-36",
@@ -850,7 +862,8 @@
     "attributes": [],
     "isPastEvent": false,
     "optionLabel": "",
-    "masterSlug": ""
+    "masterSlug": "",
+    "filmKind": "Farbe"
   },
   {
     "slug": "jobo-35mm-tank-1510",
@@ -877,7 +890,8 @@
     "attributes": [],
     "isPastEvent": false,
     "optionLabel": "",
-    "masterSlug": ""
+    "masterSlug": "",
+    "filmKind": ""
   },
   {
     "slug": "jobo-kit-duo-set-1501",
@@ -904,7 +918,8 @@
     "attributes": [],
     "isPastEvent": false,
     "optionLabel": "",
-    "masterSlug": ""
+    "masterSlug": "",
+    "filmKind": ""
   },
   {
     "slug": "jobo-kit-duo-set-2502k",
@@ -931,7 +946,8 @@
     "attributes": [],
     "isPastEvent": false,
     "optionLabel": "",
-    "masterSlug": ""
+    "masterSlug": "",
+    "filmKind": ""
   },
   {
     "slug": "jobo-lab-kit-l-1500-l",
@@ -958,7 +974,8 @@
     "attributes": [],
     "isPastEvent": false,
     "optionLabel": "",
-    "masterSlug": ""
+    "masterSlug": "",
+    "filmKind": ""
   },
   {
     "slug": "jobo-lab-kit-m-1500m",
@@ -985,7 +1002,8 @@
     "attributes": [],
     "isPastEvent": false,
     "optionLabel": "",
-    "masterSlug": ""
+    "masterSlug": "",
+    "filmKind": ""
   },
   {
     "slug": "jobo-magnet-1504",
@@ -1012,7 +1030,8 @@
     "attributes": [],
     "isPastEvent": false,
     "optionLabel": "",
-    "masterSlug": ""
+    "masterSlug": "",
+    "filmKind": ""
   },
   {
     "slug": "jobo-multi-tank-2520",
@@ -1039,7 +1058,8 @@
     "attributes": [],
     "isPastEvent": false,
     "optionLabel": "",
-    "masterSlug": ""
+    "masterSlug": "",
+    "filmKind": ""
   },
   {
     "slug": "jobo-multi-tank-2550",
@@ -1066,7 +1086,8 @@
     "attributes": [],
     "isPastEvent": false,
     "optionLabel": "",
-    "masterSlug": ""
+    "masterSlug": "",
+    "filmKind": ""
   },
   {
     "slug": "jobo-planfilmset-uni-2509n",
@@ -1093,7 +1114,8 @@
     "attributes": [],
     "isPastEvent": false,
     "optionLabel": "",
-    "masterSlug": ""
+    "masterSlug": "",
+    "filmKind": ""
   },
   {
     "slug": "jobo-roller-1509",
@@ -1120,7 +1142,8 @@
     "attributes": [],
     "isPastEvent": false,
     "optionLabel": "",
-    "masterSlug": ""
+    "masterSlug": "",
+    "filmKind": ""
   },
   {
     "slug": "jobo-uni-tank-1520",
@@ -1147,7 +1170,8 @@
     "attributes": [],
     "isPastEvent": false,
     "optionLabel": "",
-    "masterSlug": ""
+    "masterSlug": "",
+    "filmKind": ""
   },
   {
     "slug": "kodak-ektacolor-pro-160-135-36",
@@ -1174,7 +1198,8 @@
     "attributes": [],
     "isPastEvent": false,
     "optionLabel": "",
-    "masterSlug": ""
+    "masterSlug": "",
+    "filmKind": "Farbe"
   },
   {
     "slug": "kodak-ektacolor-pro-400-135-36-1",
@@ -1201,7 +1226,8 @@
     "attributes": [],
     "isPastEvent": false,
     "optionLabel": "",
-    "masterSlug": ""
+    "masterSlug": "",
+    "filmKind": "Farbe"
   },
   {
     "slug": "kodak-ektacolor-pro-800-135-36",
@@ -1228,7 +1254,8 @@
     "attributes": [],
     "isPastEvent": false,
     "optionLabel": "",
-    "masterSlug": ""
+    "masterSlug": "",
+    "filmKind": "Farbe"
   },
   {
     "slug": "kodak-ektar-100-135-36",
@@ -1255,7 +1282,8 @@
     "attributes": [],
     "isPastEvent": false,
     "optionLabel": "",
-    "masterSlug": ""
+    "masterSlug": "",
+    "filmKind": "Farbe"
   },
   {
     "slug": "kodak-kodacolor-100-color-negative-film-135-36",
@@ -1282,7 +1310,8 @@
     "attributes": [],
     "isPastEvent": false,
     "optionLabel": "",
-    "masterSlug": ""
+    "masterSlug": "",
+    "filmKind": "Farbe"
   },
   {
     "slug": "kodak-kodacolor-200-color-negative-film-135-36",
@@ -1296,7 +1325,7 @@
     "brand": "Kodak",
     "category": "Shop",
     "format": "35mm",
-    "process": "",
+    "process": "C-41",
     "iso": "200",
     "description": "Kodak Kodacolor 200 ist ein mittelschneller, tageslichtbalancierter Farbnegativfilm. Er zeichnet sich durch feines Korn, satte Farben, hohe Schärfe, einen großen Belichtungsspielraum und eine gleichmäßige Farbwiedergabe aus. Dadurch eignet er sich hervorragend für allgemeine Aufnahmen in unterschiedlichsten Situationen.",
     "images": [
@@ -1309,7 +1338,8 @@
     "attributes": [],
     "isPastEvent": false,
     "optionLabel": "",
-    "masterSlug": ""
+    "masterSlug": "",
+    "filmKind": "Farbe"
   },
   {
     "slug": "kodak-portra-160-120-rollfilm",
@@ -1336,7 +1366,8 @@
     "attributes": [],
     "isPastEvent": false,
     "optionLabel": "",
-    "masterSlug": ""
+    "masterSlug": "",
+    "filmKind": "Farbe"
   },
   {
     "slug": "kodak-portra-160-kleinbild-35mm",
@@ -1363,7 +1394,8 @@
     "attributes": [],
     "isPastEvent": false,
     "optionLabel": "",
-    "masterSlug": ""
+    "masterSlug": "",
+    "filmKind": "Farbe"
   },
   {
     "slug": "kodak-portra-400-120-rollfilm",
@@ -1390,7 +1422,8 @@
     "attributes": [],
     "isPastEvent": false,
     "optionLabel": "",
-    "masterSlug": ""
+    "masterSlug": "",
+    "filmKind": "Farbe"
   },
   {
     "slug": "kodak-portra-400-135-36-film",
@@ -1417,7 +1450,8 @@
     "attributes": [],
     "isPastEvent": false,
     "optionLabel": "",
-    "masterSlug": ""
+    "masterSlug": "",
+    "filmKind": "Farbe"
   },
   {
     "slug": "kodak-portra-800-120-rollfilm",
@@ -1444,7 +1478,8 @@
     "attributes": [],
     "isPastEvent": false,
     "optionLabel": "",
-    "masterSlug": ""
+    "masterSlug": "",
+    "filmKind": "Farbe"
   },
   {
     "slug": "kodak-portra-800-135-36-film",
@@ -1472,7 +1507,8 @@
     "attributes": [],
     "isPastEvent": false,
     "optionLabel": "",
-    "masterSlug": ""
+    "masterSlug": "",
+    "filmKind": "Farbe"
   },
   {
     "slug": "kodak-professional-d-76-zum-ansatz-von-1000-ml",
@@ -1499,7 +1535,8 @@
     "attributes": [],
     "isPastEvent": false,
     "optionLabel": "",
-    "masterSlug": ""
+    "masterSlug": "",
+    "filmKind": ""
   },
   {
     "slug": "pentax-17",
@@ -1528,7 +1565,8 @@
     "attributes": [],
     "isPastEvent": false,
     "optionLabel": "",
-    "masterSlug": ""
+    "masterSlug": "",
+    "filmKind": ""
   },
   {
     "slug": "fujifilm-instax-10-aufnahmen-square",
@@ -1555,7 +1593,8 @@
     "attributes": [],
     "isPastEvent": false,
     "optionLabel": "",
-    "masterSlug": ""
+    "masterSlug": "",
+    "filmKind": ""
   },
   {
     "slug": "fujifilm-instax-film-doppelpack-wide",
@@ -1582,7 +1621,8 @@
     "attributes": [],
     "isPastEvent": false,
     "optionLabel": "",
-    "masterSlug": ""
+    "masterSlug": "",
+    "filmKind": ""
   },
   {
     "slug": "fujifilm-instax-mini-10-aufnahmen-monochrome",
@@ -1609,7 +1649,8 @@
     "attributes": [],
     "isPastEvent": false,
     "optionLabel": "",
-    "masterSlug": ""
+    "masterSlug": "",
+    "filmKind": ""
   },
   {
     "slug": "fujifilm-instax-mini-doppelpack-2x10-aufnahmen",
@@ -1636,7 +1677,8 @@
     "attributes": [],
     "isPastEvent": false,
     "optionLabel": "",
-    "masterSlug": ""
+    "masterSlug": "",
+    "filmKind": ""
   },
   {
     "slug": "fujifilm-instax-mini-einzelpack-10-aufnahmen",
@@ -1663,7 +1705,8 @@
     "attributes": [],
     "isPastEvent": false,
     "optionLabel": "",
-    "masterSlug": ""
+    "masterSlug": "",
+    "filmKind": ""
   },
   {
     "slug": "fujifilm-instax-wide-monochrome-sw-sofortbildfilm-mit-10-aufnahmen",
@@ -1690,7 +1733,8 @@
     "attributes": [],
     "isPastEvent": false,
     "optionLabel": "",
-    "masterSlug": ""
+    "masterSlug": "",
+    "filmKind": ""
   },
   {
     "slug": "polaroid-b-und-w-sx-70",
@@ -1704,7 +1748,7 @@
     "brand": "Polaroid",
     "category": "POLAROID",
     "format": "",
-    "process": "Schwarzweiß",
+    "process": "",
     "iso": "",
     "description": "Originaler Polaroid-Sofortbildfilm mit klassischem weißen Rahmen, der sich in 5 bis 10 Minuten entwickeln lässt und bis zu acht Aufnahmen in hoher Qualität ermöglicht. Kompatibel mit der Polaroid SX-70 Kamera.",
     "images": [
@@ -1717,7 +1761,8 @@
     "attributes": [],
     "isPastEvent": false,
     "optionLabel": "",
-    "masterSlug": ""
+    "masterSlug": "",
+    "filmKind": ""
   },
   {
     "slug": "polaroid-color-600-sofortbildfilm",
@@ -1744,7 +1789,8 @@
     "attributes": [],
     "isPastEvent": false,
     "optionLabel": "",
-    "masterSlug": ""
+    "masterSlug": "",
+    "filmKind": ""
   },
   {
     "slug": "polaroid-color-600-sofortbildfilm-doppelpack",
@@ -1771,7 +1817,8 @@
     "attributes": [],
     "isPastEvent": false,
     "optionLabel": "",
-    "masterSlug": ""
+    "masterSlug": "",
+    "filmKind": ""
   },
   {
     "slug": "polaroid-color-sx-70",
@@ -1798,7 +1845,8 @@
     "attributes": [],
     "isPastEvent": false,
     "optionLabel": "",
-    "masterSlug": ""
+    "masterSlug": "",
+    "filmKind": ""
   },
   {
     "slug": "zine-alessandro-iotti-und-davide-soldarini-carpathians",
@@ -1828,7 +1876,8 @@
     "attributes": [],
     "isPastEvent": false,
     "optionLabel": "",
-    "masterSlug": ""
+    "masterSlug": "",
+    "filmKind": ""
   },
   {
     "slug": "zine-bob-price-lust-to-thrive",
@@ -1857,7 +1906,8 @@
     "attributes": [],
     "isPastEvent": false,
     "optionLabel": "",
-    "masterSlug": ""
+    "masterSlug": "",
+    "filmKind": ""
   },
   {
     "slug": "zine-jason-connelly-21",
@@ -1886,7 +1936,8 @@
     "attributes": [],
     "isPastEvent": false,
     "optionLabel": "",
-    "masterSlug": ""
+    "masterSlug": "",
+    "filmKind": ""
   },
   {
     "slug": "zine-pete-falkous-great-british-holiday",
@@ -1915,7 +1966,8 @@
     "attributes": [],
     "isPastEvent": false,
     "optionLabel": "",
-    "masterSlug": ""
+    "masterSlug": "",
+    "filmKind": ""
   },
   {
     "slug": "zine-sebastian-schweers-urban-immobility",
@@ -1944,7 +1996,8 @@
     "attributes": [],
     "isPastEvent": false,
     "optionLabel": "",
-    "masterSlug": ""
+    "masterSlug": "",
+    "filmKind": ""
   },
   {
     "slug": "110-professional-hc-110-schwarz-weiss-entwickler",
@@ -1958,7 +2011,7 @@
     "brand": "",
     "category": "FOTOCHEMIE",
     "format": "",
-    "process": "Schwarzweiß",
+    "process": "",
     "iso": "",
     "description": "Kodak HC110 Negativentwickler Eigentlich als Presse- Schnellentwickler konzipiert, erfreut sich HC 110 heute großer Beliebtheit bei den Zonensystem- und Großformatfotografen. Der Grund: Mit diesem Entwickler lässt sich der Negativkontrast sehr gut steuern und HC 110 holt die Empfindlichkeit aus den Filmen bei gleichzeitig guter Schattenzeichnung. Für Feinstkornfetischisten ist dieser Entwickler nichts. Der Entwickler ist stark verdünnbar und arbeitet somit wirtschaftlich bei Planfilmen oder im Schullabor. Durch die kurzen Entwicklungszeiten ist auch gesichert, dass der Film wirklich beim nächsten Pausenklingeln fertig ist. Es handelt sich hier um das unverdünnte Originalkonzentrat.",
     "images": [
@@ -1971,7 +2024,8 @@
     "attributes": [],
     "isPastEvent": false,
     "optionLabel": "",
-    "masterSlug": ""
+    "masterSlug": "",
+    "filmKind": ""
   },
   {
     "slug": "23-03-2024-photowalk",
@@ -1998,7 +2052,8 @@
     "attributes": [],
     "isPastEvent": true,
     "optionLabel": "",
-    "masterSlug": ""
+    "masterSlug": "",
+    "filmKind": ""
   },
   {
     "slug": "adox-adofix-plus-expressfixierer-500-ml-konzentrat-adox-adofix-plus-expressfixierer-500-ml",
@@ -2025,7 +2080,8 @@
     "attributes": [],
     "isPastEvent": false,
     "optionLabel": "",
-    "masterSlug": ""
+    "masterSlug": "",
+    "filmKind": ""
   },
   {
     "slug": "adox-adonal-500-ml-konzentrat-schwarz-weiss-filmentwickler",
@@ -2039,7 +2095,7 @@
     "brand": "Adox",
     "category": "FOTOCHEMIE",
     "format": "",
-    "process": "Schwarzweiß",
+    "process": "",
     "iso": "",
     "description": "Hergestellt nach der letzten bekannten Agfa Rodinal Originalrezeptur von 2005. Schärfesteigernder Entwickler als Flüssigkonzentrat. Einfach in der Anwendung: Verdünnen / Entwickeln / Wegkippen. Einer der universellsten Entwickler überhaupt mit weltweiter Bekanntheit und einer der umfassendsten Sammlungen an Entwicklungszeiten . 500 ml Konzentrat für Verdünnungen von 1+25 bis 1+200. Dieser Entwickler wird nach der letzen bekannten Agfa RODINAL original Rezeptur hergestellt. Er verwendet ausgesuchte, nachbehandelte Rohstoffe und ist in der Rezeptur absolut identisch. Nach unserem Kenntnisstand trifft diese Aussage derzeit auf keinen anderen Paraminophenol basierten Entwickler auf dem Markt zu, der nach 2010 hergestellt worden ist. RODINAL ist das älteste fotochemische Patent der Welt. Das Konzentrat ist nahezu unbegrenzt haltbar - auch wenn die Flasche nach dem Öffnen langsam durchfärbt. Angesetzt muss zügig verbraucht werden, da er in Verdünnungen über 1+25 schnell an Wirksamkeit verliert. Es kursieren zwar Entwicklungsanleitungen aus dem letzten Jahrhundert, wonach ein ADOX 25 ASA Film in Rodinal 1+200 bei Standentwicklung nach 3 Tagen auf wundersame 400 ASA klettern würde, aber wir denken, dass jeder Chemiker diese Theorie wohl in die Schublade der Kuriositäten verbannen wird. ADONAL/RODINAL unterscheidet sich leicht von APH09/R09 durch eine etwas verbesserte Feinkörnigkeit.",
     "images": [
@@ -2052,7 +2108,8 @@
     "attributes": [],
     "isPastEvent": false,
     "optionLabel": "",
-    "masterSlug": ""
+    "masterSlug": "",
+    "filmKind": ""
   },
   {
     "slug": "adox-adostop-eco-geruchloses-stoppbad-mit-indikator-500-ml-konzentrat-adox-adostop-eco-ger",
@@ -2079,7 +2136,8 @@
     "attributes": [],
     "isPastEvent": false,
     "optionLabel": "",
-    "masterSlug": ""
+    "masterSlug": "",
+    "filmKind": ""
   },
   {
     "slug": "adox-adotech-iv-fuer-bis-zu-6-kleinbild-oder-rollfilme-100-ml-konzentrat",
@@ -2092,9 +2150,9 @@
     "delivery": "2-3",
     "brand": "Adox",
     "category": "FOTOCHEMIE",
-    "format": "120",
+    "format": "",
     "process": "",
-    "iso": "100",
+    "iso": "",
     "description": "Spezial Entwickler um den ADOX CMS 20 II Film mit Halbtönen wie einen normalen Film zu entwickeln. Wesentlich verbesserte Grauwertwiedergabe in den Lichtern im Vergleich zum ADOTECH I. Die Kurve wurde linearisiert. Der CMS 20 II hat seit dem ADOTECH II jetzt annähernd die gleiche Kurve wie ein normaler S/W Film. Seit ADOTECH III sind die Einschränkungen in der Haltbarkeit beseitigt. ADOTECH IV hält jetzt in der Flasche wie ein normaler Entwickler und muss nicht mehr nach Teilentnahmen mit Wasser aufgefüllt werden. Außerdem weist er eine noch einmal wesentlich verbesserte Stabilität gegen Schlieren in größeren homogenen Grauflächen auf. Dieses dem Hochauflösungsverfahren früher immanente Problem kann jetzt als weitestgehend beseitigt angesehen werden. Der neue ADOTECH IV Entwickler liefert eine nochmals verbesserte Tonwertwiedergabe im Vergleich zu seinem Vorgänger ADOTECH III. Insbesondere die Schattenzeichnung konnte signifikant verbessert werden. Die Schwärzungskurve verläuft noch harmonischer mit gleichmäßigeren Abstufungen. Zusätzlich konnte der praktisch nutzbare Empfindlichkeitsbereich etwas erweitert werden. Seit 2011 ausgelieferte CMS 20 II Filme könnnen wahlweise in ADOTECH III oder ADOTECH IV verarbeitet werden. Es sind die Verdünnungs-, Temperatur- und Entwicklungsangaben auf dem jeweiligen Flaschenetikett zu verwenden! Inhalt 100 ml. Verdünnung 1+14 zur Herstellung von 1500 ml Arbeitslösung. Für bis zu 6 Kleinbild-Filme in Jobo Dosen (250 ml je Film) Für bis zu 6 Rollfilme in Jobo Dosen (500ml für 2 Filme) In anderen Dosen weicht die Ausnutzung ab!",
     "images": [
       "/images/adox-adotech-iv-fuer-bis-zu-6-kleinbild-oder-rollfilme-100-ml-konzentrat.webp"
@@ -2106,7 +2164,8 @@
     "attributes": [],
     "isPastEvent": false,
     "optionLabel": "",
-    "masterSlug": ""
+    "masterSlug": "",
+    "filmKind": ""
   },
   {
     "slug": "adox-d-76-filmentwickler-zum-ansatz-von-1000-ml",
@@ -2133,7 +2192,8 @@
     "attributes": [],
     "isPastEvent": false,
     "optionLabel": "",
-    "masterSlug": ""
+    "masterSlug": "",
+    "filmKind": ""
   },
   {
     "slug": "adox-silvermax-entwickler-100-ml-konzentrat",
@@ -2148,7 +2208,7 @@
     "category": "FOTOCHEMIE",
     "format": "",
     "process": "",
-    "iso": "100",
+    "iso": "",
     "description": "SILVERMAX Entwickler ist speziell optimiert für den ADOX Silvermax Film, kann aber auch für andere Filme mit hervorragenden Ergebnissen verwendet werden. Er sorgt dafür, dass die Reservern die im Silvermax schlummern in erweiterte fotografische Eigenschaften umgesetzt werden. Die Maximaldichte wird reduziert und die Grauwerte werden optimiert über die Kurve verteilt. Nur im SILVERMAX Entwickler bringt der Film bis zu 14 Zonen Kopierumfang. Andere Entwickler können bei verkürzter Entwicklungszeit auch die Maximalschwärze reduzieren, sie modulieren die Kurve aber nicht so wie der SILVERMAX Entwickler um bei höchstem Detailkontrast Lichter und Schatten voll auszureizen. 100 ml Konzentrat zum Ansatz von 3 Litern Arbeitslösung. der Flascheninhalt reicht bei der Verwendung von Jobo Dosen (250ml) für 12 Filme, sonst für 10 Filme. Entwicklungszeiten für andere Filme im technischen Datenblatt (PDF Download). Entwicklungszeit Silvermax bei 20°C: 11 Minuten.",
     "images": [
       "/images/adox-silvermax-entwickler-100-ml-konzentrat.webp"
@@ -2160,7 +2220,8 @@
     "attributes": [],
     "isPastEvent": false,
     "optionLabel": "",
-    "masterSlug": ""
+    "masterSlug": "",
+    "filmKind": ""
   },
   {
     "slug": "adox-xt-3-developer-zum-ansatz-von-1000-ml",
@@ -2187,7 +2248,8 @@
     "attributes": [],
     "isPastEvent": false,
     "optionLabel": "",
-    "masterSlug": ""
+    "masterSlug": "",
+    "filmKind": ""
   },
   {
     "slug": "agfa-photo-apx-400-135-36-film",
@@ -2201,7 +2263,7 @@
     "brand": "",
     "category": "Shop",
     "format": "35mm",
-    "process": "",
+    "process": "Schwarzweiß",
     "iso": "400",
     "description": "Hochempfindlicher SW-Film (ISO 400/27°) mit noch guter Schärfe und Feinkörnigkeit. Er eignet sich für alle Aufnahmen unter ungünstigen Lichtverhältnissen. Durch forcierte Entwicklung kann er in der Empfindlichkeit bis ISO 1600/31° gesteigert werden",
     "images": [
@@ -2214,7 +2276,8 @@
     "attributes": [],
     "isPastEvent": false,
     "optionLabel": "",
-    "masterSlug": ""
+    "masterSlug": "",
+    "filmKind": "Schwarzweiß"
   },
   {
     "slug": "analog-store-geschenk-gutschein-50-euro",
@@ -2229,7 +2292,7 @@
     "category": "GUTSCHEIN",
     "format": "",
     "process": "",
-    "iso": "50",
+    "iso": "",
     "description": "Dieser Gutschein gilt für den Einkauf in unserem Analog-Store.",
     "images": [
       "/images/analog-store-geschenk-gutschein-50-euro.webp"
@@ -2241,7 +2304,8 @@
     "attributes": [],
     "isPastEvent": false,
     "optionLabel": "",
-    "masterSlug": ""
+    "masterSlug": "",
+    "filmKind": ""
   },
   {
     "slug": "analog-store-geschenk-gutschein-75-euro",
@@ -2268,7 +2332,8 @@
     "attributes": [],
     "isPastEvent": false,
     "optionLabel": "",
-    "masterSlug": ""
+    "masterSlug": "",
+    "filmKind": ""
   },
   {
     "slug": "bild-1-adox-adoflo-ii-netzmittel-500-ml-konzentrat-adox-adoflo-ii-netzmittel-500-ml-konzentrat",
@@ -2295,7 +2360,8 @@
     "attributes": [],
     "isPastEvent": false,
     "optionLabel": "",
-    "masterSlug": ""
+    "masterSlug": "",
+    "filmKind": ""
   },
   {
     "slug": "billingham-hadley-digital-black-fibrenyte-black",
@@ -2309,7 +2375,7 @@
     "brand": "",
     "category": "Shop",
     "format": "",
-    "process": "Schwarzweiß",
+    "process": "",
     "iso": "",
     "description": "Die Billingham Hadley Digital ist die kleinste Fototasche aus der Hadley-Serie. Diese besondere Kameratasche vereint Komfort mit einer kompakten Größe. Die Hadley Digital ist natürlich ebenso solide wie die übrigen Billingham-Kamerataschen. Gewicht: 470 gr. Länge: 130 mm Breite: 210 mm Höhe: 210 mm Innengröße Breite: 180 mm Innere dimension Tiefe: 100 mm Innengröße Länge: 170 mm",
     "images": [
@@ -2322,7 +2388,8 @@
     "attributes": [],
     "isPastEvent": false,
     "optionLabel": "",
-    "masterSlug": ""
+    "masterSlug": "",
+    "filmKind": ""
   },
   {
     "slug": "billingham-hadley-small-pro-black-fibrenyte-black",
@@ -2336,7 +2403,7 @@
     "brand": "",
     "category": "Shop",
     "format": "",
-    "process": "Schwarzweiß",
+    "process": "",
     "iso": "",
     "description": "Die Hadley Small hat sich bei vielen Fotografen längst als sehr kompakte Fototasche etabliert. Nun hat Billingham dieser nach wie vor bewährten und beliebten Kameratasche eine neue Version an die Seite gestellt: die Hadley Small Pro. Sie verfügt über dasselbe herausnehmbare Insert wie ihre ältere Schwester. Mit dem identischen Volumen von 3,5 l kann sie ebenso wie diese eine DSLR-Kamera oder auch eine Spiegellose mit Standardobjektiv, einem zweiten Objektiv und Zubehör aufnehmen. Die Unterschiede zwischen beiden Modellen zeigen sich außen an der Hadley Small Pro. Bloße Äußerlichkeiten sind sie dennoch nicht. Länge: 330 mm Breite: 140 mm Höhe: 260 mm Innengröße Breite: 260 mm Innere dimension Tiefe: 80 mm Innengröße Länge: 190 mm",
     "images": [
@@ -2351,7 +2418,8 @@
     "attributes": [],
     "isPastEvent": false,
     "optionLabel": "",
-    "masterSlug": ""
+    "masterSlug": "",
+    "filmKind": ""
   },
   {
     "slug": "billingham-hadley-small-pro-black-tan",
@@ -2365,7 +2433,7 @@
     "brand": "",
     "category": "Shop",
     "format": "",
-    "process": "Schwarzweiß",
+    "process": "",
     "iso": "",
     "description": "Die Hadley Small hat sich bei vielen Fotografen längst als sehr kompakte Fototasche etabliert. Nun hat Billingham dieser nach wie vor bewährten und beliebten Kameratasche eine neue Version an die Seite gestellt: die Hadley Small Pro. Sie verfügt über dasselbe herausnehmbare Insert wie ihre ältere Schwester. Mit dem identischen Volumen von 3,5 l kann sie ebenso wie diese eine DSLR-Kamera oder auch eine Spiegellose mit Standardobjektiv, einem zweiten Objektiv und Zubehör aufnehmen. Die Unterschiede zwischen beiden Modellen zeigen sich außen an der Hadley Small Pro. Bloße Äußerlichkeiten sind sie dennoch nicht. Länge: 330 mm Breite: 140 mm Höhe: 260 mm Innengröße Breite: 260 mm Innere dimension Tiefe: 80 mm Innengröße Länge: 190 mm",
     "images": [
@@ -2380,7 +2448,8 @@
     "attributes": [],
     "isPastEvent": false,
     "optionLabel": "",
-    "masterSlug": ""
+    "masterSlug": "",
+    "filmKind": ""
   },
   {
     "slug": "billingham-hadley-small-pro-khaki-tan",
@@ -2409,7 +2478,8 @@
     "attributes": [],
     "isPastEvent": false,
     "optionLabel": "",
-    "masterSlug": ""
+    "masterSlug": "",
+    "filmKind": ""
   },
   {
     "slug": "cinestill-400d-mittelformat",
@@ -2424,7 +2494,7 @@
     "category": "FILME",
     "format": "120",
     "process": "C-41",
-    "iso": "",
+    "iso": "400",
     "description": "CineStill 400Dynamic ist ein feinkörniger, tageslichtausgeglichener Farbnegativfilm, der eine weiche Farbpalette mit natürlicher Sättigung und satten, warmen Hauttönen liefert. Der Film hat einen großen Dynamikbereich mit einer Basisempfindlichkeit von ISO 400, kann aber von 200 bis 800 bewertet und auf 3200 erhöht werden. Dadurch ist der Film sehr vielseitig und kann sowohl im Innenbereich als auch im Studio unter praktisch allen Lichtverhältnissen verwendet werden. Dieser Film kann im C-41 Farbprozess im Filmlabor entwicklet werden.",
     "images": [
       "/images/cinestill-400d-mittelformat.webp",
@@ -2444,7 +2514,8 @@
     "attributes": [],
     "isPastEvent": false,
     "optionLabel": "",
-    "masterSlug": ""
+    "masterSlug": "",
+    "filmKind": "Farbe"
   },
   {
     "slug": "cinestill-50d-daylight-120-rollfilm",
@@ -2459,7 +2530,7 @@
     "category": "FILME",
     "format": "120",
     "process": "C-41",
-    "iso": "",
+    "iso": "50",
     "description": "CINESTILL CineStill 50D Daylight C-41 120 Rollfilm Der zweite Cinestill-Farbnegativfilm ist jetzt auch als Rollfilm erhältlich. Der 50D ist wahrscheinlich der feinkörnigste und schärfste Farbnegativfilm der Welt. Obwohl er eine geringe Empfindlichkeit hat, hat er einen hervorragenden Belichtungsspielraum, wie Sie es von einem Film erwarten würden.",
     "images": [
       "/images/cinestill-50d-daylight-120-rollfilm.webp",
@@ -2483,7 +2554,8 @@
     "attributes": [],
     "isPastEvent": false,
     "optionLabel": "",
-    "masterSlug": ""
+    "masterSlug": "",
+    "filmKind": "Farbe"
   },
   {
     "slug": "cinestill-bwxx-120",
@@ -2497,7 +2569,7 @@
     "brand": "CineStill",
     "category": "FILME",
     "format": "120",
-    "process": "C-41",
+    "process": "Schwarzweiß",
     "iso": "",
     "description": "CineStill BwXX 120 is a classic panchromatic black and white negative film for both outdoor and indoor/studio use. Akin to the legendary Kodak Plus-X & Tri-X emulsions, it is an excellent choice for all those looking for a classic film stock with top-level performance and versatility in a variety of conditions. It has a variable base sensitivity of 250 under daylight (5500K) and 200 under tungsten (3200K) lighting conditions, and can be rated up to ISO 1600 with the appropriate processing compensation. Ideal for low light situations, this film delivers rich blacks and and wide range of tonal steps, while also providing very high sharpness, crisp micro-contrast, and a fine grain structure. This film stock is left relatively unchanged since its release in 1959 for still and motion picture use. Some of the iconic movies filmed on the classic Eastman Double-X film stock 5222 include: The Lighthouse (2019), Raging Bull (1980), Schindler's List (1993), Stranger Than Paradise (1984), Memento (2000), Kafka (1991), Casino Royale (2006), I'm Not There (2007), Kill Bill: Vol. 1 (2003), Manhattan (1979), Cinderella Man (2005), Aferim! (2015), Frantz (2016), American Horror Story (2011-2017) and many many more. It is thanks to all the dedicated film shooters out there that we were able to bring such an exciting new film stock to the market. For all the silver halides enthusiasts out there, we hope you'll enjoy shooting this film as much as we do!",
     "images": [
@@ -2516,7 +2588,8 @@
     "attributes": [],
     "isPastEvent": false,
     "optionLabel": "",
-    "masterSlug": ""
+    "masterSlug": "",
+    "filmKind": "Schwarzweiß"
   },
   {
     "slug": "cinestill-cinestill-800-t-c-41-120",
@@ -2554,7 +2627,8 @@
     "attributes": [],
     "isPastEvent": false,
     "optionLabel": "",
-    "masterSlug": ""
+    "masterSlug": "",
+    "filmKind": "Farbe"
   },
   {
     "slug": "cinestill-cinestill-800-t-c-41-135-36",
@@ -2597,7 +2671,8 @@
     "attributes": [],
     "isPastEvent": false,
     "optionLabel": "",
-    "masterSlug": ""
+    "masterSlug": "",
+    "filmKind": "Farbe"
   },
   {
     "slug": "ferrania-p30-panchro-film-80asa-135-36",
@@ -2611,8 +2686,8 @@
     "brand": "",
     "category": "Shop",
     "format": "35mm",
-    "process": "",
-    "iso": "",
+    "process": "Schwarzweiß",
+    "iso": "80",
     "description": "Die italienischen Vorreiter der Filmemacher haben den P30 in vielen weltweit beliebten und berühmten Filmen verwendet. Auf Grund der großen Beliebtheit wurde der Film auch für die Öffentlichkeit und Fotografen zugänglich. Das Ferrania Team und ihre Entwickler haben den Film neu aufgenommen und an die Moderne Zeit und Analoge Technik angepasst. In der neu aufgebauten Manufaktur in Cairo Montenotte, Italien wird der Film nun wieder hergestellt. Im Detail: - 80 ASA - Tiefe/Starke Schatten und Kontraste - Schöne scharfe Highlights - Kaum vorhandene Körnung - Made in Italy",
     "images": [
       "/images/ferrania-p30-panchro-film-80asa-135-36.webp"
@@ -2624,7 +2699,8 @@
     "attributes": [],
     "isPastEvent": false,
     "optionLabel": "",
-    "masterSlug": ""
+    "masterSlug": "",
+    "filmKind": "Schwarzweiß"
   },
   {
     "slug": "fujicolor-pro-400h-120-36-rollfilm",
@@ -2638,8 +2714,8 @@
     "brand": "",
     "category": "Shop",
     "format": "120",
-    "process": "",
-    "iso": "",
+    "process": "C-41",
+    "iso": "400",
     "description": "Der Fuji Pro 400 H ist ein hochempfindlicher Farbnegativfilm mit einer Nennempfindlichkeit von ISO 400/27°. Der Pro 400 H ist ein Farbnegativfilm für Tageslicht. Hauttöne werden natürlich wiedergegeben. Hinzu kommen eine exakte Farbreproduktion und eine gleichmäßige Graubalance. Mit seinem großen Belichtungsspielraum sorgt der PRO 400 H auch bei Unter- und Überbelichtungen für eine erheblich gesteigerte Farbtreue.",
     "images": [
       "/images/fujicolor-pro-400h-120-36-rollfilm.webp"
@@ -2651,7 +2727,8 @@
     "attributes": [],
     "isPastEvent": false,
     "optionLabel": "",
-    "masterSlug": ""
+    "masterSlug": "",
+    "filmKind": "Farbe"
   },
   {
     "slug": "fujifilm-provia-100-f-135-36-kleinbildfilm",
@@ -2678,7 +2755,8 @@
     "attributes": [],
     "isPastEvent": false,
     "optionLabel": "",
-    "masterSlug": ""
+    "masterSlug": "",
+    "filmKind": "Dia"
   },
   {
     "slug": "fujifilm-velvia-100-135-36-kb-diafilm",
@@ -2705,7 +2783,8 @@
     "attributes": [],
     "isPastEvent": false,
     "optionLabel": "",
-    "masterSlug": ""
+    "masterSlug": "",
+    "filmKind": "Dia"
   },
   {
     "slug": "ilford-delta-100-schwarz-weiss-film-135-36",
@@ -2732,7 +2811,8 @@
     "attributes": [],
     "isPastEvent": false,
     "optionLabel": "",
-    "masterSlug": ""
+    "masterSlug": "",
+    "filmKind": "Schwarzweiß"
   },
   {
     "slug": "ilford-delta-3200-professional-135-36",
@@ -2759,7 +2839,8 @@
     "attributes": [],
     "isPastEvent": false,
     "optionLabel": "",
-    "masterSlug": ""
+    "masterSlug": "",
+    "filmKind": "Schwarzweiß"
   },
   {
     "slug": "ilford-delta-3200-professional-mittelformat",
@@ -2786,7 +2867,8 @@
     "attributes": [],
     "isPastEvent": false,
     "optionLabel": "",
-    "masterSlug": ""
+    "masterSlug": "",
+    "filmKind": "Schwarzweiß"
   },
   {
     "slug": "ilford-delta-400-schwarz-weiss-film-135-36",
@@ -2813,7 +2895,8 @@
     "attributes": [],
     "isPastEvent": false,
     "optionLabel": "",
-    "masterSlug": ""
+    "masterSlug": "",
+    "filmKind": "Schwarzweiß"
   },
   {
     "slug": "ilford-fp4-plus-125-schwarz-weiss-film-135-36",
@@ -2840,7 +2923,8 @@
     "attributes": [],
     "isPastEvent": false,
     "optionLabel": "",
-    "masterSlug": ""
+    "masterSlug": "",
+    "filmKind": "Schwarzweiß"
   },
   {
     "slug": "ilford-hp5-plus-400-schwarz-weiss-film-135-36",
@@ -2867,7 +2951,8 @@
     "attributes": [],
     "isPastEvent": false,
     "optionLabel": "",
-    "masterSlug": ""
+    "masterSlug": "",
+    "filmKind": "Schwarzweiß"
   },
   {
     "slug": "ilford-hp5-plus-400-schwarzweissfilm-120",
@@ -2894,7 +2979,8 @@
     "attributes": [],
     "isPastEvent": false,
     "optionLabel": "",
-    "masterSlug": ""
+    "masterSlug": "",
+    "filmKind": "Schwarzweiß"
   },
   {
     "slug": "ilford-ilfostop-500-ml",
@@ -2921,7 +3007,8 @@
     "attributes": [],
     "isPastEvent": false,
     "optionLabel": "",
-    "masterSlug": ""
+    "masterSlug": "",
+    "filmKind": ""
   },
   {
     "slug": "ilford-multigrade-entwickler-fuer-schwarzweiss-fotopapier-1-liter",
@@ -2935,7 +3022,7 @@
     "brand": "Ilford",
     "category": "FOTOCHEMIE",
     "format": "",
-    "process": "Schwarzweiß",
+    "process": "",
     "iso": "",
     "description": "MULTIGRADE ist ein Schnellentwickler für alle Schwarzweißpapiere sowohl mit PE- als auch mit Barytträger. Er basiert auf der Entwicklerkombination Dimezon S und Hydrochinon. Er arbeitet besonders sauber und ist sehr gut haltbar. Mit den meisten Papieren wird ein neutralschwarzer Bildton erzielt. Der Multigrade Entwickler wurde speziell für die Ilford Multigrade Papiere konzipiert. Er eignet sich aber auch hervorragend für die Papiere anderer Hersteller. Verdünnung 1 + 9 Ergiebigkeit: 5m² PE-Papier oder 3m² Barytpapier pro Liter Gebrauchslösung",
     "images": [
@@ -2948,7 +3035,8 @@
     "attributes": [],
     "isPastEvent": false,
     "optionLabel": "",
-    "masterSlug": ""
+    "masterSlug": "",
+    "filmKind": ""
   },
   {
     "slug": "ilford-pan-f-plus-50-schwarz-weiss-film-135-36",
@@ -2975,7 +3063,8 @@
     "attributes": [],
     "isPastEvent": false,
     "optionLabel": "",
-    "masterSlug": ""
+    "masterSlug": "",
+    "filmKind": "Schwarzweiß"
   },
   {
     "slug": "ilford-rapid-fixer-1-liter",
@@ -3002,7 +3091,8 @@
     "attributes": [],
     "isPastEvent": false,
     "optionLabel": "",
-    "masterSlug": ""
+    "masterSlug": "",
+    "filmKind": ""
   },
   {
     "slug": "ilford-sfx-200-135-36-infrarotfilm",
@@ -3016,7 +3106,7 @@
     "brand": "Ilford",
     "category": "FILME",
     "format": "35mm",
-    "process": "C-41",
+    "process": "Schwarzweiß",
     "iso": "200",
     "description": "Schwarzweißfilm mit erweiterter Rotempfindlichkeit und einer Empfindlichkeit von EI 200/24. Er erlaubt dem Fotografen, seiner Kreativität erweiterte Ausdrucksmöglichkeiten zu verschaffen. Insbesondere die Verwendung unterschiedlichster Filter ergibt spannende und ungewöhnliche Kontraste, die einen intensiven Bildeindruck hinterlassen. Im Charakter ähnlich einem Infrarotfilm, vermeidet er dessen typischen Nachteile: der Film kann bei normalen Lichtverhältnissen in die Kamera eingelegt werden und muss nicht anders als ein normaler Schwarzweißfilm gelagert werden",
     "images": [
@@ -3029,7 +3119,8 @@
     "attributes": [],
     "isPastEvent": false,
     "optionLabel": "",
-    "masterSlug": ""
+    "masterSlug": "",
+    "filmKind": "Schwarzweiß"
   },
   {
     "slug": "ilford-xp-2-super-135-36-kleinbildfilm",
@@ -3044,7 +3135,7 @@
     "category": "FILME",
     "format": "35mm",
     "process": "C-41",
-    "iso": "",
+    "iso": "400",
     "description": "Er ist ein in mehrfacher Hinsicht einzigartiger Schwarzweißfilm. Mit seiner Nennempfindlichkeit von ISO 400/27° gehört er zwar bereits zu den hochempfindlichen Filmen, doch bietet er eine so außergewöhnliche Feinkörnigkeit, wie man sie sonst nur von einem Schwarzweißfilm einer niedrigeren Empfindlichkeitsklasse erwartet. Diese außergewöhnliche Leistungsfähigkeit resultiert aus dem Einsatz moderner Farbfilmtechnologie. Er ist ein sogenannter chromogener Film, dessen Schwärzung im Negativ durch die während der Entwicklung gebildeten Farbstoffe und nicht - wie bei herkömmlichen Schwarzweißfilmen üblich - durch metallisches Silber hervorgerufen wird. Daraus folgt nicht nur, dass er ein herausragendes Produkt darstellt, sondern auch den Vorteil bietet, ganz einfach in jedem Farblabor oder Minilab im üblichen C-41-Farbnegativprozess, auch zusammen mit Farbfilmen, verarbeitet werden zu können. Die Negative werden ebenso wie herkömmliche Negative auf Schwarzweiß-Fotopapier vergrößert oder kopiert",
     "images": [
       "/images/ilford-xp-2-super-135-36-kleinbildfilm.webp"
@@ -3056,7 +3147,8 @@
     "attributes": [],
     "isPastEvent": false,
     "optionLabel": "",
-    "masterSlug": ""
+    "masterSlug": "",
+    "filmKind": "Schwarzweiß"
   },
   {
     "slug": "jobo-thermosflasche",
@@ -3083,7 +3175,8 @@
     "attributes": [],
     "isPastEvent": false,
     "optionLabel": "",
-    "masterSlug": ""
+    "masterSlug": "",
+    "filmKind": ""
   },
   {
     "slug": "jobo-wasserflasche",
@@ -3110,7 +3203,8 @@
     "attributes": [],
     "isPastEvent": false,
     "optionLabel": "",
-    "masterSlug": ""
+    "masterSlug": "",
+    "filmKind": ""
   },
   {
     "slug": "kodak-colorplus-200-135-36-film",
@@ -3137,7 +3231,8 @@
     "attributes": [],
     "isPastEvent": false,
     "optionLabel": "",
-    "masterSlug": ""
+    "masterSlug": "",
+    "filmKind": "Farbe"
   },
   {
     "slug": "kodak-ektachrome-100-135-36-diafilm",
@@ -3164,7 +3259,8 @@
     "attributes": [],
     "isPastEvent": false,
     "optionLabel": "",
-    "masterSlug": ""
+    "masterSlug": "",
+    "filmKind": "Dia"
   },
   {
     "slug": "kodak-ektachrome-e100-120-dia-rollfilm",
@@ -3179,7 +3275,7 @@
     "category": "FILME",
     "format": "120",
     "process": "E-6",
-    "iso": "",
+    "iso": "100",
     "description": "Extrem feinkörniger Farbdiafilm",
     "images": [
       "/images/kodak-ektachrome-e100-120-dia-rollfilm.webp"
@@ -3191,7 +3287,8 @@
     "attributes": [],
     "isPastEvent": false,
     "optionLabel": "",
-    "masterSlug": ""
+    "masterSlug": "",
+    "filmKind": "Dia"
   },
   {
     "slug": "kodak-gold-200-135-36-film",
@@ -3218,7 +3315,8 @@
     "attributes": [],
     "isPastEvent": false,
     "optionLabel": "",
-    "masterSlug": ""
+    "masterSlug": "",
+    "filmKind": "Farbe"
   },
   {
     "slug": "kodak-gold-200-mittelformat-120",
@@ -3245,7 +3343,8 @@
     "attributes": [],
     "isPastEvent": false,
     "optionLabel": "",
-    "masterSlug": ""
+    "masterSlug": "",
+    "filmKind": "Farbe"
   },
   {
     "slug": "kodak-t-max-100-rollfilm",
@@ -3259,7 +3358,7 @@
     "brand": "Kodak",
     "category": "FILME",
     "format": "120",
-    "process": "C-41",
+    "process": "Schwarzweiß",
     "iso": "100",
     "description": "Panchromatisch sensibilisierter SW Film mit patentierter T-Flachkristalltechnologie. Überaus feinkörnig und hochauflösend. Hervorragende Konturenschärfe. T-Max 100 liefert in den meisten Entwicklern eine lineare Schwärzungskurve.",
     "images": [
@@ -3272,7 +3371,8 @@
     "attributes": [],
     "isPastEvent": false,
     "optionLabel": "",
-    "masterSlug": ""
+    "masterSlug": "",
+    "filmKind": "Schwarzweiß"
   },
   {
     "slug": "kodak-t-max-400-kleinbild-35mm-ablaufdatum-12-25",
@@ -3286,7 +3386,7 @@
     "brand": "Kodak",
     "category": "FILME",
     "format": "35mm",
-    "process": "C-41",
+    "process": "Schwarzweiß",
     "iso": "400",
     "description": "Der Kodak Professionell T-MAX 400 ist ein hochempfindlicher panchromatischer Schwarzweiß-Negativfilm mit einer Nennempfindlichkeit von ISO 400/27°. Dank der patentierten T-Grain Kristall-Technologie von Kodak zeichnet sich dieser Film durch exzellente Schärfe, Feinkörnigkeit und großem Belichtungsspielraum aus.",
     "images": [
@@ -3299,7 +3399,8 @@
     "attributes": [],
     "isPastEvent": false,
     "optionLabel": "",
-    "masterSlug": ""
+    "masterSlug": "",
+    "filmKind": "Schwarzweiß"
   },
   {
     "slug": "kodak-t-max-400-rollfilm",
@@ -3313,7 +3414,7 @@
     "brand": "Kodak",
     "category": "FILME",
     "format": "120",
-    "process": "C-41",
+    "process": "Schwarzweiß",
     "iso": "400",
     "description": "Der Kodak T-MAX 400 ist ein hochempfindlicher panchromatischer Schwarzweiß-Negativfilm mit einer Nennempfindlichkeit von ISO 400/27°. Dank der patentierten T-Grain Kristall-Technologie von Kodak zeichnet sich dieser Film durch exzellente Schärfe, Feinkörnigkeit und großem Belichtungsspielraum aus.",
     "images": [
@@ -3326,7 +3427,8 @@
     "attributes": [],
     "isPastEvent": false,
     "optionLabel": "",
-    "masterSlug": ""
+    "masterSlug": "",
+    "filmKind": "Schwarzweiß"
   },
   {
     "slug": "kodak-t-max-tmx-100-135-36-film",
@@ -3340,7 +3442,7 @@
     "brand": "Kodak",
     "category": "FILME",
     "format": "35mm",
-    "process": "C-41",
+    "process": "Schwarzweiß",
     "iso": "100",
     "description": "Schwarz/Weiss Film mit T-Kristallen Sehr feinkörnig und hochauflösend. Kodak T-Max 100: ISO 100/21°",
     "images": [
@@ -3353,7 +3455,8 @@
     "attributes": [],
     "isPastEvent": false,
     "optionLabel": "",
-    "masterSlug": ""
+    "masterSlug": "",
+    "filmKind": "Schwarzweiß"
   },
   {
     "slug": "kodak-tri-x-400-120-rollfilm",
@@ -3380,7 +3483,8 @@
     "attributes": [],
     "isPastEvent": false,
     "optionLabel": "",
-    "masterSlug": ""
+    "masterSlug": "",
+    "filmKind": "Schwarzweiß"
   },
   {
     "slug": "kodak-tri-x-400-135-36-film",
@@ -3407,7 +3511,8 @@
     "attributes": [],
     "isPastEvent": false,
     "optionLabel": "",
-    "masterSlug": ""
+    "masterSlug": "",
+    "filmKind": "Schwarzweiß"
   },
   {
     "slug": "kodak-ultra-max-400-135-36-film",
@@ -3434,7 +3539,8 @@
     "attributes": [],
     "isPastEvent": false,
     "optionLabel": "",
-    "masterSlug": ""
+    "masterSlug": "",
+    "filmKind": "Farbe"
   },
   {
     "slug": "moersch-alkalischer-fixierer-ats-fuer-stainende-entwickler-1000-ml-konzentrat",
@@ -3461,7 +3567,8 @@
     "attributes": [],
     "isPastEvent": false,
     "optionLabel": "",
-    "masterSlug": ""
+    "masterSlug": "",
+    "filmKind": ""
   },
   {
     "slug": "workshop-schwarz-weiss-filmentwicklung-am-samstag-den-19-07-2025",
@@ -3475,7 +3582,7 @@
     "brand": "",
     "category": "WORKSHOPS",
     "format": "",
-    "process": "Schwarzweiß",
+    "process": "",
     "iso": "",
     "description": "Einführung in die Schwarz Weiß Filmentwicklung In diesem Labor Workshop lernen Sie alles Nötige um Ihren Schwarz Weiß Film danach selbständig entwickeln zu können. Inklusive 35mm Schwarz Weiß Film (Wird Ihnen per Post nach Buchung des Workshops zugesendet), Negativhüllen, Entwicklungs-Chemie. Übersicht der verschiedenen Schwarz Weiß Filme Beratung für die Filmentwicklung Zuhause Wahl des passenden Films für verschiedene Lichtverhältnisse Erläuterung der verschiedenen Entwickler mit Beispielen Entwicklung des eigenen Films Kursleiter: Andrew van Zanten (Odd Squad Collective) und Chris Frenz (Analog-Store) Ort: Odd Squad Studios Nürnberg Dauer: 3 - 3,5 Stunden Teilnehmer: Maximal 5 Teilnehmer pro Workshop",
     "images": [
@@ -3490,7 +3597,8 @@
     "attributes": [],
     "isPastEvent": true,
     "optionLabel": "",
-    "masterSlug": ""
+    "masterSlug": "",
+    "filmKind": ""
   },
   {
     "slug": "zone-imaging-defehr-s-510-pyro-100-ml-konzentrat",
@@ -3505,7 +3613,7 @@
     "category": "FOTOCHEMIE",
     "format": "",
     "process": "",
-    "iso": "100",
+    "iso": "",
     "description": "A premium pyro staining developer that won the Silvergrain Classics Awards 2021. 1.Razor sharp and extremely fine grained - most ISO 100 films go grainless! Unrivalled long tonal range particularly in shadows and highlights 2. A 100ml bottle develops 30-100 35mm rolls, 6+ years shelf life 3. Protects film from damage and uniquely gives negatives that are optimised for scanning, silver gelatine and UV printing processes with the same development time 510 Pyro is one of the more modern pyro developers, that was invented by Jay DeFehr, offering exceptional fine grain, sharpness, more than 6 years shelf life, maximum image stain and minimal general stain and is suitable for rotary processors too. The stain offered by this developer gives extraordinary shadow recovery in direct digitisation of negatives; incredible highlight separation for darkroom printing and more density for highlights when using UV based alt process printing methods. By using extremely dilute working solutions - 1:100 to 1:500, this makes this developer also extremely economical! 510 Pyro, formulated by Jay DeFehr, is an extremely fine grained, high acutance, long shelf-life staining developer giving full film speed with most films and uniquely triple optimised for darkroom silver gelatine printing, alternative UV based printing and scanning with the same development time. It proceeded to win the Silvergrain Classics 2021 Awards. 510 Pyro is specifically designed for both modern T-grain and the conventional emulsions. 510 Pyro is for maximising sharpness with minimal grain – solving the traditional paradox of a trade-off with sharpness and grain levels; extended range of tonality -particularly unrivalled highlight separation in silver gelatine printing given by the inbuilt variable contrast filter or extraordinary shadow recovery in digitisation - obtained from the stain; high micro-contrast and exceptional enlargements exceeding x20. 510 Pyro is supplied as a liquid concentrate diluted for 1:100 one-shot use. However, it can be further diluted for economy though there will be a reduction in image quality and longer development times. Note: an acidic stop bath and hypo clear must not be used with 510 Pyro developed negatives as they destroy the stain. A water stop bath is instead recommended. Grundpreis gemäß PAngV.: 295 EUR pro Liter Hinweise zur Entsorgung von Foto-Chemikalien finden Sie im Sicherheitsdatenblatt (MSDS) welches Sie oben herunterladen oder auf den Webseiten des jeweiligen Herstellers finden können.",
     "images": [
       "/images/zone-imaging-defehr-s-510-pyro-100-ml-konzentrat.webp"
@@ -3517,7 +3625,8 @@
     "attributes": [],
     "isPastEvent": false,
     "optionLabel": "",
-    "masterSlug": ""
+    "masterSlug": "",
+    "filmKind": ""
   },
   {
     "slug": "filmentwicklung-kleinbild-c-41-entwicklung-mit-large-scan-jpg",
@@ -3720,7 +3829,8 @@
     ],
     "isPastEvent": false,
     "optionLabel": "C-41 Entwicklung mit Large Scan (JPG)",
-    "masterSlug": "filmentwicklung-kleinbild"
+    "masterSlug": "filmentwicklung-kleinbild",
+    "filmKind": ""
   },
   {
     "slug": "filmentwicklung-kleinbild-c-41-entwicklung-mit-large-scan-tiff",
@@ -3923,7 +4033,8 @@
     ],
     "isPastEvent": false,
     "optionLabel": "C-41 Entwicklung mit Large Scan (TIFF)",
-    "masterSlug": "filmentwicklung-kleinbild"
+    "masterSlug": "filmentwicklung-kleinbild",
+    "filmKind": ""
   },
   {
     "slug": "filmentwicklung-kleinbild-c-41-entwicklung-ohne-scan",
@@ -4126,7 +4237,8 @@
     ],
     "isPastEvent": false,
     "optionLabel": "C-41 Entwicklung ohne Scan",
-    "masterSlug": "filmentwicklung-kleinbild"
+    "masterSlug": "filmentwicklung-kleinbild",
+    "filmKind": ""
   },
   {
     "slug": "filmentwicklung-kleinbild-e-6-entwicklung-mit-large-scan-jpg",
@@ -4330,7 +4442,8 @@
     ],
     "isPastEvent": false,
     "optionLabel": "E-6 Entwicklung mit Large Scan (JPG)",
-    "masterSlug": "filmentwicklung-kleinbild"
+    "masterSlug": "filmentwicklung-kleinbild",
+    "filmKind": ""
   },
   {
     "slug": "filmentwicklung-kleinbild-e-6-entwicklung-mit-large-scan-tiff",
@@ -4534,7 +4647,8 @@
     ],
     "isPastEvent": false,
     "optionLabel": "E-6 Entwicklung mit Large Scan (TIFF)",
-    "masterSlug": "filmentwicklung-kleinbild"
+    "masterSlug": "filmentwicklung-kleinbild",
+    "filmKind": ""
   },
   {
     "slug": "filmentwicklung-kleinbild-e-6-entwicklung-ohne-scan",
@@ -4738,7 +4852,8 @@
     ],
     "isPastEvent": false,
     "optionLabel": "E-6 Entwicklung ohne Scan",
-    "masterSlug": "filmentwicklung-kleinbild"
+    "masterSlug": "filmentwicklung-kleinbild",
+    "filmKind": ""
   },
   {
     "slug": "filmentwicklung-kleinbild-schwarz-weiss-entwicklung-mit-large-scan-jpg",
@@ -4941,7 +5056,8 @@
     ],
     "isPastEvent": false,
     "optionLabel": "Schwarz-Weiß Entwicklung mit Large Scan (JPG)",
-    "masterSlug": "filmentwicklung-kleinbild"
+    "masterSlug": "filmentwicklung-kleinbild",
+    "filmKind": ""
   },
   {
     "slug": "filmentwicklung-kleinbild-schwarz-weiss-entwicklung-mit-large-scan-tiff",
@@ -5144,7 +5260,8 @@
     ],
     "isPastEvent": false,
     "optionLabel": "Schwarz-Weiß Entwicklung mit Large Scan (TIFF)",
-    "masterSlug": "filmentwicklung-kleinbild"
+    "masterSlug": "filmentwicklung-kleinbild",
+    "filmKind": ""
   },
   {
     "slug": "filmentwicklung-kleinbild-schwarz-weiss-entwicklung-ohne-scan",
@@ -5347,7 +5464,8 @@
     ],
     "isPastEvent": false,
     "optionLabel": "Schwarz-Weiß Entwicklung ohne Scan",
-    "masterSlug": "filmentwicklung-kleinbild"
+    "masterSlug": "filmentwicklung-kleinbild",
+    "filmKind": ""
   },
   {
     "slug": "filmentwicklung-kleinbild-schwarz-weiss-push-pull-entwicklung-mit-large-scan",
@@ -5550,7 +5668,8 @@
     ],
     "isPastEvent": false,
     "optionLabel": "Schwarz-Weiß Push/Pull Entwicklung mit Large Scan (JPG)",
-    "masterSlug": "filmentwicklung-kleinbild"
+    "masterSlug": "filmentwicklung-kleinbild",
+    "filmKind": ""
   },
   {
     "slug": "filmentwicklung-kleinbild-schwarz-weiss-push-pull-entwicklung-mit-large-scan-1",
@@ -5753,7 +5872,8 @@
     ],
     "isPastEvent": false,
     "optionLabel": "Schwarz-Weiß Push/Pull Entwicklung mit Large Scan (TIFF)",
-    "masterSlug": "filmentwicklung-kleinbild"
+    "masterSlug": "filmentwicklung-kleinbild",
+    "filmKind": ""
   },
   {
     "slug": "filmentwicklung-kleinbild-schwarz-weiss-push-pull-entwicklung-ohne-scan",
@@ -5956,7 +6076,8 @@
     ],
     "isPastEvent": false,
     "optionLabel": "Schwarz-Weiß Push/Pull Entwicklung ohne Scan",
-    "masterSlug": "filmentwicklung-kleinbild"
+    "masterSlug": "filmentwicklung-kleinbild",
+    "filmKind": ""
   },
   {
     "slug": "filmentwicklung-mittelformat-c-41-entwicklung-mit-large-scan-jpg",
@@ -6117,7 +6238,8 @@
     ],
     "isPastEvent": false,
     "optionLabel": "C-41 Entwicklung mit Large Scan (JPG)",
-    "masterSlug": "filmentwicklung-mittelformat"
+    "masterSlug": "filmentwicklung-mittelformat",
+    "filmKind": ""
   },
   {
     "slug": "filmentwicklung-mittelformat-c-41-entwicklung-mit-large-scan-tiff",
@@ -6278,7 +6400,8 @@
     ],
     "isPastEvent": false,
     "optionLabel": "C-41 Entwicklung mit Large Scan (TIFF)",
-    "masterSlug": "filmentwicklung-mittelformat"
+    "masterSlug": "filmentwicklung-mittelformat",
+    "filmKind": ""
   },
   {
     "slug": "filmentwicklung-mittelformat-c-41-entwicklung-ohne-scan",
@@ -6439,7 +6562,8 @@
     ],
     "isPastEvent": false,
     "optionLabel": "C-41 Entwicklung ohne Scan",
-    "masterSlug": "filmentwicklung-mittelformat"
+    "masterSlug": "filmentwicklung-mittelformat",
+    "filmKind": ""
   },
   {
     "slug": "filmentwicklung-mittelformat-e-6-entwicklung-mit-large-scan-jpg",
@@ -6600,7 +6724,8 @@
     ],
     "isPastEvent": false,
     "optionLabel": "E-6 Entwicklung mit Large Scan (JPG)",
-    "masterSlug": "filmentwicklung-mittelformat"
+    "masterSlug": "filmentwicklung-mittelformat",
+    "filmKind": ""
   },
   {
     "slug": "filmentwicklung-mittelformat-e-6-entwicklung-mit-large-scan-tiff",
@@ -6761,7 +6886,8 @@
     ],
     "isPastEvent": false,
     "optionLabel": "E-6 Entwicklung mit Large Scan (TIFF)",
-    "masterSlug": "filmentwicklung-mittelformat"
+    "masterSlug": "filmentwicklung-mittelformat",
+    "filmKind": ""
   },
   {
     "slug": "filmentwicklung-mittelformat-e-6-entwicklung-ohne-scan",
@@ -6922,7 +7048,8 @@
     ],
     "isPastEvent": false,
     "optionLabel": "E-6 Entwicklung ohne Scan",
-    "masterSlug": "filmentwicklung-mittelformat"
+    "masterSlug": "filmentwicklung-mittelformat",
+    "filmKind": ""
   },
   {
     "slug": "filmentwicklung-mittelformat-schwarz-weiss-entwicklung-mit-large-scan-jpg",
@@ -7083,7 +7210,8 @@
     ],
     "isPastEvent": false,
     "optionLabel": "Schwarz-Weiß Entwicklung mit Large Scan (JPG)",
-    "masterSlug": "filmentwicklung-mittelformat"
+    "masterSlug": "filmentwicklung-mittelformat",
+    "filmKind": ""
   },
   {
     "slug": "filmentwicklung-mittelformat-schwarz-weiss-entwicklung-mit-large-scan-tiff",
@@ -7244,7 +7372,8 @@
     ],
     "isPastEvent": false,
     "optionLabel": "Schwarz-Weiß Entwicklung mit Large Scan (TIFF)",
-    "masterSlug": "filmentwicklung-mittelformat"
+    "masterSlug": "filmentwicklung-mittelformat",
+    "filmKind": ""
   },
   {
     "slug": "filmentwicklung-mittelformat-schwarz-weiss-entwicklung-ohne-scan",
@@ -7405,7 +7534,8 @@
     ],
     "isPastEvent": false,
     "optionLabel": "Schwarz-Weiß Entwicklung ohne Scan",
-    "masterSlug": "filmentwicklung-mittelformat"
+    "masterSlug": "filmentwicklung-mittelformat",
+    "filmKind": ""
   },
   {
     "slug": "filmentwicklung-pocket-110-c-41-entwicklung-mit-scan-jpg",
@@ -7524,7 +7654,8 @@
     ],
     "isPastEvent": false,
     "optionLabel": "C-41 Entwicklung mit Scan (JPG)",
-    "masterSlug": "filmentwicklung-pocket-110"
+    "masterSlug": "filmentwicklung-pocket-110",
+    "filmKind": ""
   },
   {
     "slug": "filmentwicklung-pocket-110-c-41-entwicklung-mit-scan-tiff",
@@ -7643,7 +7774,8 @@
     ],
     "isPastEvent": false,
     "optionLabel": "C-41 Entwicklung mit Scan (TIFF)",
-    "masterSlug": "filmentwicklung-pocket-110"
+    "masterSlug": "filmentwicklung-pocket-110",
+    "filmKind": ""
   },
   {
     "slug": "filmentwicklung-pocket-110-c-41-farbentwicklung-ohne-scan",
@@ -7762,7 +7894,8 @@
     ],
     "isPastEvent": false,
     "optionLabel": "C-41 Farbentwicklung ohne Scan",
-    "masterSlug": "filmentwicklung-pocket-110"
+    "masterSlug": "filmentwicklung-pocket-110",
+    "filmKind": ""
   },
   {
     "slug": "filmentwicklung-pocket-110-schwarz-weiss-entwicklung-mit-scan-jpg",
@@ -7881,7 +8014,8 @@
     ],
     "isPastEvent": false,
     "optionLabel": "Schwarz-Weiß Entwicklung mit Scan (JPG)",
-    "masterSlug": "filmentwicklung-pocket-110"
+    "masterSlug": "filmentwicklung-pocket-110",
+    "filmKind": ""
   },
   {
     "slug": "filmentwicklung-pocket-110-schwarz-weiss-entwicklung-mit-scan-tiff",
@@ -8000,7 +8134,8 @@
     ],
     "isPastEvent": false,
     "optionLabel": "Schwarz-Weiß Entwicklung mit Scan (TIFF)",
-    "masterSlug": "filmentwicklung-pocket-110"
+    "masterSlug": "filmentwicklung-pocket-110",
+    "filmKind": ""
   },
   {
     "slug": "filmentwicklung-pocket-110-schwarz-weiss-entwicklung-ohne-scan",
@@ -8119,7 +8254,8 @@
     ],
     "isPastEvent": false,
     "optionLabel": "Schwarz-Weiß Entwicklung ohne Scan",
-    "masterSlug": "filmentwicklung-pocket-110"
+    "masterSlug": "filmentwicklung-pocket-110",
+    "filmKind": ""
   },
   {
     "slug": "negativ-scan-ganze-rollen-kleinbild-film-35mm",
@@ -8210,7 +8346,8 @@
     ],
     "isPastEvent": false,
     "optionLabel": "Kleinbild-Film 35mm",
-    "masterSlug": "negativ-scan-ganze-rollen"
+    "masterSlug": "negativ-scan-ganze-rollen",
+    "filmKind": ""
   },
   {
     "slug": "negativ-scan-ganze-rollen-mittelformat-film-120-maximal-6x12",
@@ -8301,7 +8438,8 @@
     ],
     "isPastEvent": false,
     "optionLabel": "Mittelformat-Film 120 (Maximal 6x12)",
-    "masterSlug": "negativ-scan-ganze-rollen"
+    "masterSlug": "negativ-scan-ganze-rollen",
+    "filmKind": ""
   },
   {
     "slug": "negativ-scan-ganze-rollen-tiff-kleinbild-film-35mm",
@@ -8392,7 +8530,8 @@
     ],
     "isPastEvent": false,
     "optionLabel": "TIFF Kleinbild-Film 35mm",
-    "masterSlug": "negativ-scan-ganze-rollen"
+    "masterSlug": "negativ-scan-ganze-rollen",
+    "filmKind": ""
   },
   {
     "slug": "negativ-scan-ganze-rollen-tiff-mittelformat-film-120-maximal-6x12",
@@ -8483,6 +8622,7 @@
     ],
     "isPastEvent": false,
     "optionLabel": "TIFF Mittelformat-Film 120 (Maximal 6x12)",
-    "masterSlug": "negativ-scan-ganze-rollen"
+    "masterSlug": "negativ-scan-ganze-rollen",
+    "filmKind": ""
   }
 ]

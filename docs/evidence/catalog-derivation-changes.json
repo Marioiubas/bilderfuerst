@@ -1,0 +1,936 @@
+{
+ "generated": "2026-10-05T19:45:58.555Z",
+ "method": "name + first 160 characters of the source description; source fields untouched",
+ "changes": [
+  {
+   "slug": "fujifilm-instax-wide-evo-black-ex-d-sofortbildkamera",
+   "before": {
+    "format": "",
+    "process": "Schwarzweiß",
+    "iso": "",
+    "filmKind": ""
+   },
+   "after": {
+    "format": "",
+    "process": "",
+    "iso": "",
+    "filmKind": ""
+   }
+  },
+  {
+   "slug": "schwarz-weiss-entwicklungs-set-mit-jobo-lab-kit-m-patterson-wechselsack-adox-chemie-uvm",
+   "before": {
+    "format": "",
+    "process": "Schwarzweiß",
+    "iso": "",
+    "filmKind": ""
+   },
+   "after": {
+    "format": "",
+    "process": "",
+    "iso": "",
+    "filmKind": ""
+   }
+  },
+  {
+   "slug": "analog-store-black-und-white-film-200-iso-135-36",
+   "before": {
+    "format": "35mm",
+    "process": "Schwarzweiß",
+    "iso": "200",
+    "filmKind": ""
+   },
+   "after": {
+    "format": "35mm",
+    "process": "Schwarzweiß",
+    "iso": "200",
+    "filmKind": "Schwarzweiß"
+   }
+  },
+  {
+   "slug": "cinestill-400d-36-135-kleinbildfilm",
+   "before": {
+    "format": "35mm",
+    "process": "C-41",
+    "iso": "",
+    "filmKind": ""
+   },
+   "after": {
+    "format": "35mm",
+    "process": "C-41",
+    "iso": "400",
+    "filmKind": "Farbe"
+   }
+  },
+  {
+   "slug": "cinestill-50d-c-41-135-36",
+   "before": {
+    "format": "35mm",
+    "process": "C-41",
+    "iso": "",
+    "filmKind": ""
+   },
+   "after": {
+    "format": "35mm",
+    "process": "C-41",
+    "iso": "50",
+    "filmKind": "Farbe"
+   }
+  },
+  {
+   "slug": "harmann-photo-poenix-ii-200-135-36",
+   "before": {
+    "format": "35mm",
+    "process": "C-41",
+    "iso": "200",
+    "filmKind": ""
+   },
+   "after": {
+    "format": "35mm",
+    "process": "C-41",
+    "iso": "200",
+    "filmKind": "Farbe"
+   }
+  },
+  {
+   "slug": "kodak-ektacolor-pro-160-135-36",
+   "before": {
+    "format": "35mm",
+    "process": "C-41",
+    "iso": "160",
+    "filmKind": ""
+   },
+   "after": {
+    "format": "35mm",
+    "process": "C-41",
+    "iso": "160",
+    "filmKind": "Farbe"
+   }
+  },
+  {
+   "slug": "kodak-ektacolor-pro-400-135-36-1",
+   "before": {
+    "format": "35mm",
+    "process": "C-41",
+    "iso": "400",
+    "filmKind": ""
+   },
+   "after": {
+    "format": "35mm",
+    "process": "C-41",
+    "iso": "400",
+    "filmKind": "Farbe"
+   }
+  },
+  {
+   "slug": "kodak-ektacolor-pro-800-135-36",
+   "before": {
+    "format": "35mm",
+    "process": "C-41",
+    "iso": "800",
+    "filmKind": ""
+   },
+   "after": {
+    "format": "35mm",
+    "process": "C-41",
+    "iso": "800",
+    "filmKind": "Farbe"
+   }
+  },
+  {
+   "slug": "kodak-ektar-100-135-36",
+   "before": {
+    "format": "35mm",
+    "process": "C-41",
+    "iso": "100",
+    "filmKind": ""
+   },
+   "after": {
+    "format": "35mm",
+    "process": "C-41",
+    "iso": "100",
+    "filmKind": "Farbe"
+   }
+  },
+  {
+   "slug": "kodak-kodacolor-100-color-negative-film-135-36",
+   "before": {
+    "format": "35mm",
+    "process": "C-41",
+    "iso": "100",
+    "filmKind": ""
+   },
+   "after": {
+    "format": "35mm",
+    "process": "C-41",
+    "iso": "100",
+    "filmKind": "Farbe"
+   }
+  },
+  {
+   "slug": "kodak-kodacolor-200-color-negative-film-135-36",
+   "before": {
+    "format": "35mm",
+    "process": "",
+    "iso": "200",
+    "filmKind": ""
+   },
+   "after": {
+    "format": "35mm",
+    "process": "C-41",
+    "iso": "200",
+    "filmKind": "Farbe"
+   }
+  },
+  {
+   "slug": "kodak-portra-160-120-rollfilm",
+   "before": {
+    "format": "120",
+    "process": "C-41",
+    "iso": "160",
+    "filmKind": ""
+   },
+   "after": {
+    "format": "120",
+    "process": "C-41",
+    "iso": "160",
+    "filmKind": "Farbe"
+   }
+  },
+  {
+   "slug": "kodak-portra-160-kleinbild-35mm",
+   "before": {
+    "format": "35mm",
+    "process": "C-41",
+    "iso": "160",
+    "filmKind": ""
+   },
+   "after": {
+    "format": "35mm",
+    "process": "C-41",
+    "iso": "160",
+    "filmKind": "Farbe"
+   }
+  },
+  {
+   "slug": "kodak-portra-400-120-rollfilm",
+   "before": {
+    "format": "120",
+    "process": "C-41",
+    "iso": "400",
+    "filmKind": ""
+   },
+   "after": {
+    "format": "120",
+    "process": "C-41",
+    "iso": "400",
+    "filmKind": "Farbe"
+   }
+  },
+  {
+   "slug": "kodak-portra-400-135-36-film",
+   "before": {
+    "format": "35mm",
+    "process": "C-41",
+    "iso": "400",
+    "filmKind": ""
+   },
+   "after": {
+    "format": "35mm",
+    "process": "C-41",
+    "iso": "400",
+    "filmKind": "Farbe"
+   }
+  },
+  {
+   "slug": "kodak-portra-800-120-rollfilm",
+   "before": {
+    "format": "120",
+    "process": "C-41",
+    "iso": "800",
+    "filmKind": ""
+   },
+   "after": {
+    "format": "120",
+    "process": "C-41",
+    "iso": "800",
+    "filmKind": "Farbe"
+   }
+  },
+  {
+   "slug": "kodak-portra-800-135-36-film",
+   "before": {
+    "format": "35mm",
+    "process": "C-41",
+    "iso": "800",
+    "filmKind": ""
+   },
+   "after": {
+    "format": "35mm",
+    "process": "C-41",
+    "iso": "800",
+    "filmKind": "Farbe"
+   }
+  },
+  {
+   "slug": "polaroid-b-und-w-sx-70",
+   "before": {
+    "format": "",
+    "process": "Schwarzweiß",
+    "iso": "",
+    "filmKind": ""
+   },
+   "after": {
+    "format": "",
+    "process": "",
+    "iso": "",
+    "filmKind": ""
+   }
+  },
+  {
+   "slug": "110-professional-hc-110-schwarz-weiss-entwickler",
+   "before": {
+    "format": "",
+    "process": "Schwarzweiß",
+    "iso": "",
+    "filmKind": ""
+   },
+   "after": {
+    "format": "",
+    "process": "",
+    "iso": "",
+    "filmKind": ""
+   }
+  },
+  {
+   "slug": "adox-adonal-500-ml-konzentrat-schwarz-weiss-filmentwickler",
+   "before": {
+    "format": "",
+    "process": "Schwarzweiß",
+    "iso": "",
+    "filmKind": ""
+   },
+   "after": {
+    "format": "",
+    "process": "",
+    "iso": "",
+    "filmKind": ""
+   }
+  },
+  {
+   "slug": "adox-adotech-iv-fuer-bis-zu-6-kleinbild-oder-rollfilme-100-ml-konzentrat",
+   "before": {
+    "format": "120",
+    "process": "",
+    "iso": "100",
+    "filmKind": ""
+   },
+   "after": {
+    "format": "",
+    "process": "",
+    "iso": "",
+    "filmKind": ""
+   }
+  },
+  {
+   "slug": "adox-silvermax-entwickler-100-ml-konzentrat",
+   "before": {
+    "format": "",
+    "process": "",
+    "iso": "100",
+    "filmKind": ""
+   },
+   "after": {
+    "format": "",
+    "process": "",
+    "iso": "",
+    "filmKind": ""
+   }
+  },
+  {
+   "slug": "agfa-photo-apx-400-135-36-film",
+   "before": {
+    "format": "35mm",
+    "process": "",
+    "iso": "400",
+    "filmKind": ""
+   },
+   "after": {
+    "format": "35mm",
+    "process": "Schwarzweiß",
+    "iso": "400",
+    "filmKind": "Schwarzweiß"
+   }
+  },
+  {
+   "slug": "analog-store-geschenk-gutschein-50-euro",
+   "before": {
+    "format": "",
+    "process": "",
+    "iso": "50",
+    "filmKind": ""
+   },
+   "after": {
+    "format": "",
+    "process": "",
+    "iso": "",
+    "filmKind": ""
+   }
+  },
+  {
+   "slug": "billingham-hadley-digital-black-fibrenyte-black",
+   "before": {
+    "format": "",
+    "process": "Schwarzweiß",
+    "iso": "",
+    "filmKind": ""
+   },
+   "after": {
+    "format": "",
+    "process": "",
+    "iso": "",
+    "filmKind": ""
+   }
+  },
+  {
+   "slug": "billingham-hadley-small-pro-black-fibrenyte-black",
+   "before": {
+    "format": "",
+    "process": "Schwarzweiß",
+    "iso": "",
+    "filmKind": ""
+   },
+   "after": {
+    "format": "",
+    "process": "",
+    "iso": "",
+    "filmKind": ""
+   }
+  },
+  {
+   "slug": "billingham-hadley-small-pro-black-tan",
+   "before": {
+    "format": "",
+    "process": "Schwarzweiß",
+    "iso": "",
+    "filmKind": ""
+   },
+   "after": {
+    "format": "",
+    "process": "",
+    "iso": "",
+    "filmKind": ""
+   }
+  },
+  {
+   "slug": "cinestill-400d-mittelformat",
+   "before": {
+    "format": "120",
+    "process": "C-41",
+    "iso": "",
+    "filmKind": ""
+   },
+   "after": {
+    "format": "120",
+    "process": "C-41",
+    "iso": "400",
+    "filmKind": "Farbe"
+   }
+  },
+  {
+   "slug": "cinestill-50d-daylight-120-rollfilm",
+   "before": {
+    "format": "120",
+    "process": "C-41",
+    "iso": "",
+    "filmKind": ""
+   },
+   "after": {
+    "format": "120",
+    "process": "C-41",
+    "iso": "50",
+    "filmKind": "Farbe"
+   }
+  },
+  {
+   "slug": "cinestill-bwxx-120",
+   "before": {
+    "format": "120",
+    "process": "C-41",
+    "iso": "",
+    "filmKind": ""
+   },
+   "after": {
+    "format": "120",
+    "process": "Schwarzweiß",
+    "iso": "",
+    "filmKind": "Schwarzweiß"
+   }
+  },
+  {
+   "slug": "cinestill-cinestill-800-t-c-41-120",
+   "before": {
+    "format": "120",
+    "process": "C-41",
+    "iso": "800",
+    "filmKind": ""
+   },
+   "after": {
+    "format": "120",
+    "process": "C-41",
+    "iso": "800",
+    "filmKind": "Farbe"
+   }
+  },
+  {
+   "slug": "cinestill-cinestill-800-t-c-41-135-36",
+   "before": {
+    "format": "35mm",
+    "process": "C-41",
+    "iso": "800",
+    "filmKind": ""
+   },
+   "after": {
+    "format": "35mm",
+    "process": "C-41",
+    "iso": "800",
+    "filmKind": "Farbe"
+   }
+  },
+  {
+   "slug": "ferrania-p30-panchro-film-80asa-135-36",
+   "before": {
+    "format": "35mm",
+    "process": "",
+    "iso": "",
+    "filmKind": ""
+   },
+   "after": {
+    "format": "35mm",
+    "process": "Schwarzweiß",
+    "iso": "80",
+    "filmKind": "Schwarzweiß"
+   }
+  },
+  {
+   "slug": "fujicolor-pro-400h-120-36-rollfilm",
+   "before": {
+    "format": "120",
+    "process": "",
+    "iso": "",
+    "filmKind": ""
+   },
+   "after": {
+    "format": "120",
+    "process": "C-41",
+    "iso": "400",
+    "filmKind": "Farbe"
+   }
+  },
+  {
+   "slug": "fujifilm-provia-100-f-135-36-kleinbildfilm",
+   "before": {
+    "format": "35mm",
+    "process": "E-6",
+    "iso": "100",
+    "filmKind": ""
+   },
+   "after": {
+    "format": "35mm",
+    "process": "E-6",
+    "iso": "100",
+    "filmKind": "Dia"
+   }
+  },
+  {
+   "slug": "fujifilm-velvia-100-135-36-kb-diafilm",
+   "before": {
+    "format": "35mm",
+    "process": "E-6",
+    "iso": "100",
+    "filmKind": ""
+   },
+   "after": {
+    "format": "35mm",
+    "process": "E-6",
+    "iso": "100",
+    "filmKind": "Dia"
+   }
+  },
+  {
+   "slug": "ilford-delta-100-schwarz-weiss-film-135-36",
+   "before": {
+    "format": "35mm",
+    "process": "Schwarzweiß",
+    "iso": "100",
+    "filmKind": ""
+   },
+   "after": {
+    "format": "35mm",
+    "process": "Schwarzweiß",
+    "iso": "100",
+    "filmKind": "Schwarzweiß"
+   }
+  },
+  {
+   "slug": "ilford-delta-3200-professional-135-36",
+   "before": {
+    "format": "35mm",
+    "process": "Schwarzweiß",
+    "iso": "3200",
+    "filmKind": ""
+   },
+   "after": {
+    "format": "35mm",
+    "process": "Schwarzweiß",
+    "iso": "3200",
+    "filmKind": "Schwarzweiß"
+   }
+  },
+  {
+   "slug": "ilford-delta-3200-professional-mittelformat",
+   "before": {
+    "format": "120",
+    "process": "Schwarzweiß",
+    "iso": "3200",
+    "filmKind": ""
+   },
+   "after": {
+    "format": "120",
+    "process": "Schwarzweiß",
+    "iso": "3200",
+    "filmKind": "Schwarzweiß"
+   }
+  },
+  {
+   "slug": "ilford-delta-400-schwarz-weiss-film-135-36",
+   "before": {
+    "format": "35mm",
+    "process": "Schwarzweiß",
+    "iso": "400",
+    "filmKind": ""
+   },
+   "after": {
+    "format": "35mm",
+    "process": "Schwarzweiß",
+    "iso": "400",
+    "filmKind": "Schwarzweiß"
+   }
+  },
+  {
+   "slug": "ilford-fp4-plus-125-schwarz-weiss-film-135-36",
+   "before": {
+    "format": "35mm",
+    "process": "Schwarzweiß",
+    "iso": "125",
+    "filmKind": ""
+   },
+   "after": {
+    "format": "35mm",
+    "process": "Schwarzweiß",
+    "iso": "125",
+    "filmKind": "Schwarzweiß"
+   }
+  },
+  {
+   "slug": "ilford-hp5-plus-400-schwarz-weiss-film-135-36",
+   "before": {
+    "format": "35mm",
+    "process": "Schwarzweiß",
+    "iso": "400",
+    "filmKind": ""
+   },
+   "after": {
+    "format": "35mm",
+    "process": "Schwarzweiß",
+    "iso": "400",
+    "filmKind": "Schwarzweiß"
+   }
+  },
+  {
+   "slug": "ilford-hp5-plus-400-schwarzweissfilm-120",
+   "before": {
+    "format": "120",
+    "process": "Schwarzweiß",
+    "iso": "400",
+    "filmKind": ""
+   },
+   "after": {
+    "format": "120",
+    "process": "Schwarzweiß",
+    "iso": "400",
+    "filmKind": "Schwarzweiß"
+   }
+  },
+  {
+   "slug": "ilford-multigrade-entwickler-fuer-schwarzweiss-fotopapier-1-liter",
+   "before": {
+    "format": "",
+    "process": "Schwarzweiß",
+    "iso": "",
+    "filmKind": ""
+   },
+   "after": {
+    "format": "",
+    "process": "",
+    "iso": "",
+    "filmKind": ""
+   }
+  },
+  {
+   "slug": "ilford-pan-f-plus-50-schwarz-weiss-film-135-36",
+   "before": {
+    "format": "35mm",
+    "process": "Schwarzweiß",
+    "iso": "50",
+    "filmKind": ""
+   },
+   "after": {
+    "format": "35mm",
+    "process": "Schwarzweiß",
+    "iso": "50",
+    "filmKind": "Schwarzweiß"
+   }
+  },
+  {
+   "slug": "ilford-sfx-200-135-36-infrarotfilm",
+   "before": {
+    "format": "35mm",
+    "process": "C-41",
+    "iso": "200",
+    "filmKind": ""
+   },
+   "after": {
+    "format": "35mm",
+    "process": "Schwarzweiß",
+    "iso": "200",
+    "filmKind": "Schwarzweiß"
+   }
+  },
+  {
+   "slug": "ilford-xp-2-super-135-36-kleinbildfilm",
+   "before": {
+    "format": "35mm",
+    "process": "C-41",
+    "iso": "",
+    "filmKind": ""
+   },
+   "after": {
+    "format": "35mm",
+    "process": "C-41",
+    "iso": "400",
+    "filmKind": "Schwarzweiß"
+   }
+  },
+  {
+   "slug": "kodak-colorplus-200-135-36-film",
+   "before": {
+    "format": "35mm",
+    "process": "C-41",
+    "iso": "200",
+    "filmKind": ""
+   },
+   "after": {
+    "format": "35mm",
+    "process": "C-41",
+    "iso": "200",
+    "filmKind": "Farbe"
+   }
+  },
+  {
+   "slug": "kodak-ektachrome-100-135-36-diafilm",
+   "before": {
+    "format": "35mm",
+    "process": "E-6",
+    "iso": "100",
+    "filmKind": ""
+   },
+   "after": {
+    "format": "35mm",
+    "process": "E-6",
+    "iso": "100",
+    "filmKind": "Dia"
+   }
+  },
+  {
+   "slug": "kodak-ektachrome-e100-120-dia-rollfilm",
+   "before": {
+    "format": "120",
+    "process": "E-6",
+    "iso": "",
+    "filmKind": ""
+   },
+   "after": {
+    "format": "120",
+    "process": "E-6",
+    "iso": "100",
+    "filmKind": "Dia"
+   }
+  },
+  {
+   "slug": "kodak-gold-200-135-36-film",
+   "before": {
+    "format": "35mm",
+    "process": "C-41",
+    "iso": "200",
+    "filmKind": ""
+   },
+   "after": {
+    "format": "35mm",
+    "process": "C-41",
+    "iso": "200",
+    "filmKind": "Farbe"
+   }
+  },
+  {
+   "slug": "kodak-gold-200-mittelformat-120",
+   "before": {
+    "format": "120",
+    "process": "C-41",
+    "iso": "200",
+    "filmKind": ""
+   },
+   "after": {
+    "format": "120",
+    "process": "C-41",
+    "iso": "200",
+    "filmKind": "Farbe"
+   }
+  },
+  {
+   "slug": "kodak-t-max-100-rollfilm",
+   "before": {
+    "format": "120",
+    "process": "C-41",
+    "iso": "100",
+    "filmKind": ""
+   },
+   "after": {
+    "format": "120",
+    "process": "Schwarzweiß",
+    "iso": "100",
+    "filmKind": "Schwarzweiß"
+   }
+  },
+  {
+   "slug": "kodak-t-max-400-kleinbild-35mm-ablaufdatum-12-25",
+   "before": {
+    "format": "35mm",
+    "process": "C-41",
+    "iso": "400",
+    "filmKind": ""
+   },
+   "after": {
+    "format": "35mm",
+    "process": "Schwarzweiß",
+    "iso": "400",
+    "filmKind": "Schwarzweiß"
+   }
+  },
+  {
+   "slug": "kodak-t-max-400-rollfilm",
+   "before": {
+    "format": "120",
+    "process": "C-41",
+    "iso": "400",
+    "filmKind": ""
+   },
+   "after": {
+    "format": "120",
+    "process": "Schwarzweiß",
+    "iso": "400",
+    "filmKind": "Schwarzweiß"
+   }
+  },
+  {
+   "slug": "kodak-t-max-tmx-100-135-36-film",
+   "before": {
+    "format": "35mm",
+    "process": "C-41",
+    "iso": "100",
+    "filmKind": ""
+   },
+   "after": {
+    "format": "35mm",
+    "process": "Schwarzweiß",
+    "iso": "100",
+    "filmKind": "Schwarzweiß"
+   }
+  },
+  {
+   "slug": "kodak-tri-x-400-120-rollfilm",
+   "before": {
+    "format": "120",
+    "process": "Schwarzweiß",
+    "iso": "400",
+    "filmKind": ""
+   },
+   "after": {
+    "format": "120",
+    "process": "Schwarzweiß",
+    "iso": "400",
+    "filmKind": "Schwarzweiß"
+   }
+  },
+  {
+   "slug": "kodak-tri-x-400-135-36-film",
+   "before": {
+    "format": "35mm",
+    "process": "Schwarzweiß",
+    "iso": "400",
+    "filmKind": ""
+   },
+   "after": {
+    "format": "35mm",
+    "process": "Schwarzweiß",
+    "iso": "400",
+    "filmKind": "Schwarzweiß"
+   }
+  },
+  {
+   "slug": "kodak-ultra-max-400-135-36-film",
+   "before": {
+    "format": "35mm",
+    "process": "C-41",
+    "iso": "400",
+    "filmKind": ""
+   },
+   "after": {
+    "format": "35mm",
+    "process": "C-41",
+    "iso": "400",
+    "filmKind": "Farbe"
+   }
+  },
+  {
+   "slug": "workshop-schwarz-weiss-filmentwicklung-am-samstag-den-19-07-2025",
+   "before": {
+    "format": "",
+    "process": "Schwarzweiß",
+    "iso": "",
+    "filmKind": ""
+   },
+   "after": {
+    "format": "",
+    "process": "",
+    "iso": "",
+    "filmKind": ""
+   }
+  },
+  {
+   "slug": "zone-imaging-defehr-s-510-pyro-100-ml-konzentrat",
+   "before": {
+    "format": "",
+    "process": "",
+    "iso": "100",
+    "filmKind": ""
+   },
+   "after": {
+    "format": "",
+    "process": "",
+    "iso": "",
+    "filmKind": ""
+   }
+  }
+ ]
+}

@@ -1,33 +1,48 @@
 "use client";
+// Vanta atmosphere: environmental light only, never information.
+// FOG = diffused enlarger light / chemical haze (home hero). DOTS = scanner signal field (digitization).
+// Client only, dynamically imported, Three passed explicitly, destroyed offscreen / hidden /
+// reduced motion / below desktop / data saving, and always destroyed on unmount.
 import {useEffect,useRef} from 'react';
-type Scene={destroy:()=>void;renderer?:{setPixelRatio:(ratio:number)=>void;dispose:()=>void;forceContextLoss:()=>void}};
-export default function Darkroom({variant='fog'}:{variant?:'fog'|'dots'}){
+import {motionTier} from '@/motion/setup';
+import {acquireContext,releaseContext,webglAvailable} from '@/lib/webgl';
+
+type VantaScene={destroy:()=>void;renderer?:{setPixelRatio:(ratio:number)=>void;dispose:()=>void;forceContextLoss:()=>void}};
+const settings={
+ fog:{highlightColor:0x6e1b15,midtoneColor:0x1b1f22,lowlightColor:0x0a0b0c,baseColor:0x0a0b0c,blurFactor:.72,speed:.32,zoom:.85},
+ dots:{backgroundColor:0x0a0b0c,color:0x24676b,color2:0x4cc6cc,size:1.25,spacing:38,showLines:false},
+} as const;
+
+export default function Darkroom({variant='fog',className=''}:{variant?:'fog'|'dots';className?:string}){
  const ref=useRef<HTMLDivElement>(null);
  useEffect(()=>{
-  const el=ref.current;if(!el)return;let scene:Scene|null=null;let active=false;let disposed=false;let generation=0;
-  const motion=window.matchMedia('(prefers-reduced-motion: reduce)');const desktop=window.matchMedia('(min-width: 768px)');
-  const connection=(navigator as Navigator & {connection?:{saveData?:boolean}}).connection;
+  const el=ref.current;if(!el)return;
+  const id=`vanta-${variant}`;let scene:VantaScene|null=null;let visible=false;let disposed=false;let generation=0;
+  const pixelRatio=()=>Math.min((window.devicePixelRatio||1)/2.2,1.25);
   const destroy=()=>{generation++;const current=scene;scene=null;const renderer=current?.renderer;
-   try{current?.destroy()}catch{/* Vanta can remove a failed initialization canvas before teardown. */}
-   finally{renderer?.dispose();renderer?.forceContextLoss();el.dataset.webgl='static'}
+   try{current?.destroy()}catch{/* Vanta may already have removed its canvas */}
+   finally{try{renderer?.dispose();renderer?.forceContextLoss()}catch{/* context already lost */}releaseContext(id);el.dataset.webgl='static'}
   };
   const sync=async()=>{
-   if(disposed||!active||motion.matches||!desktop.matches||document.hidden||connection?.saveData){destroy();return;}
-   if(scene)return;const token=++generation;
-   try{const THREE=await import('three');
-    // Vanta DOTS 0.5.24 reads this global at module evaluation, before its option is applied.
-    (window as Window & {THREE?:typeof THREE}).THREE=THREE;
+   if(disposed||!visible||document.hidden||motionTier()!=='desktop'){if(scene)destroy();return}
+   if(scene||!webglAvailable()||!acquireContext(id))return;
+   const token=++generation;el.dataset.webgl='loading';
+   try{
+    const THREE=await import('three');
+    // Vanta DOTS 0.5.24 reads window.THREE during module evaluation.
+    (window as Window&{THREE?:typeof THREE}).THREE=THREE;
     const effect=await (variant==='fog'?import('vanta/dist/vanta.fog.min'):import('vanta/dist/vanta.dots.min'));
-    if(disposed||token!==generation)return;
-    const common={el,THREE,mouseControls:false,touchControls:false,gyroControls:false,scale:2.5,scaleMobile:4};
-    scene=effect.default(variant==='fog'?{...common,highlightColor:0x5b2429,midtoneColor:0x202a30,lowlightColor:0x080b0e,baseColor:0x0b0d0e,blurFactor:.65,speed:.22,zoom:1.2}:{...common,backgroundColor:0x0b0d0e,color:0x35595c,color2:0x55bcc0,size:1.1,spacing:42,showLines:false});
+    if(disposed||token!==generation){releaseContext(id);return}
+    scene=effect.default({el,THREE,mouseControls:false,touchControls:false,gyroControls:false,scale:2,scaleMobile:4,...settings[variant]});
     if(!el.querySelector('canvas'))throw new Error('Vanta renderer did not initialize');
-    scene?.renderer?.setPixelRatio(Math.min(window.devicePixelRatio/2.5,1.5));el.dataset.webgl='active';
-   }catch{destroy();}
+    scene?.renderer?.setPixelRatio(pixelRatio());el.dataset.webgl='active';
+   }catch{destroy()}
   };
-  const observer=new IntersectionObserver(([entry])=>{active=entry.isIntersecting;void sync()});observer.observe(el);
-  const change=()=>void sync();const resize=()=>scene?.renderer?.setPixelRatio(Math.min(window.devicePixelRatio/2.5,1.5));window.addEventListener('resize',resize);document.addEventListener('visibilitychange',change);motion.addEventListener('change',change);desktop.addEventListener('change',change);
-  return()=>{disposed=true;observer.disconnect();window.removeEventListener('resize',resize);document.removeEventListener('visibilitychange',change);motion.removeEventListener('change',change);desktop.removeEventListener('change',change);destroy()};
+  const io=new IntersectionObserver(([entry])=>{visible=entry.isIntersecting;void sync()});io.observe(el);
+  const queries=['(prefers-reduced-motion: reduce)','(min-width: 1024px) and (pointer: fine)'].map(q=>window.matchMedia(q));
+  const change=()=>void sync();const resize=()=>scene?.renderer?.setPixelRatio(pixelRatio());
+  window.addEventListener('resize',resize);document.addEventListener('visibilitychange',change);queries.forEach(q=>q.addEventListener('change',change));
+  return()=>{disposed=true;io.disconnect();window.removeEventListener('resize',resize);document.removeEventListener('visibilitychange',change);queries.forEach(q=>q.removeEventListener('change',change));destroy()};
  },[variant]);
- return <div className={`darkroom-atmosphere atmosphere-${variant}`} ref={ref} aria-hidden="true" data-webgl="static"/>;
+ return <div className={`atmosphere atmosphere-${variant} ${className}`} aria-hidden="true"><div className="atmosphere-static"/><div className="atmosphere-canvas" ref={ref} data-webgl="static"/></div>;
 }

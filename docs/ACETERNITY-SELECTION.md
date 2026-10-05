@@ -1,0 +1,21 @@
+# Aceternity UI selection · Remake 2026-10-05
+
+Registry checked live on 2026-10-05: `https://ui.aceternity.com/registry.json` lists 294 items; each candidate below returned HTTP 200 at `https://ui.aceternity.com/registry/<name>.json`. Installation uses the existing `components.json` (`@aceternity` registry, shadcn CLI) — not overwritten. Components are installed individually; the library is not copied. Already present from the previous release: `spotlight-new`, `lens`, `compare`, `tracing-beam`, `parallax-scroll`, `3d-card`. Added in this remake: `focus-cards` (`npx shadcn@latest add @aceternity/focus-cards`, created `components/ui/focus-cards.tsx` only).
+
+Motion ownership: Aceternity components keep their internal Motion (`motion/react`) animation; Anime.js never animates the same element. Every component is restyled to Design System V2 (rectangular, tokens, no gradients-as-text, no blur on touch).
+
+| Candidate | Use case for Bilderfürst | Benefit | Cost | Mobile | Accessibility | Motion owner | Decision |
+|---|---|---|---|---|---|---|---|
+| **Lens** | Hardware inspection on PDP (Kameras, Labor-Equipment, Taschen) + developer-sample inspection in the lab | Lets experts check real detail (grain, engraving, build) — specialist credibility | Small; Motion | Disabled on touch; lightbox button instead | Not the only zoom path: native lightbox button with focus return | Aceternity | **Use** — never on film boxes by default |
+| **Compare** | Real before/after only: ICE dust/scratch sample if the source provides a genuine pair; otherwise genuine Adonal vs D-76 developer samples | Makes a technical difference visible without claims | Small | Works with native range input | Labelled `<input type=range>` | Aceternity (adapted, no autoplay/sparkles) | **Use** |
+| **Tracing Beam** | History: light travelling through a film strip; each milestone a frame | Scroll-linked progression fits "film roll through time" | Small | Static rail on mobile | Content is plain DOM; beam is decorative | Aceternity (beam) + Anime (image develop) | **Use** (adapted: amber film-base light, frames not dots) |
+| **Focus Cards** | Street Gallery DOM gallery: framed prints (black frame, white mat) where hovering/focusing one print dims the others like a gallery spot | Mirrors walking along a window display; keeps the gallery DOM-first under the 3D window | Tiny, no deps | No blur/dim on touch (all prints equal) | Adapted to also react to keyboard focus; real `<button>`s open the lightbox | Aceternity (CSS transitions) + Anime (contact-sheet spread) | **Use** — chosen instead of Parallax Scroll |
+| **Parallax Scroll** | Previously used for the gallery | Depth | Motion scroll listeners | Disabled on touch | OK | Aceternity | **Reject** — brief: Focus Cards *or* Parallax Grid, not both; removed |
+| **3D Card Effect** | Pentax 17 feature (real product photo) on the homepage store zone | Tactile object feel for the one featured camera | Small | Disabled on touch/reduced motion | Card content is a normal link | Aceternity (bounded ≤ 5°) | **Use**, desktop only |
+| **Spotlight (spotlight-new)** | Enlarger light cone in the home hero | Photographic light metaphor | Small, CSS gradients | Off on mobile | Decorative, `aria-hidden` | Aceternity | **Use**, low opacity |
+| Spotlight (classic SVG) | Alternative hero light | — | Duplicate of spotlight-new | — | — | — | Reject (duplicate) |
+| Animated Modal | Technical service info | — | Adds a second modal system | — | Native `<dialog>` already gives focus trap/return/Escape | — | **Reject** — native `components/dialog.tsx` covers it |
+| Container Scroll Animation | Device-mockup scroll | — | Heavy scroll transforms | Poor | — | — | **Reject** — SaaS trope, no photographic metaphor |
+| Hero Parallax | Product montage hero | — | Large image payload above the fold | Poor | — | — | **Reject** — marketplace feel; hero is the 3D film workspace |
+| Resizable Navbar | Floating pill navbar | — | — | — | — | — | **Reject** — rounded floating pill contradicts the rectangular system; own header uses one Anime threshold |
+| Layout Grid / Images Slider / Card Spotlight / Canvas Reveal / Background Beams / Sparkles / Aurora / Meteors | Various | — | — | — | — | — | **Reject** — decorative effects without a photographic metaphor |

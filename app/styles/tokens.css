@@ -1,0 +1,109 @@
+/* Bilderfürst Design System V2 · Direction C "Analog Technology".
+   Every accent has one job. See docs/DESIGN-SYSTEM-V2.md. */
+:root{
+ /* — Neutrals: photographic density scale — */
+ --black:#0a0b0c;          /* photographic black: immersive zones */
+ --graphite-950:#0f1112;
+ --graphite-900:#14171a;   /* lab hardware body */
+ --graphite-800:#1b1f22;
+ --graphite-700:#262b2f;
+ --graphite-600:#363c41;
+ --graphite-500:#4d545a;
+ --silver-400:#878f95;     /* silver: equipment, technical UI */
+ --silver-300:#adb4b9;
+ --silver-200:#cfd4d7;
+ --silver-100:#e4e7e9;
+ --paper-50:#f2f3f1;       /* light-table tint */
+ --white:#fafaf8;          /* photo paper white: commerce + reading */
+ --white-pure:#ffffff;
+
+ /* — Accents (one job each) — */
+ --red:#d12f26;            /* darkroom red: interaction, focus, selection, CTA */
+ --red-ink:#b3261e;        /* red for small text on white (AA) */
+ --red-glow:#ff4b3e;       /* safelight on black (large/decorative) */
+ --red-deep:#5c1410;
+ --amber:#e3a13c;          /* negative amber: film, chemistry, C-41 */
+ --amber-ink:#8a5a12;
+ --amber-deep:#6b3f0c;
+ --cyan:#4cc6cc;           /* scanner cyan: digitization only */
+ --cyan-ink:#1c7a80;
+ --blue:#4c78c2;           /* industrial blue: E-6 + technical drawing lines */
+ --blue-ink:#2f5797;
+
+ /* — Surfaces — */
+ --surface-dark:var(--black);
+ --surface-dark-2:var(--graphite-900);
+ --surface-dark-3:var(--graphite-800);
+ --surface-light:var(--white);
+ --surface-light-2:var(--paper-50);
+ --surface-stage:#eceeec;   /* neutral product stage */
+
+ /* — Text — */
+ --text:#121416;
+ --text-muted:#555c62;
+ --text-faint:#6a7278;
+ --text-inverse:#f4f5f3;
+ --text-inverse-muted:#a3abb0;
+ --text-inverse-faint:#80888e;
+
+ /* — Lines — */
+ --line:#d6dadc;
+ --line-strong:#a9b0b4;
+ --line-dark:#2c3236;
+ --line-dark-strong:#475056;
+
+ /* — Type — */
+ --font-sans:'Archivo Variable','Archivo',ui-sans-serif,system-ui,sans-serif;
+ --font-mono:'IBM Plex Mono',ui-monospace,'SFMono-Regular',monospace;
+ --stretch-display:72%;     /* condensed, like film-box typography */
+ --stretch-ui:100%;
+ --fs-display-xl:clamp(60px,10.4vw,172px);
+ --fs-display-l:clamp(46px,7.2vw,112px);
+ --fs-h1:clamp(40px,5.6vw,84px);
+ --fs-h2:clamp(32px,4.2vw,60px);
+ --fs-h3:clamp(20px,1.7vw,26px);
+ --fs-h4:17px;
+ --fs-body-l:18px;
+ --fs-body:15px;
+ --fs-small:13px;
+ --fs-mono:11px;
+ --fs-mono-s:10px;
+ --lh-display:.86;
+ --lh-heading:1;
+ --lh-body:1.6;
+ --track-mono:.08em;
+ --track-display:-.012em;
+
+ /* — Space (4px base) — */
+ --s-1:4px;--s-2:8px;--s-3:12px;--s-4:16px;--s-5:24px;--s-6:32px;--s-7:48px;--s-8:64px;--s-9:96px;--s-10:128px;
+ --gutter:clamp(16px,4vw,56px);
+ --wrap:1440px;
+ --wrap-narrow:960px;
+ --section:clamp(72px,9vw,144px);
+ --header-h:72px;
+ --utility-h:30px;
+
+ /* — Geometry — */
+ --r-0:0;--r-1:2px;--r-2:3px;
+ --hair:1px solid var(--line);
+ --hair-dark:1px solid var(--line-dark);
+ --shadow-print:0 1px 0 rgb(10 11 12 / .05),0 22px 44px -28px rgb(10 11 12 / .45);
+ --shadow-frame:0 40px 70px -36px rgb(0 0 0 / .85),0 2px 0 rgb(0 0 0 / .4);
+ --shadow-drawer:-30px 0 80px -30px rgb(10 11 12 / .35);
+ --focus-ring:2px solid var(--red);
+ --focus-ring-dark:2px solid var(--red-glow);
+ --focus-offset:3px;
+
+ /* — Motion (mirrors motion/tokens.ts) — */
+ --t-fast:180ms;--t-normal:320ms;--t-section:580ms;--t-hero:820ms;
+ --ease-shutter:cubic-bezier(.2,.75,.1,1);   /* mechanical, decisive stop */
+ --ease-optical:cubic-bezier(.62,0,.32,1);   /* focus pull / aperture */
+ --ease-advance:cubic-bezier(.33,0,.15,1);   /* film advance lever */
+
+ /* — Layers — */
+ --z-canvas:0;--z-content:2;--z-sticky:40;--z-header:60;--z-dialog:100;
+
+ /* — Textures (static, cheap) — */
+ --grain:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .5 0 0 0 0 .5 0 0 0 0 .5 0 0 0 .9 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+@media (max-width:767px){:root{--header-h:60px;--fs-body:15px}}
