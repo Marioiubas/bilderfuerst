@@ -59,7 +59,7 @@ Final optimized build, TypeScript, ESLint syntax/hooks check and catalog verifie
 
 [Route sweep](evidence/visual-after/route-qa.json): **189/189** HTTP routes, one H1, review noindex and meaningful content. [Responsive observations](evidence/visual-after/layout.json): **65/65**. [Interaction observations](evidence/visual-after/interactions.json): **37/37**. Final local production browser diagnostics contain no captured errors/warnings. The prior CLI browser runner is preserved as historical evidence; this release used direct browser verification.
 
-Browser emulation for reduced motion, CPU throttling, cache bypass and blocked assets was reset after testing. Local source verification is distinct from the final Vercel deployment check, which is performed after publishing the release.
+Browser emulation for reduced motion, CPU throttling, cache bypass and blocked assets was reset after testing. The initial visual release (code commit `fc0b93c`) reached Vercel **READY**, deployment `dpl_Az9CE8JFhKwUfQQJD6jWSvDmM3xe`. Ordinary unauthenticated access returns HTTP 200; **189/189 public routes** pass. The live aperture plays, loaded imagery has no broken assets, and checkout has zero customer/payment inputs with payment disabled. See [release evidence](evidence/visual-after/public-release.json), [public route sweep](evidence/visual-after/public-route-qa.json) and public screenshots. The subsequent documentation-only deployment is checked separately at final handoff.
 
 ![Darkroom hero](evidence/visual-after/hero-1280.jpg)
 

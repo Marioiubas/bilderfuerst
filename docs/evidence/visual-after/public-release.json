@@ -1,0 +1,27 @@
+{
+  "verifiedAt": "2026-10-05 17:41:03 UTC",
+  "scope": "Initial visual-code release; subsequent documentation-only commit is verified separately at handoff.",
+  "url": "https://bilderfuerst.vercel.app",
+  "repository": "https://github.com/Marioiubas/bilderfuerst",
+  "deployment": "dpl_Az9CE8JFhKwUfQQJD6jWSvDmM3xe",
+  "state": "READY",
+  "target": "production",
+  "commit": "fc0b93c8c25b21b009354f1133e3b94f4e9b36f1",
+  "anonymousAccess": 200,
+  "publicRoutes": {
+    "passed": 189,
+    "total": 189
+  },
+  "browser": {
+    "apertureActive": true,
+    "apertureReplay": true,
+    "brokenLoadedImages": 0,
+    "checkoutFormsAndInputs": 0,
+    "paymentDisabled": true,
+    "noindex": "noindex, nofollow"
+  },
+  "higgsfield": {
+    "projectId": "9e1fa240-ae3d-49dd-b6f6-dc114bfbfd63",
+    "revision": 1
+  }
+}

@@ -37,3 +37,9 @@ The publication notes and reusable remote route checker are pushed after this in
 The public URL requires no login, while the site remains a labelled DEMO / OWNER REVIEW with source prices and stock dated 04 October 2026. The cart is local and creates no order; checkout collects no personal or payment data. Pages retain noindex. Public accessibility does not imply search-engine indexing or live commerce.
 
 The original merchant site and business domain remain untouched. Asset rights, legal inconsistencies, owner API access, tax/shipping/payment behavior and sandbox order acceptance remain in `OWNER-CONFIRMATION-LIST.md`. Public review publication does not establish those approvals.
+
+## Photographic and Higgsfield update · 05 October 2026
+
+Visual code commit `fc0b93c8c25b21b009354f1133e3b94f4e9b36f1` reached `READY` in production as `dpl_Az9CE8JFhKwUfQQJD6jWSvDmM3xe`. The public alias serves the new optical section and six Higgsfield props. Ordinary anonymous access is HTTP 200, and all 189 public routes pass. Live aperture playback and disabled checkout were verified directly. [Evidence](evidence/visual-after/public-release.json) and [32-point visual report](FINAL-VISUAL-REPORT.md).
+
+These evidence notes are a documentation-only follow-up to the verified visual code. Its final Git-linked deployment is checked at handoff. All review, noindex and no-payment boundaries remain.
