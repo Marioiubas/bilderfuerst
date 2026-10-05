@@ -29,7 +29,8 @@
     "fallback": "Procedural Three.js cartridge or static poster; hide on reduced-motion/low-power if desired.",
     "decorative": true,
     "documentary": false,
-    "rawEvidence": "docs/evidence/higgsfield/generated/film-cartridge-tripo-h31-raw.glb"
+    "rawEvidence": "docs/evidence/higgsfield/generated/film-cartridge-tripo-h31-raw.glb",
+    "status": "in production: home hero 3D workspace (desktop, after first engagement)"
   },
   {
     "name": "analog-craft",
@@ -49,6 +50,7 @@
     "usage": "Optical-craft props; aperture plays one 1400ms open/close on entry or explicit replay; mouse tilt ≈3.4°.",
     "fallback": "Six WebP posters in /props/*.webp (400x300 Eevee renders).",
     "decorative": true,
-    "documentary": false
+    "documentary": false,
+    "status": "retired from production 2026-10-05 (unused by the remake); file removed from public/props, retained in git history and docs/evidence/higgsfield"
   }
 ]

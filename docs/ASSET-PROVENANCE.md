@@ -12,7 +12,7 @@ Updated 2026-10-05. Every visual asset belongs to **exactly one** category below
 | HIGGSFIELD 3D | 2 GLB + 6 poster renders | **no — decorative** | AI/procedural in owner-operated account |
 | HIGGSFIELD VIDEO | 0 | — | — |
 | GENERATED TEXTURE | 1 (CSS SVG grain) | no — decorative | code, no third-party rights |
-| CSS/SVG GRAPHIC | see placeholder | no | — |
+| CSS/SVG GRAPHIC | see section below | no | — |
 
 ## REAL BUSINESS PHOTO / REAL PRODUCT PHOTO / REAL HISTORICAL PHOTO
 
@@ -41,7 +41,7 @@ Rules: never retouch real photos into new content, never mix generated material 
 
 ## OWNER LOGO
 
-**None approved.** The original site banner mixes branding with opening hours, address and contact details, so it was **not** cropped or reused as a logo. The current aperture mark is a temporary interface mark (see CSS/SVG GRAPHIC), not an official logo. The manifest now also lists two "Analog Store" brand-mark files (`logo-analog-store-white-on-black.webp`, `logo-analog-store-black-on-white.webp`) and the header banner (`header-banner-logo-address`, evidence only); they are rights-pending source material and are **not** approved as the Bilderfürst owner logo. Product brand logos inside product photos belong to those products, not to Bilderfürst. A standalone vector logo must come from the owner.
+**Used in the remake, owner approval pending.** Header and footer show the business's current "Analog Store – Bilderfürst Fürth" mark (bold grotesk, film-frame "A") from `logo-analog-store-white-on-black.webp` (source: photostudio.de, `A_Logo_2 10x15.jpg`, see `evidence/asset-manifest.json`). It is rendered as a CSS mask from `public/brand/analog-store-logo-mask-{320,640}.png`, an alpha channel derived losslessly from the source file's luminance and trimmed; shape, proportions and lettering are unaltered. This lets the mark take the surrounding text colour on dark and light headers. The header banner `bf.png` (logo mixed with address, hours and the cf@ email) remains evidence only. Usage rights for the logo, like all source imagery, still need the owner's confirmation; a vector original from the owner would replace the raster mask. Product brand logos inside product photos belong to those products.
 
 ## HIGGSFIELD 2D
 
@@ -68,8 +68,8 @@ Evidence-only (not published): `docs/evidence/higgsfield/generated/film-cartridg
 | Asset | File | Source | IDs | Date | Geometry / size | Use | Fallback |
 |---|---|---|---|---|---|---|---|
 | film-cartridge | `public/models/film-cartridge.glb` | Higgsfield **Tripo H3.1 Image to 3D** (`tripo_h3_1_image_to_3d`, face_limit 20k, PBR) from the GPT Image 2.5 reference above | 3D job `989fcdc6-e3b7-440c-a45e-fb66f0e318c5`; reference `eb1a8b0f-…` | 2026-10-05 | 18,766 triangles, 1 material, 3 × 1024² WebP textures (`EXT_texture_webp`), **551,632 B** (raw 2,828,488 B kept in evidence) | Decorative lab/hero prop | Procedural Three.js cartridge or static image |
-| analog-craft (6 roots: Aperture, Reel, Cassette, VHS, Negative, Prints) | `public/props/analog-craft.glb` | Higgsfield **3D Jutsu** scene builder, procedural Blender script [`create-props.py`](evidence/higgsfield/create-props.py) | project `9e1fa240-ae3d-49dd-b6f6-dc114bfbfd63`, revision 1, scene sequence 0, model op `bilderfuerst-editable-props-model`, GLB etag `b6438eb9298d24e7c4d052b9e784f1d0` | committed 2026-10-05 (`fc0b93c`) | 12,772 triangles, 7 untextured materials, 8 animations, `KHR_lights_punctual`, 589,592 B; editable `docs/evidence/higgsfield/analog-craft.blend` | Optical-craft props; aperture 1400 ms open/close; tilt ≈3.4° | The six posters below |
-| Poster renders (2D renders of the 3D Jutsu props) | `public/props/aperture.webp` (11,412), `reel.webp` (13,522), `cassette.webp` (6,204), `vhs.webp` (6,570), `negative.webp` (12,418), `prints.webp` (6,624) — all 400×300 | Eevee transparent renders, render ops `bilderfuerst-prop-posters-a/b/c` | artifact ids `8a4663…`, `f90da3…`, `37a60a…`, `9c7ddd…`, `8293a8…`, `f8882d…` (full ids + etags in [provenance.json](evidence/higgsfield/provenance.json)) | 2026-10-05 | PNG originals in `docs/evidence/higgsfield/*-poster.png` | Static stand-ins for the props | — |
+| analog-craft (6 roots: Aperture, Reel, Cassette, VHS, Negative, Prints) — **retired from production 2026-10-05** (no longer used by the remake; removed from `public/props`, kept in git history and `docs/evidence/higgsfield/`) | formerly `public/props/analog-craft.glb` | Higgsfield **3D Jutsu** scene builder, procedural Blender script [`create-props.py`](evidence/higgsfield/create-props.py) | project `9e1fa240-ae3d-49dd-b6f6-dc114bfbfd63`, revision 1, scene sequence 0, model op `bilderfuerst-editable-props-model`, GLB etag `b6438eb9298d24e7c4d052b9e784f1d0` | committed 2026-10-05 (`fc0b93c`) | 12,772 triangles, 7 untextured materials, 8 animations, `KHR_lights_punctual`, 589,592 B; editable `docs/evidence/higgsfield/analog-craft.blend` | Optical-craft props; aperture 1400 ms open/close; tilt ≈3.4° | The six posters below |
+| Poster renders (2D renders of the 3D Jutsu props) — **retired from production 2026-10-05** | formerly `public/props/aperture.webp` (11,412), `reel.webp` (13,522), `cassette.webp` (6,204), `vhs.webp` (6,570), `negative.webp` (12,418), `prints.webp` (6,624) — all 400×300 | Eevee transparent renders, render ops `bilderfuerst-prop-posters-a/b/c` | artifact ids `8a4663…`, `f90da3…`, `37a60a…`, `9c7ddd…`, `8293a8…`, `f8882d…` (full ids + etags in [provenance.json](evidence/higgsfield/provenance.json)) | 2026-10-05 | PNG originals in `docs/evidence/higgsfield/*-poster.png` | Static stand-ins for the props | — |
 
 All 3D assets are **decorative, non-documentary**, generic and unbranded: no merchant product, no real lab machine, no restoration outcome, no historical artifact. Machine-readable details: [`public/models/manifest.json`](../public/models/manifest.json). Rejected 3D: none (one attempt, accepted).
 
@@ -87,6 +87,28 @@ Non-AI, code-generated textures:
 
 (The four AI textures above are listed under HIGGSFIELD 2D, not here.)
 
-## CSS/SVG GRAPHIC — completed by the implementation team
+## CSS/SVG GRAPHIC
 
-_Placeholder._ List every CSS/SVG interface graphic here (icons, dividers, the temporary aperture interface mark, sprocket/frame motifs, Vanta configuration, gradients), with file path, author (hand-coded / library + licence) and whether it is purely decorative.
+All hand-coded for this project (no third-party artwork), decorative unless stated, `aria-hidden` where they carry no information.
+
+| Graphic | Where | Notes |
+|---|---|---|
+| Aperture mark (6-blade) | `components/analog/primitives.tsx` `ApertureMark` | Interface glyph only; no longer used as a logo since the real Analog Store mark is available |
+| Sprocket rows, edge print, frame numbers | `app/styles/base.css` `.sprockets`, `.edge-print`; hero, lab, history, gallery | Generic 35 mm geometry; edge print uses only frame codes, never film-brand names |
+| 135 cartridge line drawing with callouts | `components/hero-film.tsx` | First-paint technical drawing of a generic cartridge |
+| Light table, contact sheet, grease-pencil mark | `components/hero-film.tsx`, `app/styles/hero.css` | — |
+| Film strip progress (35mm / 120 / 110) and tank schematic | `components/lab/film-strip.tsx`, `process-tank.tsx`, `format-glyph.tsx` | Captioned "Schema, kein Foto der Maschine" |
+| Scan dimension diagram | `components/lab/scan-specs.tsx` | Drawn to scale from the published Noritsu HS-1800 pixel sizes |
+| Media silhouettes and identification diagrams (perforations, reel holes, cassettes) | `components/digitization/silhouettes.tsx`, `identify.tsx` | General identification cues, relative scale; not product renderings |
+| Lab drawer icons (router) | `components/home-router.tsx` | — |
+| Biometric framing schema | `components/story/services.tsx` | Registration-mark guide lines, no face, no certification claim |
+| Print stack sheets | `components/home-print-room.tsx`, `components/story/print-room.tsx` | CSS 3D; sheets show real Tri-X lab samples |
+| Window map / hanging plan, 2D window fallback | `components/gallery/window-map.tsx`, `window-stage.tsx` | Diagram of positions 1–12, not a photograph |
+| Aperture iris (lightbox) | `components/gallery/lightbox.tsx` | 7-blade SVG mask, the single aperture signature |
+| Tracing-beam film strip | `components/ui/tracing-beam.tsx` (Aceternity, adapted) | Amber film-base light |
+| Static grain | `--grain` in `app/styles/tokens.css` | SVG feTurbulence data URI, 7 % opacity, hero/history/gallery on ≥ 768 px only |
+| Vanta FOG / DOTS configuration | `components/darkroom.tsx` | Library effect (Vanta.js 0.5.24, MIT) with project colours; static fallbacks use the Higgsfield textures |
+
+## DERIVED RENDITIONS OF REAL PHOTOS
+
+Same source files, resized only (no retouching): `*-l.webp` (larger renditions fetched from the same photostudio.de source URLs at `width=2400`, max 1600 px; originals `docs/evidence/assets/*-l.jpg.original`), `film-shelf-m.webp` (900 px, from the `-l` original), `*-t.webp` (480 px hero-strip renditions). The ICE sample pair is shown aligned by CSS positioning only (measured scale ×1.0288, offset −13.9/+23.1 px); pixels unchanged.
