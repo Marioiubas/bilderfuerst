@@ -1,3 +1,4 @@
+import '../styles/digitization.css';
 import type {Metadata} from 'next';
 import {Digitization} from '@/components/digitization/digitization';
 export const metadata:Metadata={

@@ -9,7 +9,6 @@ import dynamic from 'next/dynamic';
 import {useCallback,useEffect,useLayoutEffect,useRef,useState} from 'react';
 import {flushSync} from 'react-dom';
 import {ArrowRight,ArrowUpRight} from 'lucide-react';
-import {Spotlight} from './ui/spotlight-new';
 import {HeroFilm} from './hero-film';
 import {useWebGLScene,type SceneMount} from '@/hooks/use-webgl-scene';
 import {motionTier,useMotionTier} from '@/motion/setup';
@@ -17,6 +16,8 @@ import {measureFrames,playContactSheet,playHeroIntro,type Revertible} from '@/mo
 import type {FilmWorkspaceApi} from './three/film-workspace';
 
 const Darkroom=dynamic(()=>import('./darkroom'),{ssr:false});
+// Desktop-only enlarger light: keep its Motion runtime out of the initial bundle.
+const Spotlight=dynamic(()=>import('./ui/spotlight-new').then(m=>m.Spotlight),{ssr:false});
 
 /** Runs during HTML parsing, before first paint: hold the intro elements at their
  *  (visible) start state so hydration does not flash. Self-heals after 3.5 s. */

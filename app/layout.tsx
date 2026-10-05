@@ -8,13 +8,8 @@ import '@fontsource/ibm-plex-mono/latin-400.css';
 import '@fontsource/ibm-plex-mono/latin-500.css';
 import './styles/tokens.css';
 import './styles/base.css';
-import './styles/hero.css';
-import './styles/home.css';
+// Area stylesheets load with their routes; commerce stays global for the search/cart overlays.
 import './styles/commerce.css';
-import './styles/lab.css';
-import './styles/digitization.css';
-import './styles/gallery.css';
-import './styles/story.css';
 export const metadata:Metadata={
  title:{default:'bilderfürst Fürth — Analog Store & Film Lab',template:'%s · bilderfürst Fürth'},
  description:'Analoge Fotografie in Fürth: Filme, Kameras, Filmentwicklung im eigenen Labor (C-41, Schwarzweiß, E-6), Noritsu-Scans, Digitalisierung und FineArt Prints. Alexanderstraße 2.',

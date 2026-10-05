@@ -2,10 +2,11 @@
 // 03 · STR ANALOG STORE — light zone. Pentax 17 feature (Aceternity 3D card ≤ 4°, desktop + motion only; Lens on
 // the real shop photo), the assortment as an archive index with live catalog counts, and the used-camera note.
 import Link from 'next/link';
+import {useEffect,useState} from 'react';
 import {ArrowUpRight,ArrowRight} from 'lucide-react';
 import {SectionHead,frameNo} from './analog/primitives';
 import {CardContainer,CardBody,CardItem} from './ui/3d-card';
-import {Lens} from './ui/lens';
+import type {Lens as LensComponent} from './ui/lens';
 import {bySlug,formatPrice,groupCount,shopGroupLabels,shopGroups} from '@/lib/catalog';
 import {track} from '@/lib/analytics';
 import {viewfinderLock} from '@/motion/home';
@@ -40,9 +41,9 @@ export function HomeStore(){
       <CardContainer containerClassName="py-0 block hm-card-wrap" className="block w-full">
        <CardBody className="h-auto w-full hm-card-body">
         <CardItem translateZ={16} className="w-full hm-card-photo">
-         <Lens zoomFactor={1.9} lensSize={190}>
+         <DesktopLens>
           <img src={PHOTO.pentax.src} width={PHOTO.pentax.w} height={PHOTO.pentax.h} loading="lazy" decoding="async" alt="Pentax 17 mit Originalkarton auf der Ladentheke in Fürth"/>
-         </Lens>
+         </DesktopLens>
         </CardItem>
        </CardBody>
       </CardContainer>
@@ -85,4 +86,16 @@ export function HomeStore(){
    </div>
   </div>
  </section>;
+}
+
+/** The Aceternity Lens (and its Motion runtime) loads only on desktop with a fine pointer;
+ *  everyone else gets the same photograph without the loupe and without the extra JS. */
+function DesktopLens({children}:{children:React.ReactNode}){
+ const [Loaded,setLoaded]=useState<typeof LensComponent|null>(null);
+ useEffect(()=>{
+  if(!window.matchMedia('(min-width: 1024px) and (pointer: fine)').matches)return;
+  let live=true;import('./ui/lens').then(m=>{if(live)setLoaded(()=>m.Lens)});
+  return()=>{live=false};
+ },[]);
+ return Loaded?<Loaded zoomFactor={1.9} lensSize={190}>{children}</Loaded>:<>{children}</>;
 }

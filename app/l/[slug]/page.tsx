@@ -1,3 +1,4 @@
+import '../../styles/story.css';
 import type {Metadata} from 'next';
 import {notFound,redirect} from 'next/navigation';
 import content from '@/lib/source-content.json';
