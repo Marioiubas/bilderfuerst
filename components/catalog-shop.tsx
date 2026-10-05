@@ -1,23 +1,163 @@
 "use client";
-import {useState,useEffect,useRef} from 'react';
-import {useSearchParams} from 'next/navigation';
-import {Search,X,SlidersHorizontal} from 'lucide-react';
-import {catalog,featured,matchesQuery,type Product} from '@/lib/catalog';
+// /shop + /c/*: calm photo-white light table. URL is the single source of filter state.
+import {useCallback,useEffect,useLayoutEffect,useMemo,useRef,useState} from 'react';
+import {usePathname,useSearchParams} from 'next/navigation';
+import {Search,X,SlidersHorizontal,LayoutGrid,Rows3} from 'lucide-react';
+import {catalog,shopGroup} from '@/lib/catalog';
+import {track} from '@/lib/analytics';
+import {type Category,type Filters,type FacetKey,applyFilters,categoryLabel,categoryOrder,emptyFilters,formats,fromPrice,isoBucketLabel,isoBuckets,kinds,matchesFacets,parseFilters,processes,searchProducts,serializeFilters,sortProducts,sorts,brandOf,allBrands} from '@/lib/shop-filters';
+import {dimResults,revealResults,clearResultStyles} from '@/motion/products';
 import {ProductCard} from './product-card';
 import {Dialog} from './dialog';
-import {refreshProducts} from '@/motion/photographic';
-const priceCeiling=Math.ceil(Math.max(...catalog.map(p=>p.price)));
-const tabs=['Alle','Filme','Kameras','Labor','Sofortbild','Bücher','Gutscheine'];
-function group(p:Product){if(p.category==='FILME')return 'Filme';if(p.category==='CAMERAS')return 'Kameras';if(p.category.includes('INSTAX')||p.category.includes('POLAROID'))return 'Sofortbild';if(p.category.includes('ZINES')||p.category.includes('BÜCHER'))return 'Bücher';if(/gutschein/i.test(p.name))return 'Gutscheine';return 'Labor'}
-export function CatalogShop({initialCategory='Alle'}:{initialCategory?:string}){
- const params=useSearchParams();const [category,setCategory]=useState(params.get('category')||initialCategory);const [query,setQuery]=useState(params.get('q')||'');const [format,setFormat]=useState('Alle');const [brand,setBrand]=useState('Alle');const [process,setProcess]=useState('Alle');const [iso,setIso]=useState('Alle');const [stock,setStock]=useState(false);const [sort,setSort]=useState('selected');const [filters,setFilters]=useState(false);const [maxPrice,setMaxPrice]=useState(priceCeiling);const [mobile,setMobile]=useState(false);const grid=useRef<HTMLDivElement>(null);
- useEffect(()=>{setCategory(params.get('category')||initialCategory);setQuery(params.get('q')||'')},[params,initialCategory]);
- useEffect(()=>{const media=window.matchMedia('(max-width: 700px)');const update=()=>{setMobile(media.matches);if(!media.matches)setFilters(false)};update();media.addEventListener('change',update);return()=>media.removeEventListener('change',update)},[]);
- useEffect(()=>{if(!grid.current)return;const a=refreshProducts(grid.current);return()=>{a?.revert()}},[category,query,format,brand,process,iso,stock,maxPrice,sort]);
- const brands=Array.from(new Set(catalog.map(p=>p.brand).filter(Boolean))).sort();
- const result=catalog.filter(p=>(category==='Alle'||group(p)===category)&&matchesQuery(p,query)&&(format==='Alle'||p.format===format)&&(brand==='Alle'||p.brand===brand)&&(process==='Alle'||p.process===process)&&(iso==='Alle'||p.iso===iso)&&p.price<=maxPrice&&(!stock||p.inStock)).sort((a,b)=>sort==='low'?a.price-b.price:sort==='high'?b.price-a.price:sort==='name'?a.name.localeCompare(b.name,'de'):Number(b.inStock)-Number(a.inStock)||(featured.findIndex(p=>p.slug===a.slug)<0?999:featured.findIndex(p=>p.slug===a.slug))-(featured.findIndex(p=>p.slug===b.slug)<0?999:featured.findIndex(p=>p.slug===b.slug)));
- const reset=()=>{setCategory('Alle');setQuery('');setFormat('Alle');setBrand('Alle');setProcess('Alle');setIso('Alle');setStock(false);setMaxPrice(priceCeiling)};
- const chips=[...(category!=='Alle'?[{label:category,remove:()=>setCategory('Alle')}]:[]),...(query?[{label:`Suche: ${query}`,remove:()=>setQuery('')}]:[]),...[{label:format,remove:()=>setFormat('Alle')},{label:brand,remove:()=>setBrand('Alle')},{label:process,remove:()=>setProcess('Alle')},{label:iso==='Alle'?'Alle':`ISO ${iso}`,remove:()=>setIso('Alle')}].filter(c=>c.label!=='Alle'),...(stock?[{label:'Auf Lager',remove:()=>setStock(false)}]:[]),...(maxPrice<priceCeiling?[{label:`bis ${maxPrice} €`,remove:()=>setMaxPrice(priceCeiling)}]:[])];
- const filterContent=<><div className="filter-heading"><span className="eyebrow">LAB / SPEZIFIKATION</span><button onClick={reset}>Zurücksetzen</button></div>{[['Format',format,setFormat,['Alle','35mm','120','110']],['Marke',brand,setBrand,['Alle',...brands]],['Prozess',process,setProcess,['Alle','C-41','Schwarzweiß','E-6']],['ISO',iso,setIso,['Alle',...Array.from(new Set(catalog.filter(p=>p.category==='FILME').map(p=>p.iso).filter(Boolean))).sort((a,b)=>Number(a)-Number(b))]]].map(([label,value,setter,choices])=><label className="filter-select" key={label as string}>{label as string}<select value={value as string} onChange={e=>(setter as (v:string)=>void)(e.target.value)}>{(choices as string[]).map(c=><option key={c}>{c}</option>)}</select></label>)}<label className="price-filter">Maximaler Preis<input aria-label="Maximaler Preis" type="range" min="0" max={priceCeiling} step="1" value={maxPrice} onChange={e=>setMaxPrice(Number(e.target.value))}/><span>bis {maxPrice.toLocaleString('de-DE')} €</span></label><label className="stock-checkbox"><input type="checkbox" checked={stock} onChange={e=>setStock(e.target.checked)}/> Nur auf Lager (Quellstand)</label><p className="filter-note">Katalogstand: 04.10.2026.<br/>Aktuelle Preise & Verfügbarkeit bestätigt der bestehende Shop.</p></>;
- return <div className="section-wrap shop-page"><div className="page-intro"><span className="eyebrow">DER BILDERFÜRST / ANALOG STORE</span><h1>Dein nächstes Bild<br/><em>beginnt hier.</em></h1><p>Filme, Kameras und gutes Werkzeug. Aus unserem echten Analog Store in Fürth.</p></div><div className="shop-tabs" aria-label="Produktkategorien">{tabs.map(t=><button key={t} aria-pressed={category===t} className={category===t?'selected':''} onClick={()=>setCategory(t)}>{t}</button>)}</div><div className="shop-toolbar"><div className="catalog-search"><Search size={18}/><input aria-label="Im Katalog suchen" placeholder="Film, Marke, ISO oder Format suchen …" value={query} onChange={e=>setQuery(e.target.value)}/>{query&&<button aria-label="Suchbegriff löschen" onClick={()=>setQuery('')}><X size={17}/></button>}</div><span className="results-count" aria-live="polite">{result.length} Produkte</span><label className="sort-control">Sortieren<select value={sort} onChange={e=>setSort(e.target.value)}><option value="selected">Unsere Auswahl</option><option value="low">Preis aufsteigend</option><option value="high">Preis absteigend</option><option value="name">Name A–Z</option></select></label><button className="filter-mobile" aria-expanded={filters} onClick={()=>setFilters(true)}><SlidersHorizontal size={17}/> Filter</button></div>{chips.length>0&&<div className="active-filters" aria-label="Aktive Filter">{chips.map(c=><button key={c.label} onClick={c.remove} aria-label={`${c.label} entfernen`}>{c.label}<X size={11}/></button>)}</div>}<div className="shop-layout">{!mobile&&<aside className="catalog-filters" aria-label="Produktfilter">{filterContent}</aside>}<div className="catalog-grid" ref={grid}>{result.length?result.map((p,i)=><ProductCard product={p} index={i} key={p.slug}/>):<div className="no-results"><h2>Hier ist noch kein Bild.</h2><p>Für diese Auswahl gibt es keine Produkte.</p><button className="button button-secondary" onClick={reset}>Filter zurücksetzen</button></div>}</div></div><div className="catalog-note"><span>109 Quellprodukte inklusive archivierter Veranstaltungen · {catalog.length} aktuell im Vorschaukatalog</span><span>Preise inkl. MwSt., zzgl. Versand · Vorschau ohne Zahlungsfunktion</span></div>{mobile&&<Dialog open={filters} onClose={()=>setFilters(false)} label="Produktfilter" className="filter-dialog"><div className="dialog-heading"><h2>Deine Auswahl.</h2><button onClick={()=>setFilters(false)} aria-label="Filter schließen"><X/></button></div><div className="mobile-filter-content">{filterContent}</div><button className="button primary" onClick={()=>setFilters(false)}>{result.length} Produkte ansehen</button></Dialog>}</div>
+import {ShopHead} from './commerce/shop-head';
+import {FilmIndex} from './commerce/film-index';
+import {ActiveChips,FilmFinder,FilterControls,type FacetModel,type FinderKey,type Option} from './commerce/shop-filters';
+
+type Initial=Record<string,string|string[]|undefined>;
+const first=(v:string|string[]|undefined)=>Array.isArray(v)?v[0]:v;
+const quickPicks:Array<[string,string]>=[['Portra 400','portra 400'],['HP5 Plus','hp5'],['Tri-X','tri-x'],['Gold 200','gold 200'],['CineStill 800T','800t']];
+
+export function CatalogShop({initial={},base={}}:{initial?:Initial;base?:Partial<Filters>}){
+ const params=useSearchParams();const pathname=usePathname();
+ const [filters,setFilters]=useState<Filters>(()=>parseFilters(k=>first(initial[k]),base));
+ const [shown,setShown]=useState<Filters>(filters);
+ const [sheet,setSheet]=useState(false);
+ const [qDraft,setQDraft]=useState(filters.q);
+ const grid=useRef<HTMLDivElement>(null);
+ const written=useRef(params.toString());
+ const filtersRef=useRef(filters);
+ const dim=useRef<ReturnType<typeof dimResults>>(undefined);
+ const firstReveal=useRef(true);
+ const baseKey=JSON.stringify(base);
+
+ useEffect(()=>{filtersRef.current=filters},[filters]);
+
+ // External navigation (header links, back/forward) → re-read the URL.
+ const paramString=params.toString();
+ useEffect(()=>{
+  if(paramString===written.current)return;
+  written.current=paramString;
+  const next=parseFilters(k=>new URLSearchParams(paramString).get(k),JSON.parse(baseKey) as Partial<Filters>);
+  setFilters(next);setQDraft(next.q);
+ },[paramString,baseKey]);
+
+ const commit=useCallback((next:Filters)=>{
+  setFilters(next);
+  const qs=serializeFilters(next);written.current=qs;
+  window.history.replaceState(null,'',qs?`${pathname}?${qs}`:pathname);
+ },[pathname]);
+ const change=useCallback((patch:Partial<Filters>)=>commit({...filtersRef.current,...patch}),[commit]);
+ const reset=useCallback(()=>{setQDraft('');commit({...emptyFilters,category:filtersRef.current.category,sort:filtersRef.current.sort,view:filtersRef.current.view})},[commit]);
+ const setCategory=(category:Category)=>{const f=filtersRef.current;commit({...emptyFilters,category,q:f.q,stock:f.stock,sort:f.sort,view:category==='Filme'?f.view:'raster'})};
+
+ // Debounced query → URL.
+ useEffect(()=>{
+  if(qDraft.trim()===filtersRef.current.q)return;
+  const t=window.setTimeout(()=>change({q:qDraft.trim()}),220);
+  return()=>window.clearTimeout(t);
+ },[qDraft,change]);
+
+ // Analytics (debounced, no PII: only facet values).
+ useEffect(()=>{
+  const t=window.setTimeout(()=>{
+   const {q,...rest}=filters;
+   track('filter',{category:rest.category,format:rest.format,kind:rest.kind,iso:rest.iso,process:rest.process,brand:rest.brand,stock:rest.stock,sort:rest.sort,view:rest.view});
+   if(q)track('search',{q,source:'shop'});
+  },800);
+  return()=>window.clearTimeout(t);
+ },[filters]);
+
+ // Motion: dim the visible set, then swap results; reveal only the first visible set.
+ useEffect(()=>{
+  if(shown===filters)return;
+  dim.current?.cancel();
+  const target=filters;
+  dim.current=dimResults(grid.current,()=>setShown(target));
+ },[filters,shown]);
+ useLayoutEffect(()=>{
+  if(firstReveal.current){firstReveal.current=false;return}
+  dim.current?.revert();dim.current=undefined;clearResultStyles(grid.current);
+  const r=revealResults(grid.current);
+  return()=>r?.revert();
+ },[shown]);
+
+ // Facet model with live counts (each facet ignores its own value).
+ const pool=useMemo(()=>filters.q?searchProducts(filters.q).results:catalog,[filters.q]);
+ const facets=useMemo<FacetModel>(()=>{
+  const count=(patch:Partial<Filters>)=>pool.filter(p=>matchesFacets(p,{...filters,...patch})).length;
+  const opts=<T extends string>(key:FacetKey,values:readonly T[],label:(v:T)=>string=v=>v,title?:(v:T)=>string):Option[]=>[{value:'',label:'Alle',count:count({[key]:''} as Partial<Filters>)},...values.map(v=>({value:v,label:label(v),count:count({[key]:v} as Partial<Filters>),title:title?.(v)}))];
+  const prices=pool.filter(p=>filters.category==='Alle'||shopGroup(p)===filters.category).map(fromPrice);
+  const brandsHere=allBrands.filter(b=>pool.some(p=>brandOf(p)===b&&(filters.category==='Alle'||shopGroup(p)===filters.category)));
+  return {
+   format:opts('format',formats),kind:opts('kind',kinds),iso:opts('iso',isoBuckets,v=>v,v=>isoBucketLabel[v]),process:opts('process',processes,v=>v==='Schwarzweiß'?'S/W':v),
+   brand:opts('brand',brandsHere),stockCount:count({stock:true}),
+   priceFloor:prices.length?Math.min(...prices):0,priceCeiling:prices.length?Math.ceil(Math.max(...prices)):0,
+  };
+ },[pool,filters]);
+ const tabCounts=useMemo(()=>Object.fromEntries(categoryOrder.map(c=>[c,pool.filter(p=>matchesFacets(p,{...emptyFilters,stock:filters.stock,category:c})).length])) as Record<Category,number>,[pool,filters.stock]);
+
+ const now=useMemo(()=>applyFilters(catalog,filters),[filters]);
+ const results=useMemo(()=>sortProducts(applyFilters(catalog,shown),shown.sort),[shown]);
+ const isFilm=filters.category==='Filme';
+ const finderKeys:FinderKey[]=isFilm||filters.category==='Alle'||filters.category==='Entwicklung'?['format','process','iso','kind']:[];
+ const railKeys:FinderKey[]=isFilm?[]:finderKeys;
+ const activeCount=[filters.format,filters.kind,filters.iso,filters.process,filters.brand].filter(Boolean).length+Number(filters.stock)+Number(filters.maxPrice!=null);
+ const noun=isFilm?(now.length===1?'Film':'Filme'):(now.length===1?'Produkt':'Produkte');
+
+ return <div className="shop zone-light">
+  <ShopHead count={catalog.length}/>
+  <div className="wrap shop-body">
+   <div className="shop-tabs" role="group" aria-label="Kategorie">
+    {categoryOrder.map(c=><button type="button" key={c} aria-pressed={filters.category===c} className="shop-tab" onClick={()=>setCategory(c)} disabled={tabCounts[c]===0&&filters.category!==c}>
+     {categoryLabel(c)}<span className="mono num">{tabCounts[c]}</span></button>)}
+   </div>
+
+   {isFilm&&<div className="finder-wrap">
+    <div className="finder-desktop"><FilmFinder facets={facets} filters={filters} onChange={change}/></div>
+    <div className="finder-mobile"><FilmFinder facets={facets} filters={filters} onChange={change} keys={['format','kind']}/></div>
+   </div>}
+   {isFilm&&<p className="quick-picks"><span className="mono faint">Direkt zu</span>{quickPicks.map(([label,q])=><button type="button" key={q} className="quick-pick" onClick={()=>{setQDraft(q);change({q})}}>{label}</button>)}</p>}
+
+   <div className="shop-toolbar">
+    <div className="shop-search"><Search size={17} aria-hidden="true"/>
+     <input type="search" value={qDraft} onChange={e=>setQDraft(e.target.value)} placeholder="Film, Marke, ISO, Format … z. B. Portra 400, 120 SW" aria-label="Im Analog Store suchen" enterKeyHint="search"/>
+     {qDraft&&<button type="button" className="icon-btn" aria-label="Suchbegriff löschen" onClick={()=>{setQDraft('');change({q:''})}}><X size={16}/></button>}
+    </div>
+    <p className="shop-result-count mono" aria-live="polite"><span className="num">{now.length}</span> {noun}</p>
+    <label className="shop-sort"><span className="mono">Sortieren</span>
+     <select className="select" value={filters.sort} onChange={e=>change({sort:e.target.value as Filters['sort']})}>{sorts.map(([k,l])=><option key={k} value={k}>{l}</option>)}</select>
+    </label>
+    {isFilm&&<div className="view-toggle" role="group" aria-label="Ansicht">
+     <button type="button" aria-pressed={filters.view==='raster'} onClick={()=>change({view:'raster'})}><LayoutGrid size={15} aria-hidden="true"/>Raster</button>
+     <button type="button" aria-pressed={filters.view==='index'} onClick={()=>change({view:'index'})}><Rows3 size={15} aria-hidden="true"/>Film-Index</button>
+    </div>}
+    <button type="button" className="btn btn-ghost btn-sm shop-filter-btn" aria-haspopup="dialog" aria-expanded={sheet} onClick={()=>setSheet(true)}><SlidersHorizontal size={15} aria-hidden="true"/>Filter{activeCount>0&&<span className="mono num">({activeCount})</span>}</button>
+   </div>
+   <ActiveChips filters={filters} onChange={patch=>{if('q' in patch)setQDraft('');change(patch)}} onReset={reset}/>
+
+   <div className="shop-layout">
+    <aside className="shop-rail" aria-label="Produktfilter"><FilterControls facets={facets} filters={filters} onChange={change} onReset={reset} finderKeys={railKeys}/></aside>
+    <section className="shop-results" aria-labelledby="shop-results-h">
+     <h2 id="shop-results-h" className="sr-only">{categoryLabel(shown.category)}: {results.length} {results.length===1?'Ergebnis':'Ergebnisse'}</h2>
+     <div ref={grid} className={shown.view==='index'&&shown.category==='Filme'?'shop-index':'shop-grid'}>
+      {results.length===0?<div className="shop-empty">
+        <p className="mono faint">00 Treffer</p>
+        <h3>Für diese Kombination haben wir nichts im Regal.</h3>
+        <p className="muted">Nimm einen Filter heraus oder setze alles zurück. Nach Lieferzeiten fragst du am besten im Laden in Fürth: <a className="link" href="tel:+49911774202">0911 774202</a>.</p>
+        <button type="button" className="btn btn-ink btn-sm" onClick={reset}>Filter zurücksetzen</button>
+       </div>
+       :shown.view==='index'&&shown.category==='Filme'?<FilmIndex items={results} sort={shown.sort} onSort={sort=>change({sort})}/>
+       :results.map((p,i)=><ProductCard key={p.slug} product={p} index={i} eager={i===0}/>)}
+     </div>
+    </section>
+   </div>
+   <p className="shop-notes mono">Preise inkl. MwSt., zzgl. Versand · Quellstand 04.10.2026 · Vorschau ohne Zahlungsfunktion</p>
+  </div>
+
+  <Dialog open={sheet} onClose={()=>setSheet(false)} label="Produktfilter" kind="sheet" className="filter-sheet">
+   <div className="dialog-head"><span className="mono"><b>SPEC</b> Filter · {categoryLabel(filters.category)}</span><button type="button" className="icon-btn" onClick={()=>setSheet(false)} aria-label="Filter schließen"><X size={20}/></button></div>
+   <div className="filter-sheet-body"><FilterControls facets={facets} filters={filters} onChange={change} onReset={reset} finderKeys={finderKeys}/></div>
+   <div className="filter-sheet-foot"><button type="button" className="btn btn-primary btn-block" onClick={()=>setSheet(false)}>{now.length} {noun} anzeigen</button></div>
+  </Dialog>
+ </div>;
 }

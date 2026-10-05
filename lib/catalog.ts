@@ -31,11 +31,9 @@ export function shopGroup(p:Product):ShopGroup{
 }
 export function groupCount(group:ShopGroup){return catalog.filter(p=>shopGroup(p)===group).length}
 
-/** Film colour family for the film finder. */
+/** Film colour family for the film finder (derived by scripts/derive-film-attributes.mjs from the
+ *  source name + description; e.g. Ilford XP2 = Schwarzweiß film processed in C-41). */
 export function filmKind(p:Product):'Farbe'|'Schwarzweiß'|'Dia'|''{
- if(shopGroup(p)!=='Filme')return '';
- if(p.process==='E-6')return 'Dia';
- if(p.process==='Schwarzweiß')return 'Schwarzweiß';
- if(p.process==='C-41')return 'Farbe';
- return /schwarz|black|b&w|apx|hp5|delta|fp4|pan f|tri-x|t-max|p30|bwxx/i.test(p.name)?'Schwarzweiß':/velvia|provia|ektachrome|dia/i.test(p.name)?'Dia':'Farbe';
+ const kind=(p as Product&{filmKind?:string}).filmKind;
+ return kind==='Farbe'||kind==='Schwarzweiß'||kind==='Dia'?kind:'';
 }

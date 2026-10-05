@@ -1,4 +1,6 @@
 "use client";
+// Aceternity Lens (owned by commerce). Pointer-only magnifier: disabled for coarse pointers and
+// reduced motion; callers must offer a lightbox button as the touch/keyboard path.
 
 import React, { useRef, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
@@ -15,6 +17,8 @@ interface LensProps {
   isFocusing?: () => void;
   hovering?: boolean;
   setHovering?: (hovering: boolean) => void;
+  /** Extra class on the lens container (Analog Technology: rectangular, no radius). */
+  className?: string;
 }
 
 export const Lens: React.FC<LensProps> = ({
@@ -25,6 +29,7 @@ export const Lens: React.FC<LensProps> = ({
   position = { x: 200, y: 150 },
   hovering,
   setHovering,
+  className = "",
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -46,7 +51,7 @@ export const Lens: React.FC<LensProps> = ({
   return (
     <div
       ref={containerRef}
-      className="relative overflow-hidden rounded-lg z-20"
+      className={`relative overflow-hidden z-20 ${className}`}
       onMouseEnter={() => {
         if (!window.matchMedia('(prefers-reduced-motion: reduce), (pointer: coarse)').matches) setIsHovering(true);
       }}
