@@ -42,4 +42,4 @@ The original merchant site and business domain remain untouched. Asset rights, l
 
 Visual code commit `fc0b93c8c25b21b009354f1133e3b94f4e9b36f1` reached `READY` in production as `dpl_Az9CE8JFhKwUfQQJD6jWSvDmM3xe`. The public alias serves the new optical section and six Higgsfield props. Ordinary anonymous access is HTTP 200, and all 189 public routes pass. Live aperture playback and disabled checkout were verified directly. [Evidence](evidence/visual-after/public-release.json) and [32-point visual report](FINAL-VISUAL-REPORT.md).
 
-These evidence notes are a documentation-only follow-up to the verified visual code. Its final Git-linked deployment is checked at handoff. All review, noindex and no-payment boundaries remain.
+These evidence notes follow the verified visual code. A final Vanta cleanup guard handles an already detached canvas, with 38/38 interaction checks passing. The exact final Git-linked deployment is checked at handoff. All review, noindex and no-payment boundaries remain.

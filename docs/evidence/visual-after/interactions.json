@@ -154,5 +154,14 @@
   {
     "name": "Audio selection preserves source service information",
     "pass": true
+  },
+  {
+    "name": "Vanta detached canvas cleanup",
+    "pass": true,
+    "detail": {
+      "canvases": 0,
+      "h1": "Analog.Für immer.",
+      "scene": "static"
+    }
   }
 ]
