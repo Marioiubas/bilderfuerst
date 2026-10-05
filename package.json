@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start --hostname 127.0.0.1",
     "typecheck": "tsc --noEmit",
-    "verify": "node scripts/verify-catalog.mjs"
+    "verify": "node scripts/verify-catalog.mjs",
+    "lint": "eslint app components lib motion --max-warnings=0"
   },
   "dependencies": {
     "@fontsource/dm-sans": "^5.3.0",
@@ -30,7 +31,10 @@
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
     "@types/three": "^0.186.0",
+    "@typescript-eslint/parser": "^8.71.0",
     "agent-browser": "latest",
+    "eslint": "^10.12.0",
+    "eslint-plugin-react-hooks": "^7.1.1",
     "tailwindcss": "^4.1.0",
     "typescript": "^5.9.2"
   }

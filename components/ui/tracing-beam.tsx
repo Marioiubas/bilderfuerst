@@ -1,10 +1,9 @@
 "use client";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState, useId } from "react";
 import {
   motion,
   useTransform,
   useScroll,
-  useReducedMotion,
   useSpring,
 } from "motion/react";
 import { cn } from "@/lib/utils";
@@ -16,7 +15,7 @@ export const TracingBeam = ({
   children: React.ReactNode;
   className?: string;
 }) => {
-  const reduced = useReducedMotion();
+  const gradientId = useId();
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -72,8 +71,8 @@ export const TracingBeam = ({
               delay: 0.5,
             }}
             animate={{
-              backgroundColor: scrollYProgress.get() > 0 ? "white" : "#dc4d22",
-              borderColor: scrollYProgress.get() > 0 ? "white" : "#dc4d22",
+              backgroundColor: scrollYProgress.get() > 0 ? "white" : "#c6322a",
+              borderColor: scrollYProgress.get() > 0 ? "white" : "#c6322a",
             }}
             className="h-2 w-2 rounded-full border border-neutral-300 bg-white"
           />
@@ -97,7 +96,7 @@ export const TracingBeam = ({
           <motion.path
             d={`M 1 0V -36 l 18 24 V ${svgHeight * 0.8} l -18 24V ${svgHeight}`}
             fill="none"
-            stroke="url(#gradient)"
+            stroke={`url(#${gradientId})`}
             strokeWidth="1.25"
             className="motion-reduce:hidden"
             transition={{
@@ -106,17 +105,17 @@ export const TracingBeam = ({
           ></motion.path>
           <defs>
             <motion.linearGradient
-              id="gradient"
+              id={gradientId}
               gradientUnits="userSpaceOnUse"
               x1="0"
               x2="0"
               y1={y1} // set y1 for gradient
               y2={y2} // set y2 for gradient
             >
-              <stop stopColor="#dc4d22" stopOpacity="0"></stop>
-              <stop stopColor="#dc4d22"></stop>
-              <stop offset="0.325" stopColor="#e5a458"></stop>
-              <stop offset="1" stopColor="#dc4d22" stopOpacity="0"></stop>
+              <stop stopColor="#c6322a" stopOpacity="0"></stop>
+              <stop stopColor="#c6322a"></stop>
+              <stop offset="0.325" stopColor="#bbc1c2"></stop>
+              <stop offset="1" stopColor="#c6322a" stopOpacity="0"></stop>
             </motion.linearGradient>
           </defs>
         </svg>

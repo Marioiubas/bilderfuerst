@@ -1,0 +1,145 @@
+{
+  "commit": "c11e784",
+  "files": [
+    {
+      "file": "0032s-gl8kjob.js",
+      "bytes": 12381,
+      "gzipBytes": 4266,
+      "type": ".js"
+    },
+    {
+      "file": "0cz1d0mv5g_q7.js",
+      "bytes": 112594,
+      "gzipBytes": 39627,
+      "type": ".js"
+    },
+    {
+      "file": "0dh8jmf7m3bc7.js",
+      "bytes": 18559,
+      "gzipBytes": 6072,
+      "type": ".js"
+    },
+    {
+      "file": "0h2qsuyze9ds1.js",
+      "bytes": 14377,
+      "gzipBytes": 3662,
+      "type": ".js"
+    },
+    {
+      "file": "0ptp15usijvzl.css",
+      "bytes": 61613,
+      "gzipBytes": 13116,
+      "type": ".css"
+    },
+    {
+      "file": "0z6mtz7ff74cv.js",
+      "bytes": 134532,
+      "gzipBytes": 44544,
+      "type": ".js"
+    },
+    {
+      "file": "0z_t-49fr9gix.js",
+      "bytes": 34594,
+      "gzipBytes": 11567,
+      "type": ".js"
+    },
+    {
+      "file": "10lfice8kop07.js",
+      "bytes": 11210,
+      "gzipBytes": 4436,
+      "type": ".js"
+    },
+    {
+      "file": "148mr4iv85swx.js",
+      "bytes": 7499,
+      "gzipBytes": 2827,
+      "type": ".js"
+    },
+    {
+      "file": "19mx3mg6lkumu.js",
+      "bytes": 28907,
+      "gzipBytes": 7614,
+      "type": ".js"
+    },
+    {
+      "file": "1adpu_dmjpv-9.js",
+      "bytes": 259749,
+      "gzipBytes": 36171,
+      "type": ".js"
+    },
+    {
+      "file": "1qyommwf9wcbc.js",
+      "bytes": 737668,
+      "gzipBytes": 185347,
+      "type": ".js"
+    },
+    {
+      "file": "1rj7ns8rte9vc.js",
+      "bytes": 229156,
+      "gzipBytes": 71628,
+      "type": ".js"
+    },
+    {
+      "file": "1w-wb6-l83aeb.js",
+      "bytes": 34103,
+      "gzipBytes": 10356,
+      "type": ".js"
+    },
+    {
+      "file": "2z-e6jheq0ftu.js",
+      "bytes": 165979,
+      "gzipBytes": 45185,
+      "type": ".js"
+    },
+    {
+      "file": "310vm2bl3xxpt.js",
+      "bytes": 5364,
+      "gzipBytes": 1970,
+      "type": ".js"
+    },
+    {
+      "file": "37-0hfnth2bdm.js",
+      "bytes": 2625,
+      "gzipBytes": 1215,
+      "type": ".js"
+    },
+    {
+      "file": "3h7r-8q9b2_hl.js",
+      "bytes": 8235,
+      "gzipBytes": 3385,
+      "type": ".js"
+    },
+    {
+      "file": "3oehnn7in3txd.js",
+      "bytes": 43397,
+      "gzipBytes": 14805,
+      "type": ".js"
+    },
+    {
+      "file": "43ejmoc5bmn00.js",
+      "bytes": 5718,
+      "gzipBytes": 2122,
+      "type": ".js"
+    },
+    {
+      "file": "44ret8uzx-y5j.js",
+      "bytes": 33932,
+      "gzipBytes": 13554,
+      "type": ".js"
+    },
+    {
+      "file": "44zj_v6d2w7g1.js",
+      "bytes": 1591,
+      "gzipBytes": 868,
+      "type": ".js"
+    },
+    {
+      "file": "turbopack-1vijxpa2bdysr.js",
+      "bytes": 9721,
+      "gzipBytes": 3849,
+      "type": ".js"
+    }
+  ],
+  "totalJS": 1911891,
+  "totalCSS": 61613
+}

@@ -1,0 +1,158 @@
+[
+  {
+    "name": "35mm C-41 JPG exact price",
+    "pass": true,
+    "detail": "12,00 €"
+  },
+  {
+    "name": "110 excludes E-6 and Push/Pull",
+    "pass": true,
+    "detail": [
+      "C-41",
+      "S/W"
+    ]
+  },
+  {
+    "name": "110 C-41 TIFF exact price",
+    "pass": true,
+    "detail": "30,00 €"
+  },
+  {
+    "name": "110 S/W TIFF exact price",
+    "pass": true,
+    "detail": "35,00 €"
+  },
+  {
+    "name": "Selected source variant readable in cart",
+    "pass": true
+  },
+  {
+    "name": "Cart quantity changes visible total",
+    "pass": true,
+    "detail": "70,00 €"
+  },
+  {
+    "name": "Cart item removal",
+    "pass": true
+  },
+  {
+    "name": "Dialog Escape and focus return",
+    "pass": true
+  },
+  {
+    "name": "No customer/payment form; payment disabled",
+    "pass": true
+  },
+  {
+    "name": "Multiword search finds Portra",
+    "pass": true
+  },
+  {
+    "name": "120 filter preserves real formats",
+    "pass": true
+  },
+  {
+    "name": "Filter chip removes format",
+    "pass": true
+  },
+  {
+    "name": "Reset restores full active catalog",
+    "pass": true
+  },
+  {
+    "name": "Zero-price filter no fabricated results",
+    "pass": true
+  },
+  {
+    "name": "Keyboard shortcut opens native search",
+    "pass": true
+  },
+  {
+    "name": "Search returns real product",
+    "pass": true
+  },
+  {
+    "name": "Search Escape closes and restores focus",
+    "pass": true
+  },
+  {
+    "name": "Mobile native filter sheet and focus",
+    "pass": true
+  },
+  {
+    "name": "Mobile filter Escape restores trigger focus",
+    "pass": true
+  },
+  {
+    "name": "Mobile native navigation dialog",
+    "pass": true
+  },
+  {
+    "name": "PDP image has accessible lightbox",
+    "pass": true
+  },
+  {
+    "name": "Unavailable original product disabled",
+    "pass": true
+  },
+  {
+    "name": "Gallery shutter reveals genuine source photo",
+    "pass": true
+  },
+  {
+    "name": "Developer selector uses true HC110 sample",
+    "pass": true
+  },
+  {
+    "name": "Compare keyboard range",
+    "pass": true
+  },
+  {
+    "name": "Contact-sheet grid toggles",
+    "pass": true
+  },
+  {
+    "name": "Reverse contact-sheet layout",
+    "pass": true
+  },
+  {
+    "name": "Higgsfield aperture active with replay",
+    "pass": true
+  },
+  {
+    "name": "Live reduced motion destroys prop and restores poster",
+    "pass": true
+  },
+  {
+    "name": "Reduced-motion hero remains visible and static",
+    "pass": true
+  },
+  {
+    "name": "Digitization selector responds under CPU throttling",
+    "pass": true
+  },
+  {
+    "name": "Final aperture camera framing verified",
+    "pass": true
+  },
+  {
+    "name": "Prop renderer removed when offscreen",
+    "pass": true
+  },
+  {
+    "name": "Blocked GLB keeps visible static poster",
+    "pass": true
+  },
+  {
+    "name": "Reel selection preserves source service information",
+    "pass": true
+  },
+  {
+    "name": "Video selection preserves source service information",
+    "pass": true
+  },
+  {
+    "name": "Audio selection preserves source service information",
+    "pass": true
+  }
+]

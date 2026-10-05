@@ -30,8 +30,8 @@ export const CardContainer = ({
     if (!containerRef.current || window.matchMedia('(prefers-reduced-motion: reduce), (pointer: coarse)').matches) return;
     const { left, top, width, height } =
       containerRef.current.getBoundingClientRect();
-    const x = (e.clientX - left - width / 2) / 80;
-    const y = (e.clientY - top - height / 2) / 80;
+    const x = Math.max(-5, Math.min(5, (e.clientX - left - width / 2) / 80));
+    const y = Math.max(-5, Math.min(5, (e.clientY - top - height / 2) / 80));
     containerRef.current.style.transform = `rotateY(${x}deg) rotateX(${y}deg)`;
   };
 
@@ -122,17 +122,14 @@ export const CardItem = ({
   const [isMouseEntered] = useMouseEnter();
 
   useEffect(() => {
-    handleAnimations();
-  }, [isMouseEntered]);
 
-  const handleAnimations = () => {
     if (!ref.current || window.matchMedia('(prefers-reduced-motion: reduce), (pointer: coarse)').matches) return;
     if (isMouseEntered) {
       ref.current.style.transform = `translateX(${translateX}px) translateY(${translateY}px) translateZ(${translateZ}px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) rotateZ(${rotateZ}deg)`;
     } else {
       ref.current.style.transform = `translateX(0px) translateY(0px) translateZ(0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg)`;
     }
-  };
+  }, [isMouseEntered, translateX, translateY, translateZ, rotateX, rotateY, rotateZ]);
 
   return (
     <Tag

@@ -12,7 +12,7 @@ Published at the user's explicit request on 05 October 2026. Access requires no 
 
 ## Run locally
 
-Node.js 22 or newer is required. No credentials are needed for this review build.
+Node.js 24 or newer is recommended (the optional browser QA runner requires 24). No credentials are needed for this review build.
 
 ```sh
 npm ci
@@ -28,8 +28,9 @@ npm run start
 
 ## Included
 
-- Anime.js 4.5.0: hero entrances, floating film/contact-grid choreography, section reveals and cart entrance.
-- Vanta.js 0.5.24 with Three.js: one lazy darkroom FOG scene, destroyed offscreen and disabled on mobile or with reduced motion.
+- Anime.js 4.5.0: contact-sheet choreography, film advancement, a scan pass, photographic reveals, dialog entrances, bounded filter feedback and the Higgsfield aperture cycle.
+- Vanta.js 0.5.24 with Three.js: lazy FOG in the darkroom hero and DOTS in the digitization introduction. Destroyed offscreen, on hidden pages and with reduced motion; static on mobile/data saving.
+- Higgsfield 3D Jutsu: six generic optical/media props, native poster renders and an editable Blender scene. Desktop props render on demand; real business and catalog photography remain unchanged.
 - Six official Aceternity components: Spotlight, Lens, Compare, Tracing Beam, Parallax Scroll and 3D Card. Source was installed through the official registry before custom UI work and adapted for this brand.
 - 109 source master/product records and 31 authentic variants, with real source prices, inventory snapshots, descriptions, IDs and purchase links.
 - Search, category/brand/format/process/ISO/stock/price filters, sorting, product galleries, development configuration, persistent review cart and checkout preview.
@@ -49,6 +50,7 @@ Compare shows genuine Adonal versus D-76 developer samples of the same subject. 
 
 ```sh
 npm run typecheck
+npm run lint
 npm run verify
 npm run build
 npm audit
@@ -56,10 +58,12 @@ node scripts/verify-routes.mjs
 node scripts/browser-qa.mjs
 ```
 
-The last two checks default to the local server at port 3000. The route sweep also accepts `BILDERFUERST_SITE_ORIGIN` and `BILDERFUERST_QA_OUTPUT` to verify the public deployment. Browser QA uses its own named browser session and resets that session's review cart; it never operates the original shop.
+The last two checks default to the local server at port 3000. The route sweep also accepts `BILDERFUERST_SITE_ORIGIN` and `BILDERFUERST_QA_OUTPUT` to verify the public deployment. The historical browser script is retained as baseline evidence; its structural selectors describe the previous layout. Final visual and interaction QA was completed directly in the Codex browser at 360–1440 px and is recorded in the final visual report. It never operates the original shop.
 
 The installed native `agent-browser` runner stalled during some keyboard/navigation sequences. Its partial results are preserved, and the affected cart refresh, keyboard, responsive and motion checks were completed directly in the Codex browser. See the QA report for this distinction; the CLI run is not claimed as a completely passing automated suite.
 
+- [Final visual report and Higgsfield delivery](docs/FINAL-VISUAL-REPORT.md)
+- [Visual baseline audit](docs/FINAL-VISUAL-AUDIT.md)
 - [QA report](docs/QA-REPORT.md)
 - [Existing site audit](docs/EXISTING-SITE-AUDIT.md)
 - [Commerce architecture](docs/ECOMMERCE-AUDIT.md)

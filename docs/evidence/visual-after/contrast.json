@@ -1,0 +1,38 @@
+[
+  {
+    "label": "Primary text",
+    "foreground": "#fafaf7",
+    "background": "#c6322a",
+    "contrast": 5.16
+  },
+  {
+    "label": "Print body",
+    "foreground": "#626a6e",
+    "background": "#fafaf7",
+    "contrast": 5.28
+  },
+  {
+    "label": "Dark body",
+    "foreground": "#bbc1c2",
+    "background": "#0b0d0e",
+    "contrast": 10.69
+  },
+  {
+    "label": "Cyan button",
+    "foreground": "#0b0d0e",
+    "background": "#55bcc0",
+    "contrast": 8.66
+  },
+  {
+    "label": "Amber metadata",
+    "foreground": "#d6a541",
+    "background": "#15191c",
+    "contrast": 7.85
+  },
+  {
+    "label": "Red large type",
+    "foreground": "#c6322a",
+    "background": "#0b0d0e",
+    "contrast": 3.61
+  }
+]

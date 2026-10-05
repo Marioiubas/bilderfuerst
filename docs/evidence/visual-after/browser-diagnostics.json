@@ -1,0 +1,4 @@
+{
+  "logs": [],
+  "expected": "A blocked GLB request was intentionally injected and restored to exercise the static fallback."
+}

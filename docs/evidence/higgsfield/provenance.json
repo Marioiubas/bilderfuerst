@@ -1,0 +1,126 @@
+{
+  "projectId": "9e1fa240-ae3d-49dd-b6f6-dc114bfbfd63",
+  "revision": 1,
+  "sceneSequence": 0,
+  "projectUrl": "https://higgsfield.ai/3d-jutsu/9e1fa240-ae3d-49dd-b6f6-dc114bfbfd63",
+  "modelOperation": "bilderfuerst-editable-props-model",
+  "roots": [
+    "Aperture",
+    "Reel",
+    "Cassette",
+    "VHS",
+    "Negative",
+    "Prints"
+  ],
+  "purpose": "Generic stylized illustrations only. No merchant product, business photography, restoration outcome or historical artifact representation.",
+  "glb": {
+    "projectId": "9e1fa240-ae3d-49dd-b6f6-dc114bfbfd63",
+    "revision": 1,
+    "size": 589592,
+    "etag": "b6438eb9298d24e7c4d052b9e784f1d0",
+    "type": "glb"
+  },
+  "blend": {
+    "projectId": "9e1fa240-ae3d-49dd-b6f6-dc114bfbfd63",
+    "revision": 1,
+    "size": 1569822,
+    "etag": "32d80f7e3d2361ac2a0ebfe875b946b8",
+    "type": "blend"
+  },
+  "renderOperations": [
+    {
+      "id": "bilderfuerst-prop-posters-a",
+      "status": "succeeded",
+      "revision": 1,
+      "artifacts": [
+        {
+          "size": 115505,
+          "etag": "e11a2d945aa1f4b4d3f2ea32179bd89e",
+          "id": "8a4663472a01eea60c3a6f931c989752",
+          "name": "aperture-poster.png",
+          "mediaType": "image/png",
+          "width": 400,
+          "height": 300
+        },
+        {
+          "size": 116415,
+          "etag": "56b06d6ce63686f0eb6469e06c5703e4",
+          "id": "f90da3f2e7b3e9e65726ca8618cbc1fa",
+          "name": "reel-poster.png",
+          "mediaType": "image/png",
+          "width": 400,
+          "height": 300
+        }
+      ]
+    },
+    {
+      "id": "bilderfuerst-prop-posters-b",
+      "status": "succeeded",
+      "revision": 1,
+      "artifacts": [
+        {
+          "size": 97901,
+          "etag": "bdb2d142ce1c2b747a90ba0d7eef6741",
+          "id": "37a60a222934e743403b3815073f2748",
+          "name": "cassette-poster.png",
+          "mediaType": "image/png",
+          "width": 400,
+          "height": 300
+        },
+        {
+          "size": 107636,
+          "etag": "03d0c4ecce935155218d55d3015d50bc",
+          "id": "9c7ddd35edc8ea564449a0f847e7ca4a",
+          "name": "vhs-poster.png",
+          "mediaType": "image/png",
+          "width": 400,
+          "height": 300
+        }
+      ]
+    },
+    {
+      "id": "bilderfuerst-prop-posters-c",
+      "status": "succeeded",
+      "revision": 1,
+      "artifacts": [
+        {
+          "size": 118399,
+          "etag": "035badf633ea5a57a39fdf5ea84f76e1",
+          "id": "8293a8ff9f2bf37ccdd428ff553e1e58",
+          "name": "negative-poster.png",
+          "mediaType": "image/png",
+          "width": 400,
+          "height": 300
+        },
+        {
+          "size": 97010,
+          "etag": "7b44727b379b33a5d782017970e375bd",
+          "id": "f8882d7304ed816c69c9cdc8ffd26081",
+          "name": "prints-poster.png",
+          "mediaType": "image/png",
+          "width": 400,
+          "height": 300
+        }
+      ]
+    }
+  ],
+  "renderSettings": {
+    "engine": "Eevee",
+    "samples": 4,
+    "resolution": [
+      400,
+      300
+    ],
+    "transparent": true,
+    "shadowMaps": false
+  },
+  "notes": [
+    "First combined seven-render mutation timed out and rolled back; editable scene export succeeded separately.",
+    "All six small native renders were inspected, then encoded to WebP for the site.",
+    "The poster B result label retained the previous root names; returned artifact filenames and actual inspected imagery confirm Cassette and VHS."
+  ],
+  "animation": {
+    "aperture": "eight blades, one open-close cycle, 60 frames at 24fps",
+    "site": "1400ms on entry or explicit button; mouse tilt bounded to approximately 3.4 degrees; no permanent prop render loop"
+  }
+}
