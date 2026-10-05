@@ -1,68 +1,34 @@
 "use client";
+// Aceternity UI "Focus Cards" (ui.aceternity.com/components/focus-cards), installed from the registry and
+// adapted for the Street Gallery (Direction C):
+// - hovering (mouse only) OR keyboard-focusing one card dims the others, like a single gallery spot;
+// - no blur, no scale, no gradient text, no caption overlay on the photograph, rectangular frames;
+// - generic render prop so every card is a real control (<button>) with its caption beside/below;
+// - state is exposed as data attributes and styled in app/styles/gallery.css (CSS transitions only,
+//   so Anime layout animations on the same list never fight over one element).
+import {useState,type FocusEvent,type HTMLAttributes,type PointerEvent,type ReactNode,type Ref} from 'react';
 
-import React, { useState } from "react";
-import { cn } from "@/lib/utils";
+export type FocusState={index:number;focused:boolean;dimmed:boolean};
 
-export const Card = React.memo(
-  ({
-    card,
-    index,
-    hovered,
-    setHovered,
-  }: {
-    card: any;
-    index: number;
-    hovered: number | null;
-    setHovered: React.Dispatch<React.SetStateAction<number | null>>;
-  }) => (
-    <div
-      onMouseEnter={() => setHovered(index)}
-      onMouseLeave={() => setHovered(null)}
-      className={cn(
-        "rounded-lg relative bg-gray-100 dark:bg-neutral-900 overflow-hidden h-60 md:h-96 w-full transition-all duration-300 ease-out",
-        hovered !== null && hovered !== index && "blur-sm scale-[0.98]"
-      )}
-    >
-      <img
-        src={card.src}
-        alt={card.title}
-        className="object-cover absolute inset-0"
-      />
-      <div
-        className={cn(
-          "absolute inset-0 bg-black/50 flex items-end py-8 px-4 transition-opacity duration-300",
-          hovered === index ? "opacity-100" : "opacity-0"
-        )}
-      >
-        <div className="text-xl md:text-2xl font-medium bg-clip-text text-transparent bg-gradient-to-b from-neutral-50 to-neutral-200">
-          {card.title}
-        </div>
-      </div>
-    </div>
-  )
-);
+type Props<T>={
+ items:T[];
+ getKey:(item:T)=>string;
+ render:(item:T,state:FocusState)=>ReactNode;
+ itemProps?:(item:T,index:number)=>HTMLAttributes<HTMLLIElement>&Record<`data-${string}`,string|undefined>;
+ listRef?:Ref<HTMLOListElement>;
+}&Omit<HTMLAttributes<HTMLOListElement>,'children'>;
 
-Card.displayName = "Card";
-
-type Card = {
-  title: string;
-  src: string;
-};
-
-export function FocusCards({ cards }: { cards: Card[] }) {
-  const [hovered, setHovered] = useState<number | null>(null);
-
-  return (
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-10 max-w-5xl mx-auto md:px-8 w-full">
-      {cards.map((card, index) => (
-        <Card
-          key={card.title}
-          card={card}
-          index={index}
-          hovered={hovered}
-          setHovered={setHovered}
-        />
-      ))}
-    </div>
-  );
+export function FocusCards<T>({items,getKey,render,itemProps,listRef,...rest}:Props<T>){
+ const [focused,setFocused]=useState<number|null>(null);
+ const enter=(i:number)=>(e:PointerEvent<HTMLLIElement>)=>{if(e.pointerType==='mouse')setFocused(i)};
+ const leave=(e:PointerEvent<HTMLLIElement>)=>{if(e.pointerType==='mouse')setFocused(null)};
+ const focus=(i:number)=>(e:FocusEvent<HTMLLIElement>)=>{if((e.target as HTMLElement).matches(':focus-visible'))setFocused(i)};
+ const blur=(e:FocusEvent<HTMLLIElement>)=>{if(!e.currentTarget.contains(e.relatedTarget as Node|null))setFocused(null)};
+ return <ol ref={listRef} data-focus={focused===null?'off':'on'} {...rest}>
+  {items.map((item,i)=>{
+   const state:FocusState={index:i,focused:focused===i,dimmed:focused!==null&&focused!==i};
+   return <li key={getKey(item)} {...itemProps?.(item,i)} data-spot={state.focused?'lit':state.dimmed?'dim':undefined}
+    onPointerEnter={enter(i)} onPointerLeave={leave} onFocus={focus(i)} onBlur={blur}>{render(item,state)}</li>;
+  })}
+ </ol>;
 }
