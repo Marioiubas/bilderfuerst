@@ -43,7 +43,7 @@ export function HomeArchive(){
    </div>
    <figure className="hm-arc-facades">
     <img src={PHOTO.history.src} width={PHOTO.history.w} height={PHOTO.history.h} loading="lazy" decoding="async" alt="Drei historische Aufnahmen: eine Bilderfürst-Filiale mit Schild „Farbfotos in 1 Stunde“ (Datumsstempel 1988), die Fassade von Foto Seitz und ein Ladeninneres mit rot-gelber Theke"/>
-    <figcaption className="hm-cap"><span>ARC · Archivbilder von der Geschichtsseite</span><span>Bilderfürst-Filiale 1988 · Foto Seitz · Ladeninneres</span></figcaption>
+    <figcaption className="hm-cap"><span>ARC · Archivbilder von der Geschichtsseite</span><span>Bilderfürst-Filiale (Datumsstempel im Bild ’88) · Foto Seitz · Ladeninneres</span></figcaption>
    </figure>
   </div>
  </section>;

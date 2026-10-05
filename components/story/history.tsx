@@ -17,6 +17,7 @@ import {CHAPTERS,SRC,type Chapter} from './facts';
 const anchor=(c:Chapter)=>`kapitel-${c.year.toLowerCase()}`;
 const TOTAL=frameNo(CHAPTERS.length);
 
+const NUMBER_WORDS=['null','ein','zwei','drei','vier','fünf','sechs','sieben','acht','neun','zehn','elf','zwölf'];
 export function HistoryPage(){
  const tier=useMotionTier();
  const animated=tier==='desktop'||tier==='tablet';
@@ -75,7 +76,7 @@ export function HistoryPage(){
 
   <section className="zone-dark hist-chronicle" aria-labelledby="chronik-title">
    <div className="wrap">
-    <SectionHead code="ARC" label="Chronik" index={`${CHAPTERS.length} Kapitel`} id="chronik-title" title={<>Ein Streifen,<br/>zehn Bilder.</>} action={<a className="link" href="#uebersicht">Chronik überspringen</a>}/>
+    <SectionHead code="ARC" label="Chronik" index={`${CHAPTERS.length} Kapitel`} id="chronik-title" title={<>Ein Streifen,<br/>{NUMBER_WORDS[CHAPTERS.length]??CHAPTERS.length} Bilder.</>} action={<a className="link" href="#uebersicht">Chronik überspringen</a>}/>
     <div className="hist-grid">
      <aside className="hist-hud" aria-label="Position in der Chronik">
       <p className="mono hist-hud-code" aria-hidden="true"><span>Kapitel {frameNo(active+1)} / {TOTAL}</span><span className="hist-hud-dot"/></p>

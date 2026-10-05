@@ -46,7 +46,7 @@ img{height:auto}
 .mono,.code,.eyebrow{font-family:var(--font-mono);font-size:var(--fs-mono);font-weight:500;letter-spacing:var(--track-mono);text-transform:uppercase;line-height:1.4}
 .eyebrow{display:flex;align-items:center;gap:10px;color:var(--text-muted)}
 .eyebrow b,.code b{font-weight:500;color:var(--red)}
-.zone-dark .eyebrow b{color:var(--red-glow)}
+.zone-dark .eyebrow b,.zone-graphite .eyebrow b,[data-tone=dark] .eyebrow b{color:var(--red-glow)}
 .num{font-variant-numeric:tabular-nums}
 
 /* Section head: technical code + title + optional action */
@@ -192,7 +192,7 @@ input[type=range]{accent-color:var(--red)}
 .site-footer{background:var(--black);color:var(--text-inverse);--line:var(--line-dark);--hair:1px solid var(--line-dark);--text-muted:var(--text-inverse-muted);padding-top:var(--s-9)}
 .footer-top{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:var(--s-8);padding-bottom:var(--s-8);border-bottom:1px solid var(--line-dark)}
 .footer-claim{font-stretch:var(--stretch-display);font-weight:760;font-size:clamp(44px,6.4vw,104px);line-height:.88;text-transform:uppercase;letter-spacing:var(--track-display)}
-.footer-claim span{color:transparent;-webkit-text-stroke:1.3px var(--silver-400)}
+.footer-claim span{display:inline-block;margin-top:.14em;color:transparent;-webkit-text-stroke:1.3px var(--silver-400)}
 .site-footer .brand-logo{height:64px}
 .footer-visit{display:grid;align-content:space-between;gap:var(--s-6)}
 .footer-visit address{font-style:normal;font-size:var(--fs-body-l);line-height:1.5}

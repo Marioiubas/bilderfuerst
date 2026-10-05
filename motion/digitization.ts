@@ -69,8 +69,9 @@ export function iceScanPass(tier:Tier,onProgress:(value:number,phase:ScanPhase)=
 export function processAdvance(strip:HTMLElement|null,tier:Tier,onPlayed?:()=>void):(()=>void)|undefined{
  if(!strip||!moving(tier)||tier==='mobile')return;
  const items=strip.querySelectorAll<HTMLElement>('[data-advance]');if(!items.length)return;
- const initial=set(items,{opacity:.2,translateX:-14});
+ // Clip instead of fading so the text never sits at low contrast before the reveal.
+ const initial=set(items,{translateX:-14,clipPath:'inset(0 0 0 100%)'});
  let run:Revertible|undefined;
- const dispose=onceVisible(strip,()=>{onPlayed?.();run=animate(items,{opacity:1,translateX:0,duration:duration.section,delay:staggerFn(stagger.normal*2),ease:ease.advance})},.25);
+ const dispose=onceVisible(strip,()=>{onPlayed?.();run=animate(items,{clipPath:'inset(0 0 0 0%)',translateX:0,duration:duration.section,delay:staggerFn(stagger.normal*2),ease:ease.advance})},.25);
  return()=>{dispose();run?.revert();initial.revert()};
 }
