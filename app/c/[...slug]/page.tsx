@@ -1,4 +1,3 @@
-import {Suspense} from 'react';
 import {redirect} from 'next/navigation';
 import {CatalogShop} from '@/components/catalog-shop';
 import type {Filters} from '@/lib/shop-filters';
@@ -14,5 +13,5 @@ export default async function Page({params,searchParams}:{params:Promise<{slug:s
  if(value.includes('filmentwicklungen'))redirect('/filmentwicklung');
  const base=legacy.find(([re])=>re.test(value))?.[1]??{};
  const initial=await searchParams;
- return <Suspense><CatalogShop initial={initial} base={base}/></Suspense>;
+ return <CatalogShop initial={initial} base={base}/>;
 }

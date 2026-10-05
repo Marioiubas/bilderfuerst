@@ -9,6 +9,21 @@ const active=new Set<string>();
 export function webglAvailable(){
  try{const c=document.createElement('canvas');const gl=c.getContext('webgl2')||c.getContext('webgl');const ok=!!gl;(gl as WebGLRenderingContext|null)?.getExtension('WEBGL_lose_context')?.loseContext();return ok}catch{return false}
 }
+let engaged:Promise<void>|null=null;
+/** Resolves on the visitor's first pointer move, touch, wheel, key press or scroll, or after
+ *  `timeout` ms. WebGL layers wait for it so the static art paints and the page becomes
+ *  interactive before any GPU/shader setup runs on the main thread. */
+export function whenEngaged(timeout=6000){
+ if(engaged)return engaged;
+ engaged=new Promise<void>(resolve=>{
+  const events=['pointermove','pointerdown','touchstart','wheel','keydown','scroll'] as const;
+  let timer=0;
+  const done=()=>{events.forEach(e=>window.removeEventListener(e,done,true));window.clearTimeout(timer);resolve()};
+  events.forEach(e=>window.addEventListener(e,done,{capture:true,passive:true}));
+  timer=window.setTimeout(done,timeout);
+ });
+ return engaged;
+}
 export function acquireContext(id:string){if(active.has(id))return true;if(active.size>=MAX_CONTEXTS)return false;active.add(id);return true}
 export function releaseContext(id:string){active.delete(id)}
 export function liveContexts(){return active.size}

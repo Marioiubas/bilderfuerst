@@ -5,7 +5,7 @@
 // reduced motion / below desktop / data saving, and always destroyed on unmount.
 import {useEffect,useRef} from 'react';
 import {motionTier} from '@/motion/setup';
-import {acquireContext,releaseContext,webglAvailable} from '@/lib/webgl';
+import {acquireContext,releaseContext,webglAvailable,whenEngaged} from '@/lib/webgl';
 
 type VantaScene={destroy:()=>void;renderer?:{setPixelRatio:(ratio:number)=>void;dispose:()=>void;forceContextLoss:()=>void}};
 const settings={
@@ -25,8 +25,12 @@ export default function Darkroom({variant='fog',className=''}:{variant?:'fog'|'d
   };
   const sync=async()=>{
    if(disposed||!visible||document.hidden||motionTier()!=='desktop'){if(scene)destroy();return}
-   if(scene||!webglAvailable()||!acquireContext(id))return;
-   const token=++generation;el.dataset.webgl='loading';
+   if(scene)return;
+   const token=++generation;
+   await whenEngaged();
+   if(disposed||token!==generation||scene||!visible||document.hidden||motionTier()!=='desktop')return;
+   if(!webglAvailable()||!acquireContext(id))return;
+   el.dataset.webgl='loading';
    try{
     const THREE=await import('three');
     // Vanta DOTS 0.5.24 reads window.THREE during module evaluation.

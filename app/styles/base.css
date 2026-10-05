@@ -30,6 +30,8 @@ img{height:auto}
 .zone-table{background:var(--surface-light-2);color:var(--text)}
 .grain{position:relative;isolation:isolate}
 .grain::after{content:'';position:absolute;inset:0;pointer-events:none;z-index:1;background-image:var(--grain);background-size:200px;opacity:.07;mix-blend-mode:overlay}
+/* Phones: no grain overlay. It is a full-bleed image and would become the LCP element. */
+@media (max-width:767px){.grain::after{content:none}}
 
 /* ───────── Type ───────── */
 .display,.h-display{font-family:var(--font-sans);font-stretch:var(--stretch-display);font-weight:780;font-size:var(--fs-display-l);line-height:var(--lh-display);letter-spacing:var(--track-display);text-transform:uppercase}

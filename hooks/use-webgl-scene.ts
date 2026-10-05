@@ -5,7 +5,7 @@
 // - respects the per-page context budget; any error leaves the fallback visible
 import {useEffect,useRef,useState,type RefObject} from 'react';
 import {motionTier,type Tier} from '@/motion/setup';
-import {acquireContext,releaseContext,webglAvailable} from '@/lib/webgl';
+import {acquireContext,releaseContext,webglAvailable,whenEngaged} from '@/lib/webgl';
 
 export type SceneHandle={destroy:()=>void;pause?:()=>void;resume?:()=>void};
 export type SceneMount=(host:HTMLElement,ctx:{tier:Tier;signal:AbortSignal})=>Promise<SceneHandle>;
@@ -26,6 +26,8 @@ export function useWebGLScene(ref:RefObject<HTMLElement|null>,load:()=>Promise<S
    if(!allowed()){teardown();return}
    if(scene){if(visible&&!document.hidden)scene.resume?.();else scene.pause?.();return}
    if(!visible||document.hidden||controller)return;
+   await whenEngaged();
+   if(disposed||scene||controller||!visible||document.hidden||!allowed())return;
    if(!webglAvailable()||!acquireContext(id)){set('static');return}
    controller=new AbortController();const signal=controller.signal;set('loading');
    try{

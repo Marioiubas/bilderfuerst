@@ -13,7 +13,7 @@ export function ShopHead({count}:{count:number}){
     <Link className="shop-lab-link link" href="/filmentwicklung">Belichteten Film entwickeln lassen <ArrowRight size={15} aria-hidden="true"/></Link>
    </div>
    <figure className="shop-montage">
-    <img src="/images/film-shelf-l.webp" alt="Filmpackungen im Regal des Analog Store: Kodak Portra, Ektar, Tri-X, UltraMax, ColorPlus, CineStill und Ilford" width={1600} height={1067} loading="eager" decoding="async" fetchPriority="high"/>
+    <img src="/images/film-shelf-l.webp" srcSet="/images/film-shelf.webp 600w, /images/film-shelf-m.webp 900w, /images/film-shelf-l.webp 1600w" sizes="(max-width: 767px) calc(100vw - 32px), 46vw" alt="Filmpackungen im Regal des Analog Store: Kodak Portra, Ektar, Tri-X, UltraMax, ColorPlus, CineStill und Ilford" width={1600} height={1067} loading="eager" decoding="async" fetchPriority="high"/>
     <figcaption className="mono">Filmregal im Laden · Fürth</figcaption>
    </figure>
   </div>

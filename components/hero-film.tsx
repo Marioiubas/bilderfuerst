@@ -66,7 +66,7 @@ export function HeroFilm({sheet,ref}:{sheet:boolean;ref?:Ref<HTMLDivElement>}){
     {heroFrames.map((f,i)=><li key={f.src} className="hero-frame" style={slot(i)} data-selected={i===SELECTED_FRAME||undefined}>
      <figure className="hero-frame-body">
       <span className="hero-frame-img">
-       <img src={f.srcSet?f.small:f.src} srcSet={f.srcSet} sizes="(min-width: 1024px) 16vw, 32vw" alt={f.alt} width={f.width} height={f.height} decoding="async" {...(i===0?{fetchPriority:'high' as const}:{loading:'lazy' as const})}/>
+       <img src={f.thumb} srcSet={f.srcSet} sizes="(min-width: 1024px) 16vw, 32vw" alt={f.alt} width={f.width} height={f.height} decoding="async" {...(i===0?{fetchPriority:'high' as const}:{loading:'lazy' as const})}/>
        <span className="hero-frame-latent" aria-hidden="true"/>
       </span>
       <figcaption><span className="hero-frame-no">{frameNo(i+1)}</span> {f.caption}</figcaption>

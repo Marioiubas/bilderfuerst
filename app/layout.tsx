@@ -1,9 +1,9 @@
 import type {Metadata,Viewport} from 'next';
+import {preload} from 'react-dom';
 import {StoreProvider} from '@/components/store-context';
 import {Header} from '@/components/header';
 import {Footer} from '@/components/footer';
 import {ShopOverlays} from '@/components/shop-overlays';
-import '@fontsource-variable/archivo/wdth.css';
 import '@fontsource/ibm-plex-mono/latin-400.css';
 import '@fontsource/ibm-plex-mono/latin-500.css';
 import './styles/tokens.css';
@@ -23,5 +23,7 @@ export const metadata:Metadata={
 };
 export const viewport:Viewport={themeColor:'#0a0b0c',colorScheme:'light'};
 export default function Layout({children}:{children:React.ReactNode}){
+ // The display face carries the LCP headline on most routes: fetch it with the document.
+ preload('/fonts/archivo-latin-wdth-normal.woff2',{as:'font',type:'font/woff2',crossOrigin:'anonymous'});
  return <html lang="de"><body><StoreProvider><Header/><main id="main">{children}</main><Footer/><ShopOverlays/></StoreProvider></body></html>;
 }
