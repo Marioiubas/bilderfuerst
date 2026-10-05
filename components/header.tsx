@@ -52,7 +52,7 @@ export function Header(){
    <Link className="utility-extra" href="/kontakt">Mo–Fr 9:30–18:30 · Sa 9:30–16:30 <ArrowUpRight size={11}/></Link>
   </div>
   <header className={`site-header ${compact?'is-compact':''}`} data-tone={dark?'dark':'light'} ref={megaRef}>
-   <Link href="/" className="wordmark" aria-label="Analog Store – Bilderfürst Fürth, Startseite"><BrandLogo/><span className="brand-lab" aria-hidden="true">Film Lab<br/>seit 1973</span></Link>
+   <Link href="/" className="wordmark" aria-label="Analog Store – Bilderfürst Fürth, Startseite"><BrandLogo/><span className="brand-lab" aria-hidden="true">Film Lab<br/>Fürth</span></Link>
    <nav className="primary-nav" aria-label="Hauptnavigation">
     <button className="nav-trigger" aria-expanded={mega} aria-controls="mega-shop" data-active={isActive('/shop')} onClick={()=>setMega(v=>!v)}>Shop <ChevronDown size={14} style={{transform:mega?'rotate(180deg)':undefined,transition:'transform .2s'}}/></button>
     {NAV.slice(1).map(n=><Link key={n.href} href={n.href} aria-current={isActive(n.href)?'page':undefined}>{n.label}</Link>)}
