@@ -125,7 +125,7 @@ export function CatalogShop({initial={},base={}}:{initial?:Initial;base?:Partial
     </div>
     <p className="shop-result-count mono" aria-live="polite"><span className="num">{now.length}</span> {noun}</p>
     <label className="shop-sort"><span className="mono">Sortieren</span>
-     <select className="select" value={filters.sort} onChange={e=>change({sort:e.target.value as Filters['sort']})}>{sorts.map(([k,l])=><option key={k} value={k}>{l}</option>)}</select>
+     <select className="select" aria-label="Sortieren" value={filters.sort} onChange={e=>change({sort:e.target.value as Filters['sort']})}>{sorts.map(([k,l])=><option key={k} value={k}>{l}</option>)}</select>
     </label>
     {isFilm&&<div className="view-toggle" role="group" aria-label="Ansicht">
      <button type="button" aria-pressed={filters.view==='raster'} onClick={()=>change({view:'raster'})}><LayoutGrid size={15} aria-hidden="true"/>Raster</button>
