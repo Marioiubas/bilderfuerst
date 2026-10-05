@@ -1,8 +1,27 @@
-import Link from 'next/link';
+import type {Metadata} from 'next';
 import {notFound,redirect} from 'next/navigation';
-import {ArrowUpRight} from 'lucide-react';
 import content from '@/lib/source-content.json';
-import {PrintSelector} from '@/components/editorial-pages';
+import {PrintRoomPage} from '@/components/story/fineart';
+import {SourcePage} from '@/components/story/source';
+
+// Old source URLs that now live on dedicated pages.
 const aliases:Record<string,string>={'wir-digitalisieren':'/digitalisierung','galerie':'/galerie','unsere-geschichte':'/geschichte','kontakt-und-oeffnungszeiten':'/kontakt','unser-geschaeft':'/kontakt','drop-off-locations':'/kontakt','fotostudio':'/services','pass-und-bewerbung':'/services','ueber-uns':'/geschichte'};
-export async function generateMetadata({params}:{params:Promise<{slug:string}>}){const {slug}=await params;const p=content[slug as keyof typeof content];return {title:p?.title||'Service'}}
-export default async function Page({params}:{params:Promise<{slug:string}>}){const {slug}=await params;if(aliases[slug])redirect(aliases[slug]);const p=content[slug as keyof typeof content];if(!p)notFound();if(slug==='fineart-prints'||slug==='preisliste')return <div className="section-wrap editorial-page"><div className="page-intro"><span className="eyebrow">FINEART PRINTING / FÜRTH & NÜRNBERG</span><h1>Dein Bild.<br/><em>Zum Anfassen.</em></h1><p>FineArt und Standardabzüge. Bis A3+ direkt in Fürth, größere Formate im Fuji Store Nürnberg.</p></div><div className="print-layout"><img src="/images/store-inside.webp" alt="Unser echtes Ladengeschäft mit fotografischen Drucken" width={850} height={650}/><PrintSelector/></div><Link href="/kontakt" className="text-link">Mit deinem Bild vorbeikommen <ArrowUpRight size={17}/></Link></div>;return <div className="section-wrap source-page"><span className="eyebrow">SERVICEINFORMATION / QUELLARCHIV</span><h1>{p.title}</h1><div className="source-note">Informationen des bestehenden Geschäfts, Stand 04.10.2026. Aktuelle Preise und Abläufe bitte vor einem Auftrag bestätigen.</div><div className="source-prose">{p.paragraphs.map((t,i)=><p key={i}>{t}</p>)}</div>{slug==='online-terminvergabe'&&<a href="https://widget.calenso.com/?partner=bilderfuerstfuerth&type=appointment&isFrame=true&lang=de_CH" target="_blank" rel="noopener noreferrer" className="button primary">Termin bei Calenso buchen <ArrowUpRight size={17}/></a>}<a href={p.source} target="_blank" rel="noopener noreferrer" className="text-link">Originalseite ansehen <ArrowUpRight size={17}/></a><Link href="/kontakt" className="button button-secondary">Persönlich nachfragen <ArrowUpRight size={17}/></Link></div>}
+const legal=new Set(['contact','cookiepolicy','privacy','tac','withdrawal','shipping']);
+type Params={params:Promise<{slug:string}>};
+const page=(slug:string)=>(content as Record<string,{title:string;paragraphs:string[];source:string;updated?:string}|undefined>)[slug];
+
+export async function generateMetadata({params}:Params):Promise<Metadata>{
+ const {slug}=await params;
+ if(slug==='fineart-prints')return {title:'FineArt Prints — Fotopapier, Metallic, FineArt bis 100 × 190 cm'};
+ if(slug==='preisliste')return {title:'Preisliste Druck — FineArt, Fotopapier, Metallic, Abzüge'};
+ return {title:page(slug)?.title||'Service'};
+}
+export default async function Page({params}:Params){
+ const {slug}=await params;
+ if(aliases[slug])redirect(aliases[slug]);
+ if(legal.has(slug))redirect(`/l/${slug}`);
+ const p=page(slug);
+ if(!p)notFound();
+ if(slug==='fineart-prints'||slug==='preisliste')return <PrintRoomPage focus={slug==='preisliste'?'preisliste':'fineart'}/>;
+ return <SourcePage slug={slug} page={p}/>;
+}
