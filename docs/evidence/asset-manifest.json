@@ -2326,5 +2326,45 @@
     "use": "Genuine business lab/sample image (larger rendition of scan-adonal.webp from the same source file)",
     "rights": "OWNER REVIEW ONLY - owner rights approval pending",
     "status": "downloaded 2026-10-05"
+  },
+  {
+    "url": "https://www.photostudio.de/storage/images/ice%20an%20Semi%20Korrektur%20aus%20Auschnitt.jpg?hash=b211e005b6f6b0fe86c922b75a9000abd00a7819&shop=78046715&width=6000&height=6000",
+    "filename": "ice-sample-with-l.webp",
+    "sourcePage": "https://www.photostudio.de/i/negativ-digitalisierung",
+    "use": "Genuine business lab/sample image (larger rendition of ice-sample-with.webp from the same source file)",
+    "rights": "OWNER REVIEW ONLY - owner rights approval pending",
+    "status": "downloaded 2026-10-06 (larger rendition of ice-sample-with.webp)"
+  },
+  {
+    "url": "https://www.photostudio.de/storage/images/ice%20aus%20Semi%20Korrektur%20aus%20Auschnitt.jpg?hash=29aec5ebb7418f473aeeb12eb0d3d46aec4d1fe0&shop=78046715&width=6000&height=6000",
+    "filename": "ice-sample-without-l.webp",
+    "sourcePage": "https://www.photostudio.de/i/negativ-digitalisierung",
+    "use": "Genuine business lab/sample image (larger rendition of ice-sample-without.webp from the same source file)",
+    "rights": "OWNER REVIEW ONLY - owner rights approval pending",
+    "status": "downloaded 2026-10-06 (larger rendition of ice-sample-without.webp)"
+  },
+  {
+    "url": "https://www.photostudio.de/storage/images/Filmentwicklung5.jpg?hash=05d6e1975c8a958a01b35973255a1d6ab36fe327&shop=78046715&width=6000&height=6000",
+    "filename": "print-kiosk-screens-l.webp",
+    "sourcePage": "https://www.photostudio.de/",
+    "use": "Genuine business lab/sample image (larger rendition of print-kiosk-screens.webp from the same source file)",
+    "rights": "OWNER REVIEW ONLY - owner rights approval pending",
+    "status": "downloaded 2026-10-06 (larger rendition of print-kiosk-screens.webp)"
+  },
+  {
+    "url": "https://www.photostudio.de/storage/images/Dia%20wei%C3%9Fe%20Seite%202500x2000.jpg?hash=bdcc48889a04c5a51327a4ae066bda903fe9ba30&shop=78046715&width=6000&height=6000",
+    "filename": "slide-in-glove-l.webp",
+    "sourcePage": "https://www.photostudio.de/i/dias-digitalisierung-1",
+    "use": "Genuine business lab/sample image (larger rendition of slide-in-glove.webp from the same source file)",
+    "rights": "OWNER REVIEW ONLY - owner rights approval pending",
+    "status": "downloaded 2026-10-06 (larger rendition of slide-in-glove.webp)"
+  },
+  {
+    "url": "https://www.photostudio.de/storage/images/dia%20richtig%20im%20Magazin%202500x2000.jpg?hash=f788b41bf3a46b1998e4114900663333d2e974ed&shop=78046715&width=6000&height=6000",
+    "filename": "slide-magazine-macro-l.webp",
+    "sourcePage": "https://www.photostudio.de/i/dias-digitalisierung-1",
+    "use": "Genuine business lab/sample image (larger rendition of slide-magazine-macro.webp from the same source file)",
+    "rights": "OWNER REVIEW ONLY - owner rights approval pending",
+    "status": "downloaded 2026-10-06 (larger rendition of slide-magazine-macro.webp)"
   }
 ]

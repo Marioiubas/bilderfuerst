@@ -36,7 +36,8 @@ export function Header(){
  const [mobile,setMobile]=useState(false);const [mega,setMega]=useState(false);const [compact,setCompact]=useState(false);
  const scan=useRef<HTMLSpanElement>(null);const megaRef=useRef<HTMLDivElement>(null);
  const count=lines.reduce((a,l)=>a+l.quantity,0);
- const dark=DARK_ROUTES.includes(path)&&!compact;
+ // Dark-first routes keep the dark bar when compact, so scrolling never flips the header to paper white.
+ const dark=DARK_ROUTES.includes(path);
  const isActive=(href:string)=>href==='/shop'?path.startsWith('/shop')||path.startsWith('/p/')||path.startsWith('/c/'):path===href||(href==='/geschichte'&&path==='/kontakt');
 
  useEffect(()=>watchHeaderThreshold(next=>{setCompact(next);if(next)registerSweep(scan.current)}),[]);
@@ -58,7 +59,7 @@ export function Header(){
     {NAV.slice(1).map(n=><Link key={n.href} href={n.href} aria-current={isActive(n.href)?'page':undefined}>{n.label}</Link>)}
    </nav>
    <div className="header-tools">
-    <button className="search-trigger" onClick={()=>setSearchOpen(true)} aria-label="Produkte suchen (Strg+K)"><Search size={17}/><span>Archiv durchsuchen</span><kbd>⌘K</kbd></button>
+    <button className="search-trigger" onClick={()=>setSearchOpen(true)} aria-label="Shop und Services durchsuchen (Strg+K)"><Search size={18}/><span>Suchen</span><kbd>⌘K</kbd></button>
     <button className="icon-btn cart-trigger" onClick={()=>setCartOpen(true)} aria-label={`Vorschau-Warenkorb öffnen, ${count} Artikel`}><ShoppingBag size={20}/><span className="cart-count" data-empty={count===0}>{count}</span></button>
     <button className="icon-btn menu-trigger" onClick={()=>setMobile(true)} aria-label="Menü öffnen" aria-haspopup="dialog"><Menu size={22}/></button>
    </div>
