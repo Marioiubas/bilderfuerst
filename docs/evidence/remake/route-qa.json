@@ -8,14 +8,6 @@
     "hasContent": true
   },
   {
-    "path": "/",
-    "status": 200,
-    "resolved": "/",
-    "h1": 1,
-    "noindex": true,
-    "hasContent": true
-  },
-  {
     "path": "/filmentwicklung",
     "status": 200,
     "resolved": "/filmentwicklung",
@@ -27,6 +19,14 @@
     "path": "/digitalisierung",
     "status": 200,
     "resolved": "/digitalisierung",
+    "h1": 1,
+    "noindex": true,
+    "hasContent": true
+  },
+  {
+    "path": "/",
+    "status": 200,
+    "resolved": "/",
     "h1": 1,
     "noindex": true,
     "hasContent": true
@@ -64,17 +64,17 @@
     "hasContent": true
   },
   {
-    "path": "/p/fujifilm-instax-wide-evo-black-ex-d-sofortbildkamera",
+    "path": "/kontakt",
     "status": 200,
-    "resolved": "/p/fujifilm-instax-wide-evo-black-ex-d-sofortbildkamera",
+    "resolved": "/kontakt",
     "h1": 1,
     "noindex": true,
     "hasContent": true
   },
   {
-    "path": "/kontakt",
+    "path": "/p/fujifilm-instax-wide-evo-black-ex-d-sofortbildkamera",
     "status": 200,
-    "resolved": "/kontakt",
+    "resolved": "/p/fujifilm-instax-wide-evo-black-ex-d-sofortbildkamera",
     "h1": 1,
     "noindex": true,
     "hasContent": true
@@ -88,9 +88,9 @@
     "hasContent": true
   },
   {
-    "path": "/cart",
+    "path": "/checkout",
     "status": 200,
-    "resolved": "/cart",
+    "resolved": "/checkout",
     "h1": 1,
     "noindex": true,
     "hasContent": true
@@ -99,14 +99,6 @@
     "path": "/p/schwarz-weiss-entwicklungs-set-mit-jobo-lab-kit-m-patterson-wechselsack-adox-chemie-uvm",
     "status": 200,
     "resolved": "/p/schwarz-weiss-entwicklungs-set-mit-jobo-lab-kit-m-patterson-wechselsack-adox-chemie-uvm",
-    "h1": 1,
-    "noindex": true,
-    "hasContent": true
-  },
-  {
-    "path": "/checkout",
-    "status": 200,
-    "resolved": "/checkout",
     "h1": 1,
     "noindex": true,
     "hasContent": true
@@ -139,6 +131,14 @@
     "path": "/p/cinestill-50d-c-41-135-36",
     "status": 200,
     "resolved": "/p/cinestill-50d-c-41-135-36",
+    "h1": 1,
+    "noindex": true,
+    "hasContent": true
+  },
+  {
+    "path": "/cart",
+    "status": 200,
+    "resolved": "/cart",
     "h1": 1,
     "noindex": true,
     "hasContent": true
@@ -184,9 +184,9 @@
     "hasContent": true
   },
   {
-    "path": "/p/harmann-photo-poenix-ii-200-135-36",
+    "path": "/p/jobo-35mm-tank-1510",
     "status": 200,
-    "resolved": "/p/harmann-photo-poenix-ii-200-135-36",
+    "resolved": "/p/jobo-35mm-tank-1510",
     "h1": 1,
     "noindex": true,
     "hasContent": true
@@ -200,9 +200,9 @@
     "hasContent": true
   },
   {
-    "path": "/p/jobo-35mm-tank-1510",
+    "path": "/p/harmann-photo-poenix-ii-200-135-36",
     "status": 200,
-    "resolved": "/p/jobo-35mm-tank-1510",
+    "resolved": "/p/harmann-photo-poenix-ii-200-135-36",
     "h1": 1,
     "noindex": true,
     "hasContent": true
@@ -216,14 +216,6 @@
     "hasContent": true
   },
   {
-    "path": "/p/jobo-lab-kit-l-1500-l",
-    "status": 200,
-    "resolved": "/p/jobo-lab-kit-l-1500-l",
-    "h1": 1,
-    "noindex": true,
-    "hasContent": true
-  },
-  {
     "path": "/p/jobo-lab-kit-m-1500m",
     "status": 200,
     "resolved": "/p/jobo-lab-kit-m-1500m",
@@ -232,17 +224,17 @@
     "hasContent": true
   },
   {
-    "path": "/p/jobo-magnet-1504",
+    "path": "/p/jobo-lab-kit-l-1500-l",
     "status": 200,
-    "resolved": "/p/jobo-magnet-1504",
+    "resolved": "/p/jobo-lab-kit-l-1500-l",
     "h1": 1,
     "noindex": true,
     "hasContent": true
   },
   {
-    "path": "/p/jobo-multi-tank-2550",
+    "path": "/p/jobo-magnet-1504",
     "status": 200,
-    "resolved": "/p/jobo-multi-tank-2550",
+    "resolved": "/p/jobo-magnet-1504",
     "h1": 1,
     "noindex": true,
     "hasContent": true
@@ -264,6 +256,14 @@
     "hasContent": true
   },
   {
+    "path": "/p/jobo-multi-tank-2550",
+    "status": 200,
+    "resolved": "/p/jobo-multi-tank-2550",
+    "h1": 1,
+    "noindex": true,
+    "hasContent": true
+  },
+  {
     "path": "/p/jobo-roller-1509",
     "status": 200,
     "resolved": "/p/jobo-roller-1509",
@@ -280,17 +280,17 @@
     "hasContent": true
   },
   {
-    "path": "/p/kodak-ektacolor-pro-160-135-36",
+    "path": "/p/kodak-ektacolor-pro-400-135-36-1",
     "status": 200,
-    "resolved": "/p/kodak-ektacolor-pro-160-135-36",
+    "resolved": "/p/kodak-ektacolor-pro-400-135-36-1",
     "h1": 1,
     "noindex": true,
     "hasContent": true
   },
   {
-    "path": "/p/kodak-ektacolor-pro-400-135-36-1",
+    "path": "/p/kodak-ektacolor-pro-160-135-36",
     "status": 200,
-    "resolved": "/p/kodak-ektacolor-pro-400-135-36-1",
+    "resolved": "/p/kodak-ektacolor-pro-160-135-36",
     "h1": 1,
     "noindex": true,
     "hasContent": true
@@ -344,6 +344,14 @@
     "hasContent": true
   },
   {
+    "path": "/p/kodak-portra-400-120-rollfilm",
+    "status": 200,
+    "resolved": "/p/kodak-portra-400-120-rollfilm",
+    "h1": 1,
+    "noindex": true,
+    "hasContent": true
+  },
+  {
     "path": "/p/kodak-portra-400-135-36-film",
     "status": 200,
     "resolved": "/p/kodak-portra-400-135-36-film",
@@ -360,9 +368,9 @@
     "hasContent": true
   },
   {
-    "path": "/p/kodak-portra-400-120-rollfilm",
+    "path": "/p/kodak-professional-d-76-zum-ansatz-von-1000-ml",
     "status": 200,
-    "resolved": "/p/kodak-portra-400-120-rollfilm",
+    "resolved": "/p/kodak-professional-d-76-zum-ansatz-von-1000-ml",
     "h1": 1,
     "noindex": true,
     "hasContent": true
@@ -376,9 +384,9 @@
     "hasContent": true
   },
   {
-    "path": "/p/kodak-professional-d-76-zum-ansatz-von-1000-ml",
+    "path": "/p/pentax-17",
     "status": 200,
-    "resolved": "/p/kodak-professional-d-76-zum-ansatz-von-1000-ml",
+    "resolved": "/p/pentax-17",
     "h1": 1,
     "noindex": true,
     "hasContent": true
@@ -387,14 +395,6 @@
     "path": "/p/fujifilm-instax-10-aufnahmen-square",
     "status": 200,
     "resolved": "/p/fujifilm-instax-10-aufnahmen-square",
-    "h1": 1,
-    "noindex": true,
-    "hasContent": true
-  },
-  {
-    "path": "/p/pentax-17",
-    "status": 200,
-    "resolved": "/p/pentax-17",
     "h1": 1,
     "noindex": true,
     "hasContent": true
@@ -440,17 +440,17 @@
     "hasContent": true
   },
   {
-    "path": "/p/polaroid-color-600-sofortbildfilm",
+    "path": "/p/polaroid-b-und-w-sx-70",
     "status": 200,
-    "resolved": "/p/polaroid-color-600-sofortbildfilm",
+    "resolved": "/p/polaroid-b-und-w-sx-70",
     "h1": 1,
     "noindex": true,
     "hasContent": true
   },
   {
-    "path": "/p/polaroid-b-und-w-sx-70",
+    "path": "/p/polaroid-color-600-sofortbildfilm",
     "status": 200,
-    "resolved": "/p/polaroid-b-und-w-sx-70",
+    "resolved": "/p/polaroid-color-600-sofortbildfilm",
     "h1": 1,
     "noindex": true,
     "hasContent": true
@@ -472,17 +472,17 @@
     "hasContent": true
   },
   {
-    "path": "/p/zine-alessandro-iotti-und-davide-soldarini-carpathians",
+    "path": "/p/zine-bob-price-lust-to-thrive",
     "status": 200,
-    "resolved": "/p/zine-alessandro-iotti-und-davide-soldarini-carpathians",
+    "resolved": "/p/zine-bob-price-lust-to-thrive",
     "h1": 1,
     "noindex": true,
     "hasContent": true
   },
   {
-    "path": "/p/zine-bob-price-lust-to-thrive",
+    "path": "/p/zine-alessandro-iotti-und-davide-soldarini-carpathians",
     "status": 200,
-    "resolved": "/p/zine-bob-price-lust-to-thrive",
+    "resolved": "/p/zine-alessandro-iotti-und-davide-soldarini-carpathians",
     "h1": 1,
     "noindex": true,
     "hasContent": true
@@ -496,17 +496,17 @@
     "hasContent": true
   },
   {
-    "path": "/p/zine-pete-falkous-great-british-holiday",
+    "path": "/p/zine-sebastian-schweers-urban-immobility",
     "status": 200,
-    "resolved": "/p/zine-pete-falkous-great-british-holiday",
+    "resolved": "/p/zine-sebastian-schweers-urban-immobility",
     "h1": 1,
     "noindex": true,
     "hasContent": true
   },
   {
-    "path": "/p/zine-sebastian-schweers-urban-immobility",
+    "path": "/p/zine-pete-falkous-great-british-holiday",
     "status": 200,
-    "resolved": "/p/zine-sebastian-schweers-urban-immobility",
+    "resolved": "/p/zine-pete-falkous-great-british-holiday",
     "h1": 1,
     "noindex": true,
     "hasContent": true
@@ -528,14 +528,6 @@
     "hasContent": true
   },
   {
-    "path": "/p/adox-adonal-500-ml-konzentrat-schwarz-weiss-filmentwickler",
-    "status": 200,
-    "resolved": "/p/adox-adonal-500-ml-konzentrat-schwarz-weiss-filmentwickler",
-    "h1": 1,
-    "noindex": true,
-    "hasContent": true
-  },
-  {
     "path": "/p/adox-adofix-plus-expressfixierer-500-ml-konzentrat-adox-adofix-plus-expressfixierer-500-ml",
     "status": 200,
     "resolved": "/p/adox-adofix-plus-expressfixierer-500-ml-konzentrat-adox-adofix-plus-expressfixierer-500-ml",
@@ -547,6 +539,14 @@
     "path": "/p/adox-adostop-eco-geruchloses-stoppbad-mit-indikator-500-ml-konzentrat-adox-adostop-eco-ger",
     "status": 200,
     "resolved": "/p/adox-adostop-eco-geruchloses-stoppbad-mit-indikator-500-ml-konzentrat-adox-adostop-eco-ger",
+    "h1": 1,
+    "noindex": true,
+    "hasContent": true
+  },
+  {
+    "path": "/p/adox-adonal-500-ml-konzentrat-schwarz-weiss-filmentwickler",
+    "status": 200,
+    "resolved": "/p/adox-adonal-500-ml-konzentrat-schwarz-weiss-filmentwickler",
     "h1": 1,
     "noindex": true,
     "hasContent": true
@@ -664,14 +664,6 @@
     "hasContent": true
   },
   {
-    "path": "/p/cinestill-bwxx-120",
-    "status": 200,
-    "resolved": "/p/cinestill-bwxx-120",
-    "h1": 1,
-    "noindex": true,
-    "hasContent": true
-  },
-  {
     "path": "/p/cinestill-cinestill-800-t-c-41-120",
     "status": 200,
     "resolved": "/p/cinestill-cinestill-800-t-c-41-120",
@@ -680,17 +672,17 @@
     "hasContent": true
   },
   {
-    "path": "/p/cinestill-cinestill-800-t-c-41-135-36",
+    "path": "/p/cinestill-bwxx-120",
     "status": 200,
-    "resolved": "/p/cinestill-cinestill-800-t-c-41-135-36",
+    "resolved": "/p/cinestill-bwxx-120",
     "h1": 1,
     "noindex": true,
     "hasContent": true
   },
   {
-    "path": "/p/fujifilm-provia-100-f-135-36-kleinbildfilm",
+    "path": "/p/cinestill-cinestill-800-t-c-41-135-36",
     "status": 200,
-    "resolved": "/p/fujifilm-provia-100-f-135-36-kleinbildfilm",
+    "resolved": "/p/cinestill-cinestill-800-t-c-41-135-36",
     "h1": 1,
     "noindex": true,
     "hasContent": true
@@ -707,6 +699,14 @@
     "path": "/p/fujicolor-pro-400h-120-36-rollfilm",
     "status": 200,
     "resolved": "/p/fujicolor-pro-400h-120-36-rollfilm",
+    "h1": 1,
+    "noindex": true,
+    "hasContent": true
+  },
+  {
+    "path": "/p/fujifilm-provia-100-f-135-36-kleinbildfilm",
+    "status": 200,
+    "resolved": "/p/fujifilm-provia-100-f-135-36-kleinbildfilm",
     "h1": 1,
     "noindex": true,
     "hasContent": true
@@ -752,22 +752,6 @@
     "hasContent": true
   },
   {
-    "path": "/p/ilford-fp4-plus-125-schwarz-weiss-film-135-36",
-    "status": 200,
-    "resolved": "/p/ilford-fp4-plus-125-schwarz-weiss-film-135-36",
-    "h1": 1,
-    "noindex": true,
-    "hasContent": true
-  },
-  {
-    "path": "/p/ilford-ilfostop-500-ml",
-    "status": 200,
-    "resolved": "/p/ilford-ilfostop-500-ml",
-    "h1": 1,
-    "noindex": true,
-    "hasContent": true
-  },
-  {
     "path": "/p/ilford-hp5-plus-400-schwarz-weiss-film-135-36",
     "status": 200,
     "resolved": "/p/ilford-hp5-plus-400-schwarz-weiss-film-135-36",
@@ -776,9 +760,25 @@
     "hasContent": true
   },
   {
+    "path": "/p/ilford-fp4-plus-125-schwarz-weiss-film-135-36",
+    "status": 200,
+    "resolved": "/p/ilford-fp4-plus-125-schwarz-weiss-film-135-36",
+    "h1": 1,
+    "noindex": true,
+    "hasContent": true
+  },
+  {
     "path": "/p/ilford-hp5-plus-400-schwarzweissfilm-120",
     "status": 200,
     "resolved": "/p/ilford-hp5-plus-400-schwarzweissfilm-120",
+    "h1": 1,
+    "noindex": true,
+    "hasContent": true
+  },
+  {
+    "path": "/p/ilford-ilfostop-500-ml",
+    "status": 200,
+    "resolved": "/p/ilford-ilfostop-500-ml",
     "h1": 1,
     "noindex": true,
     "hasContent": true
@@ -816,17 +816,17 @@
     "hasContent": true
   },
   {
-    "path": "/p/jobo-thermosflasche",
+    "path": "/p/ilford-xp-2-super-135-36-kleinbildfilm",
     "status": 200,
-    "resolved": "/p/jobo-thermosflasche",
+    "resolved": "/p/ilford-xp-2-super-135-36-kleinbildfilm",
     "h1": 1,
     "noindex": true,
     "hasContent": true
   },
   {
-    "path": "/p/ilford-xp-2-super-135-36-kleinbildfilm",
+    "path": "/p/jobo-thermosflasche",
     "status": 200,
-    "resolved": "/p/ilford-xp-2-super-135-36-kleinbildfilm",
+    "resolved": "/p/jobo-thermosflasche",
     "h1": 1,
     "noindex": true,
     "hasContent": true
@@ -888,17 +888,17 @@
     "hasContent": true
   },
   {
-    "path": "/p/kodak-t-max-400-kleinbild-35mm-ablaufdatum-12-25",
+    "path": "/p/kodak-t-max-400-rollfilm",
     "status": 200,
-    "resolved": "/p/kodak-t-max-400-kleinbild-35mm-ablaufdatum-12-25",
+    "resolved": "/p/kodak-t-max-400-rollfilm",
     "h1": 1,
     "noindex": true,
     "hasContent": true
   },
   {
-    "path": "/p/kodak-t-max-400-rollfilm",
+    "path": "/p/kodak-t-max-400-kleinbild-35mm-ablaufdatum-12-25",
     "status": 200,
-    "resolved": "/p/kodak-t-max-400-rollfilm",
+    "resolved": "/p/kodak-t-max-400-kleinbild-35mm-ablaufdatum-12-25",
     "h1": 1,
     "noindex": true,
     "hasContent": true
@@ -920,17 +920,17 @@
     "hasContent": true
   },
   {
-    "path": "/p/kodak-ultra-max-400-135-36-film",
+    "path": "/p/kodak-tri-x-400-135-36-film",
     "status": 200,
-    "resolved": "/p/kodak-ultra-max-400-135-36-film",
+    "resolved": "/p/kodak-tri-x-400-135-36-film",
     "h1": 1,
     "noindex": true,
     "hasContent": true
   },
   {
-    "path": "/p/kodak-tri-x-400-135-36-film",
+    "path": "/p/kodak-ultra-max-400-135-36-film",
     "status": 200,
-    "resolved": "/p/kodak-tri-x-400-135-36-film",
+    "resolved": "/p/kodak-ultra-max-400-135-36-film",
     "h1": 1,
     "noindex": true,
     "hasContent": true
@@ -992,14 +992,6 @@
     "hasContent": true
   },
   {
-    "path": "/p/filmentwicklung-kleinbild-e-6-entwicklung-ohne-scan",
-    "status": 200,
-    "resolved": "/p/filmentwicklung-kleinbild-e-6-entwicklung-ohne-scan",
-    "h1": 1,
-    "noindex": true,
-    "hasContent": true
-  },
-  {
     "path": "/p/filmentwicklung-kleinbild-e-6-entwicklung-mit-large-scan-tiff",
     "status": 200,
     "resolved": "/p/filmentwicklung-kleinbild-e-6-entwicklung-mit-large-scan-tiff",
@@ -1008,9 +1000,9 @@
     "hasContent": true
   },
   {
-    "path": "/p/filmentwicklung-kleinbild-schwarz-weiss-entwicklung-mit-large-scan-tiff",
+    "path": "/p/filmentwicklung-kleinbild-e-6-entwicklung-ohne-scan",
     "status": 200,
-    "resolved": "/p/filmentwicklung-kleinbild-schwarz-weiss-entwicklung-mit-large-scan-tiff",
+    "resolved": "/p/filmentwicklung-kleinbild-e-6-entwicklung-ohne-scan",
     "h1": 1,
     "noindex": true,
     "hasContent": true
@@ -1032,17 +1024,17 @@
     "hasContent": true
   },
   {
-    "path": "/p/filmentwicklung-kleinbild-schwarz-weiss-push-pull-entwicklung-mit-large-scan",
+    "path": "/p/filmentwicklung-kleinbild-schwarz-weiss-entwicklung-mit-large-scan-tiff",
     "status": 200,
-    "resolved": "/p/filmentwicklung-kleinbild-schwarz-weiss-push-pull-entwicklung-mit-large-scan",
+    "resolved": "/p/filmentwicklung-kleinbild-schwarz-weiss-entwicklung-mit-large-scan-tiff",
     "h1": 1,
     "noindex": true,
     "hasContent": true
   },
   {
-    "path": "/p/filmentwicklung-mittelformat-c-41-entwicklung-mit-large-scan-jpg",
+    "path": "/p/filmentwicklung-kleinbild-schwarz-weiss-push-pull-entwicklung-mit-large-scan",
     "status": 200,
-    "resolved": "/p/filmentwicklung-mittelformat-c-41-entwicklung-mit-large-scan-jpg",
+    "resolved": "/p/filmentwicklung-kleinbild-schwarz-weiss-push-pull-entwicklung-mit-large-scan",
     "h1": 1,
     "noindex": true,
     "hasContent": true
@@ -1064,33 +1056,17 @@
     "hasContent": true
   },
   {
+    "path": "/p/filmentwicklung-mittelformat-c-41-entwicklung-mit-large-scan-jpg",
+    "status": 200,
+    "resolved": "/p/filmentwicklung-mittelformat-c-41-entwicklung-mit-large-scan-jpg",
+    "h1": 1,
+    "noindex": true,
+    "hasContent": true
+  },
+  {
     "path": "/p/filmentwicklung-mittelformat-c-41-entwicklung-mit-large-scan-tiff",
     "status": 200,
     "resolved": "/p/filmentwicklung-mittelformat-c-41-entwicklung-mit-large-scan-tiff",
-    "h1": 1,
-    "noindex": true,
-    "hasContent": true
-  },
-  {
-    "path": "/p/filmentwicklung-mittelformat-e-6-entwicklung-mit-large-scan-jpg",
-    "status": 200,
-    "resolved": "/p/filmentwicklung-mittelformat-e-6-entwicklung-mit-large-scan-jpg",
-    "h1": 1,
-    "noindex": true,
-    "hasContent": true
-  },
-  {
-    "path": "/p/filmentwicklung-mittelformat-e-6-entwicklung-mit-large-scan-tiff",
-    "status": 200,
-    "resolved": "/p/filmentwicklung-mittelformat-e-6-entwicklung-mit-large-scan-tiff",
-    "h1": 1,
-    "noindex": true,
-    "hasContent": true
-  },
-  {
-    "path": "/p/filmentwicklung-mittelformat-c-41-entwicklung-ohne-scan",
-    "status": 200,
-    "resolved": "/p/filmentwicklung-mittelformat-c-41-entwicklung-ohne-scan",
     "h1": 1,
     "noindex": true,
     "hasContent": true
@@ -1104,9 +1080,33 @@
     "hasContent": true
   },
   {
-    "path": "/p/filmentwicklung-mittelformat-schwarz-weiss-entwicklung-mit-large-scan-jpg",
+    "path": "/p/filmentwicklung-mittelformat-e-6-entwicklung-mit-large-scan-jpg",
     "status": 200,
-    "resolved": "/p/filmentwicklung-mittelformat-schwarz-weiss-entwicklung-mit-large-scan-jpg",
+    "resolved": "/p/filmentwicklung-mittelformat-e-6-entwicklung-mit-large-scan-jpg",
+    "h1": 1,
+    "noindex": true,
+    "hasContent": true
+  },
+  {
+    "path": "/p/filmentwicklung-mittelformat-c-41-entwicklung-ohne-scan",
+    "status": 200,
+    "resolved": "/p/filmentwicklung-mittelformat-c-41-entwicklung-ohne-scan",
+    "h1": 1,
+    "noindex": true,
+    "hasContent": true
+  },
+  {
+    "path": "/p/filmentwicklung-mittelformat-e-6-entwicklung-mit-large-scan-tiff",
+    "status": 200,
+    "resolved": "/p/filmentwicklung-mittelformat-e-6-entwicklung-mit-large-scan-tiff",
+    "h1": 1,
+    "noindex": true,
+    "hasContent": true
+  },
+  {
+    "path": "/p/filmentwicklung-mittelformat-schwarz-weiss-entwicklung-ohne-scan",
+    "status": 200,
+    "resolved": "/p/filmentwicklung-mittelformat-schwarz-weiss-entwicklung-ohne-scan",
     "h1": 1,
     "noindex": true,
     "hasContent": true
@@ -1120,9 +1120,9 @@
     "hasContent": true
   },
   {
-    "path": "/p/filmentwicklung-mittelformat-schwarz-weiss-entwicklung-ohne-scan",
+    "path": "/p/filmentwicklung-mittelformat-schwarz-weiss-entwicklung-mit-large-scan-jpg",
     "status": 200,
-    "resolved": "/p/filmentwicklung-mittelformat-schwarz-weiss-entwicklung-ohne-scan",
+    "resolved": "/p/filmentwicklung-mittelformat-schwarz-weiss-entwicklung-mit-large-scan-jpg",
     "h1": 1,
     "noindex": true,
     "hasContent": true
@@ -1152,17 +1152,17 @@
     "hasContent": true
   },
   {
-    "path": "/p/filmentwicklung-pocket-110-schwarz-weiss-entwicklung-mit-scan-tiff",
+    "path": "/p/filmentwicklung-pocket-110-schwarz-weiss-entwicklung-mit-scan-jpg",
     "status": 200,
-    "resolved": "/p/filmentwicklung-pocket-110-schwarz-weiss-entwicklung-mit-scan-tiff",
+    "resolved": "/p/filmentwicklung-pocket-110-schwarz-weiss-entwicklung-mit-scan-jpg",
     "h1": 1,
     "noindex": true,
     "hasContent": true
   },
   {
-    "path": "/p/filmentwicklung-pocket-110-schwarz-weiss-entwicklung-mit-scan-jpg",
+    "path": "/p/filmentwicklung-pocket-110-schwarz-weiss-entwicklung-mit-scan-tiff",
     "status": 200,
-    "resolved": "/p/filmentwicklung-pocket-110-schwarz-weiss-entwicklung-mit-scan-jpg",
+    "resolved": "/p/filmentwicklung-pocket-110-schwarz-weiss-entwicklung-mit-scan-tiff",
     "h1": 1,
     "noindex": true,
     "hasContent": true
@@ -1176,9 +1176,9 @@
     "hasContent": true
   },
   {
-    "path": "/p/negativ-scan-ganze-rollen-kleinbild-film-35mm",
+    "path": "/p/negativ-scan-ganze-rollen-tiff-kleinbild-film-35mm",
     "status": 200,
-    "resolved": "/p/negativ-scan-ganze-rollen-kleinbild-film-35mm",
+    "resolved": "/p/negativ-scan-ganze-rollen-tiff-kleinbild-film-35mm",
     "h1": 1,
     "noindex": true,
     "hasContent": true
@@ -1192,17 +1192,9 @@
     "hasContent": true
   },
   {
-    "path": "/p/negativ-scan-ganze-rollen-tiff-kleinbild-film-35mm",
+    "path": "/p/negativ-scan-ganze-rollen-kleinbild-film-35mm",
     "status": 200,
-    "resolved": "/p/negativ-scan-ganze-rollen-tiff-kleinbild-film-35mm",
-    "h1": 1,
-    "noindex": true,
-    "hasContent": true
-  },
-  {
-    "path": "/i/bewerbungsbilder-preise",
-    "status": 200,
-    "resolved": "/i/bewerbungsbilder-preise",
+    "resolved": "/p/negativ-scan-ganze-rollen-kleinbild-film-35mm",
     "h1": 1,
     "noindex": true,
     "hasContent": true
@@ -1211,6 +1203,14 @@
     "path": "/p/negativ-scan-ganze-rollen-tiff-mittelformat-film-120-maximal-6x12",
     "status": 200,
     "resolved": "/p/negativ-scan-ganze-rollen-tiff-mittelformat-film-120-maximal-6x12",
+    "h1": 1,
+    "noindex": true,
+    "hasContent": true
+  },
+  {
+    "path": "/i/bewerbungsbilder-preise",
+    "status": 200,
+    "resolved": "/i/bewerbungsbilder-preise",
     "h1": 1,
     "noindex": true,
     "hasContent": true
@@ -1232,14 +1232,6 @@
     "hasContent": true
   },
   {
-    "path": "/i/fotostudio",
-    "status": 200,
-    "resolved": "/services",
-    "h1": 1,
-    "noindex": true,
-    "hasContent": true
-  },
-  {
     "path": "/i/fineart-prints",
     "status": 200,
     "resolved": "/i/fineart-prints",
@@ -1251,6 +1243,14 @@
     "path": "/i/kontakt-und-oeffnungszeiten",
     "status": 200,
     "resolved": "/kontakt",
+    "h1": 1,
+    "noindex": true,
+    "hasContent": true
+  },
+  {
+    "path": "/i/fotostudio",
+    "status": 200,
+    "resolved": "/services",
     "h1": 1,
     "noindex": true,
     "hasContent": true
@@ -1272,14 +1272,6 @@
     "hasContent": true
   },
   {
-    "path": "/i/pass-und-bewerbung",
-    "status": 200,
-    "resolved": "/services",
-    "h1": 1,
-    "noindex": true,
-    "hasContent": true
-  },
-  {
     "path": "/i/preisliste",
     "status": 200,
     "resolved": "/i/preisliste",
@@ -1288,17 +1280,17 @@
     "hasContent": true
   },
   {
-    "path": "/i/ueber-uns",
+    "path": "/i/pass-und-bewerbung",
     "status": 200,
-    "resolved": "/geschichte",
+    "resolved": "/services",
     "h1": 1,
     "noindex": true,
     "hasContent": true
   },
   {
-    "path": "/i/wir-digitalisieren",
+    "path": "/i/ueber-uns",
     "status": 200,
-    "resolved": "/digitalisierung",
+    "resolved": "/geschichte",
     "h1": 1,
     "noindex": true,
     "hasContent": true
@@ -1320,9 +1312,9 @@
     "hasContent": true
   },
   {
-    "path": "/l/withdrawal",
+    "path": "/i/wir-digitalisieren",
     "status": 200,
-    "resolved": "/l/withdrawal",
+    "resolved": "/digitalisierung",
     "h1": 1,
     "noindex": true,
     "hasContent": true
@@ -1336,9 +1328,9 @@
     "hasContent": true
   },
   {
-    "path": "/i/alle-videokassetten-und-formate",
+    "path": "/l/withdrawal",
     "status": 200,
-    "resolved": "/i/alle-videokassetten-und-formate",
+    "resolved": "/l/withdrawal",
     "h1": 1,
     "noindex": true,
     "hasContent": true
@@ -1352,9 +1344,9 @@
     "hasContent": true
   },
   {
-    "path": "/l/shipping",
+    "path": "/i/alle-videokassetten-und-formate",
     "status": 200,
-    "resolved": "/l/shipping",
+    "resolved": "/i/alle-videokassetten-und-formate",
     "h1": 1,
     "noindex": true,
     "hasContent": true
@@ -1363,6 +1355,14 @@
     "path": "/i/super8-normal8-16mm-35mm-kino",
     "status": 200,
     "resolved": "/i/super8-normal8-16mm-35mm-kino",
+    "h1": 1,
+    "noindex": true,
+    "hasContent": true
+  },
+  {
+    "path": "/l/shipping",
+    "status": 200,
+    "resolved": "/l/shipping",
     "h1": 1,
     "noindex": true,
     "hasContent": true
@@ -1379,14 +1379,6 @@
     "path": "/i/negativ-digitalisierung",
     "status": 200,
     "resolved": "/i/negativ-digitalisierung",
-    "h1": 1,
-    "noindex": true,
-    "hasContent": true
-  },
-  {
-    "path": "/i/galerie",
-    "status": 200,
-    "resolved": "/galerie",
     "h1": 1,
     "noindex": true,
     "hasContent": true
@@ -1416,9 +1408,9 @@
     "hasContent": true
   },
   {
-    "path": "/c/shop/jobo-analog-equipment",
+    "path": "/i/galerie",
     "status": 200,
-    "resolved": "/c/shop/jobo-analog-equipment",
+    "resolved": "/galerie",
     "h1": 1,
     "noindex": true,
     "hasContent": true
@@ -1435,6 +1427,14 @@
     "path": "/c/shop/filme",
     "status": 200,
     "resolved": "/c/shop/filme",
+    "h1": 1,
+    "noindex": true,
+    "hasContent": true
+  },
+  {
+    "path": "/c/shop/jobo-analog-equipment",
+    "status": 200,
+    "resolved": "/c/shop/jobo-analog-equipment",
     "h1": 1,
     "noindex": true,
     "hasContent": true

@@ -107,3 +107,30 @@ Size is the problem, not contrast — every measured small informational text me
 8. **header** — deploy and verify the pending dark compact header and mega-menu changes at 1024/1280 (O1, P2).
 9. **commerce** — no upscaling of the four ≤ 300 px catalog photos (stage + lightbox) and an owner request for originals (M1).
 10. **home + digitization** — mobile page length: condensed chapters, tighter section padding, jump index (M2).
+
+## Resolution · 2026-10-07
+
+Fixed by five area teams and the lead; re-measured on the production build (headless Chromium, same viewports as the audit). axe-core: **0 violations on 13 routes at 390×844 and 1440×900**. Route sweep 190/190.
+
+| Row | Before | After |
+|---|---|---|
+| H1 shop first screen (390×844) | first price bottom 877 (/shop) · 1129 (Filme) | **571 · 571** (name, price, stock on screen); 1280×800 Filme price 991 → **793** |
+| H2 informational text < 12 px (390, visible, not aria-hidden) | home 53 %, shop 75 % of text nodes; hero captions 7 px | **0 nodes** on /, /shop, /filmentwicklung, /digitalisierung, /galerie, /geschichte, /p/pentax-17 (12 px floor; decorative edge print aria-hidden) |
+| H3 tap targets | search 33×38, chips 26–36, view 38, sort 16, sheet rows 21–32 | search **44×44**, chips/view/sort/sheet rows **44–48**, steppers 44×44, small buttons 44 |
+| M1 300 px product photos | upscaled 1.84× / 2.34× | shown at native size; owner must supply originals ([PRODUCT-IMAGE-AUDIT.md](PRODUCT-IMAGE-AUDIT.md)) |
+| M2 page height (390) | home 16,289 · digitization 13,564 · shop 19,044 | home **12,534** · digitization **8,715** · shop **5,333** (24-card batches, "Mehr laden") |
+| M3 search rows | 6/6 truncated, stock never visible | **0/6 truncated**, price + stock own row |
+| M4 configurator first option (390 · 1280) | 924 · 859 | **447 · 575**; 48 px progress row; summary dock |
+| M5 selected tile → detail | 769 px | **0 px** (opens after the tile's row); jump index; short select labels |
+| M6 Porsche repeats | 10 of 26 gallery images | **2 of 26** |
+| P1 outlined headings outside H1 | home 4, /lab 1 | **0** |
+| P2 mega menu wrap at 1280 | "E-6" broke inside badge | no internal wraps; metadata drops to its own line |
+| P3 hero toggle | single "Im Raster ansehen" | "Negativ \| Kontaktbogen" radiogroup |
+| P4 "5 Schritte" vs 06 | inconsistent | "5 Schritte + Auftragsnotiz" from one STEPS constant |
+| P5 history anchors (390) | label 3–5 px under sticky stack | label 59–61 px below |
+| O landscape hero CTAs | y≈519 (off screen) | y 264–312 |
+| O hero CTA fade | CTAs started at 40 % opacity | fully opaque from first frame |
+| O dark header on scroll | turned paper white | stays dark on dark-first routes |
+| O "Maus" hint | shown < 1024 px with a mouse (lens not loaded) | only when the loupe is active; touch wording on PDP |
+
+Open: owner originals for small product photos; real-device (iOS/Android) pass; current exhibition data for the gallery; home on phones remains above the 10,500 px research target without removing facts.
