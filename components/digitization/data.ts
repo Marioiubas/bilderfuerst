@@ -200,6 +200,19 @@ export const videoRates={
  pro:{label:'Profi (Betacam, Digi-Beta, DVCAM, DVCPRO, U-Matic)',tiers:[29.95,29.95,29.95]},
 } as const;
 export type VideoKind=keyof typeof videoRates;
+/** Estimator "Kassettentyp": short labels (they fit a closed select on a 360 px phone) named
+ *  like the formats in the chooser; each maps to a published price group (videoRates). The
+ *  full format list of the group is shown as help text under the control. */
+const HOME_HELP='Heimformat, ein Festpreis für VHS, S-VHS, VHS-C, Video8, Hi8, Digital8, MiniDV, Video 2000 und Betamax.';
+export const videoTypes={
+ vhs:{label:'VHS / S-VHS / VHS-C',kind:'home',help:HOME_HELP},
+ v8:{label:'Video8 / Hi8 / Digital8',kind:'home',help:HOME_HELP},
+ minidv:{label:'MiniDV',kind:'home',help:HOME_HELP},
+ beta:{label:'Betamax / Video 2000',kind:'home',help:HOME_HELP},
+ ntsc:{label:'NTSC / SECAM nach PAL',kind:'ntsc',help:'Heimformat in NTSC / SECAM, nach PAL.'},
+ pro:{label:'Profi-Format',kind:'pro',help:'Betacam, Betacam SP, Digi-Beta, DVCAM, DV, DVCPRO, U-Matic. Mengenrabatte für Profi-Formate auf Anfrage.'},
+} as const satisfies Record<string,{label:string;kind:VideoKind;help:string}>;
+export type VideoType=keyof typeof videoTypes;
 
 /** Slide tiers: from 1 / from 100 / from 500. */
 export const diaRates={

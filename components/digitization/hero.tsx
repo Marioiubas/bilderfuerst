@@ -1,11 +1,12 @@
 "use client";
 // Digitization hero: graphite + scanner cyan (the only cyan zone of the site).
 // Atmosphere: Vanta DOTS (desktop only, via darkroom.tsx; static scanner-light fallback).
-// Foreground: REAL photographs from the source pages (a mounted slide, a slide magazine).
+// Foreground: REAL photographs from the source pages (a mounted slide, a slide magazine),
+// served responsively: 480 / 1400 / 2500 px candidates with `sizes` matching the layout, so
+// phones never fetch the 2500 px files and only large, dense screens do.
 import dynamic from 'next/dynamic';
-import Link from 'next/link';
 import {useEffect,useRef} from 'react';
-import {ArrowDown,ArrowUpRight} from 'lucide-react';
+import {ArrowDown} from 'lucide-react';
 import {useMotionTier} from '@/motion/setup';
 import {heroScanPass} from '@/motion/digitization';
 
@@ -32,7 +33,7 @@ export function DigitizationHero(){
     <p className="lead">Dias, Negative, Schmalfilm, Videokassetten, Tonband und Schallplatte: Seit 2001 digitalisieren wir analoges Material – heute in der eigenen bilderfürst Manufaktur in Fürth-Dambach, die auch für andere Fotohändler arbeitet.</p>
     <div className="dz-hero-actions">
      <a href="#was-hast-du" className="btn btn-primary">Objekt wählen <ArrowDown size={17}/></a>
-     <Link href="/kontakt" className="btn btn-ghost">Abgabe & Kontakt <ArrowUpRight size={17} className="btn-arrow-up"/></Link>
+     <a href="#abgabe" className="btn btn-ghost">Abgabe & Kontakt <ArrowDown size={17}/></a>
     </div>
     <dl className="dz-readout">
      {readout.map(r=><div key={r.k}><dt className="mono">{r.k}</dt><dd><span className="dz-readout-v">{r.v}</span><span className="dz-readout-d">{r.d}</span></dd></div>)}
@@ -42,13 +43,13 @@ export function DigitizationHero(){
     <figure className="dz-plate reg">
      <figcaption className="dz-plate-bar mono"><span>Vorlage 01 · KB-Dia 5 × 5 cm</span><span className="dz-signal" aria-hidden="true">Signal</span></figcaption>
      <div className="dz-plate-img">
-      <img src="/images/slide-in-glove.webp" alt="Gerahmtes Kleinbild-Dia, mit einem Baumwollhandschuh gehalten" width={1400} height={1120} fetchPriority="high" decoding="async"/>
+      <img src="/images/slide-in-glove.webp" srcSet="/images/slide-in-glove-t.webp 480w, /images/slide-in-glove.webp 1400w, /images/slide-in-glove-l.webp 2500w" sizes="(min-width: 1024px) min(36vw, 540px), (min-width: 680px) 600px, 90vw" alt="Gerahmtes Kleinbild-Dia, mit einem Baumwollhandschuh gehalten" width={1400} height={1120} fetchPriority="high" decoding="async"/>
       <span className="dz-hero-scan" ref={bar} aria-hidden="true"/>
      </div>
      <p className="dz-plate-bar dz-plate-credit mono">Foto der Quellseite</p>
     </figure>
     <figure className="dz-plate dz-plate-sm">
-     <img src="/images/slide-magazine-macro.webp" alt="Dia-Magazin mit nummerierten Fächern, ein Dia wird entnommen" width={1400} height={1120} loading="lazy" decoding="async"/>
+     <img src="/images/slide-magazine-macro.webp" srcSet="/images/slide-magazine-macro.webp 1400w, /images/slide-magazine-macro-l.webp 2500w" sizes="(min-width: 1024px) min(16vw, 240px), 1px" alt="Dia-Magazin mit nummerierten Fächern, ein Dia wird entnommen" width={1400} height={1120} loading="lazy" decoding="async"/>
      <figcaption className="mono">Magazin · nummerierte Fächer</figcaption>
     </figure>
    </div>

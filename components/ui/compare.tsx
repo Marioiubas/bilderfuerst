@@ -15,6 +15,10 @@ export type CompareBox={left:number;top:number;width:number;height:number};
 
 export type CompareProps={
  firstImage?:string;secondImage?:string;
+ /** Optional responsive candidates (w descriptors) for larger renditions of the same crop. */
+ firstSrcSet?:string;secondSrcSet?:string;
+ /** `sizes` for both images: their rendered width (box width × stage width). */
+ sizes?:string;
  firstLabel?:string;secondLabel?:string;
  firstAlt?:string;secondAlt?:string;
  /** Visible caption under the viewer (figcaption). */
@@ -43,7 +47,7 @@ const clamp=(n:number)=>Math.max(0,Math.min(100,n));
 const place=(box?:CompareBox):CSSProperties|undefined=>box?{left:`${box.left}%`,top:`${box.top}%`,width:`${box.width}%`,height:`${box.height}%`}:undefined;
 
 export function Compare({
- firstImage='',secondImage='',
+ firstImage='',secondImage='',firstSrcSet,secondSrcSet,sizes,
  firstLabel='Adox Adonal',secondLabel='Kodak D-76',
  firstAlt,secondAlt,caption,rangeLabel='Entwickleraufnahmen vergleichen',
  aspect='3 / 2',imageWidth=1200,imageHeight=800,firstBox,secondBox,objectPosition,
@@ -62,9 +66,9 @@ export function Compare({
   <div ref={stageRef} className="compare-stage" style={{aspectRatio:aspect}}
    onPointerDown={e=>{if(e.button!==0)return;onInteract?.();e.currentTarget.setPointerCapture(e.pointerId);move(e.currentTarget,e.clientX)}}
    onPointerMove={e=>{if(e.currentTarget.hasPointerCapture(e.pointerId))move(e.currentTarget,e.clientX)}}>
-   <img className="compare-img" src={secondImage} alt={alt2} width={imageWidth} height={imageHeight} loading={loading} decoding="async" draggable={false} style={imgStyle(secondBox)}/>
+   <img className="compare-img" src={secondImage} srcSet={secondSrcSet} sizes={secondSrcSet?sizes:undefined} alt={alt2} width={imageWidth} height={imageHeight} loading={loading} decoding="async" draggable={false} style={imgStyle(secondBox)}/>
    <div className="compare-first" style={{clipPath:`inset(0 ${100-value}% 0 0)`}}>
-    <img className="compare-img" src={firstImage} alt={alt1} width={imageWidth} height={imageHeight} loading={loading} decoding="async" draggable={false} style={imgStyle(firstBox)}/>
+    <img className="compare-img" src={firstImage} srcSet={firstSrcSet} sizes={firstSrcSet?sizes:undefined} alt={alt1} width={imageWidth} height={imageHeight} loading={loading} decoding="async" draggable={false} style={imgStyle(firstBox)}/>
    </div>
    <div className="compare-line" style={{left:`${value}%`}} aria-hidden="true"><span className="compare-handle"><MoveHorizontal size={16} strokeWidth={1.6}/></span></div>
   </div>

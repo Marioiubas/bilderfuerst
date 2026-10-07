@@ -1,11 +1,14 @@
 "use client";
 // /digitalisierung — "ANALOG MEMORY → DIGITAL SIGNAL". Signature experience #3.
-// Order: hero → object-first chooser → identification → estimator → ICE scanner pass →
-// process & manufactory → drop-off. Graphite + scanner cyan; red only for interaction.
+// Order: hero → service index → object-first chooser (detail panel inline after the chosen
+// tile's row) → estimator → identification (a path, not a prerequisite: after the estimate,
+// folded on phones) → ICE scanner pass → process & manufactory → drop-off.
+// Graphite + scanner cyan; red only for interaction.
 import {useEffect,useState} from 'react';
 import {track} from '@/lib/analytics';
 import {objects,type EstimateMode,type ObjectId} from './data';
 import {DigitizationHero} from './hero';
+import {JumpIndex} from './jump-index';
 import {Chooser} from './chooser';
 import {Identify} from './identify';
 import {Estimator} from './estimator';
@@ -19,9 +22,10 @@ export function Digitization(){
  const select=(id:ObjectId)=>{setSelected(id);const m=objects.find(o=>o.id===id)?.estimate;if(m)setMode(m)};
  return <div className="dz">
   <DigitizationHero/>
+  <JumpIndex/>
   <Chooser selected={selected} onSelect={select} onEstimate={setMode}/>
-  <Identify/>
   <Estimator mode={mode} onMode={setMode}/>
+  <Identify/>
   <IceScan/>
   <Process/>
   <DropOff/>

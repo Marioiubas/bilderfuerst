@@ -4,8 +4,9 @@
 // estimate; the final price is set in the shop.
 import {useId,useState} from 'react';
 import {SectionHead} from '@/components/analog/primitives';
-import {diaRates,estimateDia,estimateFilm,estimateNeg,estimateVideo,eur,filmRates,negRates,SOURCE_DATE,videoRates,
- type DiaKind,type EstimateMode,type FilmFormat,type NegKind,type VideoKind} from './data';
+import {diaRates,estimateDia,estimateFilm,estimateNeg,estimateVideo,eur,filmRates,negRates,SOURCE_DATE,videoTypes,
+ type DiaKind,type EstimateMode,type FilmFormat,type NegKind,type VideoType} from './data';
+import {sectionLabel} from './jump-index';
 
 const modes:{id:EstimateMode;label:string;code:string}[]=[
  {id:'film',label:'Schmalfilm',code:'FLM'},{id:'video',label:'Videokassetten',code:'VID'},{id:'dia',label:'Dias',code:'DIA'},{id:'negativ',label:'Negative',code:'NEG'},
@@ -34,27 +35,30 @@ function Qty({label,unit,value,min,max,rangeMax,onChange,presets}:{label:string;
  </div>;
 }
 
-function Choice<T extends string>({label,value,options,onChange}:{label:string;value:T;options:Record<T,{label:string}>;onChange:(v:T)=>void}){
- const id=useId();
+/** Native select with SHORT option labels (they fit the closed control on a 360 px phone);
+ *  an option's longer explanation is shown under the control and linked via aria-describedby. */
+function Choice<T extends string>({label,value,options,onChange}:{label:string;value:T;options:Record<T,{label:string;help?:string}>;onChange:(v:T)=>void}){
+ const id=useId();const help=options[value].help;
  return <div className="field"><label htmlFor={id}>{label}</label>
-  <select id={id} className="select" value={value} onChange={e=>onChange(e.target.value as T)}>{(Object.keys(options) as T[]).map(k=><option key={k} value={k}>{options[k].label}</option>)}</select></div>;
+  <select id={id} className="select" value={value} aria-describedby={help?`${id}-help`:undefined} onChange={e=>onChange(e.target.value as T)}>{(Object.keys(options) as T[]).map(k=><option key={k} value={k}>{options[k].label}</option>)}</select>
+  {help&&<p className="dz-select-help" id={`${id}-help`}>{help}</p>}</div>;
 }
 
 export function Estimator({mode,onMode}:{mode:EstimateMode;onMode:(m:EstimateMode)=>void}){
  const [film,setFilm]=useState<FilmFormat>('s8');const [minutes,setMinutes]=useState(60);
- const [video,setVideo]=useState<VideoKind>('home');const [tapes,setTapes]=useState(10);
+ const [video,setVideo]=useState<VideoType>('vhs');const [tapes,setTapes]=useState(10);
  const [dia,setDia]=useState<DiaKind>('mag');const [slides,setSlides]=useState(500);const [diaTiff,setDiaTiff]=useState(false);const [karussell,setKarussell]=useState(false);
  const [neg,setNeg]=useState<NegKind>('strip');const [negs,setNegs]=useState(360);const [negTiff,setNegTiff]=useState(false);
- const result=mode==='film'?estimateFilm(film,minutes):mode==='video'?estimateVideo(video,tapes):mode==='dia'?estimateDia(dia,slides,diaTiff,dia==='mag'&&karussell):estimateNeg(neg,negs,negTiff);
+ const result=mode==='film'?estimateFilm(film,minutes):mode==='video'?estimateVideo(videoTypes[video].kind,tapes):mode==='dia'?estimateDia(dia,slides,diaTiff,dia==='mag'&&karussell):estimateNeg(neg,negs,negTiff);
  const outId=useId();
  return <section id="schaetzung" className="dz-sec zone-graphite" aria-labelledby="dz-estimate-title">
   <div className="wrap">
-   <SectionHead code="SCN" label="03 · Schätzung" index="Veröffentlichte Preise" id="dz-estimate-title" title={<>Was kostet<br/>meine Kiste?</>}/>
+   <SectionHead code="SCN" label={sectionLabel('02')} index="Veröffentlichte Preise" id="dz-estimate-title" title={<>Was kostet<br/>meine Kiste?</>}/>
    <div className="dz-estimator">
     <form className="dz-est-controls" onSubmit={e=>e.preventDefault()} aria-describedby={`${outId}-note`}>
      <fieldset className="dz-modes">
       <legend className="field-label">Material</legend>
-      {modes.map(m=><label key={m.id} className="dz-mode"><input type="radio" name="dz-est-mode" value={m.id} checked={mode===m.id} onChange={()=>onMode(m.id)} className="sr-only"/><span className="mono">{m.code}</span>{m.label}</label>)}
+      {modes.map(m=><label key={m.id} className="dz-mode"><input type="radio" name="dz-est-mode" value={m.id} checked={mode===m.id} onChange={()=>onMode(m.id)} className="sr-only"/><span className="mono" aria-hidden="true">{m.code}</span>{m.label}</label>)}
      </fieldset>
      {mode==='film'&&<>
       <Choice label="Filmformat" value={film} options={filmRates} onChange={setFilm}/>
@@ -62,7 +66,7 @@ export function Estimator({mode,onMode}:{mode:EstimateMode;onMode:(m:EstimateMod
       <p className="dz-hint">Laufzeit unbekannt? Faustregel Super 8 bei 18 Bildern/s: kleine 15-m-Spule gut 3 Min., 60-m-Spule gut 13 Min.</p>
      </>}
      {mode==='video'&&<>
-      <Choice label="Kassettentyp" value={video} options={videoRates} onChange={setVideo}/>
+      <Choice label="Kassettentyp" value={video} options={videoTypes} onChange={setVideo}/>
       <Qty label="Anzahl Kassetten" unit="Stk." value={tapes} min={1} max={2000} rangeMax={100} onChange={setTapes} presets={[1,10,50]}/>
       <p className="dz-hint">Festpreis je Kassette, egal ob 5 oder 240 Minuten. Staffel ab 10 und ab 50 Kassetten.</p>
      </>}

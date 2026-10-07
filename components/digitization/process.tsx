@@ -11,6 +11,8 @@ import {useMotionTier} from '@/motion/setup';
 import {processAdvance} from '@/motion/digitization';
 import {track} from '@/lib/analytics';
 import {dropOffs,SOURCE_DATE} from './data';
+import {Fold} from './fold';
+import {sectionLabel} from './jump-index';
 
 const steps=[
  {n:'01',t:'Abgabe',d:'Im Analog Store Fürth, im Fuji-Store Nürnberg oder direkt in der Manufaktur in Fürth-Dambach.'},
@@ -30,9 +32,9 @@ const timeline=[
 export function Process(){
  const tier=useMotionTier();const strip=useRef<HTMLOListElement>(null);const played=useRef(false);
  useEffect(()=>played.current?undefined:processAdvance(strip.current,tier,()=>{played.current=true}),[tier]);
- return <section className="dz-sec zone-graphite" aria-labelledby="dz-process-title">
+ return <section id="ablauf" className="dz-sec zone-graphite" aria-labelledby="dz-process-title">
   <div className="wrap">
-   <SectionHead code="SCN" label="05 · Ablauf" index="Manufaktur Fürth-Dambach" id="dz-process-title" title={<>Sechs Stationen.<br/>Deine Originale kommen zurück.</>}/>
+   <SectionHead code="SCN" label={sectionLabel('05')} index="Manufaktur Fürth-Dambach" id="dz-process-title" title={<>Sechs Stationen.<br/>Deine Originale kommen zurück.</>}/>
    <ol className="dz-steps" ref={strip}>
     {steps.map(s=><li key={s.n} className="dz-step" data-advance><span className="mono dz-step-n">{s.n}</span><h3>{s.t}</h3><p>{s.d}</p></li>)}
    </ol>
@@ -41,15 +43,17 @@ export function Process(){
      <p className="mono dz-id-code">Die Manufaktur</p>
      <h3>Digitalisierung ist bei uns kein Nebenbei.</h3>
      <p>Viele unserer Geräte haben wir weiterentwickelt, verbessert oder komplett selbst gebaut. Heute beliefert die bilderfürst Manufaktur Fotohändler – und natürlich unseren Laden in Fürth und den Fuji-Store in Nürnberg.</p>
-     <ol className="dz-years">{timeline.map(t=><li key={t.y}><span className="num">{t.y}</span><span>{t.d}</span></li>)}</ol>
+     <Fold id="dz-years" title="Chronik 1998 bis 2012" className="dz-fold-quiet">
+      <ol className="dz-years">{timeline.map(t=><li key={t.y}><span className="num">{t.y}</span><span>{t.d}</span></li>)}</ol>
+     </Fold>
     </div>
     <figure className="dz-photo dz-photo-ccd">
      <img src="/images/scanner-ccd-sensor.webp" alt="CCD-Sensor im Objektivanschluss eines Scankopfs der Manufaktur" width={470} height={467} loading="lazy" decoding="async"/>
      <figcaption><span className="mono">Unsere Scan-Technik</span>CCD-Sensor im Scankopf. Foto der Quellseite „Wir digitalisieren“.</figcaption>
     </figure>
     <figure className="dz-photo dz-photo-lab">
-     <img src="/images/lab-scan-l.webp" alt="Ein 35-mm-Negativstreifen läuft in den Noritsu-Scanner im Fürther Filmlabor" width={1600} height={1066} loading="lazy" decoding="async"/>
-     <figcaption><span className="mono">Neuer Film statt altes Archiv?</span>Frisch entwickelte Filme scannen wir im Labor in Fürth auf dem Noritsu HS-1800. <Link className="link" href="/filmentwicklung">Filmentwicklung <ArrowUpRight size={14}/></Link></figcaption>
+     <img src="/images/lab-scan-l.webp" srcSet="/images/lab-scan.webp 600w, /images/lab-scan-l.webp 1600w" sizes="(min-width: 1181px) min(36vw, 540px), 46vw" alt="Ein 35-mm-Negativstreifen läuft in den Noritsu-Scanner im Fürther Filmlabor" width={1600} height={1066} loading="lazy" decoding="async"/>
+     <figcaption><span className="mono">Neuer Film statt altes Archiv?</span>Frisch entwickelte Filme scannen wir im Labor in Fürth auf dem Noritsu HS-1800. <Link className="link dz-hit" href="/filmentwicklung">Filmentwicklung <ArrowUpRight size={14}/></Link></figcaption>
     </figure>
    </div>
   </div>
@@ -57,9 +61,9 @@ export function Process(){
 }
 
 export function DropOff(){
- return <section className="dz-sec dz-cta zone-dark" aria-labelledby="dz-cta-title">
+ return <section id="abgabe" className="dz-sec dz-cta zone-dark" aria-labelledby="dz-cta-title">
   <div className="wrap">
-   <p className="eyebrow"><b>SCN</b><span>06 · Abgabe</span></p>
+   <p className="eyebrow"><b>SCN</b><span>{sectionLabel('06')}</span></p>
    <div className="dz-cta-grid">
     <div>
      <h2 id="dz-cta-title">Bring deine Kiste vorbei.</h2>

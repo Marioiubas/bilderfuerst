@@ -1,8 +1,11 @@
 // "Nicht sicher?" — general, factual identification cues drawn as hairline technical
-// diagrams (millimetre viewBoxes, true proportions). No prices here. Server-safe.
+// diagrams (millimetre viewBoxes, true proportions). No prices here. A path, not a
+// prerequisite: placed after the estimate; on phones each card is a 48 px disclosure (Fold).
 import type {CSSProperties,ReactNode} from 'react';
 import {SectionHead} from '@/components/analog/primitives';
 import {sector} from './silhouettes';
+import {Fold} from './fold';
+import {sectionLabel} from './jump-index';
 
 const range=(n:number)=>Array.from({length:n},(_,i)=>i);
 const Y0=3,LEN=30;
@@ -52,14 +55,14 @@ const cassettes:Cassette[]=[
 ];
 
 export function Identify(){
- return <section className="dz-sec zone-dark" aria-labelledby="dz-identify-title">
+ return <section id="erkennen" className="dz-sec zone-dark" aria-labelledby="dz-identify-title">
   <div className="wrap">
-   <SectionHead code="SCN" label="02 · Nicht sicher?" index="Erkennungsmerkmale" id="dz-identify-title" title={<>Woran du dein<br/>Material erkennst.</>}/>
+   <SectionHead code="SCN" label={sectionLabel('03')} index="Nicht sicher?" id="dz-identify-title" title={<>Woran du dein<br/>Material erkennst.</>}/>
    <p className="lead dz-sec-lead">Allgemeine Faustregeln, gezeichnet im echten Größenverhältnis. Im Zweifel bring das Stück einfach mit – wir schauen es uns an.</p>
    <div className="dz-id-grid">
     <article className="dz-id-card">
      <p className="mono dz-id-code">ID-A · Lochung</p>
-     <h3>Normal 8, Super 8 oder 16 mm?</h3>
+     <Fold id="dz-id-a" as="h3" title="Normal 8, Super 8 oder 16 mm?">
      <Perforations/>
      <ul className="dz-cues">
       <li><b>Normal 8:</b> größere Löcher, genau auf der Bildkante zwischen zwei Bildern.</li>
@@ -67,20 +70,22 @@ export function Identify(){
       <li><b>16 mm:</b> doppelt so breit; Löcher an einer oder an beiden Seiten.</li>
       <li><b>Bräunlicher Streifen am Rand:</b> meist eine Magnettonspur. Mit oder ohne Ton kostet bei uns gleich viel.</li>
      </ul>
+     </Fold>
     </article>
     <article className="dz-id-card">
      <p className="mono dz-id-code">ID-B · Spulenmitte</p>
-     <h3>Kleines oder großes Loch?</h3>
+     <Fold id="dz-id-b" as="h3" title="Kleines oder großes Loch?">
      <ReelHoles/>
      <ul className="dz-cues">
       <li><b>Kleines, eckiges Mittelloch:</b> meist Normal 8 oder 16 mm.</li>
       <li><b>Großes, rundes Mittelloch:</b> meist Super 8.</li>
       <li><b>Faustregel Laufzeit:</b> Eine kleine 15-m-Spule Super 8 läuft bei 18 Bildern/s gut 3 Minuten, eine 60-m-Spule gut 13 Minuten.</li>
      </ul>
+     </Fold>
     </article>
     <article className="dz-id-card dz-id-wide">
      <p className="mono dz-id-code">ID-C · Kassetten im Größenvergleich</p>
-     <h3>Welche Kassette ist das?</h3>
+     <Fold id="dz-id-c" as="h3" title="Welche Kassette ist das?">
      <div className="dz-lineup"><div className="dz-lineup-row">
       {cassettes.map(c=><figure key={c.id} className="dz-cassette" style={{'--w':c.w} as CSSProperties}>
        <svg className="dz-diagram" viewBox={`0 0 ${c.w} ${c.h}`} aria-hidden="true" focusable="false"><rect className="f" x=".5" y=".5" width={c.w-1} height={c.h-1} rx="2.5"/>{c.draw}</svg>
@@ -89,6 +94,7 @@ export function Identify(){
       </div>
       <div className="dz-ruler" aria-hidden="true"><svg viewBox="0 0 100 6" preserveAspectRatio="none"><path d={`M0 .5H100${range(11).map(i=>`M${i*10} .5V${i%5===0?6:3.5}`).join('')}`}/></svg><span className="mono">10 cm</span></div>
      </div>
+     </Fold>
     </article>
    </div>
   </div>
