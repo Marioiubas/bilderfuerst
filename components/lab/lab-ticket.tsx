@@ -1,11 +1,12 @@
 "use client";
 // Order summary as a lab envelope / order ticket on photo-white paper. Printable as a note to bring
 // along (no order number, not binding, no payment). Prices come from the resolved catalog variant.
+// It is the summary after the choice steps, so its frame reads "Notiz", not a sixth number (audit P4).
 import {useEffect,useRef} from 'react';
 import {ArrowUpRight,Plus,Printer,RotateCcw} from 'lucide-react';
 import {formatPrice} from '@/lib/catalog';
 import {lockFigure} from '@/motion/film';
-import {SOURCE_DATE,deliveries,formats,masterSource,processes,scanLabel,scanSizes,type DeliveryId,type FormatId,type ProcessId,type ScanId,type Variant} from './film-data';
+import {SOURCE_DATE,SUMMARY_STEP,deliveries,formats,masterSource,processes,scanLabel,scanSizes,type DeliveryId,type FormatId,type ProcessId,type ScanId,type Variant} from './film-data';
 
 type Props={format:FormatId|null;process:ProcessId|null;scan:ScanId|null;qty:number;delivery:DeliveryId|null;variant?:Variant;estimate:number|null;missing:string[];roll:number;added:boolean;animate:boolean;onAdd:()=>void;onAnother:()=>void};
 
@@ -23,8 +24,8 @@ export function LabTicket({format,process,scan,qty,delivery,variant,estimate,mis
  return <section className="tk-ticket" aria-labelledby="tk-title" data-complete={!!variant}>
   <div className="tk-flap" aria-hidden="true"/>
   <header className="tk-head">
-   <span className="tk-frame mono" aria-hidden="true">06</span>
-   <div><h2 id="tk-title" className="tk-title">Auftragsnotiz</h2><p className="mono tk-sub">Labor · Analog Store Fürth · Rolle {roll}</p></div>
+   <span className="tk-frame mono" aria-hidden="true">{SUMMARY_STEP.short}</span>
+   <div><h2 id="tk-title" className="tk-title" tabIndex={-1}>{SUMMARY_STEP.label}</h2><p className="mono tk-sub">Labor · Analog Store Fürth · Rolle {roll}</p></div>
   </header>
   <p className="tk-print-only">Notiz zum Mitbringen – kein verbindlicher Auftrag, keine Auftragsnummer, keine Zahlung. Erstellt am <span ref={dateRef}/>.</p>
   <dl className="tk-fields">

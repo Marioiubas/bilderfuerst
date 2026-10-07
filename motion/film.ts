@@ -31,7 +31,8 @@ export function createStripController(viewport:HTMLElement,track:HTMLElement,rea
   }
   return no(lefts.length-1);
  };
- const apply=(nx:number)=>{x=nx;track.style.transform=`translate3d(${nx.toFixed(2)}px,0,0)`;if(readout)readout.textContent=label(nx)};
+ // The readout prints "BILD 02" for numbered frames; the summary frame ("Notiz") reads without prefix.
+ const apply=(nx:number)=>{x=nx;track.style.transform=`translate3d(${nx.toFixed(2)}px,0,0)`;if(readout){const t=label(nx);readout.textContent=t;readout.dataset.frame=/^\d/.test(t)?'num':'text'}};
  let moving=false;
  const realign=()=>{if(!moving)apply(targetFor(index))};
  const ro=new ResizeObserver(()=>{anim?.cancel();moving=false;apply(targetFor(index))});ro.observe(viewport);

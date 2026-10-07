@@ -1,6 +1,8 @@
 "use client";
 // Signature experience #2: film development configurator (/filmentwicklung).
-// 01 Format → 02 Prozess → 03 Scan → 04 Menge → 05 Abgabe (optional) → lab envelope ticket.
+// 01 Format → 02 Prozess → 03 Scan → 04 Menge → 05 Abgabe (optional) → order note ("Notiz", the summary,
+// numbered outside the choice steps; count derived from STEPS, audit P4). Phones: compact intro,
+// 48 px progress row instead of the sticky strip and a summary dock once a price exists (audit M4).
 // Every combination resolves to a REAL catalog variant (lib/catalog.json); unsupported combinations
 // are not offered. URL state: ?format=35mm|120|110&process=C-41|S/W|S/W%20Push/Pull|E-6&scan=Ohne%20Scan|JPG|TIFF&qty=n
 import {useEffect,useRef,useState} from 'react';
@@ -11,12 +13,14 @@ import {track} from '@/lib/analytics';
 import {motionAllowed} from '@/motion/reduced-motion';
 import {useStore} from './store-context';
 import {FilmStrip,type StripFrame} from './lab/film-strip';
+import {ProgressRow} from './lab/progress-row';
+import {SummaryDock} from './lab/summary-dock';
 import {ProcessTank} from './lab/process-tank';
 import {LabTicket} from './lab/lab-ticket';
 import {ScanSpecs} from './lab/scan-specs';
 import {DeveloperLab} from './lab/developer-lab';
 import {FormatGlyph} from './lab/format-glyph';
-import {DELIVERY_IDS,FORMAT_IDS,PROCESS_IDS,SCAN_IDS,deliveries,encParam,findVariant,formatDelta,formats,formatsFor,megapixels,minPrice,parseFormat,parseProcess,parseQty,parseScan,processes,processesFor,scanLabel,scanSizes,tiffPremium,type DeliveryId,type FormatId,type ProcessId,type ScanId,type Selection} from './lab/film-data';
+import {DELIVERY_IDS,FORMAT_IDS,PROCESS_IDS,SCAN_IDS,STEPS,STEP_COUNT_LABEL,SUMMARY_STEP,deliveries,encParam,findVariant,formatDelta,formats,formatsFor,megapixels,minPrice,parseFormat,parseProcess,parseQty,parseScan,processes,processesFor,scanLabel,scanSizes,stepNo,tiffPremium,type DeliveryId,type FormatId,type ProcessId,type ScanId,type Selection,type StepId} from './lab/film-data';
 
 type Price={text:string;tone:'delta'|'abs'|'from'|'current'|'none'};
 const slug=(s:string)=>s.toLowerCase().replace(/[^a-z0-9]+/g,'-');
@@ -133,13 +137,17 @@ export function FilmConfigurator(){
  let current=reqDone.findIndex(d=>!d);
  if(current===-1)current=delivery?5:4;
  if(added)current=5;
+ const stepState:Record<StepId,{value:string;done:boolean}>={
+  format:{value:format?formats[format].name:'',done:!!format},
+  process:{value:process?processes[process].strip:'',done:!!process},
+  scan:{value:scan?(scan==='Ohne Scan'?'Ohne':scan):'',done:!!scan},
+  qty:{value:`×${qty}`,done:qtyDone},
+  delivery:{value:delivery?deliveries[delivery].strip:'',done:!!delivery},
+ };
+ const total=variant?variant.price*qty:null;
  const frames:StripFrame[]=[
-  {id:'format',no:'01',label:'Format',value:format?formats[format].name:'',done:!!format,href:'#step-format'},
-  {id:'process',no:'02',label:'Prozess',value:process?processes[process].strip:'',done:!!process,href:'#step-process'},
-  {id:'scan',no:'03',label:'Scan',value:scan?(scan==='Ohne Scan'?'Ohne':scan):'',done:!!scan,href:'#step-scan'},
-  {id:'qty',no:'04',label:'Menge',value:`×${qty}`,done:qtyDone,href:'#step-qty'},
-  {id:'delivery',no:'05',label:'Abgabe',value:delivery?deliveries[delivery].strip:'',done:!!delivery,href:'#step-delivery',optional:true},
-  {id:'ticket',no:'06',label:'Auftrag',value:variant?formatPrice(variant.price*qty):'',done:added,showValue:!!variant,href:'#fc-ticket'},
+  ...STEPS.map(st=>({id:st.id,no:stepNo(st.id),label:st.label,href:st.href,optional:st.optional,...stepState[st.id]})),
+  {id:'ticket',no:SUMMARY_STEP.short,label:'Gesamt',value:total!==null?formatPrice(total):'',done:added,showValue:total!==null,href:SUMMARY_STEP.href,summary:true},
  ];
  const shownProcesses=format?processesFor(format):[...PROCESS_IDS];
  const kind=process?processes[process].kind:null;
@@ -148,9 +156,10 @@ export function FilmConfigurator(){
   <header className="zone-dark fc-hero">
    <div className="wrap fc-hero-grid">
     <div className="fc-hero-copy">
-     <p className="eyebrow"><b>LAB</b><span>Filmentwicklung im eigenen Labor · Fürth</span></p>
+     <p className="eyebrow"><b>LAB</b><span>Filmentwicklung im eigenen Labor<span className="fc-wide-only"> · Fürth</span></span></p>
      <h1 className="fc-title">Film entwickeln <span className="outline-type">im eigenen Labor</span></h1>
-     <p className="lead">C-41 im Fujifilm-Minilab, Schwarzweiß individuell in Jobo-Rotationsmaschinen, E-6 mit CineStill-Chemie. Gescannt wird auf dem Noritsu HS-1800. Fünf Schritte, Preise direkt aus dem Shop.</p>
+     <p className="lead fc-lead">C-41 im Fujifilm-Minilab, Schwarzweiß individuell in Jobo-Rotationsmaschinen, E-6 mit CineStill-Chemie. Gescannt wird auf dem Noritsu HS-1800. {STEP_COUNT_LABEL}, Preise direkt aus dem Shop.</p>
+     <p className="lead fc-lead-short">{FORMAT_IDS.map(f=>formats[f].name).join(' · ')} · ab <span className="num">{formatPrice(minPrice({})??0)}</span> je Film</p>
     </div>
     <dl className="fc-facts">
      <div><dt>Formate</dt><dd>35mm · 120 · 110</dd></div>
@@ -164,22 +173,23 @@ export function FilmConfigurator(){
 
   <section className="zone-dark fc-bench" aria-labelledby="fc-bench-title">
    <div className="wrap">
-    <div className="fc-bar">
-     <h2 id="fc-bench-title" className="mono fc-bar-code"><b>LAB</b> Konfigurator · 5 Schritte</h2>
-     <div className="fc-mode">
-      <span className="fc-mode-desc">{expert?'Entwickler, Scan-Tabelle und Maschinen sichtbar':'Einsteigeransicht'}</span>
-      <button type="button" className="fc-toggle" aria-expanded={expert} aria-controls="fc-expert-process fc-expert-scan" onClick={()=>setExpert(e=>!e)}><span className="fc-switch" aria-hidden="true"/>Expertenmodus</button>
-     </div>
-    </div>
     <div className="fc-grid">
+     <div className="fc-bar">
+      <h2 id="fc-bench-title" className="mono fc-bar-code"><b>LAB</b><span className="fc-bar-name">Konfigurator<span aria-hidden="true"> · </span></span><span className="fc-bar-steps">{STEP_COUNT_LABEL}</span></h2>
+      <div className="fc-mode">
+       <span className="fc-mode-desc" id="fc-mode-desc">{expert?'Entwickler, Scan-Tabelle und Maschinen sichtbar':'Einsteigeransicht'}</span>
+       <button type="button" className="fc-toggle" aria-expanded={expert} aria-controls="fc-expert-process fc-expert-scan" aria-describedby="fc-mode-desc" onClick={()=>setExpert(e=>!e)}><span className="fc-switch" aria-hidden="true"/>Expertenmodus</button>
+      </div>
+     </div>
      <div className="fc-main">
       <div className="fc-strip-dock">
        <FilmStrip format={format} kind={kind} frames={frames} current={current} animate={animate}/>
-       <p className="fc-notice" role="status">{notice}</p>
+       <ProgressRow frames={frames} current={current}/>
       </div>
+      <p className="fc-notice" role="status">{notice}</p>
 
       <section className="fc-step" id="step-format" aria-labelledby="fc-h-format" data-done={!!format}>
-       <header className="fc-step-head"><span className="fc-step-no" aria-hidden="true">01</span><div><h3 id="fc-h-format" ref={formatHead} tabIndex={-1}>Welchen Film hast du?</h3><p className="fc-help">Am Gehäuse erkennbar: Patrone, Rollfilm mit Schutzpapier oder Pocket-Kassette.</p></div></header>
+       <header className="fc-step-head"><span className="fc-step-no" aria-hidden="true">{stepNo('format')}</span><div><h3 id="fc-h-format" ref={formatHead} tabIndex={-1}>Welchen Film hast du?</h3><p className="fc-help">Am Gehäuse erkennbar: Patrone, Rollfilm mit Schutzpapier oder Pocket-Kassette.</p></div></header>
        <div className="fc-options fc-formats" role="group" aria-labelledby="fc-h-format">
         {FORMAT_IDS.map(f=>{const sel=format===f;const clash=!!process&&!processesFor(f).includes(process);return <button type="button" key={f} className="fc-opt" aria-pressed={sel} onClick={()=>chooseFormat(f)}>
          <FormatGlyph format={f}/>
@@ -193,7 +203,7 @@ export function FilmConfigurator(){
       </section>
 
       <section className="fc-step" id="step-process" aria-labelledby="fc-h-process" data-done={!!process}>
-       <header className="fc-step-head"><span className="fc-step-no" aria-hidden="true">02</span><div><h3 id="fc-h-process">Welcher Prozess?</h3><p className="fc-help">Der Prozess steht auf Packung oder Patrone. {format?`Für ${formats[format].name} im Angebot: ${processesFor(format).map(p=>processes[p].label).join(', ')}.`:'Erst das Format wählen, dann zeigen wir nur, was dafür möglich ist.'}</p></div></header>
+       <header className="fc-step-head"><span className="fc-step-no" aria-hidden="true">{stepNo('process')}</span><div><h3 id="fc-h-process">Welcher Prozess?</h3><p className="fc-help">Der Prozess steht auf Packung oder Patrone. {format?`Für ${formats[format].name} im Angebot: ${processesFor(format).map(p=>processes[p].label).join(', ')}.`:'Erst das Format wählen, dann zeigen wir nur, was dafür möglich ist.'}</p></div></header>
        <div className="fc-options fc-procs" role="group" aria-labelledby="fc-h-process">
         {shownProcesses.map(p=>{const info=processes[p];const sel=process===p;const id=`fc-proc-${slug(p)}`;return <div key={p} className="fc-proc" data-kind={info.kind} data-selected={sel} data-marker={!!info.marker}>
          <button type="button" className="fc-proc-btn" aria-pressed={sel} aria-describedby={`${id}-d`} onClick={()=>chooseProcess(p)}>
@@ -218,7 +228,7 @@ export function FilmConfigurator(){
       </section>
 
       <section className="fc-step" id="step-scan" aria-labelledby="fc-h-scan" data-done={!!scan}>
-       <header className="fc-step-head"><span className="fc-step-no" aria-hidden="true">03</span><div><h3 id="fc-h-scan">Brauchst du Scans?</h3><p className="fc-help">Ohne Scan bekommst du nur die Entwicklung. Mit Scan zusätzlich Bilddateien{format==='110'?'.':', gescannt auf dem Noritsu HS-1800.'} Wie die Dateien zu dir kommen, bitte im Laden erfragen.</p></div></header>
+       <header className="fc-step-head"><span className="fc-step-no" aria-hidden="true">{stepNo('scan')}</span><div><h3 id="fc-h-scan">Brauchst du Scans?</h3><p className="fc-help">Ohne Scan bekommst du nur die Entwicklung. Mit Scan zusätzlich Bilddateien{format==='110'?'.':', gescannt auf dem Noritsu HS-1800.'} Wie die Dateien zu dir kommen, bitte im Laden erfragen.</p></div></header>
        <div className="fc-options fc-scans" role="group" aria-labelledby="fc-h-scan">
         {SCAN_IDS.map(s=>{const sel=scan===s;return <button type="button" key={s} className="fc-opt fc-scan" aria-pressed={sel} onClick={()=>chooseScan(s)}>
          <span className="fc-opt-title">{scanLabel(format,s)}</span>
@@ -234,7 +244,7 @@ export function FilmConfigurator(){
       </section>
 
       <section className="fc-step" id="step-qty" aria-labelledby="fc-h-qty" data-done={qtyDone}>
-       <header className="fc-step-head"><span className="fc-step-no" aria-hidden="true">04</span><div><h3 id="fc-h-qty">Wie viele Filme?</h3><p className="fc-help">Alle Filme mit denselben Optionen. Andere Optionen: erst diese Rolle hinzufügen, dann „Weitere Rolle mit anderen Optionen“.</p></div></header>
+       <header className="fc-step-head"><span className="fc-step-no" aria-hidden="true">{stepNo('qty')}</span><div><h3 id="fc-h-qty">Wie viele Filme?</h3><p className="fc-help">Alle Filme mit denselben Optionen. Andere Optionen: erst diese Rolle hinzufügen, dann „Weitere Rolle mit anderen Optionen“.</p></div></header>
        <div className="fc-qty">
         <button type="button" className="fc-qty-btn" aria-label="Einen Film weniger" disabled={qty<=1} onClick={()=>chooseQty(qty-1)}><Minus size={18} aria-hidden="true"/></button>
         <label className="fc-qty-field"><span className="sr-only">Anzahl Filme</span><input className="num" type="number" inputMode="numeric" min={1} max={99} value={qty} onChange={e=>{if(e.target.value!=='')chooseQty(Number(e.target.value))}}/></label>
@@ -244,7 +254,7 @@ export function FilmConfigurator(){
       </section>
 
       <section className="fc-step" id="step-delivery" aria-labelledby="fc-h-delivery" data-done={!!delivery}>
-       <header className="fc-step-head"><span className="fc-step-no" aria-hidden="true">05</span><div><h3 id="fc-h-delivery">Wie kommt der Film zu uns? <span className="fc-optional">optional · nur Info</span></h3><p className="fc-help">Keine Auswahl nötig, sie ändert nichts am Preis.</p></div></header>
+       <header className="fc-step-head"><span className="fc-step-no" aria-hidden="true">{stepNo('delivery')}</span><div><h3 id="fc-h-delivery">Wie kommt der Film zu uns? <span className="fc-optional">optional · nur Info</span></h3><p className="fc-help">Keine Auswahl nötig, sie ändert nichts am Preis.</p></div></header>
        <div className="fc-options fc-deliveries" role="group" aria-labelledby="fc-h-delivery">
         {DELIVERY_IDS.map(d=><button type="button" key={d} className="fc-opt fc-delivery" aria-pressed={delivery===d} onClick={()=>chooseDelivery(d)}><span className="fc-opt-title">{deliveries[d].label}</span></button>)}
        </div>
@@ -254,6 +264,8 @@ export function FilmConfigurator(){
        </div>}
       </section>
      </div>
+
+     <SummaryDock total={total} qty={qty} canAdd={!!variant?.inStock} added={added} onAdd={()=>{addCurrent()}} targetId="fc-ticket" focusId="tk-title"/>
 
      <aside className="fc-side" aria-label="Zusammenfassung">
       <ProcessTank format={format} process={process} animate={animate}/>

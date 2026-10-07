@@ -15,6 +15,21 @@ export type ProcessKind='c41'|'bw'|'e6';
 
 export const SOURCE_DATE='04.10.2026';
 
+/** Configurator choice steps: ONE source for the step count in lead, bar, strip, progress row and
+ * ticket (audit P4). The order note is the summary, numbered outside the choice steps ("Notiz"). */
+export type StepId='format'|'process'|'scan'|'qty'|'delivery';
+export type StepDef={id:StepId;label:string;href:string;optional?:boolean};
+export const STEPS:readonly StepDef[]=[
+ {id:'format',label:'Format',href:'#step-format'},
+ {id:'process',label:'Prozess',href:'#step-process'},
+ {id:'scan',label:'Scan',href:'#step-scan'},
+ {id:'qty',label:'Menge',href:'#step-qty'},
+ {id:'delivery',label:'Abgabe',href:'#step-delivery',optional:true},
+];
+export const SUMMARY_STEP={label:'Auftragsnotiz',short:'Notiz',href:'#fc-ticket'} as const;
+export const STEP_COUNT_LABEL=`${STEPS.length} Schritte + ${SUMMARY_STEP.label}`;
+export const stepNo=(id:StepId)=>String(STEPS.findIndex(s=>s.id===id)+1).padStart(2,'0');
+
 export const formats:Record<FormatId,{master:string;name:string;sub:string;object:string;hint?:string;code:string}>={
  '35mm':{master:'filmentwicklung-kleinbild',name:'35mm',sub:'Kleinbild · 135',object:'Filmpatrone',hint:'Auch Halbformat, z. B. Pentax 17',code:'135'},
  '120':{master:'filmentwicklung-mittelformat',name:'120',sub:'Mittelformat · Rollfilm',object:'Spule mit Schutzpapier',hint:'6×4,5 bis 6×9',code:'120'},

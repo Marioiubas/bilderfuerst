@@ -1,5 +1,6 @@
 // /lab — "Unser Labor". Real photographs, the machine lineup as technical spec cards, the genuine
 // developer samples (+ Compare), the price grid from the catalog and the way into the configurator.
+// Outline type only in the page entrance; supporting headings are solid (audit P1).
 import Link from 'next/link';
 import {ArrowRight,ArrowUpRight} from 'lucide-react';
 import {formatPrice} from '@/lib/catalog';
@@ -96,7 +97,7 @@ export function LabPage(){
 
   <section className="zone-dark lp-cta" aria-labelledby="lp-cta-title">
    <div className="wrap lp-cta-grid">
-    <h2 id="lp-cta-title">Film abgeben,<br/><span className="outline-type">Rest machen wir</span></h2>
+    <h2 id="lp-cta-title">Film abgeben,<br/><span className="lp-cta-sub">Rest machen wir</span></h2>
     <div>
      <p className="lead">Im Laden in der Alexanderstraße 2 abgeben, einschicken oder an einer Drop-off-Stelle lassen. Bearbeitungszeit bitte im Laden erfragen.</p>
      <div className="lp-actions"><Link className="btn btn-primary" href="/filmentwicklung">Film entwickeln <ArrowRight size={17} aria-hidden="true"/></Link><Link className="link" href="/kontakt">Kontakt & Abgabestellen <ArrowUpRight size={15} aria-hidden="true"/></Link></div>
