@@ -74,7 +74,7 @@ img{height:auto}
 .btn-ghost:hover{--btn-bd:currentColor}
 .zone-dark .btn-ghost,.zone-graphite .btn-ghost{--btn-bd:var(--line-dark-strong)}
 .zone-dark .btn-ghost:hover,.zone-graphite .btn-ghost:hover{--btn-bd:var(--silver-300)}
-.btn-sm{min-height:38px;padding:0 14px;font-size:13px;gap:10px}
+.btn-sm{min-height:44px;padding:0 14px;font-size:13px;gap:10px}
 .btn-block{width:100%}
 .btn:disabled::after{display:none}
 .link{display:inline-flex;align-items:center;gap:10px;font-weight:620;font-size:14px;padding-bottom:4px;background:linear-gradient(currentColor,currentColor) left bottom/100% 1px no-repeat;transition:background-size var(--t-normal) var(--ease-shutter),color var(--t-fast)}
@@ -166,9 +166,9 @@ input[type=range]{accent-color:var(--red)}
 .header-tools{display:flex;align-items:center;gap:6px;flex:none}
 .search-trigger{display:inline-flex;align-items:center;justify-content:center;gap:10px;height:40px;min-width:44px;padding:0 10px 0 12px;border:1px solid var(--line);border-radius:var(--r-1);font-size:13px;color:var(--text-muted);transition:border-color var(--t-fast),color var(--t-fast)}
 .search-trigger:hover{border-color:currentColor;color:inherit}
-.search-trigger kbd{font-family:var(--font-mono);font-size:11px;padding:2px 5px;border:1px solid var(--line);border-radius:var(--r-1)}
+.search-trigger kbd{font-family:var(--font-mono);font-size:12px;padding:2px 5px;border:1px solid var(--line);border-radius:var(--r-1)}
 .cart-trigger{position:relative}
-.cart-count{position:absolute;top:5px;right:3px;min-width:19px;height:19px;padding:0 4px;display:grid;place-items:center;background:var(--red);color:#fff;font-family:var(--font-mono);font-size:11px;font-weight:600;border-radius:9px}
+.cart-count{position:absolute;top:5px;right:3px;min-width:20px;height:20px;padding:0 4px;display:grid;place-items:center;background:var(--red);color:#fff;font-family:var(--font-mono);font-size:12px;font-weight:600;border-radius:9px}
 .cart-count[data-empty=true]{background:transparent;color:var(--text-muted)}
 .menu-trigger{display:none}
 .mega{position:absolute;left:0;right:0;top:100%;background:var(--surface-light);color:var(--text);border-bottom:1px solid var(--line-strong);box-shadow:0 30px 60px -40px rgb(10 11 12 / .5)}

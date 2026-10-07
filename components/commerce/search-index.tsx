@@ -1,5 +1,7 @@
 "use client";
-// ⌘K archive index: products + lab/service pages, grouped like an archive register.
+// ⌘K search ("Archiv-Index"): products + lab/service pages, grouped like an archive register.
+// Rows (audit M3): title (max. 2 lines) / spec line that wraps / price + availability on their own row,
+// nothing ellipsised away. Arrow keys move the active option; Enter opens it.
 // Alias/typo parsing lives in lib/shop-filters.ts (parseQuery/searchProducts).
 import Link from 'next/link';
 import {useRouter} from 'next/navigation';
@@ -12,7 +14,7 @@ import {track} from '@/lib/analytics';
 import {useStore} from '@/components/store-context';
 import {displayName,edgeLine,priceLabel,stockLabel} from './product-meta';
 
-type Entry={id:string;href:string;code:string;title:string;line:string;image?:string;product?:Product};
+type Entry={id:string;href:string;code:string;title:string;line:string;image?:string;product?:Product;price?:string;stock?:string;inStock?:boolean};
 type Group={key:string;label:string;entries:Entry[];total:number;more?:string};
 
 const groupOf:Record<ShopGroup,string>={Filme:'FILM',Kameras:'KAMERA',Sofortbild:'SOFORTBILD',Chemie:'CHEMIE',Equipment:'EQUIPMENT',Taschen:'EQUIPMENT',Bücher:'BÜCHER & GUTSCHEINE',Gutscheine:'BÜCHER & GUTSCHEINE',Entwicklung:'LABOR & SERVICE'};
@@ -59,7 +61,7 @@ export function SearchIndex(){
   for(const p of results){
    const g=groupOf[shopGroup(p)];
    const price=priceLabel(p);
-   const e:Entry={id:p.slug,href:`/p/${p.slug}`,code:filmCode(p),title:displayName(p),line:[edgeLine(p),`${price.from?'AB ':''}${formatPrice(price.amount)}`,stockLabel(p).toUpperCase()].filter(Boolean).join(' · '),image:p.images[0],product:p};
+   const e:Entry={id:p.slug,href:`/p/${p.slug}`,code:filmCode(p),title:displayName(p),line:edgeLine(p),image:p.images[0],product:p,price:`${price.from?'ab ':''}${formatPrice(price.amount)}`,stock:stockLabel(p),inStock:p.inStock};
    buckets.set(g,[...(buckets.get(g)??[]),e]);
   }
   if(svc.length)buckets.set('LABOR & SERVICE',[...svc,...(buckets.get('LABOR & SERVICE')??[])]);
@@ -78,15 +80,15 @@ export function SearchIndex(){
   else if(e.key==='Enter'){e.preventDefault();if(active)go(active.href);else if(q.trim())go(`/shop?q=${encodeURIComponent(q.trim())}`)}
  };
  let n=0;
- return <Dialog open={searchOpen} onClose={close} label="Archiv-Index durchsuchen" kind="overlay" className="search-index">
+ return <Dialog open={searchOpen} onClose={close} label="Suche" kind="overlay" className="search-index">
   <div className="si-head">
-   <p className="mono si-code"><b>IDX</b> Archiv-Index · {catalog.length} Produkte · Labor & Service</p>
+   <p className="mono si-code"><b>IDX</b> Suche · {catalog.length} Produkte<span className="si-code-tail"> · Labor &amp; Service</span></p>
    <button type="button" className="icon-btn" onClick={close} aria-label="Suche schließen"><X size={20}/></button>
   </div>
   <div className="si-field">
    <Search size={20} aria-hidden="true"/>
-   <input ref={input} value={q} onChange={e=>{setQ(e.target.value);setCursor(0)}} onKeyDown={onKey} placeholder="Film, Format, ISO, Prozess … z. B. Portra 400, 120 SW" aria-label="Archiv durchsuchen" role="combobox" aria-expanded={flat.length>0} aria-controls={`${uid}-list`} aria-activedescendant={active?`${uid}-${active.id}`:undefined} aria-autocomplete="list" autoComplete="off" spellCheck={false} enterKeyHint="go"/>
-   <kbd className="mono">esc</kbd>
+   <input ref={input} value={q} onChange={e=>{setQ(e.target.value);setCursor(0)}} onKeyDown={onKey} placeholder="Filme, Kameras, Labor-Services suchen" aria-label="Filme, Kameras und Labor-Services suchen" role="combobox" aria-expanded={flat.length>0} aria-controls={`${uid}-list`} aria-activedescendant={active?`${uid}-${active.id}`:undefined} aria-autocomplete="list" autoComplete="off" spellCheck={false} enterKeyHint="go"/>
+   <kbd className="mono si-kbd" aria-hidden="true">esc</kbd>
   </div>
   {parsed&&parsed.understood.length>0&&<p className="si-parsed mono" aria-live="polite">Gelesen als: {parsed.understood.map(u=><span key={u}>{u}</span>)}</p>}
 
@@ -107,18 +109,19 @@ export function SearchIndex(){
       <p id={`${uid}-${g.key}`} className="si-group-head mono"><span>{g.label}</span><span className="num">{g.total}</span></p>
       {g.entries.map(e=>{const i=n++;const sel=active?.id===e.id;
        return <Link key={e.id} id={`${uid}-${e.id}`} href={e.href} role="option" aria-selected={sel} tabIndex={-1} className="si-row" onClick={close} onMouseMove={()=>{if(cursor!==i)setCursor(i)}}>
-        <span className="si-no mono num">{String(i+1).padStart(3,'0')}</span>
-        <span className="si-thumb" aria-hidden="true">{e.image?<img src={e.image} alt="" width={44} height={44} loading="lazy" decoding="async"/>:<span className="mono">{e.code}</span>}</span>
-        <span className="si-text"><strong>{e.title}</strong><span className="si-line mono">{e.line}</span></span>
+        <span className="si-no mono num" aria-hidden="true">{String(i+1).padStart(3,'0')}</span>
+        <span className="si-thumb" aria-hidden="true">{e.image?<img src={e.image} alt="" width={44} height={44} loading={i<6?'eager':'lazy'} decoding="async"/>:<span className="mono">{e.code}</span>}</span>
+        <span className="si-text"><strong className="si-title">{e.title}</strong>{e.line&&<span className="si-line mono">{e.line}</span>}
+         {e.price&&<span className="si-buy"><span className="si-price num">{e.price}</span><span className={`status ${e.inStock?'status-ok':'status-ask'}`}>{e.stock}</span></span>}</span>
         <span className="si-code-col mono" aria-hidden="true">{e.product?e.code:''}{sel&&<CornerDownLeft size={14}/>}</span>
        </Link>})}
       {g.more&&<Link className="si-more mono" href={g.more} onClick={close}>+ {g.total-g.entries.length} weitere im Shop →</Link>}
      </div>)}
     </div>}
   </div>
-  <div className="si-foot mono">
-   <span><kbd>↑</kbd><kbd>↓</kbd> wählen · <kbd>↵</kbd> öffnen · <kbd>esc</kbd> schließen</span>
-   {q.trim()&&<Link href={`/shop?q=${encodeURIComponent(q.trim())}`} onClick={close}>Alle Treffer im Shop →</Link>}
+  <div className="si-foot">
+   <span className="si-hints mono" aria-hidden="true"><kbd>↑</kbd><kbd>↓</kbd> wählen · <kbd>↵</kbd> öffnen · <kbd>esc</kbd> schließen</span>
+   {q.trim()&&<Link className="si-all" href={`/shop?q=${encodeURIComponent(q.trim())}`} onClick={close}>Alle Treffer im Shop <ArrowRight size={16} aria-hidden="true"/></Link>}
   </div>
  </Dialog>;
 }

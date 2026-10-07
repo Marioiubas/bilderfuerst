@@ -11,7 +11,7 @@ import {useStore} from './store-context';
 import {PdpGallery} from './commerce/pdp-gallery';
 import {DeveloperStrip} from './commerce/developer-strip';
 import {DevelopBridge,PdpRelated} from './commerce/pdp-sections';
-import {deliveryText,displayName,groupLabel,labTicket,processChip,processLabel,stockLabel} from './commerce/product-meta';
+import {deliveryText,descriptionBlocks,displayName,groupLabel,labTicket,processChip,processLabel,stockLabel} from './commerce/product-meta';
 
 const TRI_X=new Set(['kodak-tri-x-400-135-36-film','kodak-tri-x-400-120-rollfilm']);
 const HARDWARE=new Set(['Kameras','Equipment','Taschen']);
@@ -44,7 +44,7 @@ export function ProductDetail({product:p}:{product:Product}){
  const configHref=ticket?`/filmentwicklung?format=${ticket.formatParam}${ticket.processParam?`&process=${encodeURIComponent(ticket.processParam)}`:''}`:p.slug==='filmentwicklung-kleinbild'?'/filmentwicklung?format=35mm':p.slug==='filmentwicklung-mittelformat'?'/filmentwicklung?format=120':p.slug==='filmentwicklung-pocket-110'?'/filmentwicklung?format=110':'';
 
  return <div className="pdp zone-light">
-  <nav className="wrap breadcrumbs" aria-label="Brotkrumen"><Link href="/shop">Analog Store</Link><span aria-hidden="true">/</span><Link href={`/shop?category=${encodeURIComponent(group)}`}>{groupLabel(p)}</Link>{master&&<><span aria-hidden="true">/</span><Link href={`/p/${master.slug}`}>{displayName(master)}</Link></>}<span aria-hidden="true">/</span><span aria-current="page">{p.optionLabel||name}</span></nav>
+  <nav className="wrap breadcrumbs pdp-crumbs" aria-label="Brotkrumen"><Link href="/shop">Analog Store</Link><span aria-hidden="true">/</span><Link className="crumb-cat" href={`/shop?category=${encodeURIComponent(group)}`}>{groupLabel(p)}</Link>{master&&<><span aria-hidden="true">/</span><Link href={`/p/${master.slug}`}>{displayName(master)}</Link></>}<span aria-hidden="true">/</span><span aria-current="page">{p.optionLabel||name}</span></nav>
   <div className="wrap pdp-grid">
    <PdpGallery images={p.images} name={name} lens={HARDWARE.has(group)}/>
    <div className="pdp-buy">
@@ -61,6 +61,7 @@ export function ProductDetail({product:p}:{product:Product}){
      </select></div>}
     {ticket&&selected&&<dl className="pdp-ticket"><div><dt className="mono">Format</dt><dd>{ticket.format}</dd></div><div><dt className="mono">Prozess</dt><dd>{ticket.process}</dd></div><div><dt className="mono">Scan</dt><dd>{ticket.scan}</dd></div></dl>}
 
+    {/* Audit O3: quantity + CTA in one row from 360 px, the real-shop link directly below. */}
     <div className="pdp-actions">
      <div className="stepper" role="group" aria-label="Menge">
       <button type="button" aria-label="Menge verringern" disabled={qty<=1||!canAdd} onClick={()=>setQty(q=>Math.max(1,q-1))}><Minus size={14}/></button>
@@ -68,11 +69,11 @@ export function ProductDetail({product:p}:{product:Product}){
       <button type="button" aria-label="Menge erhöhen" disabled={qty>=99||!canAdd} onClick={()=>setQty(q=>Math.min(99,q+1))}><Plus size={14}/></button>
      </div>
      <button type="button" className="btn btn-primary pdp-cta" disabled={!canAdd} onClick={()=>{if(!selected)return;add(selected.slug,qty);track('add_to_cart',{slug:selected.slug,quantity:qty,source:'pdp'})}}>
-      {p.isPastEvent?'Veranstaltungsarchiv':p.isMaster&&!selected?'Erst Option wählen':canAdd?'In den Vorschau-Warenkorb':'Derzeit nicht bestellbar'}<Plus size={17} aria-hidden="true"/>
+      {p.isPastEvent?'Veranstaltungsarchiv':p.isMaster&&!selected?'Erst Option wählen':canAdd?'In den Vorschau-Warenkorb':'Derzeit nicht bestellbar'}<Plus size={17} aria-hidden="true" className="pdp-cta-icon"/>
      </button>
     </div>
+    <a className="pdp-source" href={(selected??p).source} target="_blank" rel="noopener noreferrer">Im bestehenden Shop kaufen <ArrowUpRight size={16} aria-hidden="true"/></a>
     {!p.inStock&&!p.isPastEvent&&<p className="pdp-ask">Lieferzeit im Laden erfragen: <a className="link" href="tel:+49911774202">0911 774202</a></p>}
-    <a className="btn btn-ghost pdp-source" href={(selected??p).source} target="_blank" rel="noopener noreferrer">Im bestehenden Shop kaufen <ArrowUpRight size={16} className="btn-arrow-up" aria-hidden="true"/></a>
     {isLab&&configHref&&<Link className="link pdp-config" href={configHref}>Im Filmentwicklungs-Konfigurator planen <ArrowRight size={14} aria-hidden="true"/></Link>}
     <p className="pdp-review"><span className="led" aria-hidden="true"/>Vorschau · Es wird keine Bestellung ausgelöst. Bestellung und Zahlung nur im bestehenden Shop.</p>
 
@@ -85,7 +86,7 @@ export function ProductDetail({product:p}:{product:Product}){
   <section className="wrap pdp-desc" aria-labelledby="pdp-desc-h">
    <p className="eyebrow"><b>TXT</b><span>Beschreibung · Quelltext des bestehenden Shops</span></p>
    <h2 id="pdp-desc-h" className="sr-only">Beschreibung</h2>
-   <p className="pdp-desc-text">{(selected??p).description||p.description}</p>
+   <div className="pdp-desc-text">{descriptionBlocks((selected??p).description||p.description).map((b,i)=>b.kind==='ul'?<ul key={i}>{b.items.map((t,j)=><li key={j}>{t}</li>)}</ul>:b.kind==='q'?<h3 key={i}>{b.text}</h3>:<p key={i}>{b.text}</p>)}</div>
   </section>
 
   {(group==='Filme'||p.slug==='pentax-17')&&<div className="wrap"><DevelopBridge product={p}/></div>}

@@ -1,7 +1,8 @@
 "use client";
-// Shop filter controls: film finder bar (segmented radios) + lab-specification rail.
+// Shop filter controls: film finder bar (segmented radios, tablet/desktop) + lab-specification rail /
+// bottom sheet (phones get the finder facets, quick picks and view inside the sheet: audit H1).
 // Real form controls only; empty options stay visible but disabled.
-import {useId} from 'react';
+import {useId,type ReactNode} from 'react';
 import {X,RotateCcw} from 'lucide-react';
 import {type Filters,type FacetKey,isoBucketLabel,categoryLabel} from '@/lib/shop-filters';
 import {formatPrice} from '@/lib/catalog';
@@ -12,8 +13,8 @@ export type FinderKey='format'|'kind'|'iso'|'process';
 export const finderLabels:Record<FinderKey,string>={format:'Format',kind:'Typ',iso:'ISO',process:'Prozess'};
 type Change=(patch:Partial<Filters>)=>void;
 
-/** One radio group. variant "segment" = film finder, "list" = rail row list. */
-export function FacetGroup({name,legend,code,options,value,onChange,variant='list'}:{name:string;legend:string;code?:string;options:Option[];value:string;onChange:(v:string)=>void;variant?:'segment'|'list'}){
+/** One radio group. variant "segment" = film finder, "list" = rail row list, "chips" = wrapped 44 px chips (sheet). */
+export function FacetGroup({name,legend,code,options,value,onChange,variant='list'}:{name:string;legend:string;code?:string;options:Option[];value:string;onChange:(v:string)=>void;variant?:'segment'|'list'|'chips'}){
  const id=useId();
  return <fieldset className={`facet facet-${variant}`}>
   <legend className="facet-legend mono">{code&&<span className="facet-code">{code}</span>}{legend}</legend>
@@ -29,16 +30,22 @@ export function FacetGroup({name,legend,code,options,value,onChange,variant='lis
  </fieldset>;
 }
 
-/** Sticky film finder bar (Filme). `keys` lets mobile show a subset inline. */
-export function FilmFinder({facets,filters,onChange,keys=['format','kind','iso','process']}:{facets:FacetModel;filters:Filters;onChange:Change;keys?:FinderKey[]}){
+/** Sticky film finder bar (Filme, >= 768 px). Extra controls (quick picks) follow the facets. */
+export function FilmFinder({facets,filters,onChange,keys=['format','kind','iso','process'],children}:{facets:FacetModel;filters:Filters;onChange:Change;keys?:FinderKey[];children?:ReactNode}){
  return <div className="finder" role="group" aria-label="Film finden">
   <p className="finder-title mono"><b>FLM</b> Film finden</p>
   {keys.map(k=><FacetGroup key={k} name={k} legend={finderLabels[k]} variant="segment" options={facets[k]} value={filters[k]} onChange={v=>onChange({[k]:v} as Partial<Filters>)}/>)}
+  {children}
  </div>;
 }
 
+/** "Direkt zu" quick searches (Filme): finder row on desktop, filter sheet on phones. */
+export function QuickPicks({picks,onPick}:{picks:Array<[string,string]>;onPick:(q:string)=>void}){
+ return <div className="quick-picks" role="group" aria-label="Direkt zu"><span className="mono faint" aria-hidden="true">Direkt zu</span>{picks.map(([label,q])=><button type="button" key={q} className="quick-pick" onClick={()=>onPick(q)}>{label}</button>)}</div>;
+}
+
 /** Lab specification rail (desktop) / bottom-sheet body (mobile). */
-export function FilterControls({facets,filters,onChange,onReset,finderKeys}:{facets:FacetModel;filters:Filters;onChange:Change;onReset:()=>void;finderKeys:FinderKey[]}){
+export function FilterControls({facets,filters,onChange,onReset,finderKeys,before,after,variant='list'}:{facets:FacetModel;filters:Filters;onChange:Change;onReset:()=>void;finderKeys:FinderKey[];before?:ReactNode;after?:ReactNode;variant?:'list'|'chips'}){
  const id=useId();
  const show=(k:FinderKey)=>finderKeys.includes(k)&&(facets[k].slice(1).some(o=>o.count>0)||!!filters[k]);
  const codes:Record<FinderKey,string>={format:'01',process:'02',iso:'03',kind:'04'};
@@ -46,8 +53,9 @@ export function FilterControls({facets,filters,onChange,onReset,finderKeys}:{fac
  const ceiling=Math.max(facets.priceCeiling,filters.maxPrice??0);
  const price=filters.maxPrice??ceiling;
  return <div className="spec">
-  <div className="spec-head"><span className="mono"><b>SPEC</b> Filter</span><button type="button" className="spec-reset mono" onClick={onReset}><RotateCcw size={12}/> Zurücksetzen</button></div>
-  {order.filter(show).map(k=><FacetGroup key={k} name={k} code={codes[k]} legend={finderLabels[k].toUpperCase()} options={facets[k]} value={filters[k]} onChange={v=>onChange({[k]:v} as Partial<Filters>)}/>)}
+  <div className="spec-head"><span className="mono"><b>SPEC</b> Filter</span><button type="button" className="spec-reset mono" onClick={onReset}><RotateCcw size={12} aria-hidden="true"/> Zurücksetzen</button></div>
+  {before}
+  {order.filter(show).map(k=><FacetGroup key={k} name={k} code={codes[k]} legend={finderLabels[k].toUpperCase()} variant={variant} options={facets[k]} value={filters[k]} onChange={v=>onChange({[k]:v} as Partial<Filters>)}/>)}
   {facets.brand.length>2&&<div className="facet"><label className="facet-legend mono" htmlFor={`${id}-brand`}><span className="facet-code">05</span>MARKE</label>
    <select id={`${id}-brand`} className="select" value={filters.brand} onChange={e=>onChange({brand:e.target.value})}>
     {facets.brand.map(o=><option key={o.value||'alle'} value={o.value} disabled={o.count===0&&o.value!==filters.brand}>{o.label} ({o.count})</option>)}
@@ -59,6 +67,7 @@ export function FilterControls({facets,filters,onChange,onReset,finderKeys}:{fac
    <input id={`${id}-price`} className="spec-range" type="range" min={Math.floor(facets.priceFloor)} max={ceiling} step={1} value={price} aria-valuetext={`bis ${formatPrice(price)}`} onChange={e=>{const n=Number(e.target.value);onChange({maxPrice:n>=ceiling?null:n})}}/>
    <p className="spec-range-out mono num"><span>{formatPrice(Math.floor(facets.priceFloor))}</span><output>bis {formatPrice(price)}</output></p>
   </div>}
+  {after}
   <p className="spec-note">Preise inkl. MwSt., zzgl. Versand · Quellstand 04.10.2026 · Verfügbarkeit bestätigt der bestehende Shop.</p>
  </div>;
 }

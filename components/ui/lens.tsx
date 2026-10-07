@@ -1,6 +1,6 @@
 "use client";
-// Aceternity Lens (owned by commerce). Pointer-only magnifier: disabled for coarse pointers and
-// reduced motion; callers must offer a lightbox button as the touch/keyboard path.
+// Aceternity Lens (owned by commerce). Pointer-only magnifier: only with (hover:hover) and (pointer:fine),
+// never with reduced motion; callers must offer a lightbox button as the touch/keyboard path.
 
 import React, { useRef, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
@@ -53,7 +53,8 @@ export const Lens: React.FC<LensProps> = ({
       ref={containerRef}
       className={`relative overflow-hidden z-20 ${className}`}
       onMouseEnter={() => {
-        if (!window.matchMedia('(prefers-reduced-motion: reduce), (pointer: coarse)').matches) setIsHovering(true);
+        // Mouse/trackpad only (same query as the "Lupe" hint): touch gets the lightbox instead.
+        if (window.matchMedia('(hover: hover) and (pointer: fine)').matches && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) setIsHovering(true);
       }}
       onMouseLeave={() => setIsHovering(false)}
       onMouseMove={handleMouseMove}
@@ -79,7 +80,7 @@ export const Lens: React.FC<LensProps> = ({
             }}
           >
             <div
-              className="absolute inset-0"
+              className="absolute inset-0 lens-zoom"
               style={{
                 transform: `scale(${zoomFactor})`,
                 transformOrigin: `${position.x}px ${position.y}px`,
@@ -113,7 +114,7 @@ export const Lens: React.FC<LensProps> = ({
                 }}
               >
                 <div
-                  className="absolute inset-0"
+                  className="absolute inset-0 lens-zoom"
                   style={{
                     transform: `scale(${zoomFactor})`,
                     transformOrigin: `${mousePosition.x}px ${mousePosition.y}px`,

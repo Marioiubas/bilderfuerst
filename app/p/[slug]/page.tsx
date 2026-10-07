@@ -1,3 +1,4 @@
+import '../../styles/commerce-pdp.css';
 import {notFound} from 'next/navigation';
 import {bySlug} from '@/lib/catalog';
 import {ProductDetail} from '@/components/product-detail';

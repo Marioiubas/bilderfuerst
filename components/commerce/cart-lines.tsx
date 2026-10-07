@@ -5,7 +5,7 @@ import Link from 'next/link';
 import {Minus,Plus,X,ArrowUpRight,ArrowRight} from 'lucide-react';
 import {bySlug,formatPrice,shopGroup,type Product} from '@/lib/catalog';
 import {useStore} from '@/components/store-context';
-import {brandLabel,developFrom,displayName,edgeLine,isLabSlug,labTicket} from './product-meta';
+import {brandLabel,developFrom,displayName,edgeLine,isLabSlug,labTicket,nameHasBrand} from './product-meta';
 
 export type Line={slug:string;quantity:number;product:Product};
 export function useCartLines(){
@@ -33,7 +33,7 @@ export function StoreLine({line,onNavigate,readOnly}:{line:Line;onNavigate?:()=>
  return <li className="cart-line">
   <Link href={`/p/${p.slug}`} className="cart-thumb" onClick={onNavigate} tabIndex={-1} aria-hidden="true"><img src={p.images[0]} alt="" width={84} height={84} loading="lazy" decoding="async"/></Link>
   <div className="cart-line-main">
-   <p className="mono cart-line-brand">{brandLabel(p)}</p>
+   {!nameHasBrand(name,brandLabel(p))&&<p className="mono cart-line-brand">{brandLabel(p)}</p>}
    <Link href={`/p/${p.slug}`} className="cart-line-name" onClick={onNavigate}>{name}</Link>
    {edgeLine(p)&&<p className="mono cart-line-edge">{edgeLine(p)}</p>}
    <div className="cart-line-row"><Stepper line={line} onChange={q=>update(p.slug,q)} readOnly={readOnly}/><span className="mono faint num">à {formatPrice(p.price)}</span></div>

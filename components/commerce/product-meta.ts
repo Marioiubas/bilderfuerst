@@ -64,3 +64,39 @@ export function sameFilmOtherFormat(p:Product,pool:Product[]){
  const mine=words(p);
  return pool.filter(o=>o.slug!==p.slug&&shopGroup(o)==='Filme'&&o.format&&o.format!==p.format&&o.iso===p.iso&&o.process===p.process&&brandOf(o)===brandOf(p)&&[...words(o)].some(w=>mine.has(w)));
 }
+
+/** True when the display name already starts with the brand (card drops the separate brand line). */
+export function nameHasBrand(name:string,brand:string){
+ const c=(t:string)=>t.toLocaleLowerCase('de-DE').replace(/[^a-z0-9äöüß]/g,'');
+ return !!brand&&c(name).startsWith(c(brand));
+}
+
+/* Source descriptions are one run-on string. Presentation only: split at the source's own sentence
+   ends and its inline "-item" list markers. Wording is never changed, nothing is added. */
+export type DescBlock={kind:'p'|'q';text:string}|{kind:'ul';items:string[]};
+const sentences=(t:string)=>t.replace(/([.!?])\s+(?=[A-ZÄÖÜ„"])/g,'$1\u0000').split('\u0000').map(s=>s.trim()).filter(Boolean);
+function paragraphs(t:string):DescBlock[]{
+ const out:DescBlock[]=[];let cur:string[]=[];let words=0;
+ const flush=()=>{if(cur.length)out.push({kind:'p',text:cur.join(' ')});cur=[];words=0};
+ for(const s of sentences(t)){
+  const w=s.split(/\s+/).length;
+  if(s.endsWith('?')&&w<=8){flush();out.push({kind:'q',text:s});continue}
+  if(cur.length&&(cur.length>=2||words+w>60))flush();
+  cur.push(s);words+=w;
+ }
+ flush();return out;
+}
+export function descriptionBlocks(raw:string):DescBlock[]{
+ const text=raw.replace(/\s+/g,' ').trim().replace(/([.:!?])\s-\s(?=\S)/g,'$1 -');
+ if(!text)return [];
+ const parts=text.split(/\s-(?=[^\s-])/).map(s=>s.trim());
+ if(parts.length<4)return paragraphs(text);
+ const [lead,...items]=parts;
+ // The source often runs the next sentence straight on after the last list item ("-eingebauter Blitz Zusätzlich zu …"):
+ // a capitalised word followed by a lower-case word, after at most five item words, starts the prose again.
+ const last=items[items.length-1].split(' ');let tail='';
+ for(let i=1;i<=5&&i<last.length-6;i++){
+  if(/^[A-ZÄÖÜ]/.test(last[i])&&/^[a-zäöüß]/.test(last[i+1])){tail=last.slice(i).join(' ');items[items.length-1]=last.slice(0,i).join(' ');break}
+ }
+ return [...paragraphs(lead),{kind:'ul',items},...(tail?paragraphs(tail):[])];
+}
