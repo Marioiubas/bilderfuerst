@@ -1,6 +1,6 @@
 # Asset provenance manifest
 
-Updated 2026-10-05. Every visual asset belongs to **exactly one** category below. Categories are strict: a generated asset is never presented as a real photo, product, place, person, lab result or historical record. Real material is used only where it is genuinely the business's own source material, and its rights are still **pending owner approval**.
+Updated 2026-10-07 (BLENDER 3D added). Every visual asset belongs to **exactly one** category below. Categories are strict: a generated asset is never presented as a real photo, product, place, person, lab result or historical record. Real material is used only where it is genuinely the business's own source material, and its rights are still **pending owner approval**.
 
 | Category | Where listed | Documentary? | Rights status |
 |---|---|---|---|
@@ -9,7 +9,9 @@ Updated 2026-10-05. Every visual asset belongs to **exactly one** category below
 | REAL HISTORICAL PHOTO | `asset-manifest.json` use *Historical image* (1 image + larger rendition) | yes | owner approval pending |
 | OWNER LOGO | — | — | **none approved** |
 | HIGGSFIELD 2D | 4 textures (WebP + AVIF) | **no — decorative** | AI-generated in owner-operated account |
+| HIGGSFIELD 2D (bake input) | 3 material textures, not published — only baked into the Blender assets | **no — decorative** | AI-generated in owner-operated account |
 | HIGGSFIELD 3D | 2 GLB + 6 poster renders | **no — decorative** | AI/procedural in owner-operated account |
+| BLENDER 3D | 2 GLB + 8 renders (cartridge poster, window poster, 3 format renders × 1×/2×) | **no — decorative** | procedural scripts written for this project (no third-party models); bake inputs listed above |
 | HIGGSFIELD VIDEO | 0 | — | — |
 | GENERATED TEXTURE | 1 (CSS SVG grain) | no — decorative | code, no third-party rights |
 | CSS/SVG GRAPHIC | see section below | no | — |
@@ -72,6 +74,46 @@ Evidence-only (not published): `docs/evidence/higgsfield/generated/film-cartridg
 | Poster renders (2D renders of the 3D Jutsu props) — **retired from production 2026-10-05** | formerly `public/props/aperture.webp` (11,412), `reel.webp` (13,522), `cassette.webp` (6,204), `vhs.webp` (6,570), `negative.webp` (12,418), `prints.webp` (6,624) — all 400×300 | Eevee transparent renders, render ops `bilderfuerst-prop-posters-a/b/c` | artifact ids `8a4663…`, `f90da3…`, `37a60a…`, `9c7ddd…`, `8293a8…`, `f8882d…` (full ids + etags in [provenance.json](evidence/higgsfield/provenance.json)) | 2026-10-05 | PNG originals in `docs/evidence/higgsfield/*-poster.png` | Static stand-ins for the props | — |
 
 All 3D assets are **decorative, non-documentary**, generic and unbranded: no merchant product, no real lab machine, no restoration outcome, no historical artifact. Machine-readable details: [`public/models/manifest.json`](../public/models/manifest.json). Rejected 3D: none (one attempt, accepted).
+
+## HIGGSFIELD 2D — bake inputs for the Blender assets (not published)
+
+Generated 2026-10-07 in the same Higgsfield project (Ultra plan) as **seamless material textures**. They are never shipped as
+images; they only feed procedural Blender materials whose result is baked into the GLBs below. Pure material surfaces: no
+objects, joints, text, logos or people. Lossless originals (pixel-verified against the downloaded PNGs) in
+`docs/evidence/higgsfield/generated/`; full prompts, costs and sha256 in the [generation log](evidence/higgsfield/generation-log.json)
+(`blenderAssetPass`). This pass spent **10.25 credits** (balance 3000 → 2973.75; the other 16 credits in that minute belong to a
+concurrent team).
+
+| Texture | Original | Model · job | Cost | Used for |
+|---|---|---|---|---|
+| Weathered beige-grey sandstone | `sandstone-facade-A-gptimage25.webp` | GPT Image 2.5 Flare, high, 2k · `0971c483-574d-46f3-beb4-adeaeec7a59c` | 2.75 | façade ashlar of `street-window.glb` (tileable cross-fade, per-block offset) |
+| Tooled (scharriert) sandstone | `sandstone-tooled-C-gptimage25.webp` | GPT Image 2.5 Flare, high, 2k · `2dfcff3a-f704-423c-aaee-252d681a3c03` | 2.75 | reveals, sill and plain lintel band of the window |
+| Brushed steel micro detail | `brushed-metal-A-gptimage25.webp` | GPT Image 2.5 Flare, high, 2k · `b5932950-fb40-4fe6-aa22-2dc416da5b3d` | 2.75 | high-passed brushing in the baked normal/roughness/base of `film-cartridge-v2.glb` |
+
+Prompts (verbatim):
+
+- **sandstone A / B** — "Seamless tileable material texture. Orthographic, perfectly flat, top-down photograph of one continuous face of weathered beige-grey Franconian sandstone, the kind used for old ashlar facades: fine sandy grain, tiny pores, subtle chisel tooling, soft tonal variation between warm beige and light grey, faint grey weathering patina. One single uninterrupted stone surface filling the entire frame edge to edge: no joints, no mortar lines, no block edges, no cracks, no corners. Perfectly even diffuse overcast light, no shadows, no vignette, no perspective, no depth of field. No text, no letters, no numbers, no logos, no graffiti, no objects, no coloured stains."
+- **tooled C** — "Seamless tileable material texture. Orthographic flat scan of a smooth honed light sandstone surface with very fine, regular horizontal stone-mason tooling marks (scharriert finish) running across the whole frame, pale beige with soft grey patina and a few darker sandy specks, low contrast, matte. One single continuous surface edge to edge: no joints, no mortar, no block edges, no cracks. Even diffuse light, no shadows, no vignette, no perspective. No text, no letters, no numbers, no logos, no objects."
+- **brushed A / B** — "Seamless tileable material texture. Orthographic flat macro photograph of brushed steel: dense, perfectly straight, perfectly horizontal fine brushing lines running edge to edge across the whole frame, varied line thickness, a few faint fine micro-scratches, uniform neutral mid-grey tone with low contrast. Perfectly even diffuse light, no reflections, no highlights, no gradients, no vignette, no perspective, no edges, no holes, no screws. Neutral grey only, no colour. No text, no letters, no numbers, no logos."
+
+Rejected: `834cde5b-fd1e-4530-a96f-744f33692b48` (Nano Banana 2 sandstone B, 2 credits; vertical streaks would tile visibly;
+preview `rejected-sandstone-B-nanobanana2-preview.jpg`). Failed and refunded: `68127b6f-1bf8-4950-b214-54df440f20d2` (Nano Banana 2
+brushed metal B). No image-to-3D was used: the 120 roll and 110 cartridge are procedural.
+
+## BLENDER 3D
+
+Built 2026-10-07 with Blender 5.2.2 LTS from procedural scripts in `scripts/blender/` (one per asset; shared helpers
+`bf_common.py`, `bf_bake.py`; verifier `verify-glb.mjs`). `.blend` originals, baked texture originals and QA previews are in
+`docs/evidence/blender/`. Details, measurements and integration notes: [BLENDER-ASSETS.md](BLENDER-ASSETS.md). All are
+**generic, unbranded, decorative, non-documentary**: not a merchant product, not the real shop's signage, not a photograph. The
+window model's photo planes are empty placeholders; real gallery photos (REAL BUSINESS PHOTO) are only mapped onto them at
+runtime and are never baked in.
+
+| Asset | Files | Script | Geometry / size | Use | Fallback |
+|---|---|---|---|---|---|
+| Hero cartridge v2 (135) | `public/models/film-cartridge-v2.glb`, `public/renders/cartridge-135.webp` | `cartridge_135.py` | 5,412 tris, 3 × 1024² WebP, 250,568 B | hero film workspace (successor to v1) | poster WebP |
+| Street gallery window | `public/models/street-window.glb`, `public/renders/street-window.webp` | `street_window.py` | 2,360 tris, 1 × 2048×1024 baked WebP, 121,580 B | gallery window scene (real photos on `Photo_01…12` at runtime) | poster WebP |
+| Format objects 135/120/110 | `public/renders/format-{135,120,110}.webp` + `@2x` | `format_objects.py` | renders only (800×600 / 1600×1200, transparent; 1× 21–28 KB) | film-development configurator | line glyphs |
 
 ## HIGGSFIELD VIDEO
 

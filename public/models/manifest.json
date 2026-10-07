@@ -52,5 +52,192 @@
     "decorative": true,
     "documentary": false,
     "status": "retired from production 2026-10-05 (unused by the remake); file removed from public/props, retained in git history and docs/evidence/higgsfield"
+  },
+  {
+    "name": "film-cartridge-v2",
+    "file": "/models/film-cartridge-v2.glb",
+    "source": "Blender 5.2.2 procedural script scripts/blender/cartridge_135.py",
+    "higgsfieldTextureInputs": [
+      {
+        "jobId": "b5932950-fb40-4fe6-aa22-2dc416da5b3d",
+        "model": "gpt_image_2_5 (flare, high, 2k)",
+        "use": "brushed-metal micro detail, bake input only"
+      }
+    ],
+    "date": "2026-10-07",
+    "license": "Procedural Blender model written for this project (no third-party model). Higgsfield textures used only as bake inputs (owner-operated account; usage per Higgsfield/upstream terms). Generic, unbranded; not a merchant product, not documentary.",
+    "triangles": 5412,
+    "vertices": 4484,
+    "textureSize": "1024x1024 ×3 (baseColor, ORM with baked AO, normal; WebP via EXT_texture_webp)",
+    "textureBytes": {
+      "cartridge-normal": 5370,
+      "cartridge-orm": 54910,
+      "cartridge-base": 11160
+    },
+    "materials": 2,
+    "fileBytes": 250568,
+    "nodes": [
+      "Cassette",
+      "Leader",
+      "LeaderTip",
+      "SlotExit",
+      "FilmCartridge"
+    ],
+    "bounds": {
+      "size": [
+        0.5922,
+        1.0,
+        0.7976
+      ],
+      "min": [
+        -0.2449,
+        -0.5,
+        -0.5527
+      ],
+      "max": [
+        0.3473,
+        0.5,
+        0.2449
+      ],
+      "note": "Y-up, 1.0 unit = full height incl. keyed hub (51.25 mm); origin on the spool axis at mid height; spool hub +Y; leader exits along (0.782, 0, -0.624) like v1."
+    },
+    "markers": {
+      "SlotExit": [
+        -0.0193,
+        -0.0522,
+        -0.2613
+      ],
+      "LeaderTip": [
+        0.3473,
+        -0.0522,
+        -0.5527
+      ]
+    },
+    "loaderRequirements": "Plain three GLTFLoader (EXT_texture_webp). No Draco/Meshopt/KTX2.",
+    "renderingNotes": "Cassette: opaque PBR (metal only on the shell); FilmBase: BLEND alpha 0.9, double-sided. Give it an environment map (PMREM RoomEnvironment) plus a soft key.",
+    "usage": "Hero film workspace cartridge — drop-in successor to film-cartridge.glb (see docs/BLENDER-ASSETS.md §1).",
+    "fallback": "/renders/cartridge-135.webp",
+    "posterBytes": 155996,
+    "decorative": true,
+    "documentary": false,
+    "status": "built 2026-10-07, not yet integrated"
+  },
+  {
+    "name": "street-window",
+    "file": "/models/street-window.glb",
+    "source": "Blender 5.2.2 procedural script scripts/blender/street_window.py (Cycles METAL light bake)",
+    "higgsfieldTextureInputs": [
+      {
+        "jobId": "0971c483-574d-46f3-beb4-adeaeec7a59c",
+        "model": "gpt_image_2_5 (flare, high, 2k)",
+        "use": "façade sandstone, bake input only"
+      },
+      {
+        "jobId": "2dfcff3a-f704-423c-aaee-252d681a3c03",
+        "model": "gpt_image_2_5 (flare, high, 2k)",
+        "use": "tooled stone (reveals, sill, lintel), bake input only"
+      }
+    ],
+    "date": "2026-10-07",
+    "license": "Procedural Blender model written for this project (no third-party model). Higgsfield textures used only as bake inputs (owner-operated account; usage per Higgsfield/upstream terms). Generic, unbranded; not a merchant product, not documentary.",
+    "triangles": 2360,
+    "vertices": 2631,
+    "textureSize": "2048x1024 ×1 (baked albedo×light, AgX-tonemapped; WebP via EXT_texture_webp)",
+    "textureBytes": {
+      "street-window-baked": 42686
+    },
+    "materials": 3,
+    "fileBytes": 121580,
+    "nodes": [
+      "Camera_Window",
+      "Glass",
+      "Photo_01",
+      "Photo_02",
+      "Photo_03",
+      "Photo_04",
+      "Photo_05",
+      "Photo_06",
+      "Photo_07",
+      "Photo_08",
+      "Photo_09",
+      "Photo_10",
+      "Photo_11",
+      "Photo_12",
+      "Spot_01",
+      "Spot_02",
+      "Spot_03",
+      "WindowStatic",
+      "StreetWindow"
+    ],
+    "bake": "Light baked into baseColor of the static parts (TEXCOORD_0, KHR_materials_unlit). PhotoSlot quads: TEXCOORD_0 = 0–1 photo UV, TEXCOORD_1 = same atlas (light on white paper). Glass stays a runtime material.",
+    "bounds": {
+      "size": [
+        7.2,
+        4.2,
+        3.475
+      ],
+      "min": [
+        -3.4,
+        -1.9,
+        -3.4
+      ],
+      "max": [
+        3.8,
+        2.3,
+        0.075
+      ],
+      "note": "metres, Y-up; façade front plane z=0, display box towards -z (back wall z=-0.98), shop wall z=-3.40."
+    },
+    "camera": {
+      "node": "Camera_Window",
+      "yfovDeg": 28,
+      "position": [
+        0.13,
+        0.05,
+        5.3
+      ],
+      "target": [
+        0.13,
+        0.05,
+        -0.4
+      ]
+    },
+    "photoSlots": "Photo_01…Photo_09 window (row-major from top-left, 0.506×0.336 m), Photo_10…Photo_12 shop wall (top→bottom, 0.385×0.255 m); material PhotoSlot (neutral grey placeholder).",
+    "loaderRequirements": "Plain three GLTFLoader (KHR_materials_unlit, EXT_texture_webp). No normals exported (unlit).",
+    "usage": "Gallery street-window scene; real gallery photos are assigned to Photo_* at runtime (docs/BLENDER-ASSETS.md §2).",
+    "fallback": "/renders/street-window.webp",
+    "posterBytes": 47990,
+    "decorative": true,
+    "documentary": false,
+    "status": "built 2026-10-07, not yet integrated"
+  },
+  {
+    "name": "format-objects",
+    "type": "render",
+    "files": [
+      "/renders/format-110.webp",
+      "/renders/format-110@2x.webp",
+      "/renders/format-120.webp",
+      "/renders/format-120@2x.webp",
+      "/renders/format-135.webp",
+      "/renders/format-135@2x.webp"
+    ],
+    "source": "Blender 5.2.2 procedural script scripts/blender/format_objects.py (135 = film-cartridge-v2.glb; 120 roll and 110 cartridge modelled procedurally)",
+    "date": "2026-10-07",
+    "license": "Procedural Blender model written for this project (no third-party model). Higgsfield textures used only as bake inputs (owner-operated account; usage per Higgsfield/upstream terms). Generic, unbranded; not a merchant product, not documentary.",
+    "imageSize": "800x600 (1×) and 1600x1200 (@2x), WebP with alpha",
+    "fileBytes": {
+      "format-110.webp": 21210,
+      "format-110@2x.webp": 56068,
+      "format-120.webp": 21334,
+      "format-120@2x.webp": 54342,
+      "format-135.webp": 27790,
+      "format-135@2x.webp": 75872
+    },
+    "usage": "Film-development configurator format pictograms (same camera/scale for all three).",
+    "fallback": "components/lab/format-glyph.tsx line glyphs",
+    "decorative": true,
+    "documentary": false,
+    "status": "built 2026-10-07, not yet integrated"
   }
 ]

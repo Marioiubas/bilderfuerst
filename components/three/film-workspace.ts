@@ -1,6 +1,6 @@
 "use client";
 // Desktop WebGL enhancement of the home hero ("floating film workspace").
-// One object scene: Higgsfield 135 cartridge (GLB) lying on a dark table, a procedural negative
+// One object scene: Blender-modelled generic 135 cartridge (GLB, v2) lying on a dark table, a procedural negative
 // strip bent along a CatmullRom curve out of its leader slot, across an opal light table, and a
 // contact-sheet paper. Real photographs ride on the strip as separate frame planes that can be
 // laid out as a contact sheet. Photographic light only: softbox key, enlarger top light, one faint
@@ -61,7 +61,7 @@ function stripGeometry(segments:number,uv:(a:number,far:boolean)=>[number,number
 
 export async function mountFilmWorkspace(host:HTMLElement,{tier,signal}:{tier:Tier;signal:AbortSignal},opts:FilmWorkspaceOptions):Promise<SceneHandle>{
  const fonts=Promise.race([document.fonts.load(`500 20px ${MONO}`).catch(()=>[]),new Promise(r=>setTimeout(r,1200))]);
- const [gltf,images]=await Promise.all([new GLTFLoader().loadAsync('/models/film-cartridge.glb'),Promise.all(heroFrames.map(f=>loadImage(f.small,signal))),fonts]);
+ const [gltf,images]=await Promise.all([new GLTFLoader().loadAsync('/models/film-cartridge-v2.glb'),Promise.all(heroFrames.map(f=>loadImage(f.small,signal))),fonts]);
  if(signal.aborted){disposeTree(gltf.scene);throw new DOMException('aborted','AbortError')}
 
  const renderer=new THREE.WebGLRenderer({antialias:true,alpha:true,powerPreference:'default'});
@@ -100,6 +100,11 @@ export async function mountFilmWorkspace(host:HTMLElement,{tier,signal}:{tier:Ti
 
  // Cartridge: lying on its side, spool towards the camera, leader slot turned to exit down-right.
  const cart=new THREE.Group();const spin=new THREE.Group();const model=gltf.scene;
+ // Blender v2 cassette (scripts/blender/cartridge_135.py): the procedural strip starts at the named
+ // SlotExit; the model's own short leader is hidden so strip width and perforations stay continuous.
+ model.updateMatrixWorld(true);
+ const slot=model.getObjectByName('SlotExit');const tipLocal=slot?slot.getWorldPosition(new THREE.Vector3()):TIP.clone();
+ const ownLeader=model.getObjectByName('Leader');if(ownLeader)ownLeader.visible=false;
  model.rotation.x=Math.PI/2;spin.rotation.z=THREE.MathUtils.degToRad(-60);spin.add(model);cart.add(spin);cart.scale.setScalar(S);
  film.add(cart);ws.updateMatrixWorld(true);
  const box=new THREE.Box3().setFromObject(model);const wsInv=new THREE.Matrix4().copy(film.matrixWorld).invert();
@@ -108,7 +113,7 @@ export async function mountFilmWorkspace(host:HTMLElement,{tier,signal}:{tier:Ti
  model.traverse(o=>{const mesh=o as THREE.Mesh;if(!mesh.isMesh)return;mesh.castShadow=true;mesh.receiveShadow=true;
   const mat=mesh.material as THREE.MeshStandardMaterial;mat.envMap=env;mat.envMapIntensity=1.25;mat.transparent=true;mat.opacity=0;mat.depthWrite=true;cartMats.push(mat);
   const line=new THREE.LineSegments(new THREE.EdgesGeometry(mesh.geometry,32),new THREE.LineBasicMaterial({color:0xcfd4d7,transparent:true,opacity:.85,depthWrite:false}));mesh.add(line);edges.push(line)});
- const tip=model.localToWorld(TIP.clone()).applyMatrix4(wsInv);
+ const tip=model.localToWorld(tipLocal.clone()).applyMatrix4(wsInv);
  const dir=EXIT.clone().transformDirection(model.matrixWorld).transformDirection(wsInv);dir.z=0;dir.normalize();
 
  // Film path: out of the slot, down onto the glass, across it, over the far edge onto the table.
