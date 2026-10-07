@@ -151,6 +151,7 @@
 
 /* ───────── Intro start state (mirrors motion/hero.ts `from` values; set before first paint) ───────── */
 .hero[data-intro=pending] [data-intro-step]{opacity:.4;transform:translateY(14px)}
+.hero[data-intro=pending] a[data-intro-step],.hero[data-intro=pending] button[data-intro-step]{opacity:1}
 .hero[data-intro=pending] .hero-line{transform:translateY(22px)}
 .hero[data-intro=pending] .hero-table{opacity:.6}
 .hero[data-intro=pending] .hc-line path:not(.hc-hidden),.hero[data-intro=pending] .hc-line ellipse,.hero[data-intro=pending] .hc-lip path:first-child{stroke-dashoffset:.62}

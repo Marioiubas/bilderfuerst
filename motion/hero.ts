@@ -35,7 +35,10 @@ export function playHeroIntro(root:HTMLElement,tier:Tier):Revertible|undefined{
  all('[data-intro-step]').forEach((el,i)=>{
   const headline=i===1||i===2;
   const rise=small?INTRO_RISE.mobile:headline?INTRO_RISE.headline:INTRO_RISE.copy;
-  tl.add(el,{opacity:[.4,1],translateY:[rise,0],duration:headline?duration.hero:duration.section,ease:headline?ease.advance:ease.shutter},STEP_AT[i]??STEP_AT[STEP_AT.length-1]);
+  // Links and buttons keep full opacity from the first frame (audit O11): only the frame-lock slide.
+  const interactive=el.matches('a,button,.btn');
+  const props:Record<string,number[]>=interactive?{translateY:[rise,0]}:{opacity:[.4,1],translateY:[rise,0]};
+  tl.add(el,{...props,duration:headline?duration.hero:duration.section,ease:headline?ease.advance:ease.shutter},STEP_AT[i]??STEP_AT[STEP_AT.length-1]);
  });
  const film=root.querySelector<HTMLElement>('.hero-film');
  // When the WebGL scene already owns the workspace, the DOM film is hidden: skip its choreography.
