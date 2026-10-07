@@ -107,7 +107,24 @@ with baked light on /galerie. The Simulator uses the Mac GPU, so phone frame tim
 No Android device or emulator was available. A checklist for real devices is in DEVICE-QA.md.
 
 ## 24 · Performance before/after
-See "Production Lighthouse" at the end (measured on the deployed site after this push). WebGL: see §7/§15 and MOBILE-3D-PLAN Phase 2.
+Lighthouse 13 against production, run back to back: the previous deployment (496841c, its own Vercel URL) against the new one, same
+machine, same minute. **Caveat:** the machine was heavily loaded (load average 10 → 46 during the runs), so single runs vary by ±10 points.
+
+| Page | Old (496841c) | New (4320264) |
+|---|---|---|
+| Home · mobile | 89 / 80 (LCP 3.6 s) | 81 / 74 (LCP 4.0–5.5 s, text LCP = serif H1) |
+| Shop · mobile | 97 / 93 (LCP 2.4–3.1 s) | 76 / 91 (LCP 3.4–3.7 s) |
+| Filmentwicklung · mobile | 88 / 91 | 93 / 92 |
+| Home · desktop | 99 | 99 |
+
+Accessibility 100 and Best Practices 100 on all four. CLS is 0.000 everywhere.
+
+Found and fixed during this pass: global serif preloads competed with the shop's LCP image (4320264 moves them to the four serif routes).
+
+Still open: home mobile LCP is the serif headline, which waits for the web font (≈2.2 s element render delay under throttling).
+A smaller hero-only subset of the serif would reduce it.
+
+WebGL (emulated phone, 4× CPU): see §7/§15 and MOBILE-3D-PLAN Phase 2.
 
 ## 25 · Current page heights (390 × 844, before → after)
 Home 12,534 → 11,589 · Shop 5,333 → 5,067 · Shop/Filme 5,333 → 5,085 · PDP Pentax 4,245 → 3,950 · Filmentwicklung 5,867 → 4,819 ·
@@ -129,7 +146,7 @@ Instagram link.
 galerie-390, geschichte-390, kontakt-390, services-390 (`*-ab.jpg`, fold, A | B | C).
 
 ## 29 · Remaining weak points
-Home is still ≈1,000 px above the 10,500 target · the gallery page is longer at 390 (one-column prints) · real-phone GPU/thermal behaviour of the
+Home mobile Lighthouse is lower than before (serif LCP headline, see §24) · Home is still ≈1,000 px above the 10,500 target · the gallery page is longer at 390 (one-column prints) · real-phone GPU/thermal behaviour of the
 3D scenes is unmeasured (Simulator only) · phone GLBs exceed their byte targets (115 KB / 88 KB, uncompressed geometry) · route pages other than home
 still show zone codes on phones (by design, fewer per screen) · the DOM hero strip frames on phones without WebGL are unchanged in size.
 
