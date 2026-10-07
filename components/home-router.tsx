@@ -6,6 +6,7 @@ import {useEffect,useRef} from 'react';
 import {ArrowUpRight} from 'lucide-react';
 import {drawerMotion,type DrawerKind} from '@/motion/home';
 import {track} from '@/lib/analytics';
+import {CHAPTERS} from './home-shared';
 
 type Drawer={code:string;label:string;dest:string;href:string;kind:DrawerKind;symbol:React.ReactNode};
 
@@ -65,17 +66,28 @@ function DrawerLink({d}:{d:Drawer}){
  </Link>;
 }
 
+/** Chapter index (UX-RESEARCH-MOBILE §6.1): not sticky, labels identical to the chapter labels of the section heads. */
+function JumpIndex(){
+ return <nav className="hm-jump" aria-labelledby="hm-jump-title">
+  <p className="eyebrow" id="hm-jump-title"><b>IDX</b><span>Kapitel auf dieser Seite</span><span className="sec-index">{CHAPTERS.length} Stationen</span></p>
+  <ol className="hm-jump-list">
+   {CHAPTERS.map(c=><li key={c.id}><a href={`#${c.id}`}><span className="hm-jump-no mono" aria-hidden="true">{String(c.n).padStart(2,'0')}</span><span className="hm-jump-label">{c.label}</span></a></li>)}
+  </ol>
+ </nav>;
+}
+
 export function HomeRouter(){
  return <section className="hm-router zone-graphite" aria-labelledby="hm-router-title" id="entdecken">
   <div className="wrap">
    <header className="hm-router-head">
     <p className="eyebrow"><b>IDX</b><span>Index · Was du mitbringst</span><span className="sec-index">5 Schubladen</span></p>
-    <h2 id="hm-router-title">Was hast du<br/>in der Hand?</h2>
+    <h2 id="hm-router-title">Was hast du <br/>in der Hand?</h2>
     <p className="hm-router-lead">Fang bei dem an, was du mitbringst. Jede Schublade führt direkt an den richtigen Platz im Laden.</p>
    </header>
    <ul className="hm-drawers">
     {DRAWERS.map(d=><li key={d.code}><DrawerLink d={d}/></li>)}
    </ul>
+   <JumpIndex/>
   </div>
  </section>;
 }

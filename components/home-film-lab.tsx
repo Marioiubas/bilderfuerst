@@ -6,7 +6,7 @@ import Link from 'next/link';
 import {ArrowUpRight} from 'lucide-react';
 import {SectionHead,Chip,type ChipKind} from './analog/primitives';
 import {developImages} from '@/motion/home';
-import {PHOTO,chapter,useMotion} from './home-shared';
+import {MoreToggle,PHOTO,chapter,photo,useMore,useMotion} from './home-shared';
 
 type Row={proc:string;kind:ChipKind;p:[number,number,number]};
 const TICKET:{fmt:string;name:string;rows:Row[]}[]=[
@@ -46,18 +46,20 @@ const MACHINES:{proc:string;kind?:ChipKind;text:string}[]=[
 export function HomeFilmLab(){
  const photos=useMotion<HTMLDivElement>(developImages);
  const head=chapter('LAB');
- return <section className="hm-lab zone-dark" id={head.sectionId} aria-labelledby="hm-lab-title">
+ // Phones: photo, lead, CTA and the price ticket stay open; machines + developer samples sit behind one disclosure.
+ const more=useMore(2);
+ return <section className="hm-lab zone-dark" id={head.sectionId} aria-labelledby="hm-lab-title" data-more={more.attr}>
   <div className="wrap">
    <SectionHead code={head.code} label={head.label} index={head.index} id="hm-lab-title"
-    title={<>Entwickelt in Fürth.<br/><span className="outline-type">Gescannt auf Noritsu.</span></>}/>
+    title={<>Entwickelt in Fürth. <br/>Gescannt auf Noritsu.</>}/>
    <div className="hm-lab-grid" ref={photos}>
     <figure className="hm-lab-photo hm-lab-photo-main">
-     <img data-develop src={PHOTO.labScan.src} width={PHOTO.labScan.w} height={PHOTO.labScan.h} loading="lazy" decoding="async" alt="Noritsu-Scanner im Bilderfürst-Labor: ein entwickelter Kleinbild-Negativstreifen läuft in den Filmeinzug"/>
+     <img data-develop {...photo(PHOTO.labScan,'(min-width: 1024px) min(52vw, 840px), 92vw')} loading="lazy" decoding="async" alt="Noritsu-Scanner im Bilderfürst-Labor: ein entwickelter Kleinbild-Negativstreifen läuft in den Filmeinzug"/>
      <figcaption className="hm-cap"><span>LAB · Noritsu-Scanner, Filmeinzug</span><span>Labor Fürth</span></figcaption>
     </figure>
     <div className="hm-lab-copy">
      <p className="hm-lab-lead">Dein Film bleibt im Haus: entwickelt im eigenen Labor, gescannt auf dem Noritsu. Abgeben und abholen an der Alexanderstraße – oder per Post einschicken.</p>
-     <dl className="hm-lab-machines">
+     <dl className="hm-lab-machines hm-extra" id={more.ids[0]}>
       {MACHINES.map(m=><div key={m.proc}><dt>{m.kind?<Chip kind={m.kind}>{m.proc}</Chip>:<span className="chip">{m.proc}</span>}</dt><dd>{m.text}</dd></div>)}
      </dl>
      <div className="hm-lab-actions">
@@ -80,9 +82,10 @@ export function HomeFilmLab(){
      </table>
      <p className="hm-ticket-foot mono">Large Scan auf Noritsu HS-1800 · Push/Pull nur Schwarzweiß Kleinbild</p>
     </div>
-    <div className="hm-lab-side">
+    <MoreToggle more={more} className="hm-lab-more">Maschinen und Entwickler</MoreToggle>
+    <div className="hm-lab-side hm-extra" id={more.ids[1]}>
      <figure className="hm-lab-photo">
-      <img data-develop src={PHOTO.filmRolls.src} width={PHOTO.filmRolls.w} height={PHOTO.filmRolls.h} loading="lazy" decoding="async" alt="Kleinbildpatronen Kodak 200, Prozess C-41, aufgereiht im Labor"/>
+      <img data-develop {...photo(PHOTO.filmRolls,'(min-width: 1024px) min(30vw, 480px), (min-width: 768px) 40vw, 92vw')} loading="lazy" decoding="async" alt="Kleinbildpatronen Kodak 200, Prozess C-41, aufgereiht im Labor"/>
       <figcaption className="hm-cap"><span>LAB · Patronen vor der Entwicklung</span><span>C-41</span></figcaption>
      </figure>
      <div className="hm-dev">

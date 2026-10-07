@@ -7,7 +7,14 @@ import {Sprockets,frameNo} from './analog/primitives';
 import {heroFrames,SELECTED_FRAME,SHEET_COLUMNS} from './hero-frames';
 
 type Vars=CSSProperties&Record<`--${string}`,string|number>;
-const slot=(i:number):Vars=>({'--i':i,'--col':i%SHEET_COLUMNS,'--row':Math.floor(i/SHEET_COLUMNS)});
+/** Grid slot per frame: 4 × 2 sheet (`--col/--row`) and the phone sheet, 2 × 4 (`--c2/--r2`). */
+const slot=(i:number):Vars=>({'--i':i,'--col':i%SHEET_COLUMNS,'--row':Math.floor(i/SHEET_COLUMNS),'--c2':i%2,'--r2':Math.floor(i/2)});
+/** "Fürth · 2018" → ["Fürth"," · ","2018"]; "Street Gallery" → ["Street"," ","Gallery"]. The parts stack in two
+ *  lines on the small tablet/desktop contact sheet so captions stay at 12 px without being cut. */
+function captionParts(caption:string):[string,string,string]{
+ const dot=caption.indexOf(' · ');if(dot>0)return [caption.slice(0,dot),' · ',caption.slice(dot+3)];
+ const sp=caption.lastIndexOf(' ');return sp>0?[caption.slice(0,sp),' ',caption.slice(sp+1)]:[caption,'',''];
+}
 
 /** 135 cartridge as a technical drawing: silver hairlines, amber callouts.
  *  Lying on the table, near end cap towards the viewer, felt lip on the right where the film exits. */
@@ -47,6 +54,11 @@ function CartridgeDrawing(){
  </svg>;
 }
 
+function FrameCaption({caption}:{caption:string}){
+ const [a,sep,b]=captionParts(caption);
+ return <span className="hero-frame-cap"><span>{a}</span>{sep&&<span className="hero-frame-sep">{sep}</span>}{b&&<span>{b}</span>}</span>;
+}
+
 export function HeroFilm({sheet,ref}:{sheet:boolean;ref?:Ref<HTMLDivElement>}){
  return <div ref={ref} className="hero-film webgl-fallback" data-view={sheet?'sheet':'strip'}>
   <div className="hero-stage">
@@ -69,7 +81,7 @@ export function HeroFilm({sheet,ref}:{sheet:boolean;ref?:Ref<HTMLDivElement>}){
        <img src={f.thumb} srcSet={f.srcSet} sizes="(min-width: 1024px) 16vw, 32vw" alt={f.alt} width={f.width} height={f.height} decoding="async" {...(i===0?{fetchPriority:'high' as const}:{loading:'lazy' as const})}/>
        <span className="hero-frame-latent" aria-hidden="true"/>
       </span>
-      <figcaption><span className="hero-frame-no">{frameNo(i+1)}</span> {f.caption}</figcaption>
+      <figcaption><span className="hero-frame-no" aria-hidden="true">{frameNo(i+1)} </span><FrameCaption caption={f.caption}/></figcaption>
      </figure>
     </li>)}
    </ol>

@@ -6,7 +6,7 @@ import Link from 'next/link';
 import {ArrowUpRight} from 'lucide-react';
 import {SectionHead} from './analog/primitives';
 import {track} from '@/lib/analytics';
-import {PHOTO,chapter} from './home-shared';
+import {MoreToggle,PHOTO,chapter,photo,useMore} from './home-shared';
 
 const FACTS:[string,string][]=[
  ['Seit','Anfang 2020 Street Gallery mit analogen Aufnahmen'],
@@ -23,14 +23,16 @@ const LOG:[string,string,string][]=[
 
 export function HomeGallery(){
  const head=chapter('GAL');
- return <section className="hm-gal zone-dark grain" id={head.sectionId} aria-labelledby="hm-gal-title">
+ // Phones: the window schema repeats the facts list (hidden there); the past-events log is one tap away.
+ const more=useMore();
+ return <section className="hm-gal zone-dark grain" id={head.sectionId} aria-labelledby="hm-gal-title" data-more={more.attr}>
   <div className="wrap">
    <SectionHead code={head.code} label={head.label} index={head.index} id="hm-gal-title"
-    title={<>Neun Bilder.<br/><span className="outline-type">Rund um die Uhr.</span></>}
+    title={<>Neun Bilder. <br/>Rund um die Uhr.</>}
     action={<Link className="link" href="/galerie" onClick={()=>track('open_gallery',{source:'home'})}>Zur Street Gallery <ArrowUpRight size={16}/></Link>}/>
    <div className="hm-gal-grid">
     <figure className="hm-gal-photo">
-     <div className="hm-gal-mat"><img src={PHOTO.galleryWindow.src} width={PHOTO.galleryWindow.w} height={PHOTO.galleryWindow.h} loading="lazy" decoding="async" alt="Schaufenster des Ladens an der Alexanderstraße 2 mit neun gerahmten Schwarzweiß-Fotografien in drei Reihen"/></div>
+     <div className="hm-gal-mat"><img {...photo(PHOTO.galleryWindow,'(min-width: 1024px) min(48vw, 760px), 88vw')} loading="lazy" decoding="async" alt="Schaufenster des Ladens an der Alexanderstraße 2 mit neun gerahmten Schwarzweiß-Fotografien in drei Reihen"/></div>
      <figcaption className="hm-cap"><span>GAL · Schaufenster Alexanderstraße 2 · Aufnahme 12.03.2018</span><span>Zeigt das Fenster, nicht die aktuelle Ausstellung</span></figcaption>
     </figure>
     <div className="hm-gal-side">
@@ -44,7 +46,8 @@ export function HomeGallery(){
     </div>
    </div>
    <dl className="hm-gal-facts">{FACTS.map(([k,v])=><div key={k}><dt className="mono">{k}</dt><dd>{v}</dd></div>)}</dl>
-   <div className="hm-log">
+   <MoreToggle more={more} className="hm-gal-more">Vergangene Termine</MoreToggle>
+   <div className="hm-log hm-extra" id={more.ids[0]}>
     <p className="eyebrow" id="hm-log-title"><b>LOG</b><span>Zuletzt in der Community</span><span className="sec-index">vergangene Termine</span></p>
     <ol className="hm-log-list" aria-labelledby="hm-log-title">{LOG.map(([date,kind,what])=><li key={date}><time className="mono num" dateTime={date.split('.').reverse().join('-')}>{date}</time><span className="hm-log-kind">{kind}</span><span className="hm-log-what">{what}</span></li>)}</ol>
    </div>

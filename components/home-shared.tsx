@@ -1,6 +1,6 @@
 "use client";
 // Shared helpers for the homepage chapters: motion hook, chapter list, Fürth opening hours (Europe/Berlin).
-import {useEffect,useRef,useState} from 'react';
+import {useEffect,useId,useRef,useState,type ReactNode} from 'react';
 import type {Dispose} from '@/motion/home';
 
 /** Run a motion/home.ts function on mount and revert it on unmount. `run` must be a stable module function. */
@@ -8,6 +8,20 @@ export function useMotion<T extends HTMLElement>(run:(el:T)=>Dispose|undefined){
  const ref=useRef<T>(null);
  useEffect(()=>{const el=ref.current;return el?run(el):undefined},[run]);
  return ref;
+}
+
+/** Phone-only disclosure for a chapter's secondary content (UX-RESEARCH-MOBILE §6.3, audit M2).
+ *  Mark the regions with `className="hm-extra"` and `id={more.ids[n]}`, put `data-more={more.attr}` on the section.
+ *  < 768 px the regions are hidden until the 44 px button opens them; ≥ 768 px the button is not displayed and the
+ *  regions are always shown. Constant label, state via aria-expanded (APG disclosure). */
+export function useMore(count=1){
+ const [open,setOpen]=useState(false);const base=useId();
+ return {open,attr:open?'open':undefined,ids:Array.from({length:count},(_,i)=>`${base}-more-${i}`),toggle:()=>setOpen(o=>!o)};
+}
+export function MoreToggle({more,className='',children}:{more:ReturnType<typeof useMore>;className?:string;children:ReactNode}){
+ return <button type="button" className={`hm-more ${className}`} aria-expanded={more.open} aria-controls={more.ids.join(' ')} onClick={more.toggle}>
+  <span>{children}</span><i className="hm-more-icon" aria-hidden="true"/>
+ </button>;
 }
 
 /** The route through the lab, numbered like frames on a roll (00 = hero darkroom). */
@@ -72,15 +86,22 @@ export function useBerlinNow(){
  return now;
 }
 
-/** Image intrinsic sizes for the real photographs used on the homepage (width × height of the files in /public/images). */
+/** Real photographs used on the homepage: intrinsic size of `src` (width × height of the file in /public/images) and
+ *  the rendition ladder from lib/image-renditions.json, so phones pick the small file and large screens the large one. */
+type Photo={src:string;w:number;h:number;srcSet?:string};
 export const PHOTO={
- labScan:{src:'/images/lab-scan-l.webp',w:1600,h:1066},
- filmRolls:{src:'/images/film-rolls-l.webp',w:1600,h:1067},
+ labScan:{src:'/images/lab-scan-l.webp',w:1600,h:1066,srcSet:'/images/lab-scan.webp 600w, /images/lab-scan-l.webp 1600w'},
+ filmRolls:{src:'/images/film-rolls-l.webp',w:1600,h:1067,srcSet:'/images/film-rolls.webp 600w, /images/film-rolls-l.webp 1600w'},
  pentax:{src:'/images/pentax-17.webp',w:1400,h:1050},
- slideMagazine:{src:'/images/slide-magazine-macro.webp',w:1400,h:1120},
- slideGlove:{src:'/images/slide-in-glove.webp',w:1400,h:1120},
- printKiosk:{src:'/images/print-kiosk-screens.webp',w:1400,h:933},
- galleryWindow:{src:'/images/store-exterior-gallery-window.webp',w:1063,h:709},
- history:{src:'/images/history-l.webp',w:1600,h:457},
+ slideMagazine:{src:'/images/slide-magazine-macro.webp',w:1400,h:1120,srcSet:'/images/slide-magazine-macro.webp 1400w, /images/slide-magazine-macro-l.webp 2500w'},
+ slideGlove:{src:'/images/slide-in-glove.webp',w:1400,h:1120,srcSet:'/images/slide-in-glove-t.webp 480w, /images/slide-in-glove.webp 1400w, /images/slide-in-glove-l.webp 2500w'},
+ printKiosk:{src:'/images/print-kiosk-screens.webp',w:1400,h:933,srcSet:'/images/print-kiosk-screens.webp 1400w, /images/print-kiosk-screens-l.webp 1600w'},
+ galleryWindow:{src:'/images/store-exterior-gallery-window.webp',w:1063,h:709,srcSet:'/images/store-exterior-gallery-window-t.webp 480w, /images/store-exterior-gallery-window.webp 1063w'},
+ history:{src:'/images/history-l.webp',w:1600,h:457,srcSet:'/images/history.webp 600w, /images/history-l.webp 1600w'},
  storeCorner:{src:'/images/store-exterior-corner.webp',w:1063,h:709},
-} as const;
+} as const satisfies Record<string,Photo>;
+
+/** `<img>` attributes for a homepage photo; `sizes` describes the rendered width (cover crops count as wider). */
+export function photo(p:Photo,sizes:string){
+ return {src:p.src,width:p.w,height:p.h,...(p.srcSet?{srcSet:p.srcSet,sizes}:{})};
+}

@@ -29,7 +29,7 @@ export function HomeLightTable(){
  return <section className="hm-ltb zone-table" id={head.sectionId} aria-labelledby="hm-ltb-title">
   <div className="wrap">
    <SectionHead code={head.code} label={head.label} index={head.index} id="hm-ltb-title"
-    title={<>Film für die<br/>nächste Rolle.</>}
+    title={<>Film für die <br/>nächste Rolle.</>}
     action={<Link className="link" href="/shop?category=Filme">Film-Finder öffnen <ArrowUpRight size={16}/></Link>}/>
    <div className="hm-ltb-table" ref={table}>
     <span className="hm-ltb-glow" data-glow aria-hidden="true"/>

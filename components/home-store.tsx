@@ -10,7 +10,7 @@ import type {Lens as LensComponent} from './ui/lens';
 import {bySlug,formatPrice,groupCount,shopGroupLabels,shopGroups} from '@/lib/catalog';
 import {track} from '@/lib/analytics';
 import {viewfinderLock} from '@/motion/home';
-import {PHOTO,chapter,useMotion} from './home-shared';
+import {MoreToggle,PHOTO,chapter,useMore,useMotion} from './home-shared';
 
 /** Pentax 17 facts — all from the product description in lib/catalog.json (/p/pentax-17). */
 const SPEC:[string,string][]=[
@@ -24,14 +24,18 @@ const SPEC:[string,string][]=[
 
 export function HomeStore(){
  const camera=bySlug('pentax-17');
+ // The loupe hint is shown only while the Lens is actually mounted (desktop width + fine pointer), never as a promise.
+ const [lens,setLens]=useState(false);
+ // Phones: the six-line spec table is one tap away; name, claim, price, stock and the CTA stay visible.
+ const more=useMore();
  const finder=useMotion<HTMLDivElement>(viewfinderLock);
  const head=chapter('STR');
  const groups=shopGroups.filter(g=>g!=='Entwicklung').map(g=>({g,label:shopGroupLabels[g],n:groupCount(g)})).filter(x=>x.n>0);
  const select=()=>track('select_item',{slug:'pentax-17',list:'home_analog_store'});
- return <section className="hm-str zone-light" id={head.sectionId} aria-labelledby="hm-str-title">
+ return <section className="hm-str zone-light" id={head.sectionId} aria-labelledby="hm-str-title" data-more={more.attr}>
   <div className="wrap">
    <SectionHead code={head.code} label={head.label} index={head.index} id="hm-str-title"
-    title={<>Kameras, Film,<br/>Chemie.</>}
+    title={<>Kameras, Film, <br/>Chemie.</>}
     action={<Link className="link" href="/shop">Zum Analog Store <ArrowUpRight size={16}/></Link>}/>
    {camera&&<div className="hm-str-feature">
     <figure className="hm-str-camera">
@@ -41,25 +45,26 @@ export function HomeStore(){
       <CardContainer containerClassName="py-0 block hm-card-wrap" className="block w-full">
        <CardBody className="h-auto w-full hm-card-body">
         <CardItem translateZ={16} className="w-full hm-card-photo">
-         <DesktopLens>
+         <DesktopLens onReady={setLens}>
           <img src={PHOTO.pentax.src} width={PHOTO.pentax.w} height={PHOTO.pentax.h} loading="lazy" decoding="async" alt="Pentax 17 mit Originalkarton auf der Ladentheke in Fürth"/>
          </DesktopLens>
         </CardItem>
        </CardBody>
       </CardContainer>
      </div>
-     <figcaption className="hm-cap"><span>STR · Pentax 17 im Laden Fürth</span><span className="hm-cap-hint">Lupe: Maus über das Foto</span></figcaption>
+     <figcaption className="hm-cap"><span>STR · Pentax 17 im Laden Fürth</span>{lens&&<span className="hm-cap-hint">Lupe: Maus über das Foto</span>}</figcaption>
     </figure>
     <div className="hm-str-spec">
      <p className="eyebrow"><b>STR</b><span>Kamera · Halbformat</span></p>
      <h3 className="hm-str-name">Pentax 17</h3>
      <p className="hm-str-claim">Halbformat · 72 Bilder auf einem 36er Film.</p>
-     <dl className="hm-spec">{SPEC.map(([k,v])=><div key={k}><dt>{k}</dt><dd>{v}</dd></div>)}</dl>
+     <dl className="hm-spec hm-extra" id={more.ids[0]}>{SPEC.map(([k,v])=><div key={k}><dt>{k}</dt><dd>{v}</dd></div>)}</dl>
      <div className="hm-str-buy">
       <p className="hm-str-price num">{formatPrice(camera.price)}</p>
       <p><span className={`status ${camera.inStock?'status-ok':'status-ask'}`}>{camera.inStock?'Auf Lager':'Lieferzeit erfragen'}</span> <span className="hm-ltb-src">Quellstand 04.10.2026</span></p>
      </div>
      <Link href="/p/pentax-17" className="btn btn-ink" onClick={select}>Pentax 17 ansehen <ArrowRight size={17}/></Link>
+     <MoreToggle more={more} className="hm-str-more">Technische Daten</MoreToggle>
     </div>
    </div>}
    <div className="hm-str-lower">
@@ -68,7 +73,7 @@ export function HomeStore(){
      <ol>
       {groups.map((x,i)=><li key={x.g}>
        <Link href={`/shop?category=${encodeURIComponent(x.g)}`}>
-        <span className="hm-index-no mono">{frameNo(i+1)}</span>
+        <span className="hm-index-no mono" aria-hidden="true">{frameNo(i+1)}</span>
         <span className="hm-index-name">{x.label}</span>
         <span className="hm-index-rule" aria-hidden="true"/>
         <span className="hm-index-count num">{x.n}<span className="sr-only"> Artikel</span></span>
@@ -89,13 +94,14 @@ export function HomeStore(){
 }
 
 /** The Aceternity Lens (and its Motion runtime) loads only on desktop with a fine pointer;
- *  everyone else gets the same photograph without the loupe and without the extra JS. */
-function DesktopLens({children}:{children:React.ReactNode}){
+ *  everyone else gets the same photograph without the loupe and without the extra JS. `onReady` reports whether
+ *  the loupe is live, so the caption only offers it when it works. */
+function DesktopLens({children,onReady}:{children:React.ReactNode;onReady:(active:boolean)=>void}){
  const [Loaded,setLoaded]=useState<typeof LensComponent|null>(null);
  useEffect(()=>{
   if(!window.matchMedia('(min-width: 1024px) and (pointer: fine)').matches)return;
-  let live=true;import('./ui/lens').then(m=>{if(live)setLoaded(()=>m.Lens)});
-  return()=>{live=false};
- },[]);
+  let live=true;import('./ui/lens').then(m=>{if(live){setLoaded(()=>m.Lens);onReady(true)}});
+  return()=>{live=false;onReady(false)};
+ },[onReady]);
  return Loaded?<Loaded zoomFactor={1.9} lensSize={190}>{children}</Loaded>:<>{children}</>;
 }

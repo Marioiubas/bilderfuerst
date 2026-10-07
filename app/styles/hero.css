@@ -18,7 +18,7 @@
 .hero-sub{margin-top:clamp(20px,3.6svh,36px);font-size:clamp(19px,1.55vw,23px);font-weight:620;line-height:1.3;letter-spacing:-.008em;color:var(--text-inverse)}
 .hero-lead{margin-top:10px;max-width:44ch;font-size:16px;line-height:1.55;color:var(--text-muted)}
 .hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:clamp(22px,3.8svh,36px)}
-.hero-textlink{margin-top:20px;color:var(--text-inverse-muted)}
+.hero-textlink{margin:11px 0 -9px;padding:9px 0 13px;background-position:left 0 bottom 9px;color:var(--text-inverse-muted)}
 .hero-textlink:hover{color:var(--white)}
 
 /* ───────── Workspace (DOM film + WebGL host) ───────── */
@@ -26,11 +26,11 @@
 .hero-film{position:absolute;inset:0}
 .hero-stage{
  --r:7deg;--sx:21cqw;--sy:31cqw;
- --pitch:16.4cqw;--fw:15.4cqw;--fh:calc(var(--fw)*2/3);--reb-t:2.5cqw;--reb-b:3.8cqw;
+ --pitch:16.4cqw;--fw:15.4cqw;--fh:calc(var(--fw)*2/3);--reb-t:2.5cqw;--reb-b:4.2cqw;
  --film-h:calc(var(--fh) + var(--reb-t) + var(--reb-b));--lead:5.4cqw;
  --tx:25cqw;--ty:15cqw;--tw:73.5cqw;--th:34.5cqw;
- --px:28cqw;--py:52.5cqw;--pw:68cqw;--ph:31cqw;--pr:-1.5deg;
- --sfw:12.6cqw;--colp:14.6cqw;--rowp:12.2cqw;--goy:1.9cqw;
+ --px:28cqw;--py:51.2cqw;--pw:68cqw;--ph:33.2cqw;--pr:-1.5deg;
+ --sfw:12.6cqw;--colp:14.6cqw;--rowp:13.8cqw;--goy:.4cqw;
  position:absolute;left:0;top:50%;width:min(100cqw,calc(100cqh*1.18));aspect-ratio:1.18;translate:0 -50%;container-type:inline-size}
 
 /* Light table (opal glass in a graphite housing) */
@@ -88,10 +88,22 @@
 .hero-frame-img{position:absolute;inset:0;display:block;overflow:hidden;background:var(--graphite-900);outline:1px solid rgb(10 11 12 / .8)}
 .hero-frame-img img{width:100%;height:100%;object-fit:cover}
 .hero-frame-latent{position:absolute;inset:0;background:rgb(156 98 46);mix-blend-mode:multiply;opacity:0;pointer-events:none}
-.hero-frame figcaption{position:absolute;left:0;right:0;top:calc(100% + .9cqw);display:flex;gap:.6em;overflow:hidden;font-family:var(--font-mono);font-size:clamp(8px,1cqw,11px);font-weight:500;line-height:1.2;letter-spacing:.05em;text-transform:uppercase;white-space:nowrap;text-overflow:ellipsis;color:rgb(244 222 190 / .92);transition:color var(--t-normal)}
-.hero-frame-no{color:var(--amber)}
-.hero-film[data-view=sheet] .hero-frame figcaption{top:calc(100% + .45cqw);font-size:clamp(7px,.7cqw,9px);letter-spacing:.06em;color:rgb(18 20 22 / .8)}
+.hero-frame figcaption{position:absolute;left:0;right:calc(var(--fw) - var(--pitch));top:calc(100% + .45cqw);display:flex;align-items:baseline;gap:.4em;overflow:hidden;font-family:var(--font-mono);font-size:var(--fs-mono);font-weight:500;line-height:1.05;letter-spacing:0;text-transform:uppercase;white-space:nowrap;color:rgb(244 222 190 / .94);transition:color var(--t-normal)}
+.hero-frame-cap{min-width:0;overflow:hidden;text-overflow:ellipsis}
+/* Frame numbers are decorative print (aria-hidden; the edge print numbers the strip): only on the contact sheet. */
+.hero-frame-no{flex:none;font-size:var(--fs-deco);letter-spacing:.08em;color:var(--amber)}
+.hero-film[data-view=strip] .hero-frame-no{display:none}
+.hero-film[data-view=sheet] .hero-frame figcaption{right:0;top:calc(100% + .45cqw);white-space:normal;line-height:1.15;color:rgb(18 20 22 / .86)}
 .hero-film[data-view=sheet] .hero-frame-no{color:var(--text)}
+/* Small 4 × 2 sheet (tablet/desktop DOM fallback): caption in two stacked lines ("FÜRTH" / "2018"). */
+.hero-film[data-view=sheet] .hero-frame-cap>span{display:block}
+.hero-film[data-view=sheet] .hero-frame-cap>.hero-frame-sep{display:none}
+@media (min-width:1024px){@container (width < 620px){
+ /* strip pitch < 100 px: the 12 px caption would be cut, so it stays for assistive tech only (alt + sheet view show it) */
+ .hero-film[data-view=strip] .hero-frame figcaption{width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}
+ .hero-film[data-view=sheet] .hero-frame-no{display:none}
+ :is(.hero-sheet,.hero-slot,.hero-frame,.hero-grease){--rowp:14.4cqw;--ph:34.6cqw;--py:50.4cqw}
+}}
 .hero-film[data-view=sheet] .hero-frame-img{outline-color:rgb(10 11 12 / .9);box-shadow:0 .15cqw .3cqw rgb(0 0 0 / .25)}
 
 /* Grease pencil (selection mark on the contact sheet) */
@@ -112,15 +124,23 @@
 .hud-br{bottom:0;right:0;border-bottom-width:1px;border-right-width:1px}
 
 /* Controls (interaction layer, always above film and canvas) */
-.hero-controls{position:absolute;z-index:6;left:22px;bottom:clamp(30px,4.4cqh,44px);display:flex;flex-direction:column;align-items:flex-start;gap:10px}
-.hero-counter{color:var(--text-inverse-faint);white-space:nowrap}
-.hero-counter b{font-weight:500;color:var(--text-inverse-muted)}
-.hero-toggle{display:inline-flex;align-items:center;gap:10px;min-height:40px;padding:0 14px;border:1px solid var(--line-dark-strong);border-radius:var(--r-1);background:rgb(10 11 12 / .72);color:var(--text-inverse);font-size:13px;font-weight:620;white-space:nowrap;transition:border-color var(--t-fast),color var(--t-fast)}
-.hero-toggle:hover{border-color:var(--silver-300)}
-.hero-toggle[aria-pressed=true]{border-color:var(--red-glow)}
-.hero-toggle-mark{display:grid;grid-template-columns:repeat(2,5px);gap:2px}
-.hero-toggle-mark i{width:5px;height:5px;border:1px solid currentColor;transition:background-color var(--t-fast),border-color var(--t-fast)}
-.hero-toggle[aria-pressed=true] .hero-toggle-mark i{background:var(--red-glow);border-color:var(--red-glow)}
+/* Desktop: top-left inside the viewfinder, clear of the contact sheet (bottom right) and the cartridge callouts. */
+.hero-controls{position:absolute;z-index:6;left:22px;top:clamp(30px,4.4cqh,44px);display:flex;align-items:center;gap:16px}
+.hero-counter{order:2;color:var(--text-inverse-faint);white-space:nowrap}
+.hero-seg{display:inline-flex;border:1px solid var(--line-dark-strong);border-radius:var(--r-1);background:rgb(10 11 12 / .72)}
+.hero-seg-opt{position:relative;display:inline-flex;align-items:center;gap:9px;min-height:44px;padding:0 14px;color:var(--text-inverse-muted);font-size:13px;font-weight:620;white-space:nowrap;transition:background-color var(--t-fast),color var(--t-fast)}
+.hero-seg-opt+.hero-seg-opt{border-left:1px solid var(--line-dark-strong)}
+.hero-seg-opt::after{content:'';position:absolute;left:-1px;right:-1px;bottom:-1px;height:2px;background:var(--red-glow);transform:scaleX(0);transform-origin:left;transition:transform var(--t-normal) var(--ease-shutter)}
+.hero-seg-opt:hover{color:var(--white)}
+.hero-seg-opt[aria-checked=true]{background:var(--graphite-700);color:var(--white)}
+.hero-seg-opt[aria-checked=true]::after{transform:none}
+.hero-seg-opt:focus-visible{outline-offset:-3px}
+.hero-seg-ico{display:grid;gap:2px}
+.hero-seg-ico-strip{grid-template-columns:repeat(3,5px)}
+.hero-seg-ico-sheet{grid-template-columns:repeat(2,5px)}
+.hero-seg-ico i{width:5px;height:5px;border:1px solid currentColor;transition:background-color var(--t-fast),border-color var(--t-fast)}
+.hero-seg-ico-strip i{height:7px}
+.hero-seg-opt[aria-checked=true] .hero-seg-ico i{background:var(--red-glow);border-color:var(--red-glow)}
 
 /* WebGL canvas (appended by components/three/film-workspace.ts) */
 .hero-canvas{position:absolute;inset:0;z-index:2;pointer-events:none}
@@ -158,20 +178,21 @@
  .hero .hero-atmosphere{display:none}
  .hero-backdrop{background:radial-gradient(70% 34% at 80% 4%,rgb(122 22 16 / .5),rgb(70 14 10 / .18) 55%,transparent 80%),radial-gradient(50% 30% at 30% 70%,rgb(244 238 226 / .035),transparent 70%),var(--black)}
  .hero-hud{display:none}
- .hero-controls{left:var(--gutter);right:var(--gutter);bottom:24px;flex-direction:row;align-items:center;justify-content:space-between}
+ .hero-controls{top:auto;left:var(--gutter);right:var(--gutter);bottom:24px;justify-content:space-between}
+ .hero-counter{order:0}
 }
 
 /* ───────── Mobile: compact strip; the contact sheet replaces the strip in place ───────── */
-@media (max-width:639px){
+@media (max-width:639px),(max-width:1023px) and (orientation:landscape) and (max-height:560px){
  .hero-title{font-size:clamp(56px,17.4vw,92px)}
  .hero-sub{font-size:19px}
  .hero-lead{font-size:15px}
  .hero-actions{width:100%}
  .hero-actions .btn{flex:1 1 auto}
- .hero-workspace{margin-top:28px;padding-left:0;padding-bottom:76px}
+ .hero-workspace{display:flex;flex-direction:column;margin-top:24px;padding-left:0;padding-bottom:28px}
  .hero-stage{
   --r:-3deg;--sx:21cqw;--sy:27cqw;
-  --pitch:30cqw;--fw:28cqw;--reb-t:3.6cqw;--reb-b:5.6cqw;--lead:4cqw;
+  --pitch:30cqw;--fw:28cqw;--reb-t:3.6cqw;--reb-b:7cqw;--lead:4cqw;
   --tx:22cqw;--ty:5cqw;--tw:82cqw;--th:44cqw;
   --px:2.5cqw;--py:2cqw;--pw:95cqw;--ph:51cqw;--pr:0deg;
   --sfw:20.4cqw;--colp:23cqw;--rowp:19.6cqw;--goy:2.8cqw;
@@ -182,13 +203,47 @@
  .hero-film[data-view=sheet] .hero-frames{z-index:7}
  .hero-film[data-view=sheet] .hero-grease{z-index:8}
  .hero-strip-edge>span{font-size:6px}
- .hero-frame figcaption{font-size:8px}
- .hero-film[data-view=sheet] .hero-frame figcaption{font-size:7px}
- .hero-sheet-head{font-size:8px}
  .hero-table-tag{display:none}
- .hero-controls{bottom:20px}
+ /* View switch above the stage: the sheet grows downwards, so the control never moves away from the finger. */
+ .hero-controls{order:-1;position:relative;left:auto;right:auto;bottom:auto;margin-bottom:16px;padding-inline:var(--gutter)}
  .hero-counter-extra{display:none}
+ /* Phone contact sheet: 2 columns × 4 rows, frames ≈ 42 % of the width (164 px at 390), 12 px captions.
+    The paper is in the flow so the stage grows to fit it; everything else on the stage stays absolute. */
+ .hero-slot{--ox:calc((var(--c2) - .5)*var(--colp));--oy:calc(var(--goy) + (var(--r2) - 1.5)*var(--rowp))}
+ .hero-film[data-view=sheet] .hero-stage{aspect-ratio:auto;--px:2.5cqw;--py:3cqw;--pw:95cqw;--sfw:42cqw;--colp:45cqw;--rowp:calc(28cqw + 31px);--goy:1.3cqw;--ph:calc(120.6cqw + 133px)}
+ .hero-film[data-view=sheet] .hero-sheet{position:relative;left:auto;top:auto;margin:var(--py) 0 var(--py) var(--px)}
+ .hero-film[data-view=sheet] .hero-sheet-head{left:4cqw;right:4cqw;top:2.6cqw;padding-bottom:6px;font-size:var(--fs-mono)}
+ .hero-film[data-view=sheet] :is(.hero-frame,.hero-grease){--ox:calc((var(--c2) - .5)*var(--colp));--oy:calc(var(--goy) + (var(--r2) - 1.5)*var(--rowp))}
+ .hero-film[data-view=sheet] .hero-frame figcaption{top:calc(100% + 6px);white-space:nowrap}
+ .hero-film[data-view=sheet] .hero-frame-cap>span{display:inline}
+ .hero-film[data-view=sheet] .hero-frame-cap>.hero-frame-sep{display:inline}
+ .hero-film[data-view=sheet] .hero-frame-no{font-size:var(--fs-mono)}
+ .hero-film[data-view=sheet] .hero-grease{--gw:calc(var(--sfw)*1.08);height:calc(var(--gw)*.8)}
  .hero-meta{display:block;line-height:1.7}
  .hero-meta>*+*{margin-left:.6em}
  .hero-stage{margin-top:0}
 }
+
+/* ───────── Landscape phones (e.g. 844 × 390): both CTAs on the first screen ─────────
+   Stacked layout, but the copy is set compactly (one-line title, one-line lead) and the stage is capped
+   to the screen height so the workspace below never reads as a second hero. */
+@media (max-width:1023px) and (orientation:landscape) and (max-height:560px){
+ .hero-inner{padding-top:14px}
+ .hero-meta{display:flex}
+ .hero-meta>*+*{margin-left:0}
+ .hero-title{margin-top:10px;font-size:clamp(34px,12svh,58px)}
+ .hero-title .hero-line{display:inline-block}
+ .hero-title .hero-line+.hero-line{margin:0 0 0 .3em}
+ .hero-sub{margin-top:12px;font-size:17px}
+ .hero-lead{margin-top:4px;max-width:none;font-size:15px}
+ .hero-actions{width:auto;margin-top:16px}
+ .hero-actions .btn{flex:0 0 auto}
+ .hero-workspace{margin-top:20px}
+ .hero-stage{width:min(100%,calc(100svh*1.5));margin-inline:auto}
+ .hero-controls{width:min(100%,calc(100svh*1.5));margin-inline:auto;padding-inline:0}
+ /* Contact sheet in landscape: 4 columns × 2 rows on the in-flow paper (frames ≈ 21 % of the stage). */
+ .hero-slot,.hero-film[data-view=sheet] :is(.hero-frame,.hero-grease){--ox:calc((var(--col) - 1.5)*var(--colp));--oy:calc(var(--goy) + (var(--row) - .5)*var(--rowp))}
+ .hero-film[data-view=sheet] .hero-stage{--sfw:21cqw;--colp:23cqw;--rowp:calc(14cqw + 31px);--ph:calc(36.6cqw + 71px)}
+ .hero-film[data-view=sheet] .hero-frame-no{font-size:var(--fs-deco)}
+}
+

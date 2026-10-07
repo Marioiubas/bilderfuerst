@@ -3,13 +3,17 @@
 
 /* ───────── Shared chapter grammar ───────── */
 :is(.hm-ltb,.hm-lab,.hm-str,.hm-scn,.hm-prt,.hm-gal,.hm-arc,.hm-fth){padding-block:var(--section)}
-:is(.hm-ltb,.hm-lab,.hm-str,.hm-scn,.hm-prt,.hm-gal,.hm-arc,.hm-fth) .sec-head h2{font-size:var(--fs-h1);line-height:.88}
+/* Heading rhythm (audit P1): the hero H1 is the only display title with an outlined line; chapter titles are solid h2s. */
+:is(.hm-ltb,.hm-lab,.hm-str,.hm-scn,.hm-prt,.hm-gal,.hm-arc,.hm-fth) .sec-head h2{font-size:var(--fs-h2);line-height:.92}
 :is(.hm-router,.hm-scn,.hm-arc) :focus-visible{outline:var(--focus-ring-dark)}
-:is(.hm-scn,.hm-arc) .outline-type{-webkit-text-stroke-color:var(--silver-300)}
+/* Informational mono text ≥ 12 px (chips, stock, captions, notes); decorative print stays aria-hidden. */
+:is(.hm-ltb,.hm-lab,.hm-str,.hm-scn) :is(.chip,.status){font-size:var(--fs-mono)}
+/* Stand-alone text links: 44 px tall hit box; padding grows the box, negative margins keep the layout. */
+:is(.hm-ltb,.hm-lab,.hm-str,.hm-scn,.hm-prt,.hm-gal,.hm-arc,.hm-fth) .link{padding-block:9px 13px;margin-block:-9px;background-position:left 0 bottom 9px}
 :is(.hm-used-title,.hm-prt-lead,.hm-lab-lead,.hm-scn-lead,.hm-fth-quote p,.hm-router-lead,.hm-drawer-label){text-wrap:balance}
-.hm-cap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:4px 18px;margin-top:12px;font-family:var(--font-mono);font-size:var(--fs-mono-s);font-weight:500;letter-spacing:.07em;text-transform:uppercase;line-height:1.5;color:var(--text-faint)}
+.hm-cap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:4px 18px;margin-top:12px;font-family:var(--font-mono);font-size:var(--fs-mono);font-weight:500;letter-spacing:.07em;text-transform:uppercase;line-height:1.5;color:var(--text-faint)}
 .hm-cap span:first-child{color:var(--text-muted)}
-.hm-note{margin-top:var(--s-5);font-size:var(--fs-mono-s);color:var(--text-faint)}
+.hm-note{margin-top:var(--s-5);font-size:var(--fs-mono);color:var(--text-faint)}
 .hm-ltb img,.hm-lab img,.hm-str img,.hm-scn img,.hm-prt img,.hm-gal img,.hm-arc img,.hm-fth img{width:100%;height:auto}
 .hm-12{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:24px}
 
@@ -21,7 +25,7 @@
 .hm-status-live{color:var(--text-inverse)}
 .hm-status-code{color:var(--text-inverse-faint)}
 .hm-status-addr{margin-left:auto;padding-right:0;border-left:0}
-.hm-status-addr a{padding-bottom:2px;background:linear-gradient(currentColor,currentColor) left bottom/100% 1px no-repeat;transition:color var(--t-fast)}
+.hm-status-addr a{display:inline-block;padding:13px 0 15px;margin-block:-13px;background:linear-gradient(currentColor,currentColor) left 0 bottom 13px/100% 1px no-repeat;transition:color var(--t-fast)}
 .hm-status-addr a:hover{color:var(--white);background-image:linear-gradient(var(--red-glow),var(--red-glow))}
 .hm-status-dot{flex:none;width:7px;height:7px;background:transparent;outline:1px solid var(--silver-400);outline-offset:-1px}
 [data-open=true]>.hm-status-dot{background:var(--red-glow);outline:0;border-radius:50%;box-shadow:0 0 10px var(--red-glow)}
@@ -38,7 +42,7 @@
 .hm-router-head .eyebrow{grid-column:1/-1;padding-bottom:var(--s-3);border-bottom:var(--hair)}
 .hm-router-head .eyebrow b{color:var(--red-glow)}
 .hm-router-head .sec-index{margin-left:auto;color:var(--text-faint)}
-.hm-router-head h2{font-size:var(--fs-h1);line-height:.88}
+.hm-router-head h2{font-size:var(--fs-h2);line-height:.92}
 .hm-router-lead{color:var(--text-muted);font-size:var(--fs-body-l);line-height:1.5}
 .hm-drawers{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));border:1px solid var(--line-dark-strong);background:var(--graphite-800)}
 .hm-drawers>li+li{border-left:1px solid var(--line-dark-strong)}
@@ -117,6 +121,22 @@
  .hm-drawer-pull{display:none}
 }
 
+/* Chapter index (jump links, not sticky): 2 columns on phones, 4 on tablets, one row of 8 on wide screens. */
+.hm-jump{margin-top:var(--s-7)}
+.hm-jump .eyebrow{padding-bottom:var(--s-3);border-bottom:var(--hair)}
+.hm-jump .eyebrow .sec-index{margin-left:auto;color:var(--text-faint)}
+.hm-jump-list{display:grid;grid-template-columns:repeat(8,minmax(0,1fr));border-left:1px solid var(--line-dark)}
+.hm-jump-list li{border-right:1px solid var(--line-dark);border-bottom:1px solid var(--line-dark)}
+.hm-jump-list a{position:relative;display:flex;align-items:center;gap:10px;min-height:48px;height:100%;padding:8px 12px;font-weight:620;font-size:14px;line-height:1.2;color:var(--text-inverse);transition:background-color var(--t-fast) var(--ease-shutter)}
+.hm-jump-list a::after{content:'';position:absolute;left:-1px;right:-1px;bottom:-1px;height:2px;background:var(--red-glow);transform:scaleX(0);transform-origin:left;transition:transform var(--t-normal) var(--ease-shutter)}
+.hm-jump-list a:hover,.hm-jump-list a:focus-visible{background:var(--graphite-700)}
+.hm-jump-list a:hover::after,.hm-jump-list a:focus-visible::after{transform:scaleX(1)}
+.hm-jump-list a:focus-visible{outline-offset:-3px}
+.hm-jump-no{color:var(--text-inverse-faint)}
+@media (max-width:1199px){.hm-jump-list{grid-template-columns:repeat(4,minmax(0,1fr))}}
+@media (max-width:639px){.hm-jump{margin-top:var(--s-6)}.hm-jump-list{grid-template-columns:repeat(2,minmax(0,1fr))}.hm-jump-list a{min-height:46px;padding:6px 10px}}
+/* Targets land below the sticky header via html{scroll-padding-top: header + 24px}; no local sticky layer here. */
+
 /* ───────── 01 · LTB light table ───────── */
 .hm-ltb{background:var(--paper-50);--text-faint:var(--text-muted)}
 .hm-ltb-table{position:relative;isolation:isolate;padding:clamp(12px,2.2vw,32px);border:1px solid var(--line-strong);background:#e3e6e4;box-shadow:inset 0 0 0 1px rgb(255 255 255 / .75),inset 0 0 120px rgb(10 11 12 / .07)}
@@ -135,15 +155,15 @@
 @media (hover:none){.hm-ltb-edge{opacity:1;transform:none}}
 .hm-ltb-meta{display:grid;grid-template-columns:minmax(0,1fr) auto;align-content:start;gap:8px 12px;padding:14px 16px 18px}
 .hm-ltb-name a{display:grid;gap:3px}
-.hm-ltb-brand{font-size:var(--fs-mono-s);color:var(--text-muted)}
+.hm-ltb-brand{font-size:var(--fs-mono);color:var(--text-muted)}
 .hm-ltb-title{font-stretch:76%;font-weight:730;font-size:clamp(19px,1.7vw,24px);line-height:1;text-transform:uppercase;letter-spacing:-.005em}
-.hm-ltb-fmt{font-stretch:100%;font-weight:500;font-size:.62em;letter-spacing:.02em;color:var(--text-muted)}
+.hm-ltb-fmt{font-stretch:100%;font-weight:500;font-size:max(12px,.62em);letter-spacing:.02em;color:var(--text-muted)}
 .hm-ltb-name a:hover .hm-ltb-title{color:var(--red-ink)}
 .hm-ltb-price{font-weight:660;font-size:18px;line-height:1.1;padding-top:16px}
 .hm-ltb-chips{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:6px}
 .hm-ltb-stock{grid-column:1/-1;display:flex;flex-wrap:wrap;align-items:center;gap:4px 12px}
-.hm-ltb-src{font-family:var(--font-mono);font-size:9.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--text-faint)}
-.hm-ltb-add{grid-column:1/-1;justify-self:start;margin-top:4px;background:var(--white)}
+.hm-ltb-src{font-family:var(--font-mono);font-size:var(--fs-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--text-faint)}
+.hm-ltb-add{grid-column:1/-1;justify-self:start;min-height:44px;margin-top:4px;background:var(--white)}
 @media (max-width:899px){.hm-ltb-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:539px){
  .hm-ltb-table{padding:10px}
@@ -184,7 +204,7 @@
 .hm-ticket-head .mono:first-child{color:var(--amber)}
 .hm-ticket-meta{color:var(--text-inverse-faint)}
 .hm-ticket-table{width:100%;border-collapse:collapse;font-size:14px}
-.hm-ticket-table thead th{padding:12px 20px 8px;font-family:var(--font-mono);font-size:var(--fs-mono-s);font-weight:500;letter-spacing:.08em;text-transform:uppercase;text-align:right;color:var(--text-inverse-faint)}
+.hm-ticket-table thead th{padding:12px 20px 8px;font-family:var(--font-mono);font-size:var(--fs-mono);font-weight:500;letter-spacing:.08em;text-transform:uppercase;text-align:right;color:var(--text-inverse-faint)}
 .hm-ticket-table thead th:first-child{text-align:left}
 .hm-ticket-table tbody th,.hm-ticket-table td{padding:8px 20px;border-top:1px solid var(--line-dark);font-weight:500}
 .hm-ticket-table tbody th{text-align:left}
@@ -209,7 +229,7 @@
  .hm-ticket-head,.hm-ticket-foot{padding-inline:12px}
  .hm-ticket-table{font-size:13px}
  .hm-ticket-table thead th,.hm-ticket-table tbody th,.hm-ticket-table td{padding-inline:8px}
- .hm-ticket-table thead th{font-size:9px;letter-spacing:.04em}
+ .hm-ticket-table thead th{font-size:var(--fs-mono);letter-spacing:.02em;line-height:1.2;vertical-align:bottom}
  .hm-ticket-table .hm-ticket-group td{padding:16px 8px 6px}
  .hm-ticket-fmt{font-size:24px}
 }
@@ -235,7 +255,7 @@
 .hm-str-claim{margin:var(--s-4) 0 var(--s-6);font-size:var(--fs-body-l);line-height:1.4;color:var(--text-muted)}
 .hm-spec{border-top:1px solid var(--text)}
 .hm-spec>div{display:grid;grid-template-columns:92px minmax(0,1fr);gap:16px;align-items:baseline;padding:9px 0;border-bottom:var(--hair)}
-.hm-spec dt{font-family:var(--font-mono);font-size:var(--fs-mono-s);letter-spacing:.08em;text-transform:uppercase;color:var(--text-faint)}
+.hm-spec dt{font-family:var(--font-mono);font-size:var(--fs-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--text-faint)}
 .hm-spec dd{font-size:14.5px}
 .hm-str-buy{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:8px 16px;margin:var(--s-5) 0}
 .hm-str-price{font-weight:680;font-size:30px;line-height:1}
@@ -244,7 +264,7 @@
 .hm-index .eyebrow{padding-bottom:var(--s-3);border-bottom:1px solid var(--text)}
 .hm-index .eyebrow .sec-index{margin-left:auto;color:var(--text-faint)}
 .hm-index li a{display:grid;grid-template-columns:36px auto minmax(24px,1fr) auto 16px;align-items:baseline;gap:14px;padding:13px 0 12px;border-bottom:var(--hair)}
-.hm-index-no{font-size:var(--fs-mono-s);color:var(--text-faint)}
+.hm-index-no{font-size:var(--fs-mono);color:var(--text-faint)}
 .hm-index-name{font-stretch:76%;font-weight:720;font-size:clamp(22px,2.2vw,32px);line-height:1;text-transform:uppercase;transition:color var(--t-fast)}
 .hm-index-rule{border-bottom:1px dotted var(--line-strong);transform:translateY(-5px)}
 .hm-index-count{font-family:var(--font-mono);font-size:13px;color:var(--text-muted)}
@@ -304,7 +324,7 @@
 .hm-sheet-0{left:0;top:0}
 .hm-sheet-1{left:calc(var(--cm) * 5);top:calc(var(--cm) * 3)}
 .hm-sheet-2{left:calc(var(--cm) * 17);top:calc(var(--cm) * 13)}
-.hm-sheet-size{position:absolute;z-index:1;left:calc(var(--cm) * 1.1);top:calc(var(--cm) * .55);font-size:8.5px;color:var(--text-muted)}
+.hm-sheet-size{position:absolute;z-index:1;left:calc(var(--cm) * 1.1);top:calc(var(--cm) * .55);font-size:var(--fs-deco);color:var(--text-muted)}
 .hm-sheet-image{position:absolute;z-index:1;inset:calc(var(--cm) * 2.4) calc(var(--cm) * 2) calc(var(--cm) * 2.2)}
 .hm-sheet-image img{width:100%!important;height:100%!important;object-fit:contain}
 .hm-prt-sizes{border-top:1px solid var(--text)}
@@ -332,7 +352,7 @@
 .hm-gal-facts{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));margin-top:var(--s-8);border-block:1px solid var(--line-dark-strong)}
 .hm-gal-facts>div{display:grid;align-content:start;gap:8px;padding:16px 20px 18px 0}
 .hm-gal-facts>div+div{padding-left:20px;border-left:1px solid var(--line-dark)}
-.hm-gal-facts dt{font-size:var(--fs-mono-s);color:var(--text-inverse-faint)}
+.hm-gal-facts dt{font-size:var(--fs-mono);color:var(--text-inverse-faint)}
 .hm-gal-facts dd{font-size:15px;line-height:1.4}
 .hm-gal-invite{padding-left:14px;border-left:2px solid var(--silver-300);color:var(--text-inverse-muted)}
 .hm-log{margin-top:var(--s-9)}
@@ -388,7 +408,7 @@
 .hm-hours-table th{position:relative}
 .hm-hours-table tr.is-today th,.hm-hours-table tr.is-today td{font-weight:650;color:var(--text)}
 .hm-hours-table tr.is-today th::before{content:'';position:absolute;left:-14px;top:50%;width:6px;height:6px;background:var(--text);transform:translateY(-50%)}
-.hm-hours-today{margin-left:10px;padding:2px 5px;border:1px solid currentColor;border-radius:var(--r-1);font-size:9px}
+.hm-hours-today{margin-left:10px;padding:1px 5px;border:1px solid currentColor;border-radius:var(--r-1);font-size:var(--fs-mono)}
 .hm-fth-actions{display:flex;flex-wrap:wrap;align-items:center;gap:12px 18px}
 .hm-fth-quote{padding-left:16px;border-left:2px solid var(--text)}
 .hm-fth-quote p{font-stretch:88%;font-weight:640;font-size:clamp(19px,1.6vw,22px);line-height:1.25}
@@ -396,4 +416,82 @@
 .hm-fth-quote footer a{display:inline-flex;align-items:center;gap:6px}
 .hm-fth-quote footer a:hover{color:var(--red-ink)}
 @media (max-width:1023px){.hm-fth-photo,.hm-fth-info{grid-column:1/-1}.hm-fth-info{grid-template-columns:minmax(0,1fr) minmax(0,1fr);column-gap:32px}.hm-fth-actions,.hm-fth-quote{grid-column:1/-1}}
-@media (max-width:767px){.hm-fth-info{grid-template-columns:1fr}.hm-fth-actions .btn{flex:1 1 100%}.hm-hours-table tr.is-today th::before{left:-10px;width:4px;height:4px}}
+@media (max-width:767px){.hm-fth-info{grid-template-columns:1fr}.hm-hours-table tr.is-today th::before{left:-10px;width:4px;height:4px}}
+
+/* ───────── Phone disclosure (secondary chapter content, < 768 px only) ───────── */
+.hm-more{display:none}
+
+/* ───────── Phones: density (audit M2) — same facts, less height ─────────
+   48 px section rhythm, compact section heads, 4 films on the light table, wider photo crops, secondary content
+   (lab machines + developer samples, Pentax spec table, past events) behind one 44 px disclosure per chapter. */
+@media (max-width:767px){
+ :is(.hm-ltb,.hm-lab,.hm-str,.hm-scn,.hm-prt,.hm-gal,.hm-arc,.hm-fth){padding-block:var(--s-7)}
+ .hm-router{padding-block:var(--s-7)}
+ :is(.hm-ltb,.hm-lab,.hm-str,.hm-scn,.hm-prt,.hm-gal,.hm-arc,.hm-fth) .sec-head{row-gap:var(--s-3);margin-bottom:var(--s-6)}
+ .hm-router-head{gap:12px;margin-bottom:var(--s-6)}
+ :is(.hm-lab-grid,.hm-str-feature,.hm-scn-grid,.hm-prt-grid,.hm-gal-grid,.hm-fth-grid){row-gap:var(--s-6)}
+ :is(.hm-lab-lead,.hm-scn-lead,.hm-router-lead){font-size:16px}
+ /* photos as 16:9 crops (captions stay true: same photograph, less sky/floor) */
+ :is(.hm-lab-photo-main,.hm-scn-frame,.hm-prt-photo,.hm-fth-photo) img{aspect-ratio:16/9;object-fit:cover}
+
+ .hm-more{display:flex;align-items:center;justify-content:space-between;gap:16px;width:100%;min-height:48px;padding:0 14px;border:1px solid var(--line-strong);border-radius:var(--r-1);font-weight:620;font-size:14px;text-align:left}
+ .hm-more-icon{position:relative;flex:none;width:12px;height:12px}
+ .hm-more-icon::before,.hm-more-icon::after{content:'';position:absolute;left:0;right:0;top:50%;height:1.5px;margin-top:-.75px;background:currentColor;transition:transform var(--t-fast) var(--ease-shutter)}
+ .hm-more-icon::after{transform:rotate(90deg)}
+ .hm-more[aria-expanded=true] .hm-more-icon::after{transform:none}
+ section:not([data-more]) .hm-extra{display:none}
+
+ /* 01 · LTB: four films (the shop has the rest), Quellstand stated once in the note */
+ .hm-ltb-item:nth-child(n+5){display:none}
+ .hm-ltb .hm-ltb-src{display:none}
+
+ /* 02 · LAB: photo · lead · CTA · ticket (prices) · [Maschinen und Entwickler] */
+ .hm-lab-copy{display:contents}
+ .hm-lab-grid>*,.hm-lab-copy>*{grid-column:1/-1}
+ .hm-lab-photo-main{order:0}.hm-lab-lead{order:1}.hm-lab-actions{order:2}.hm-ticket{order:3}.hm-lab-more{order:4}.hm-lab-machines{order:5}.hm-lab-side{order:6}
+ .hm-ticket-table tbody th,.hm-ticket-table td{padding-block:6px}
+ .hm-ticket-table .hm-ticket-group td{padding:12px 8px 4px}
+ .hm-ticket-head{padding-block:12px 10px}
+
+ /* 03 · STR: name · claim · price · CTA · [Technische Daten] · index · used cameras */
+ .hm-str-spec{display:flex;flex-direction:column}
+ .hm-str-spec .hm-spec{order:2}
+ .hm-str-more{margin-top:12px}
+ .hm-str-spec>.hm-spec{margin-top:12px}
+ .hm-str-claim{margin-bottom:var(--s-4)}
+ .hm-str-buy{margin:0 0 var(--s-4)}
+ .hm-str-lower{margin-top:var(--s-7);row-gap:var(--s-6)}
+ .hm-used{padding:18px}
+ /* Sortiment index in two columns: name · count, 48 px rows (numbers are decorative print) */
+ .hm-index ol{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:16px}
+ .hm-index li a{grid-template-columns:minmax(0,auto) minmax(6px,1fr) auto;gap:8px;align-items:center;min-height:48px;padding:6px 0}
+ .hm-index li a>.hm-index-no,.hm-index li a>svg{display:none}
+ .hm-index-name{font-size:18px}
+ .hm-index-rule{transform:translateY(4px)}
+
+ /* 04 · SCN: one photograph on phones (the slide-in-glove detail adds no fact) */
+ .hm-scn-side{display:none}
+ .hm-scn-year{font-size:56px}
+
+ /* 05 · PRT */
+ .hm-prt-stack{margin:var(--s-5) 0 var(--s-4)}
+
+ /* 06 · GAL: the window schema repeats the facts list → facts only; past events behind a disclosure */
+ .hm-window{display:none}
+ .hm-gal-facts{margin-top:var(--s-6)}
+ .hm-gal-more{margin-top:var(--s-6)}
+ .hm-log{margin-top:var(--s-4)}
+
+ /* 07 · ARC */
+ .hm-arc-facades{margin-top:var(--s-6)}
+
+ /* 08 · FTH: call + route side by side */
+ .hm-fth-actions .btn{flex:1 1 40%;padding-inline:12px}
+ .hm-hours-table th,.hm-hours-table td{padding-block:6px}
+}
+@media (max-width:639px){
+ /* Router drawers: 72 px rows */
+ .hm-drawer{padding:8px 14px}
+ .hm-drawer-face{height:56px}
+ .hm-drawer-face .hm-sym{transform:scale(.74)}
+}

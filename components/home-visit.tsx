@@ -17,7 +17,7 @@ export function HomeVisit(){
  return <section className="hm-fth zone-light" id={head.sectionId} aria-labelledby="hm-fth-title">
   <div className="wrap">
    <SectionHead code={head.code} label={head.label} index={head.index} id="hm-fth-title"
-    title={<>Der Laden<br/>an der Ecke.</>}/>
+    title={<>Der Laden <br/>an der Ecke.</>}/>
    <div className="hm-fth-grid">
     <figure className="hm-fth-photo">
      <img src={PHOTO.storeCorner.src} width={PHOTO.storeCorner.w} height={PHOTO.storeCorner.h} loading="lazy" decoding="async" alt="Eckhaus an der Alexanderstraße 2 in Fürth mit dem bilderfürst-Giebelschild über dem Eingang und dem Galerie-Schaufenster"/>

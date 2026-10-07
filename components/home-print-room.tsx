@@ -7,7 +7,7 @@ import {useEffect,useRef} from 'react';
 import {ArrowUpRight} from 'lucide-react';
 import {SectionHead} from './analog/primitives';
 import {printEmerge,printFan} from '@/motion/home';
-import {PHOTO,chapter} from './home-shared';
+import {PHOTO,chapter,photo} from './home-shared';
 
 const SHEETS=[
  {w:45,h:30,size:'30 × 45 cm',price:'24,50 €',img:'/images/scan-hc110.webp',alt:'Druckbeispiel mit Tri-X-Labormuster (Porsche 911), entwickelt in Kodak HC-110'},
@@ -22,11 +22,11 @@ export function HomePrintRoom(){
  return <section className="hm-prt zone-light" id={head.sectionId} aria-labelledby="hm-prt-title">
   <div className="wrap">
    <SectionHead code={head.code} label={head.label} index={head.index} id="hm-prt-title"
-    title={<>Vom Negativ<br/>aufs Papier.</>}
+    title={<>Vom Negativ <br/>aufs Papier.</>}
     action={<Link className="link" href="/i/fineart-prints">FineArt-Drucke <ArrowUpRight size={16}/></Link>}/>
    <div className="hm-prt-grid">
     <figure className="hm-prt-photo">
-     <img src={PHOTO.printKiosk.src} width={PHOTO.printKiosk.w} height={PHOTO.printKiosk.h} loading="lazy" decoding="async" alt="Bestellterminal für Fotoabzüge im Laden, im Hintergrund der Drucker"/>
+     <img {...photo(PHOTO.printKiosk,'(min-width: 1024px) min(68vw, 1080px), 92vw')} loading="lazy" decoding="async" alt="Bestellterminal für Fotoabzüge im Laden, im Hintergrund der Drucker"/>
      <figcaption className="hm-cap"><span>PRT · Bestellterminal im Laden</span><span>Abzüge vom Handy, von SD-Karte oder USB</span></figcaption>
     </figure>
     <div className="hm-prt-copy">
@@ -34,7 +34,7 @@ export function HomePrintRoom(){
      <p className="hm-prt-text">Kleine Formate von 9 × 13 bis 20 × 30 cm auf glänzendem oder seidenmattem FineArt-Papier, gedruckt im Laden.</p>
      <div className="hm-prt-stack" ref={stack} tabIndex={0} role="group" aria-label="FineArt-Formate maßstäblich: 30 × 45, 30 × 40 und 20 × 30 Zentimeter">
       {SHEETS.map((s,i)=><div key={s.size} className={`hm-sheet hm-sheet-${i}`} data-sheet style={{'--w':s.w,'--h':s.h} as React.CSSProperties}>
-       <span className="hm-sheet-size mono">{s.size}</span>
+       <span className="hm-sheet-size mono" aria-hidden="true">{s.size}</span>
        <span className="hm-sheet-image"><img src={s.img} width={600} height={398} loading="lazy" decoding="async" alt={s.alt}/></span>
       </div>)}
      </div>
