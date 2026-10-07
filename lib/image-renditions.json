@@ -85,15 +85,15 @@
   },
   "/images/slide-in-glove.webp": {
     "large": "/images/slide-in-glove-l.webp",
-    "w": 1600,
-    "h": 1280,
+    "w": 2500,
+    "h": 2000,
     "smallW": 1400,
     "smallH": 1120
   },
   "/images/slide-magazine-macro.webp": {
     "large": "/images/slide-magazine-macro-l.webp",
-    "w": 1600,
-    "h": 1280,
+    "w": 2500,
+    "h": 2000,
     "smallW": 1400,
     "smallH": 1120
   },
