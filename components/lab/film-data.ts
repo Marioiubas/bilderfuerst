@@ -26,14 +26,15 @@ export const STEPS:readonly StepDef[]=[
  {id:'qty',label:'Menge',href:'#step-qty'},
  {id:'delivery',label:'Abgabe',href:'#step-delivery',optional:true},
 ];
-export const SUMMARY_STEP={label:'Auftragsnotiz',short:'Notiz',href:'#fc-ticket'} as const;
+export const SUMMARY_STEP={label:'Auftragsnotiz',short:'Notiz',href:'#fc-summary'} as const;
 export const STEP_COUNT_LABEL=`${STEPS.length} Schritte + ${SUMMARY_STEP.label}`;
 export const stepNo=(id:StepId)=>String(STEPS.findIndex(s=>s.id===id)+1).padStart(2,'0');
 
-export const formats:Record<FormatId,{master:string;name:string;sub:string;object:string;hint?:string;code:string}>={
- '35mm':{master:'filmentwicklung-kleinbild',name:'35mm',sub:'Kleinbild · 135',object:'Filmpatrone',hint:'Auch Halbformat, z. B. Pentax 17',code:'135'},
- '120':{master:'filmentwicklung-mittelformat',name:'120',sub:'Mittelformat · Rollfilm',object:'Spule mit Schutzpapier',hint:'6×4,5 bis 6×9',code:'120'},
- '110':{master:'filmentwicklung-pocket-110',name:'110',sub:'Pocket',object:'Kassette',hint:'Kleine Pocket-Kassette',code:'110'},
+/** short = the one descriptor on the format tile; object + hint are technical (expert mode). code = render file. */
+export const formats:Record<FormatId,{master:string;name:string;short:string;sub:string;object:string;hint?:string;code:string}>={
+ '35mm':{master:'filmentwicklung-kleinbild',name:'35mm',short:'Kleinbild',sub:'Kleinbild · 135',object:'Filmpatrone',hint:'Auch Halbformat, z. B. Pentax 17',code:'135'},
+ '120':{master:'filmentwicklung-mittelformat',name:'120',short:'Mittelformat',sub:'Mittelformat · Rollfilm',object:'Spule mit Schutzpapier',hint:'6×4,5 bis 6×9',code:'120'},
+ '110':{master:'filmentwicklung-pocket-110',name:'110',short:'Pocket',sub:'Pocket',object:'Kassette',hint:'Kleine Pocket-Kassette',code:'110'},
 };
 
 /** Exact machine/chemistry wording from the product pages (live 2026-10-05). */

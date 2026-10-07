@@ -45,15 +45,18 @@ export function Hero(){
 
  const load=useCallback(async():Promise<SceneMount>=>{
   const {mountFilmWorkspace}=await import('./three/film-workspace');
-  return (host,ctx)=>mountFilmWorkspace(host,ctx,{pointerTarget:section.current??host,sheet:sheetRef.current,onApi:next=>{api.current=next}});
+  return (host,ctx)=>mountFilmWorkspace(host,ctx,{pointerTarget:section.current??host,sheet:sheetRef.current,currentSheet:()=>sheetRef.current,onApi:next=>{api.current=next},
+   // Phones (MOBILE-3D-PLAN §6.3): once the 3D sheet is marked, the readable DOM contact sheet takes over (hero.css).
+   onSettled:view=>{const el=workspace.current;if(!el)return;if(view==='sheet'&&sheetRef.current)el.dataset.settled='';else delete el.dataset.settled}});
  },[]);
- const webgl=useWebGLScene(workspace,load,{id:'hero-workspace',threshold:.05});
+ const webgl=useWebGLScene(workspace,load,{id:'hero-workspace',threshold:.05,minTier:'mobile'});
  // A torn-down scene (tier change, reduced motion, offscreen budget) drops its API.
- useEffect(()=>{if(webgl!=='active')api.current=null},[webgl]);
+ useEffect(()=>{if(webgl!=='active'){api.current=null;delete workspace.current?.dataset.settled}},[webgl]);
 
  function show(next:boolean){
   if(next===sheetRef.current)return;
   sheetRef.current=next;
+  if(workspace.current)delete workspace.current.dataset.settled;
   const stage=film.current;const scene=workspace.current?.dataset.webgl==='active'?api.current:null;
   const before=stage&&!scene?measureFrames(stage):undefined;
   arrangement.current?.revert();arrangement.current=undefined;
@@ -76,8 +79,8 @@ export function Hero(){
 
   <div className="hero-inner wrap">
    <div className="hero-copy">
-    <p className="hero-meta eyebrow" data-intro-step><b>DRK-00</b><span>/</span><span>Bilderfürst seit 1973 · Alexanderstraße 2, Fürth</span></p>
-    <h1 id="hero-title" className="hero-title display display-xl"><span className="hero-line" data-intro-step>Analog.</span><span className="hero-line outline-type" data-intro-step>Für immer.</span></h1>
+    <p className="hero-meta eyebrow" data-intro-step><b>Bilderfürst</b><span>Fürth · seit 1973</span></p>
+    <h1 id="hero-title" className="hero-title h-serif"><span className="hero-line" data-intro-step>Analog.</span><span className="hero-line" data-intro-step><em>Für immer.</em></span></h1>
     <p className="hero-sub" data-intro-step>Dein Blick. Dein Film. Unser Handwerk.</p>
     <p className="hero-lead" data-intro-step>Filme, Kameras und ein eigenes Labor für C-41, Schwarzweiß und E-6 – mitten in Fürth.</p>
     <div className="hero-actions">

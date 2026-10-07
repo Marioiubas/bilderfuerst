@@ -2,27 +2,37 @@
 // Signature experience #2: film development configurator (/filmentwicklung).
 // 01 Format → 02 Prozess → 03 Scan → 04 Menge → 05 Abgabe (optional) → order note ("Notiz", the summary,
 // numbered outside the choice steps; count derived from STEPS, audit P4). Phones: compact intro,
-// 48 px progress row instead of the sticky strip and a summary dock once a price exists (audit M4).
+// 48 px progress row instead of the sticky strip and a total + CTA dock from the first choice (audit M4, 2.4).
+// Hybrid surface (audit 2.1–2.7, lab-paper.css): below 900 px (and on landscape phones) the steps sit on
+// light photo paper, the technical lab (tank, machines, expert content) follows as a dark section, then
+// the order summary (real film photo, plain summary, total, CTA; the receipt collapsed on phones).
+// ≥ 900 px keeps the dark lab: tank + photo + receipt beside/after the steps, expert content inline.
 // Every combination resolves to a REAL catalog variant (lib/catalog.json); unsupported combinations
 // are not offered. URL state: ?format=35mm|120|110&process=C-41|S/W|S/W%20Push/Pull|E-6&scan=Ohne%20Scan|JPG|TIFF&qty=n
-import {useEffect,useRef,useState} from 'react';
+import {useEffect,useRef,useState,useSyncExternalStore} from 'react';
 import Link from 'next/link';
-import {ArrowRight,Minus,Plus} from 'lucide-react';
+import {ArrowRight,ChevronDown,Minus,Plus} from 'lucide-react';
 import {formatPrice} from '@/lib/catalog';
 import {track} from '@/lib/analytics';
 import {motionAllowed} from '@/motion/reduced-motion';
 import {useStore} from './store-context';
 import {FilmStrip,type StripFrame} from './lab/film-strip';
 import {ProgressRow} from './lab/progress-row';
-import {SummaryDock} from './lab/summary-dock';
+import {SummaryDock,type DockNext} from './lab/summary-dock';
 import {ProcessTank} from './lab/process-tank';
 import {LabTicket} from './lab/lab-ticket';
 import {ScanSpecs} from './lab/scan-specs';
 import {DeveloperLab} from './lab/developer-lab';
-import {FormatGlyph} from './lab/format-glyph';
+import {FormatRender} from './lab/format-glyph';
+import {lockFigure} from '@/motion/film';
 import {DELIVERY_IDS,FORMAT_IDS,PROCESS_IDS,SCAN_IDS,STEPS,STEP_COUNT_LABEL,SUMMARY_STEP,deliveries,encParam,findVariant,formatDelta,formats,formatsFor,megapixels,minPrice,parseFormat,parseProcess,parseQty,parseScan,processes,processesFor,scanLabel,scanSizes,stepNo,tiffPremium,type DeliveryId,type FormatId,type ProcessId,type ScanId,type Selection,type StepId} from './lab/film-data';
 
 type Price={text:string;tone:'delta'|'abs'|'from'|'current'|'none'};
+/** Same query as the light surface in lab-paper.css: expert content then lives in the dark lab section. */
+const PAPER_Q='(max-width: 899px), (max-height: 500px) and (max-width: 1023px)';
+function useMedia(q:string){
+ return useSyncExternalStore(cb=>{const m=window.matchMedia(q);m.addEventListener('change',cb);return()=>m.removeEventListener('change',cb)},()=>window.matchMedia(q).matches,()=>false);
+}
 const slug=(s:string)=>s.toLowerCase().replace(/[^a-z0-9]+/g,'-');
 
 function PriceTag({price}:{price:Price}){
@@ -57,6 +67,9 @@ export function FilmConfigurator(){
  const [animate,setAnimate]=useState(false);
  const started=useRef(false);const urlSync=useRef(false);const timer=useRef<number|undefined>(undefined);
  const formatHead=useRef<HTMLHeadingElement>(null);
+ const [noteOpen,setNoteOpen]=useState(false);
+ const paper=useMedia(PAPER_Q);
+ const sumTotal=useRef<HTMLElement>(null);
 
  const variant=format&&process&&scan?findVariant(format,process,scan):undefined;
  const estimate=minPrice({format,process,scan});
@@ -98,6 +111,11 @@ export function FilmConfigurator(){
  function chooseScan(s:ScanId){touch();setScan(s)}
  function chooseQty(n:number){if(!Number.isFinite(n))return;touch();setQty(Math.max(1,Math.min(99,Math.round(n))));setQtyDone(true)}
  function chooseDelivery(d:DeliveryId){touch();setDelivery(cur=>cur===d?null:d)}
+ /** Expert mode from a step: on the paper surface its content sits in the lab section, so go there. */
+ function openExpert(target:string){
+  setExpert(true);
+  if(paper)requestAnimationFrame(()=>document.getElementById(target)?.scrollIntoView({behavior:motionAllowed()?'smooth':'auto',block:'start'}));
+ }
 
  function addCurrent(){
   if(!variant?.inStock)return false;
@@ -151,13 +169,24 @@ export function FilmConfigurator(){
  ];
  const shownProcesses=format?processesFor(format):[...PROCESS_IDS];
  const kind=process?processes[process].kind:null;
+ useEffect(()=>{if(!animate)return;const a=lockFigure(sumTotal.current);return()=>{a?.revert()}},[total,estimate,animate]);
+ const nextId=!format?null:!process?'process':!scan?'scan':null;
+ const dockNext:DockNext|null=nextId?{label:STEPS.find(st=>st.id===nextId)?.label??'',href:`#step-${nextId}`,focusId:`fc-h-${nextId}`}:null;
+ const expertProcess=<div id="fc-expert-process" className="fc-expert" hidden={!expert}>
+  <DeveloperLab idPrefix="fc" headingLevel={paper?'h3':'h4'}/>
+  {process&&processes[process].kind!=='bw'&&<p className="fc-help">Die Entwicklerwahl betrifft nur Schwarzweiß.</p>}
+ </div>;
+ const expertScan=<div id="fc-expert-scan" className="fc-expert" hidden={!expert}>
+  <ScanSpecs lock={format} idPrefix="fc-scan" animate={animate}/>
+ </div>;
+ const machine=(p:ProcessId)=>`${processes[p].machine} · ${processes[p].chemistry}`;
 
  return <div className="fc" data-expert={expert}>
   <header className="zone-dark fc-hero">
    <div className="wrap fc-hero-grid">
     <div className="fc-hero-copy">
      <p className="eyebrow"><b>LAB</b><span>Filmentwicklung im eigenen Labor<span className="fc-wide-only"> · Fürth</span></span></p>
-     <h1 className="fc-title">Film entwickeln <span className="outline-type">im eigenen Labor</span></h1>
+     <h1 className="fc-title">Film entwickeln <span className="fc-title-sub">im eigenen Labor</span></h1>
      <p className="lead fc-lead">C-41 im Fujifilm-Minilab, Schwarzweiß individuell in Jobo-Rotationsmaschinen, E-6 mit CineStill-Chemie. Gescannt wird auf dem Noritsu HS-1800. {STEP_COUNT_LABEL}, Preise direkt aus dem Shop.</p>
      <p className="lead fc-lead-short">{FORMAT_IDS.map(f=>formats[f].name).join(' · ')} · ab <span className="num">{formatPrice(minPrice({})??0)}</span> je Film</p>
     </div>
@@ -192,10 +221,10 @@ export function FilmConfigurator(){
        <header className="fc-step-head"><span className="fc-step-no" aria-hidden="true">{stepNo('format')}</span><div><h3 id="fc-h-format" ref={formatHead} tabIndex={-1}>Welchen Film hast du?</h3><p className="fc-help">Am Gehäuse erkennbar: Patrone, Rollfilm mit Schutzpapier oder Pocket-Kassette.</p></div></header>
        <div className="fc-options fc-formats" role="group" aria-labelledby="fc-h-format">
         {FORMAT_IDS.map(f=>{const sel=format===f;const clash=!!process&&!processesFor(f).includes(process);return <button type="button" key={f} className="fc-opt" aria-pressed={sel} onClick={()=>chooseFormat(f)}>
-         <FormatGlyph format={f}/>
+         <FormatRender format={f}/>
          <span className="fc-opt-title">{formats[f].name}</span>
-         <span className="fc-opt-sub">{formats[f].sub} · {formats[f].object}</span>
-         {formats[f].hint&&<span className="fc-opt-hint">{formats[f].hint}</span>}
+         <span className="fc-opt-sub">{formats[f].short}</span>
+         {expert&&<span className="fc-opt-hint">{formats[f].object}{formats[f].hint?` · ${formats[f].hint}`:''}</span>}
          {clash&&process&&<span className="fc-opt-warn">{processes[process].label} nicht für {formats[f].name}</span>}
          <PriceTag price={priceFor({format:f},sel)}/>
         </button>})}
@@ -203,7 +232,7 @@ export function FilmConfigurator(){
       </section>
 
       <section className="fc-step" id="step-process" aria-labelledby="fc-h-process" data-done={!!process}>
-       <header className="fc-step-head"><span className="fc-step-no" aria-hidden="true">{stepNo('process')}</span><div><h3 id="fc-h-process">Welcher Prozess?</h3><p className="fc-help">Der Prozess steht auf Packung oder Patrone. {format?`Für ${formats[format].name} im Angebot: ${processesFor(format).map(p=>processes[p].label).join(', ')}.`:'Erst das Format wählen, dann zeigen wir nur, was dafür möglich ist.'}</p></div></header>
+       <header className="fc-step-head"><span className="fc-step-no" aria-hidden="true">{stepNo('process')}</span><div><h3 id="fc-h-process" tabIndex={-1}>Welcher Prozess?</h3><p className="fc-help">Der Prozess steht auf Packung oder Patrone. {format?`Für ${formats[format].name} im Angebot: ${processesFor(format).map(p=>processes[p].label).join(', ')}.`:'Erst das Format wählen, dann zeigen wir nur, was dafür möglich ist.'}</p></div></header>
        <div className="fc-options fc-procs" role="group" aria-labelledby="fc-h-process">
         {shownProcesses.map(p=>{const info=processes[p];const sel=process===p;const id=`fc-proc-${slug(p)}`;return <div key={p} className="fc-proc" data-kind={info.kind} data-selected={sel} data-marker={!!info.marker}>
          <button type="button" className="fc-proc-btn" aria-pressed={sel} aria-describedby={`${id}-d`} onClick={()=>chooseProcess(p)}>
@@ -221,14 +250,12 @@ export function FilmConfigurator(){
          </div></div>
         </div>})}
        </div>
-       <div id="fc-expert-process" className="fc-expert" hidden={!expert}>
-        <DeveloperLab idPrefix="fc" headingLevel="h4"/>
-        {process&&processes[process].kind!=='bw'&&<p className="fc-help">Die Entwicklerwahl betrifft nur Schwarzweiß.</p>}
-       </div>
+       <p className="fc-proc-note" data-kind={kind??'none'}>{process?processes[process].explain:''}</p>
+       {!paper&&expertProcess}
       </section>
 
       <section className="fc-step" id="step-scan" aria-labelledby="fc-h-scan" data-done={!!scan}>
-       <header className="fc-step-head"><span className="fc-step-no" aria-hidden="true">{stepNo('scan')}</span><div><h3 id="fc-h-scan">Brauchst du Scans?</h3><p className="fc-help">Ohne Scan bekommst du nur die Entwicklung. Mit Scan zusätzlich Bilddateien{format==='110'?'.':', gescannt auf dem Noritsu HS-1800.'} Wie die Dateien zu dir kommen, bitte im Laden erfragen.</p></div></header>
+       <header className="fc-step-head"><span className="fc-step-no" aria-hidden="true">{stepNo('scan')}</span><div><h3 id="fc-h-scan" tabIndex={-1}>Brauchst du Scans?</h3><p className="fc-help">Ohne Scan bekommst du nur die Entwicklung. Mit Scan zusätzlich Bilddateien{format==='110'?'.':', gescannt auf dem Noritsu HS-1800.'} Wie die Dateien zu dir kommen, bitte im Laden erfragen.</p></div></header>
        <div className="fc-options fc-scans" role="group" aria-labelledby="fc-h-scan">
         {SCAN_IDS.map(s=>{const sel=scan===s;return <button type="button" key={s} className="fc-opt fc-scan" aria-pressed={sel} onClick={()=>chooseScan(s)}>
          <span className="fc-opt-title">{scanLabel(format,s)}</span>
@@ -237,14 +264,12 @@ export function FilmConfigurator(){
          <PriceTag price={priceFor({scan:s},sel)}/>
         </button>})}
        </div>
-       <div id="fc-expert-scan" className="fc-expert" hidden={!expert}>
-        <ScanSpecs lock={format} idPrefix="fc-scan" animate={animate}/>
-       </div>
-       {!expert&&<p className="fc-help fc-help-more">Alle Pixelmaße pro Bildformat zeigt der <button type="button" className="fc-inline" aria-expanded={false} aria-controls="fc-expert-process fc-expert-scan" onClick={()=>setExpert(true)}>Expertenmodus</button>.</p>}
+       {!paper&&expertScan}
+       {!expert&&<p className="fc-help fc-help-more">Alle Pixelmaße pro Bildformat zeigt der <button type="button" className="fc-inline" aria-expanded={false} aria-controls="fc-expert-process fc-expert-scan" onClick={()=>openExpert('fc-expert-scan')}>Expertenmodus</button>.</p>}
       </section>
 
       <section className="fc-step" id="step-qty" aria-labelledby="fc-h-qty" data-done={qtyDone}>
-       <header className="fc-step-head"><span className="fc-step-no" aria-hidden="true">{stepNo('qty')}</span><div><h3 id="fc-h-qty">Wie viele Filme?</h3><p className="fc-help">Alle Filme mit denselben Optionen. Andere Optionen: erst diese Rolle hinzufügen, dann „Weitere Rolle mit anderen Optionen“.</p></div></header>
+       <header className="fc-step-head"><span className="fc-step-no" aria-hidden="true">{stepNo('qty')}</span><div><h3 id="fc-h-qty" tabIndex={-1}>Wie viele Filme?</h3><p className="fc-help">Alle Filme mit denselben Optionen. Andere Optionen: erst diese Rolle hinzufügen, dann „Weitere Rolle mit anderen Optionen“.</p></div></header>
        <div className="fc-qty">
         <button type="button" className="fc-qty-btn" aria-label="Einen Film weniger" disabled={qty<=1} onClick={()=>chooseQty(qty-1)}><Minus size={18} aria-hidden="true"/></button>
         <label className="fc-qty-field"><span className="sr-only">Anzahl Filme</span><input className="num" type="number" inputMode="numeric" min={1} max={99} value={qty} onChange={e=>{if(e.target.value!=='')chooseQty(Number(e.target.value))}}/></label>
@@ -265,14 +290,48 @@ export function FilmConfigurator(){
       </section>
      </div>
 
-     <SummaryDock total={total} qty={qty} canAdd={!!variant?.inStock} added={added} onAdd={()=>{addCurrent()}} targetId="fc-ticket" focusId="tk-title"/>
+     <SummaryDock ready={!!format} total={total} estimate={estimate} qty={qty} canAdd={!!variant?.inStock} added={added} onAdd={()=>{addCurrent()}} next={dockNext} targetId="fc-summary" focusId="fc-sum-title"/>
 
-     <aside className="fc-side" aria-label="Zusammenfassung">
-      <ProcessTank format={format} process={process} animate={animate}/>
-      <div className="fc-ticket-dock" id="fc-ticket">
-       <LabTicket format={format} process={process} scan={scan} qty={qty} delivery={delivery} variant={variant} estimate={estimate} missing={missing} roll={roll} added={added} animate={animate} onAdd={()=>{addCurrent()}} onAnother={anotherRoll}/>
-      </div>
-     </aside>
+     <div className="fc-side">
+      <section className="zone-dark fc-lab" aria-labelledby="fc-lab-title">
+       <div className="fc-lab-head"><p className="eyebrow"><b>LAB</b><span>Technik</span></p><h2 id="fc-lab-title" className="fc-lab-title">Im Labor</h2></div>
+       <ProcessTank format={format} process={process} animate={animate}/>
+       <dl className="fc-lab-machines">
+        <div><dt><span className="chip chip-c41">C-41</span></dt><dd>{machine('C-41')}</dd></div>
+        <div><dt><span className="chip chip-bw">SW</span></dt><dd>{machine('S/W')}</dd></div>
+        <div><dt><span className="chip chip-e6">E-6</span></dt><dd>{machine('E-6')}</dd></div>
+        <div><dt><span className="chip chip-scan">Scan</span></dt><dd>Noritsu HS-1800 · JPG oder TIFF</dd></div>
+       </dl>
+       {paper&&<>
+        <button type="button" className="fc-toggle fc-lab-toggle" aria-expanded={expert} aria-controls="fc-expert-process fc-expert-scan" onClick={()=>setExpert(e=>!e)}><span className="fc-switch" aria-hidden="true"/>{expert?'Entwickler & Scan-Tabelle ausblenden':'Entwickler & Scan-Tabelle zeigen'}</button>
+        {expertProcess}
+        {expertScan}
+       </>}
+      </section>
+
+      <section className="fc-summary" id="fc-summary" aria-labelledby="fc-sum-title">
+       <figure className="fc-sum-photo">
+        <img src="/images/lab-film-l.webp" srcSet="/images/lab-film.webp 600w, /images/lab-film-l.webp 1600w" sizes="(max-width: 899px) calc(100vw - 32px), (max-width: 1023px) 50vw, 410px" width={1600} height={1066} alt="Belichtete Filmpatronen mit C-41-Etikett, darunter Kodak Portra 800, bereit für die Entwicklung" loading="lazy" decoding="async"/>
+       </figure>
+       <div className="fc-sum">
+        <h2 id="fc-sum-title" className="fc-sum-title" tabIndex={-1}>Deine Auswahl</h2>
+        <dl className="fc-sum-list">
+         <div><dt>Format</dt><dd>{format?`${formats[format].name} · ${formats[format].short}`:<span className="fc-sum-open">noch wählen</span>}</dd></div>
+         <div><dt>Prozess</dt><dd>{process?`${processes[process].label} · ${processes[process].title}`:<span className="fc-sum-open">noch wählen</span>}</dd></div>
+         <div><dt>Scan</dt><dd>{scan?scanLabel(format,scan):<span className="fc-sum-open">noch wählen</span>}</dd></div>
+         <div><dt>Menge</dt><dd className="num">{qty} {qty===1?'Film':'Filme'}</dd></div>
+        </dl>
+        <p className="fc-sum-total"><span className="fc-sum-label">{total!==null?'Gesamt':'Preis je Film'}</span><strong className="num" ref={sumTotal}>{total!==null?formatPrice(total):estimate!==null?`ab ${formatPrice(estimate)}`:'—'}</strong><span className="fc-sum-vat">inkl. MwSt.</span></p>
+        <button type="button" className="btn btn-primary btn-block" disabled={!variant?.inStock} onClick={()=>{addCurrent()}} aria-describedby={missing.length?'fc-sum-missing':undefined}>{added?'Noch einmal hinzufügen':'In den Vorschau-Warenkorb'} <Plus size={18} aria-hidden="true"/></button>
+        {missing.length>0&&<p id="fc-sum-missing" className="fc-sum-missing">Noch wählen: {missing.join(', ')}</p>}
+        {added&&<p className="fc-sum-added" role="status">Im Vorschau-Warenkorb. Keine Zahlung in dieser Vorschau.</p>}
+       </div>
+       <button type="button" className="fc-note-btn" aria-expanded={noteOpen} aria-controls="fc-ticket" onClick={()=>setNoteOpen(o=>!o)}><span className="fc-note-name">Auftragsnotiz</span><span className="fc-note-hint">{noteOpen?'schließen':'Details, weitere Rolle, drucken'}</span><ChevronDown size={18} aria-hidden="true"/></button>
+       <div className="fc-ticket-dock" id="fc-ticket" data-open={noteOpen}>
+        <LabTicket format={format} process={process} scan={scan} qty={qty} delivery={delivery} variant={variant} estimate={estimate} missing={missing} roll={roll} added={added} animate={animate} onAdd={()=>{addCurrent()}} onAnother={anotherRoll}/>
+       </div>
+      </section>
+     </div>
     </div>
    </div>
   </section>

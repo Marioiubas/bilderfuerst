@@ -2,7 +2,14 @@
 
 blender -b --factory-startup -P scripts/blender/cartridge_135.py -- [--quick]
 Outputs: public/models/film-cartridge-v2.glb, public/renders/cartridge-135.webp,
+         public/textures/cartridge-contact-shadow.webp,
          docs/evidence/blender/cartridge-135.blend (+ previews/ and the baked PNG originals).
+  -- --variant mobile   phone build (MOBILE-3D-PLAN B1): public/models/film-cartridge-v2-mobile.glb — coarser
+                        outlines/lathes (≤ 2.5k tris), 512² base (AO multiplied in) + ORM, no normal map;
+                        identical node names, markers and bounds.
+  -- --stage export     re-export the desktop GLB from the saved .blend (adds CartridgeEdges) and re-render
+                        the contact shadow, without re-baking.
+Both GLBs carry `CartridgeEdges`: the feature lines (≥ 32°, as three's EdgesGeometry) as glTF LINES.
 
 Modelled in millimetres around a Z-up spool axis (z=0 = flat cap face), then normalised to 1.0
 unit total height and exported glTF Y-up, matching the v1 conventions (spool hub +Y, leader exiting
@@ -17,12 +24,20 @@ import bf_common as C
 import bf_bake as K
 from bf_common import v2
 
-QUICK = '--quick' in C.script_args()
-OUT_GLB = C.path('public', 'models', 'film-cartridge-v2.glb')
+ARGS = C.script_args()
+QUICK = '--quick' in ARGS
+MOBILE = '--variant' in ARGS and 'mobile' in ARGS
+OUT_GLB = C.path('public', 'models', 'film-cartridge-v2-mobile.glb' if MOBILE else 'film-cartridge-v2.glb')
 OUT_POSTER = C.path('public', 'renders', 'cartridge-135.webp')
+OUT_SHADOW = C.path('public', 'textures', 'cartridge-contact-shadow.webp')
 EVID = C.path('docs', 'evidence', 'blender')
 PREV = os.path.join(EVID, 'previews')
-TEX = 1024
+TEX = 512 if MOBILE else 1024
+# Mesh resolution. The outlines are Douglas–Peucker simplifications of the same SDF contours, so the
+# mobile build keeps the extents (bounds), the slot and every marker; only the facet count changes.
+RES = (dict(step=0.03, tol=0.05, lathe=20, inner=2, outer=3, margin=6) if MOBILE else
+       dict(step=0.025, tol=0.01, lathe=40, inner=3, outer=4, margin=10))
+EDGE_DEG = 32.0          # feature-line angle, identical to the runtime EdgesGeometry(geo, 32) it replaces
 
 # ── dimensions (mm) ──
 R = 12.0                 # metal shell radius (Ø24)
@@ -85,7 +100,7 @@ def ring_uv(ring):
 
 
 def build_shell(mb):
-    ring2 = contour(f_shell, step=0.025, tol=0.01)
+    ring2 = contour(f_shell, step=RES['step'], tol=RES['tol'])
     s, total = ring_uv(ring2)
     mb.island('shell')
     z0, z1 = SHELL_Z
@@ -103,11 +118,12 @@ def build_shell(mb):
 def cap_profile(bottom):
     """(inset, z) from the inner face edge round the rim to the outer face edge."""
     prof = []
-    for k in range(3):                       # inner edge, r = 0.35
-        a = math.radians(90 * k / 2)
+    ni, no = RES['inner'], RES['outer']
+    for k in range(ni):                      # inner edge, r = 0.35
+        a = math.radians(90 * k / (ni - 1))
         prof.append((0.35 - 0.35 * math.sin(a), CT - 0.35 + 0.35 * math.cos(a)))
-    for k in range(4):                       # outer edge, r = 0.8
-        b = math.radians(90 * k / 3)
+    for k in range(no):                      # outer edge, r = 0.8
+        b = math.radians(90 * k / (no - 1))
         prof.append((0.8 - 0.8 * math.cos(b), 0.8 - 0.8 * math.sin(b)))
     if not bottom:
         prof = [(d, Z_TOP - z) for d, z in prof]
@@ -142,7 +158,7 @@ def build_bottom_center(mb, outer_loop):
     prof = [(7.0, 0.0), (6.8, 0.2), (5.0, 0.2), (4.75, -0.25), (4.55, -0.45), (3.55, -0.45), (3.3, -0.2), (3.3, 5.0), (0.0, 5.0)]
     mb.island('bottom_center')
     L = sum(math.hypot(b[0] - a[0], b[1] - a[1]) for a, b in zip(prof, prof[1:]))
-    rings = C.lathe_rings(mb, prof, 40, (0, 0, 2 * math.pi * 7.0, L), MAT_PLASTIC, flip=True)
+    rings = C.lathe_rings(mb, prof, RES['lathe'], (0, 0, 2 * math.pi * 7.0, L), MAT_PLASTIC, flip=True)
     mb.island('capB_face')
     mb.fill([outer_loop, rings[0]], lambda co: (co.x, co.y), MAT_PLASTIC, flip=True)
 
@@ -157,7 +173,7 @@ def build_top_center(mb, outer_loop):
             (4.35, zt + 5.4), (4.05, zt + 5.75), (3.9, zt + 5.8)]
     mb.island('top_center')
     L = sum(math.hypot(b[0] - a[0], b[1] - a[1]) for a, b in zip(prof, prof[1:]))
-    rings = C.lathe_rings(mb, prof, 40, (0, 0, 2 * math.pi * 6.8, L), MAT_PLASTIC)
+    rings = C.lathe_rings(mb, prof, RES['lathe'], (0, 0, 2 * math.pi * 6.8, L), MAT_PLASTIC)
     mb.island('capT_face')
     mb.fill([outer_loop, rings[0]], lambda co: (co.x, co.y), MAT_PLASTIC)
     # keyed hub end: cross recess
@@ -179,12 +195,12 @@ def build_top_center(mb, outer_loop):
 def build_cassette():
     mb = C.MeshBuilder('Cassette')
     n_shell = build_shell(mb)
-    base = contour(f_cap, step=0.025, tol=0.01)
+    base = contour(f_cap, step=RES['step'], tol=RES['tol'])
     bot_face, _ = build_cap(mb, True, base)
     top_face, _ = build_cap(mb, False, base)
     build_bottom_center(mb, bot_face)
     z_hub = build_top_center(mb, top_face)
-    density = mb.pack(TEX, margin=10)
+    density = mb.pack(TEX, margin=RES['margin'])
     ob = mb.finish(sharp_angle_deg=40)
     print('CASSETTE outline pts', n_shell, 'cap pts', len(base), 'texel px/mm %.2f' % density)
     return ob, z_hub
@@ -340,28 +356,42 @@ def bake_all(ob, infos):
     C.use_cycles_metal(scene, 16, denoise=False)
     scene.world = scene.world or bpy.data.worlds.new('bake_world')
     scene.world.light_settings.distance = 5.0          # AO reach in mm
-    imgs = {k: C.image('cart_' + k, TEX, TEX, color=(k == 'base'), float_buffer=(k != 'base'))
-            for k in ('base', 'rough', 'metal', 'ao', 'normal')}
+    kinds = ('base', 'rough', 'metal', 'ao') + (() if MOBILE else ('normal',))
+    imgs = {k: C.image('cart_' + k, TEX, TEX, color=(k == 'base'), float_buffer=(k != 'base')) for k in kinds}
     K.bake_targets(infos)
     K.bake(ob, infos, imgs['base'], 'EMIT', 'base', 4)
     K.bake(ob, infos, imgs['rough'], 'EMIT', 'rough', 4)
     K.bake(ob, infos, imgs['metal'], 'EMIT', 'metal', 1)
-    K.bake(ob, infos, imgs['normal'], 'NORMAL', samples=8 if QUICK else 32)
+    if not MOBILE:
+        K.bake(ob, infos, imgs['normal'], 'NORMAL', samples=8 if QUICK else 32)
     K.bake(ob, infos, imgs['ao'], 'AO', samples=64 if QUICK else 512)
     ao = C.pixels(imgs['ao'])[..., 0]
     ao = 0.25 + 0.75 * np.clip(ao, 0, 1) ** 0.85          # keep occlusion photographic, never pitch black
-    orm = np.dstack([ao, C.pixels(imgs['rough'])[..., 0], C.pixels(imgs['metal'])[..., 0], np.ones_like(ao)])
-    out = {'base': imgs['base'], 'normal': imgs['normal']}
+    rough, metal = C.pixels(imgs['rough'])[..., 0], C.pixels(imgs['metal'])[..., 0]
+    if MOBILE:
+        # phones: no occlusion texture (no aoMap sampling) → AO multiplied into the sRGB base colour (in linear)
+        base = C.pixels(imgs['base']).copy()
+        lin = np.where(base[..., :3] <= 0.04045, base[..., :3] / 12.92, ((base[..., :3] + 0.055) / 1.055) ** 2.4)
+        lin *= (0.35 + 0.65 * ao)[..., None]
+        base[..., :3] = np.where(lin <= 0.0031308, lin * 12.92, 1.055 * np.power(np.maximum(lin, 0), 1 / 2.4) - 0.055)
+        C.set_pixels(imgs['base'], base)
+        orm = np.dstack([np.ones_like(ao), rough, metal, np.ones_like(ao)])
+    else:
+        orm = np.dstack([ao, rough, metal, np.ones_like(ao)])
+    out = {'base': imgs['base']}
+    if not MOBILE:
+        out['normal'] = imgs['normal']
     out['orm'] = C.image('cart_orm', TEX, TEX, color=False)
     C.set_pixels(out['orm'], orm)
     os.makedirs(os.path.join(EVID, 'cartridge-135-textures'), exist_ok=True)
-    for k in ('base', 'orm', 'normal'):
+    tag = 'cartridge-mobile-%s.png' if MOBILE else 'cartridge-%s.png'
+    for k in list(out):
         img = out[k]
         if img.is_float:   # store 8-bit copies (what the GLB carries)
             fixed = C.image('cart_%s_8' % k, TEX, TEX, color=False)
             C.set_pixels(fixed, C.pixels(img)); img = out[k] = fixed
-        C.save_image(img, os.path.join(EVID, 'cartridge-135-textures', 'cartridge-%s.png' % k), 'PNG', color_mode='RGB')
-        img.filepath = os.path.join(EVID, 'cartridge-135-textures', 'cartridge-%s.png' % k); img.source = 'FILE'; img.reload()
+        C.save_image(img, os.path.join(EVID, 'cartridge-135-textures', tag % k), 'PNG', color_mode='RGB')
+        img.filepath = os.path.join(EVID, 'cartridge-135-textures', tag % k); img.source = 'FILE'; img.reload()
         img.colorspace_settings.name = 'sRGB' if k == 'base' else 'Non-Color'
     return out
 
@@ -371,14 +401,16 @@ def export_material(tex):
     out = nt.nodes.new('ShaderNodeOutputMaterial'); bsdf = nt.nodes.new('ShaderNodeBsdfPrincipled')
     tb = nt.nodes.new('ShaderNodeTexImage'); tb.image = tex['base']
     to = nt.nodes.new('ShaderNodeTexImage'); to.image = tex['orm']
-    tn = nt.nodes.new('ShaderNodeTexImage'); tn.image = tex['normal']
-    sep = nt.nodes.new('ShaderNodeSeparateColor'); nm = nt.nodes.new('ShaderNodeNormalMap')
-    grp = nt.nodes.new('ShaderNodeGroup'); grp.node_tree = C.gltf_output_group()
+    sep = nt.nodes.new('ShaderNodeSeparateColor')
     C.link(nt, tb.outputs['Color'], bsdf.inputs['Base Color'])
     C.link(nt, to.outputs['Color'], sep.inputs[0])
     C.link(nt, sep.outputs['Green'], bsdf.inputs['Roughness']); C.link(nt, sep.outputs['Blue'], bsdf.inputs['Metallic'])
-    C.link(nt, sep.outputs['Red'], grp.inputs['Occlusion'])
-    C.link(nt, tn.outputs['Color'], nm.inputs['Color']); C.link(nt, nm.outputs['Normal'], bsdf.inputs['Normal'])
+    if 'normal' in tex:     # desktop only: occlusion (ORM.r) + tangent-space normal map
+        tn = nt.nodes.new('ShaderNodeTexImage'); tn.image = tex['normal']
+        nm = nt.nodes.new('ShaderNodeNormalMap')
+        grp = nt.nodes.new('ShaderNodeGroup'); grp.node_tree = C.gltf_output_group()
+        C.link(nt, sep.outputs['Red'], grp.inputs['Occlusion'])
+        C.link(nt, tn.outputs['Color'], nm.inputs['Color']); C.link(nt, nm.outputs['Normal'], bsdf.inputs['Normal'])
     C.link(nt, bsdf.outputs[0], out.inputs['Surface'])
     m.use_backface_culling = True          # closed, opaque → glTF doubleSided: false
     return m
@@ -409,12 +441,99 @@ def export_glb(root):
     bpy.ops.export_scene.gltf(filepath=OUT_GLB, export_format='GLB', use_selection=True, export_yup=True,
                               export_image_format='WEBP', export_image_quality=88, export_texcoords=True,
                               export_normals=True, export_tangents=False, export_materials='EXPORT',
-                              export_cameras=False, export_lights=False, export_extras=False, export_apply=True)
+                              export_cameras=False, export_lights=False, export_extras=False, export_apply=True,
+                              use_mesh_edges=True)   # loose edges → glTF LINES (CartridgeEdges)
     print('EXPORTED', OUT_GLB, os.path.getsize(OUT_GLB))
 
 
+def feature_edges(src, root):
+    """`CartridgeEdges`: the cassette's feature lines (dihedral ≥ EDGE_DEG plus open borders) as loose edges →
+    glTF LINES. Baked twin of three's EdgesGeometry(geometry, 32), which cost ≈ 0.29 s at 4× CPU per mount."""
+    bm = bmesh.new(); bm.from_mesh(src.data)
+    bmesh.ops.remove_doubles(bm, verts=bm.verts, dist=1e-6)
+    lim = math.radians(EDGE_DEG) - 1e-6
+    keep = [e for e in bm.edges if len(e.link_faces) != 2 or e.calc_face_angle(0.0) >= lim]
+    index, verts, edges = {}, [], []
+    for e in keep:
+        pair = []
+        for v in e.verts:
+            if v.index not in index:
+                index[v.index] = len(verts); verts.append(tuple(v.co))
+            pair.append(index[v.index])
+        edges.append(tuple(pair))
+    bm.free()
+    old = bpy.data.objects.get('CartridgeEdges')
+    if old:
+        bpy.data.objects.remove(old)
+    me = bpy.data.meshes.new('CartridgeEdges'); me.from_pydata(verts, edges, []); me.update()
+    ob = bpy.data.objects.new('CartridgeEdges', me)
+    bpy.context.scene.collection.objects.link(ob)
+    ob.parent = root
+    print('EDGES CartridgeEdges segments', len(edges))
+    return ob
+
+
+# ── hero pose → contact shadow (MOBILE-3D-PLAN B3) ──
+# components/three/film-workspace.ts: model.rotation.x = π/2 (lying, spool hub to the camera), spin.rotation.z = −60°
+# (rolled about the spool axis), film group rotation.y = FILM_YAW; key light (DirectionalLight) at (−4.5, 7.5, 5.5)
+# aimed at the origin. three is Y-up; A maps Blender (Z-up) coordinates to glTF/three ones.
+HERO_YAW, HERO_ROLL, KEY_POS = -0.12, math.radians(-60.0), Vector((-4.5, 7.5, 5.5))
+SHADOW_EXTENT, SHADOW_PX = 2.0, 256     # square plane (model units) centred on the spool-axis origin
+
+
+def contact_shadow(root, cass, lead):
+    """Shadow-catcher bake of the cartridge in the hero pose under the softbox key, top-down orthographic,
+    256² WebP with alpha (black, alpha = shadow). Runtime: a SHADOW_EXTENT×SHADOW_EXTENT plane (× the hero's
+    cartridge scale) centred under the cart origin, axis-aligned to the world (the pose already includes FILM_YAW)."""
+    from mathutils import Matrix
+    scene = bpy.context.scene
+    A = Matrix(((1, 0, 0), (0, 0, 1), (0, -1, 0)))
+    rot = Matrix.Rotation(HERO_YAW, 3, 'Y') @ Matrix.Rotation(HERO_ROLL, 3, 'Z') @ Matrix.Rotation(math.pi / 2, 3, 'X')
+    saved = root.matrix_world.copy()
+    root.matrix_world = (A.transposed() @ rot @ A).to_4x4()
+    bpy.context.view_layer.update()
+    # rest on the table like the hero (Box3.setFromObject counts the hidden leader too)
+    low = min((o.matrix_world @ v.co).z for o in (cass, lead) for v in o.data.vertices)
+    root.location.z -= low
+    bpy.context.view_layer.update()
+    hidden = []
+    for o in scene.objects:
+        if o.type in ('MESH', 'LIGHT', 'CAMERA') and o not in (cass,):
+            hidden.append((o, o.hide_render)); o.hide_render = True
+    cass.visible_camera = False                       # casts the shadow, never seen
+    bpy.ops.mesh.primitive_plane_add(size=SHADOW_EXTENT * 4, location=(0, 0, 0))
+    catcher = bpy.context.object; catcher.name = 'ShadowBakeCatcher'; catcher.is_shadow_catcher = True
+    sun_data = bpy.data.lights.new('ShadowKey', 'SUN'); sun_data.energy = 3.0; sun_data.angle = math.radians(7.0)
+    sun = bpy.data.objects.new('ShadowKey', sun_data); scene.collection.objects.link(sun)
+    sun.location = A.transposed() @ KEY_POS; C.look_at(sun, Vector((0, 0, 0)))
+    world = scene.world or bpy.data.worlds.new('shadow_world'); scene.world = world; world.use_nodes = True
+    bg = world.node_tree.nodes.get('Background')
+    old_bg = (tuple(bg.inputs[0].default_value), bg.inputs[1].default_value)
+    bg.inputs[0].default_value = (1, 1, 1, 1); bg.inputs[1].default_value = 0.45   # soft sky → contact occlusion
+    cam_data = bpy.data.cameras.new('ShadowCam'); cam_data.type = 'ORTHO'; cam_data.ortho_scale = SHADOW_EXTENT
+    cam = bpy.data.objects.new('ShadowCam', cam_data); scene.collection.objects.link(cam)
+    cam.location = (0, 0, 4.0); cam.rotation_euler = (0, 0, 0)
+    old = (scene.camera, scene.render.resolution_x, scene.render.resolution_y, scene.render.film_transparent, scene.cycles.samples)
+    scene.camera = cam
+    scene.render.resolution_x = scene.render.resolution_y = SHADOW_PX
+    scene.render.film_transparent = True
+    C.use_cycles_metal(scene, 64 if QUICK else 256)
+    C.render_to(scene, OUT_SHADOW, 'WEBP', 90)
+    # restore
+    scene.camera, scene.render.resolution_x, scene.render.resolution_y, scene.render.film_transparent, scene.cycles.samples = old
+    bg.inputs[0].default_value = old_bg[0]; bg.inputs[1].default_value = old_bg[1]
+    for o in (catcher, sun, cam):
+        bpy.data.objects.remove(o)
+    cass.visible_camera = True
+    for o, h in hidden:
+        o.hide_render = h
+    root.matrix_world = saved
+    bpy.context.view_layer.update()
+    print('SHADOW', OUT_SHADOW, os.path.getsize(OUT_SHADOW), 'extent', SHADOW_EXTENT)
+
+
 # ───────────────────────── renders ─────────────────────────
-def preview_views(scene, tag, unit, center, samples=48):
+def preview_views(scene, tag, unit, center, samples=48, only=None):
     """QA views (JPEG, dark grey backdrop). unit = model size (1.0 after normalising, H before)."""
     scene.cycles.samples = samples
     scene.render.film_transparent = False
@@ -426,6 +545,8 @@ def preview_views(scene, tag, unit, center, samples=48):
         'lying-hero': (Vector((2.6, -2.2, 3.2)), 85, (1200, 900)),
     }
     for name, (off, lens, res) in views.items():
+        if only and name not in only:
+            continue
         cam = C.camera(scene, c + off * unit, c, lens, res, 'Cam_' + name)
         if name == 'mouth-closeup':
             m = N * H0 + D * S_MOUTH
@@ -453,8 +574,21 @@ def poster(scene, root):
     root.rotation_euler = (0, 0, 0)
 
 
+def export_stage():
+    """Re-export the desktop GLB from the saved .blend (no re-bake): adds CartridgeEdges, renders the contact shadow."""
+    bpy.ops.wm.open_mainfile(filepath=os.path.join(EVID, 'cartridge-135.blend'))
+    scene = bpy.context.scene
+    root, cass, lead = (bpy.data.objects[n] for n in ('FilmCartridge', 'Cassette', 'Leader'))
+    feature_edges(cass, root)
+    export_glb(root)
+    C.studio(scene, (0, 0, 0), 1.0, -0.5, catcher=False)
+    contact_shadow(root, cass, lead)
+
+
 def main():
-    stage = 'geo' if '--stage' in C.script_args() and 'geo' in C.script_args() else 'full'
+    stage = ('geo' if 'geo' in ARGS else 'export' if 'export' in ARGS else 'full') if '--stage' in ARGS else 'full'
+    if stage == 'export':
+        return export_stage()
     scene = C.reset()
     C.use_cycles_metal(scene, 48)
     src = C.path('docs', 'evidence', 'higgsfield', 'generated', 'brushed-metal-A-gptimage25.webp')
@@ -475,6 +609,8 @@ def main():
     e_tip = empty('LeaderTip', (tip.x, tip.y, FILM_ZC))
     tris = sum(len(p.vertices) - 2 for o in (cass, lead) for p in o.data.polygons)
     print('TRIANGLES', tris, 'z range', z_min, z_hub)
+    if '--count' in ARGS:   # geometry budget check only
+        return
     if stage == 'geo':
         C.studio(scene, (0, 0, 22), 51.0, z_min, catcher=False)
         preview_views(scene, 'geo', 51.0, (0, 0, 24))
@@ -487,10 +623,16 @@ def main():
     for ob in (cass, lead, e_exit, e_tip):
         ob.parent = root
     print('NORMALISED H=%.3f mm zc=%.3f SlotExit=%s LeaderTip=%s' % (H, zc, tuple(round(x, 4) for x in e_exit.location), tuple(round(x, 4) for x in e_tip.location)))
+    feature_edges(cass, root)
     export_glb(root)
+    if MOBILE:   # phone build: GLB + one QA view (no .blend, poster or shadow — those come from the desktop build)
+        C.studio(scene, (0, 0, 0), 1.0, -0.5)
+        preview_views(scene, 'mobile', 1.0, (0, 0, 0.02), 32 if QUICK else 64, only=('lying-hero', 'three-quarter'))
+        return
     bpy.ops.wm.save_as_mainfile(filepath=os.path.join(EVID, 'cartridge-135.blend'), compress=True)
     C.studio(scene, (0, 0, 0), 1.0, -0.5)
     poster(scene, root)
+    contact_shadow(root, cass, lead)
     preview_views(scene, 'final', 1.0, (0, 0, 0.02), 64 if QUICK else 128)
 
 

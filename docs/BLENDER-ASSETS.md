@@ -11,7 +11,11 @@ blender(){ "$HOME/Library/Application Support/Steam/steamapps/common/Blender/Ble
 blender -b --factory-startup -P scripts/blender/cartridge_135.py      # → film-cartridge-v2.glb + cartridge-135.webp
 blender -b --factory-startup -P scripts/blender/street_window.py      # → street-window.glb + street-window.webp
 blender -b --factory-startup -P scripts/blender/format_objects.py     # → format-{135,120,110}[.@2x].webp (needs the v2 GLB)
-node scripts/blender/verify-glb.mjs public/models/film-cartridge-v2.glb public/models/street-window.glb
+# phone builds + runtime extras (MOBILE-3D-PLAN B1–B5, §5 below):
+blender -b --factory-startup -P scripts/blender/cartridge_135.py -- --variant mobile   # → film-cartridge-v2-mobile.glb
+blender -b --factory-startup -P scripts/blender/cartridge_135.py -- --stage export     # desktop GLB + CartridgeEdges, contact shadow (no re-bake)
+blender -b --factory-startup -P scripts/blender/street_window.py -- --stage variants   # + merged Photos; street-window-mobile.glb (no re-bake)
+node scripts/blender/verify-glb.mjs public/models/film-cartridge-v2.glb public/models/film-cartridge-v2-mobile.glb public/models/street-window.glb public/models/street-window-mobile.glb
 ```
 `--quick` (low samples) and, for the window/cartridge, `--stage geo` (geometry preview without baking) exist for iteration.
 
@@ -45,11 +49,11 @@ approximated by stretched normal/roughness detail (no KHR_materials_anisotropy n
 
 | | |
 |---|---|
-| File | 250,568 B (target ≤ 350 KB) — no Draco/Meshopt, `EXT_texture_webp` (required) |
-| Triangles | 5,412 (`Cassette` 5,290 + `Leader` 122; target ≤ 6k) |
+| File | 269,416 B since the `CartridgeEdges` re-export (250,568 B before; target ≤ 350 KB) — no Draco/Meshopt, `EXT_texture_webp` (required) |
+| Triangles | 5,412 (`Cassette` 5,290 + `Leader` 122; target ≤ 6k) + `CartridgeEdges` 1,156 line segments |
 | Textures | 3 × 1024² WebP q88: base 11,160 B · ORM 54,910 B · normal 5,370 B |
 | Materials | `Cassette` (opaque, single-sided, base+ORM+normal) · `FilmBase` (BLEND α 0.9, double-sided, factors only: sRGB ≈ #633B23, roughness 0.26) |
-| Nodes | `FilmCartridge` (root) → `Cassette`, `Leader`, `SlotExit`, `LeaderTip` (empties) |
+| Nodes | `FilmCartridge` (root) → `Cassette`, `Leader`, `CartridgeEdges` (glTF LINES), `SlotExit`, `LeaderTip` (empties) |
 | Bounds (glTF) | x −0.245…0.347 · y −0.500…0.500 · z −0.553…0.245 |
 
 **Conventions vs v1** (`film-cartridge.glb`, kept untouched):
@@ -81,8 +85,10 @@ approximated by stretched normal/roughness detail (no KHR_materials_anisotropy n
    dark brushed gunmetal with streaky highlights, caps as satin black. Neutral or ACES/AgX tone mapping both work.
 5. Fallback: `public/renders/cartridge-135.webp` (upright ¾ view, leader to the right, transparent, contact shadow).
 
-*Status 2026-10-07:* the hero team's working copy of `film-workspace.ts` already loads v2, starts the strip at `SlotExit`
-(read in model space before the model is rotated) and hides `Leader`; `EXIT` keeps v1's value, which equals v2's direction.
+*Status 2026-10-07 (integrated):* `components/three/film-workspace.ts` loads v2 (desktop) / the phone build (§5), starts the
+strip at `SlotExit` (read in model space before the model is rotated), measures the resting height with `Leader` and then
+removes it from the graph, and draws the intro line drawing from the baked `CartridgeEdges` (runtime `EdgesGeometry` only
+as a fallback for a GLB without it). `EXIT` keeps v1's value, which equals v2's direction.
 
 ## 2 · Street gallery window v2 — `public/models/street-window.glb`
 
@@ -110,11 +116,11 @@ per-block random offset/tone inside a procedural ashlar (Brick) shader; joints a
 
 | | |
 |---|---|
-| File | 121,580 B (target ≤ 700 KB) · `EXT_texture_webp`, `KHR_materials_unlit` · no normals exported (unlit) |
-| Triangles | 2,360 (target ≤ 15k) |
+| File | 124,016 B with the merged `Photos` mesh (121,580 B before; target ≤ 700 KB) · `EXT_texture_webp`, `KHR_materials_unlit` · no normals exported (unlit) |
+| Triangles | 2,384 = 2,360 + `Photos` 24 (target ≤ 15k) |
 | Texture | 1 × 2048×1024 WebP q84 (42,686 B) — the baked atlas |
 | Materials | `WindowBaked` (unlit, baked map, TEXCOORD_0) · `PhotoSlot` (unlit, 0.6 grey × baked atlas on **TEXCOORD_1**) · `Glass` (BLEND, α 0.1, roughness 0.04) |
-| Nodes | `StreetWindow` (root) → `WindowStatic`, `Glass`, `Photo_01` … `Photo_12`, `Spot_01` … `Spot_03`, `Camera_Window` |
+| Nodes | `StreetWindow` (root) → `WindowStatic`, `Glass`, `Photos` (all 12 slots, one mesh), `Photo_01` … `Photo_12`, `Spot_01` … `Spot_03`, `Camera_Window` |
 | Units / axes | metres, glTF Y-up; façade front plane z = 0, display box towards −z (back wall z = −0.98), shop wall z = −3.40 |
 
 **Photo slots.** `Photo_01`…`Photo_09` = main window, row-major from top-left (rows y = 0.71 / 0.10 / −0.51, columns
@@ -153,6 +159,12 @@ prints.forEach(async (p, i) => {
 * Budget: 1 context, ≈ 14 draw calls (static, glass, 12 photos) — merge photos into one atlas mesh if draw calls matter.
 * Fallback: `public/renders/street-window.webp`.
 
+*Status 2026-10-07 (integrated):* `components/three/gallery-window.ts` now renders this GLB (desktop) / the phone build (§5)
+instead of the procedural window: `WindowStatic` unlit (`toneMapped=false`), the real prints on the merged `Photos` mesh
+(one canvas atlas, light map = the bake through uv1, `lightMapIntensity = π × 1.25`), the additive streak glass on `Glass`,
+no scene lights (3 programs, 3 draws). The `Photo_NN` quads are dropped at runtime (fallback: merged from them if `Photos`
+is missing). `exposeLights` drives one colour scalar .25 → 1 on the bake and the photos.
+
 ## 3 · Format objects — `public/renders/format-{135,120,110}.webp`
 
 **Script** `scripts/blender/format_objects.py` · **Original** `docs/evidence/blender/format-objects.blend` · lossless
@@ -186,9 +198,26 @@ lab zone and the light stage (soft shadow only, no backdrop). They can replace o
   via KHR_materials_unlit).
 * Every preview in `docs/evidence/blender/previews/` was inspected during the build (geometry stage, bake channels, the
   unlit baked window exactly as the runtime shows it, the format family at true scale).
-* Budgets: cartridge 5,412 tris / 250,568 B (≤ 6k / ≤ 350 KB) · window 2,360 tris / 121,580 B
-  (≤ 15k / ≤ 700 KB) · format renders ≤ 80 KB at 1× (largest 27,790 B).
+* Budgets: cartridge 5,412 tris / 269,416 B (≤ 6k / ≤ 350 KB) · window 2,384 tris / 124,016 B
+  (≤ 15k / ≤ 700 KB) · format renders ≤ 80 KB at 1× (largest 27,790 B) · phone builds see §5.
 * Higgsfield: three seamless textures (10.25 credits, Ultra plan, 2026-10-07) used only as bake inputs — see
   [ASSET-PROVENANCE.md](ASSET-PROVENANCE.md) and `docs/evidence/higgsfield/generation-log.json` (`blenderAssetPass`). No
   image-to-3D; all geometry is procedural. Machine-readable entries: `public/models/manifest.json`.
 * Determinism: fixed Cycles seed, no unseeded randomness; re-running a script reproduces its outputs up to path-tracing noise.
+
+## 5 · Phone builds and runtime extras (MOBILE-3D-PLAN B1–B5, 2026-10-07)
+
+Built by the same scripts (flags in the command block at the top); verified with `verify-glb.mjs` (it now counts glTF LINES
+as segments, not triangles) and loaded by three r186 in Node and in the browser.
+
+| Asset | What | Size / geometry | Notes |
+|---|---|---|---|
+| `public/models/film-cartridge-v2-mobile.glb` (B1) | phone cassette: same SDF outlines simplified harder (Douglas–Peucker 0.05 mm instead of 0.01 mm), 20-segment lathes instead of 40, cap rims with 5 rings instead of 7; re-baked at 512² | **115,716 B** (gzip 53,349 B) · 2,246 tris (`Cassette` 2,124 + `Leader` 122) · `CartridgeEdges` 835 segments | base 512² WebP (4,228 B) with the baked AO multiplied in (linear light, floor 0.35), ORM 512² (11,534 B; R = 1, G roughness, B metalness), **no normal map, no occlusion texture**. Node names, `SlotExit`/`LeaderTip` and bounds identical to v2 (checked by `verify-glb.mjs`). Runtime (lite profile): baseColor × a procedural studio matcap — no PMREM pass on phones (its GGX prefilter was one 50–60 ms task at 4× CPU); the ORM map stays in the file for PBR use but is not uploaded. Over the 90 KB target: the bytes are float32 geometry (positions + normals + UVs ≈ 66 KB); meshopt/quantisation (B7) was skipped by decision. QA: `docs/evidence/blender/previews/cartridge-mobile-*.jpg`, maps `cartridge-135-textures/cartridge-mobile-*.png` (no `.blend`; rebuild from the script). |
+| `CartridgeEdges` in both cartridge GLBs (B2) | feature lines of `Cassette` (dihedral ≥ 32° plus open borders = three's `EdgesGeometry(geo, 32)`) as loose edges → glTF `LINES` (Blender 5.2 export option `use_mesh_edges`) | desktop 1,156 segments (+18.8 KB), phone 835 | replaces the runtime `EdgesGeometry` build (≈ 0.29 s at 4× CPU per mount). Parented to `FilmCartridge`, identity transform. |
+| `public/textures/cartridge-contact-shadow.webp` (B3) | Cycles shadow-catcher bake of the cassette in the exact hero pose (`rotation.x = π/2`, roll −60°, `FILM_YAW` −0.12, resting on the table) under the hero key direction (−4.5, 7.5, 5.5) as a 7° sun + a soft white sky (contact occlusion), top-down orthographic | 256² WebP with alpha, 11,668 B | RGB black, alpha = shadow. **Plane: 2.0 × 2.0 model units** (× the hero's cartridge scale 1.3), centred on the spool-axis origin, axis-aligned to the hero's world (image top = −Z). Lite profile only (desktop keeps the shadow map). |
+| `public/models/street-window-mobile.glb` (B4) | same bake box-filtered (linear light) to **1024×512**, WebP q80; merged `Photos` mesh instead of the twelve `Photo_NN` quads | **87,500 B** (gzip 49,306 B) · 2,356 tris (`WindowStatic` 2,332 + `Photos` 24) + `Glass` 4 | nodes `StreetWindow` → `WindowStatic`, `Glass`, `Photos`, `Spot_01…03`, `Camera_Window`; bake 16,184 B. Over the 60 KB target for the same reason as B1 (float32 geometry ≈ 66 KB, no re-bake/quantisation). |
+| `Photos` in both window GLBs (B4/B5) | the 12 slot quads joined into one mesh: **TEXCOORD_0** = fixed 4 × 3 atlas cells in `Photo_01…12` order (cell 4:3; the 3:2 slot fills the cell width, centred, i.e. 1/54 of the atlas height above and below; glTF v = 0 at the top), **TEXCOORD_1** = the slot light-map UVs | 24 tris, 48 vertices | runtime atlas: 2048×1152 (desktop) / 1024×576 (phone), photos contained on mat-coloured paper, `flipY = false`. Desktop keeps the `Photo_NN` quads alongside for the documented per-photo path. |
+
+Not built: B6 `Camera_Window_Mobile` (the narrow-stage framing is two constants in `gallery-window.ts`), B7 meshopt (decision),
+B8 1× posters (the phone fallback is the DOM drawing, which never loads the posters).
+

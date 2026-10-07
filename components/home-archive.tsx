@@ -23,7 +23,7 @@ export function HomeArchive(){
  const scroller=useRef<HTMLDivElement>(null);const [overflows,setOverflows]=useState(false);
  useEffect(()=>{const el=scroller.current;return el?developStrip(el):undefined},[]);
  useEffect(()=>{const el=scroller.current;if(!el)return;const check=()=>setOverflows(el.scrollWidth>el.clientWidth+1);check();const ro=new ResizeObserver(check);ro.observe(el);return()=>ro.disconnect()},[]);
- return <section className="hm-arc zone-graphite grain" id={head.sectionId} aria-labelledby="hm-arc-title">
+ return <section className="hm-arc zone-ivory" id={head.sectionId} aria-labelledby="hm-arc-title">
   <div className="wrap">
    <SectionHead code={head.code} label={head.label} index={head.index} id="hm-arc-title"
     title={<>Drei Generationen. <br/>Fotografie seit 1935.</>}

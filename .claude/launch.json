@@ -4,8 +4,25 @@
     {
       "name": "bilderfuerst-dev",
       "runtimeExecutable": "npm",
-      "runtimeArgs": ["run", "dev", "--", "--port", "3107"],
+      "runtimeArgs": [
+        "run",
+        "dev",
+        "--",
+        "--port",
+        "3107"
+      ],
       "port": 3107
+    },
+    {
+      "name": "bilderfuerst-prod",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": [
+        "next",
+        "start",
+        "--port",
+        "3108"
+      ],
+      "port": 3108
     }
   ]
 }

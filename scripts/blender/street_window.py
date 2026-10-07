@@ -1,7 +1,10 @@
 """STREET GALLERY WINDOW v2 — simplified, photographic model of the shop-window bay (Blender 5.2).
 
-blender -b --factory-startup -P scripts/blender/street_window.py -- [--quick] [--stage geo]
+blender -b --factory-startup -P scripts/blender/street_window.py -- [--quick] [--stage geo|variants]
 → public/models/street-window.glb, public/renders/street-window.webp, docs/evidence/blender/street-window.blend.
+`--stage variants` (no re-bake; reads the saved .blend): adds the merged `Photos` mesh (12 slots → 1 draw, uv0 = fixed
+4×3 photo-atlas cells, uv1 = light map) to street-window.glb and writes the phone build street-window-mobile.glb
+(same bake downsampled to 1024×512, WebP q80, `Photos` instead of the twelve Photo_NN quads). MOBILE-3D-PLAN B4/B5.
 Metres, Blender Z-up; façade front at y=0, interior towards +y (glTF: façade z=0, display box towards −z, as in
 components/three/gallery-window.ts). Real 3×3 hang, bevel-cut mats, sill spots, side window with three prints —
 NO signage, lettering or logos. Light baked with Cycles (METAL) into one 2048×1024 texture; glass stays runtime.
@@ -14,6 +17,7 @@ import bf_bake as K
 
 ARGS = C.script_args(); QUICK = '--quick' in ARGS
 OUT_GLB = C.path('public', 'models', 'street-window.glb')
+OUT_GLB_MOBILE = C.path('public', 'models', 'street-window-mobile.glb')
 OUT_POSTER = C.path('public', 'renders', 'street-window.webp')
 EVID = C.path('docs', 'evidence', 'blender')
 PREV = os.path.join(EVID, 'previews')
@@ -404,10 +408,10 @@ def window_camera(scene):
 
 
 # ───────────────────────── export preparation ─────────────────────────
-def patch_glb():
-    js, rest = K.glb_read(OUT_GLB)
+def patch_glb(path=OUT_GLB):
+    js, rest = K.glb_read(path)
     tex = next(i for i, t in enumerate(js['textures'])
-               if js['images'][t.get('source', t.get('extensions', {}).get('EXT_texture_webp', {}).get('source', -1))]['name'] == 'street-window-baked')
+               if js['images'][t.get('source', t.get('extensions', {}).get('EXT_texture_webp', {}).get('source', -1))]['name'].startswith('street-window-baked'))
     for m in js['materials']:
         if m['name'] == 'PhotoSlot':
             m['pbrMetallicRoughness'] = {'baseColorFactor': [0.6, 0.6, 0.6, 1.0], 'baseColorTexture': {'index': tex, 'texCoord': 1},
@@ -417,9 +421,10 @@ def patch_glb():
             m['alphaMode'] = 'BLEND'
             m['pbrMetallicRoughness'].update({'metallicFactor': 0.0, 'roughnessFactor': 0.04})
     js['meshes'] = [dict(m, name=m['name'].split('.')[0]) for m in js['meshes']]   # drop Blender '.001' suffixes
-    js['asset']['extras'] = {'note': 'Baked: WindowStatic carries albedo×light (AgX) in TEXCOORD_0; PhotoSlot TEXCOORD_1 samples the same atlas (light on white).'}
-    K.glb_write(OUT_GLB, js, rest)
-    print('PATCHED', OUT_GLB, os.path.getsize(OUT_GLB))
+    js['asset']['extras'] = {'note': 'Baked: WindowStatic carries albedo×light (AgX) in TEXCOORD_0; PhotoSlot TEXCOORD_1 samples the same atlas (light on white). '
+                                     'Photos = all slots in one mesh: TEXCOORD_0 = 4×3 atlas cells (cell 4:3, 3:2 content full width, centred; v=0 at the top), TEXCOORD_1 = light map.'}
+    K.glb_write(path, js, rest)
+    print('PATCHED', path, os.path.getsize(path))
 
 
 def spot_markers(root):
@@ -431,7 +436,86 @@ def spot_markers(root):
         e.parent = root
 
 
+# ───────────────────────── phone build + merged photo mesh (MOBILE-3D-PLAN B4/B5) ─────────────────────────
+ATLAS_COLS, ATLAS_ROWS = 4, 3            # cell 4:3 → atlas 16:9 (2048×1152 desktop, 1024×576 phone)
+CONTENT_PAD = (1 - (2 / 3) / (3 / 4)) / 2 / ATLAS_ROWS   # 3:2 slot filling the cell width, centred: 1/54 top and bottom
+
+
+def merged_photos(root, photos):
+    """One `Photos` mesh from Photo_01…12: TEXCOORD_0 = atlas cell content rect of slot i (row-major, Photo order),
+    TEXCOORD_1 = the slot's light-map UVs (unchanged)."""
+    copies = []
+    for i, p in enumerate(photos):
+        o = p.copy(); o.data = p.data.copy(); o.name = 'PhotosPart_%02d' % (i + 1)
+        bpy.context.scene.collection.objects.link(o)
+        mw = p.matrix_world.copy(); o.parent = None
+        o.data.transform(mw); o.matrix_world = Matrix.Identity(4)
+        me = o.data
+        xs = [v.co.x for v in me.vertices]; zs = [v.co.z for v in me.vertices]
+        x0, x1, z0, z1 = min(xs), max(xs), min(zs), max(zs)
+        col, row = i % ATLAS_COLS, i // ATLAS_COLS
+        u0, u1 = col / ATLAS_COLS, (col + 1) / ATLAS_COLS
+        vt, vb = row / ATLAS_ROWS + CONTENT_PAD, (row + 1) / ATLAS_ROWS - CONTENT_PAD   # glTF v (0 = image top)
+        uv = me.uv_layers['PhotoUV']
+        for poly in me.polygons:
+            for li in poly.loop_indices:
+                co = me.vertices[me.loops[li].vertex_index].co
+                a, b = (co.x - x0) / (x1 - x0), (co.z - z0) / (z1 - z0)        # street view: +x right, +z up
+                uv.data[li].uv = (u0 + a * (u1 - u0), 1 - (vt + (1 - b) * (vb - vt)))   # Blender v is flipped on export
+        copies.append(o)
+    bpy.ops.object.select_all(action='DESELECT')
+    for o in copies:
+        o.select_set(True)
+    bpy.context.view_layer.objects.active = copies[0]
+    bpy.ops.object.join()
+    ph = bpy.context.view_layer.objects.active
+    ph.name = ph.data.name = 'Photos'
+    ph.parent = root
+    print('PHOTOS merged', len(ph.data.polygons), 'quads')
+    return ph
+
+
+def downsample_baked(baked, w, h):
+    """Box-filter the baked atlas (in linear light) to w×h as a new sRGB image."""
+    import numpy as np
+    src = C.pixels(baked)[..., :3]
+    lin = np.where(src <= 0.04045, src / 12.92, ((src + 0.055) / 1.055) ** 2.4)
+    fy, fx = src.shape[0] // h, src.shape[1] // w
+    lin = lin.reshape(h, fy, w, fx, 3).mean(axis=(1, 3))
+    out = np.where(lin <= 0.0031308, lin * 12.92, 1.055 * np.power(lin, 1 / 2.4) - 0.055)
+    img = C.image('street-window-baked-mobile', w, h, color=True)
+    C.set_pixels(img, np.dstack([out, np.ones((h, w))]))
+    return img
+
+
+def export_window(path, objs, quality):
+    bpy.ops.object.select_all(action='DESELECT')
+    for o in objs:
+        o.select_set(True)
+    bpy.ops.export_scene.gltf(filepath=path, export_format='GLB', use_selection=True, export_yup=True,
+                              export_image_format='WEBP', export_image_quality=quality, export_texcoords=True,
+                              export_normals=False, export_materials='EXPORT', export_cameras=True,
+                              export_lights=False, export_extras=False, export_apply=True)
+    patch_glb(path)
+
+
+def variants_stage():
+    bpy.ops.wm.open_mainfile(filepath=os.path.join(EVID, 'street-window.blend'))
+    root, static = bpy.data.objects['StreetWindow'], bpy.data.objects['WindowStatic']
+    photos = [bpy.data.objects['Photo_%02d' % (i + 1)] for i in range(12)]
+    others = [o for o in root.children if not o.name.startswith('Photo_')]       # static, glass, camera, spot markers
+    ph = merged_photos(root, photos)
+    export_window(OUT_GLB, [root] + others + photos + [ph], 84)               # desktop: Photo_NN kept alongside
+    node = next(n for n in static.data.materials[0].node_tree.nodes if n.type == 'TEX_IMAGE')
+    full = node.image
+    node.image = downsample_baked(full, LM[0] // 2, LM[1] // 2)
+    export_window(OUT_GLB_MOBILE, [root] + others + [ph], 80)                 # phone: merged Photos only
+    node.image = full
+
+
 def main():
+    if '--stage' in ARGS and 'variants' in ARGS:
+        return variants_stage()
     stage = 'geo' if 'geo' in ARGS else 'full'
     scene = C.reset()
     C.use_cycles_metal(scene, 32)

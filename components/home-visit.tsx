@@ -6,7 +6,7 @@ import Link from 'next/link';
 import {ArrowUpRight,ArrowRight,Phone,MapPin} from 'lucide-react';
 import {SectionHead} from './analog/primitives';
 import {track} from '@/lib/analytics';
-import {HOURS,PHOTO,chapter,openState,useBerlinNow} from './home-shared';
+import {HOURS,PHOTO,chapter,openState,useBerlinNow,HOURS_STATIC} from './home-shared';
 
 const ROUTE='https://www.google.com/maps/dir/?api=1&destination=Alexanderstra%C3%9Fe+2%2C+90762+F%C3%BCrth';
 
@@ -33,6 +33,7 @@ export function HomeVisit(){
        <span className="hm-status-dot" aria-hidden="true"/>
        <span suppressHydrationWarning>{state?state.label:'Öffnungszeiten'}</span>
       </p>
+      <p className="hm-hours-summary num">{HOURS_STATIC} · So geschlossen</p>
       <table className="hm-hours-table">
        <caption className="sr-only">Öffnungszeiten des Ladens in Fürth</caption>
        <tbody>

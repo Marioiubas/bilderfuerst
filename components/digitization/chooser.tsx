@@ -6,13 +6,13 @@
 //
 // The detail panel sits INSIDE the tile grid, directly after the row of the chosen tile
 // (audit M5): tiles get order 0,2,4…; the panel gets the order of its row's last tile + 1,
-// per breakpoint (7 columns ≥ 1181 px, 4 columns ≥ 768 px, a one-column list on phones, so
-// on phones the panel opens right under the tile). When the panel moves, the scroll position
+// per breakpoint (7 columns ≥ 1181 px, 4 columns ≥ 768 px, two picture columns on phones, so
+// on phones the panel opens right under the chosen tile's row). When the panel moves, the scroll position
 // is corrected so the tapped tile stays under the finger; if the panel head is then below
 // the fold, the page scrolls the tile to the top (smooth only when motion is allowed).
 // Until the first choice no radio is checked: from 768 px the panel previews the first
-// object (its tile marked as preview); on phones the list starts collapsed (accordion), so
-// all seven objects fit one screen and nothing splits the list before a choice.
+// object (its tile marked as preview); on phones no panel shows until a tile is
+// tapped, so the seven picture tiles stay together before a choice.
 import Link from 'next/link';
 import {useEffect,useLayoutEffect,useRef,useState,type CSSProperties,type RefObject} from 'react';
 import {ArrowDown,ArrowUpRight} from 'lucide-react';
@@ -108,7 +108,7 @@ export function Chooser({selected,onSelect,onEstimate}:{selected:ObjectId;onSele
      <span className="dz-tile-hint">{o.hint}</span>
      <span className="dz-tile-scan" aria-hidden="true"/>
     </label>)}
-    <Detail item={item} onEstimate={onEstimate} panelRef={panel} style={{'--o-xl':at(7),'--o-md':at(4),'--o-sm':at(1)} as CSSProperties}/>
+    <Detail item={item} onEstimate={onEstimate} panelRef={panel} style={{'--o-xl':at(7),'--o-md':at(4),'--o-sm':at(2)} as CSSProperties}/>
    </fieldset>
    <div className="dz-tiles-foot">
     <p className="dz-scale-note mono" aria-hidden="true"><span className="dz-scale-bar"/>Alle Objekte im selben Maßstab gezeichnet · Balken = 10 cm</p>

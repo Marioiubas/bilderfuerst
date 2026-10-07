@@ -11,7 +11,7 @@ Updated 2026-10-07 (BLENDER 3D added). Every visual asset belongs to **exactly o
 | HIGGSFIELD 2D | 4 textures (WebP + AVIF) | **no — decorative** | AI-generated in owner-operated account |
 | HIGGSFIELD 2D (bake input) | 3 material textures, not published — only baked into the Blender assets | **no — decorative** | AI-generated in owner-operated account |
 | HIGGSFIELD 3D | 2 GLB + 6 poster renders | **no — decorative** | AI/procedural in owner-operated account |
-| BLENDER 3D | 2 GLB + 8 renders (cartridge poster, window poster, 3 format renders × 1×/2×) | **no — decorative** | procedural scripts written for this project (no third-party models); bake inputs listed above |
+| BLENDER 3D | 4 GLB (2 desktop + 2 phone builds) + 1 baked shadow texture + 8 renders (cartridge poster, window poster, 3 format renders × 1×/2×) | **no — decorative** | procedural scripts written for this project (no third-party models); bake inputs listed above |
 | HIGGSFIELD VIDEO | 0 | — | — |
 | GENERATED TEXTURE | 1 (CSS SVG grain) | no — decorative | code, no third-party rights |
 | CSS/SVG GRAPHIC | see section below | no | — |
@@ -111,8 +111,11 @@ runtime and are never baked in.
 
 | Asset | Files | Script | Geometry / size | Use | Fallback |
 |---|---|---|---|---|---|
-| Hero cartridge v2 (135) | `public/models/film-cartridge-v2.glb`, `public/renders/cartridge-135.webp` | `cartridge_135.py` | 5,412 tris, 3 × 1024² WebP, 250,568 B | hero film workspace (successor to v1) | poster WebP |
-| Street gallery window | `public/models/street-window.glb`, `public/renders/street-window.webp` | `street_window.py` | 2,360 tris, 1 × 2048×1024 baked WebP, 121,580 B | gallery window scene (real photos on `Photo_01…12` at runtime) | poster WebP |
+| Hero cartridge v2 (135) | `public/models/film-cartridge-v2.glb`, `public/renders/cartridge-135.webp` | `cartridge_135.py` | 5,412 tris + 1,156 edge segments (`CartridgeEdges`), 3 × 1024² WebP, 269,416 B | hero film workspace (successor to v1) | poster WebP |
+| Street gallery window | `public/models/street-window.glb`, `public/renders/street-window.webp` | `street_window.py` | 2,384 tris (incl. merged `Photos`), 1 × 2048×1024 baked WebP, 124,016 B | gallery window scene (real photos on the merged `Photos` mesh at runtime) | poster WebP |
+| Hero cartridge, phone build | `public/models/film-cartridge-v2-mobile.glb` | `cartridge_135.py --variant mobile` | 2,246 tris + 835 edge segments, 2 × 512² WebP, 115,716 B | hero film workspace, lite profile (phones/tablets) | DOM film drawing |
+| Cartridge contact shadow | `public/textures/cartridge-contact-shadow.webp` | `cartridge_135.py` (`contact_shadow`) | 256² WebP alpha, 11,668 B | lite hero profile instead of a shadow map | — |
+| Street window, phone build | `public/models/street-window-mobile.glb` | `street_window.py --stage variants` | 2,360 tris, 1 × 1024×512 baked WebP, 87,500 B | gallery window scene, lite profile | CSS window drawing |
 | Format objects 135/120/110 | `public/renders/format-{135,120,110}.webp` + `@2x` | `format_objects.py` | renders only (800×600 / 1600×1200, transparent; 1× 21–28 KB) | film-development configurator | line glyphs |
 
 ## HIGGSFIELD VIDEO

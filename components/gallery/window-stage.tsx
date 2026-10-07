@@ -1,9 +1,10 @@
 "use client";
-// The window as a stage: a CSS drawing (always rendered; mobile, tablet, reduced motion, no WebGL) and,
-// on desktop only, the WebGL model layered on top (hooks/use-webgl-scene.ts, id 'gallery-window').
+// The window as a stage: a CSS drawing (always rendered; reduced motion, no or weak WebGL) and the WebGL model
+// layered on top (hooks/use-webgl-scene.ts, id 'gallery-window') — desktop, plus capable tablets/phones (lite profile).
 // Both are decorative representations; the accessible gallery is the print wall below.
 import {useRef} from 'react';
 import {useWebGLScene} from '@/hooks/use-webgl-scene';
+import {useMotionTier} from '@/motion/setup';
 import {windowPrints,shopPrints,prints} from './prints';
 
 const loadScene=async()=>{
@@ -13,7 +14,8 @@ const loadScene=async()=>{
 
 export function WindowStage(){
  const hostRef=useRef<HTMLDivElement>(null);
- const state=useWebGLScene(hostRef,loadScene,{id:'gallery-window',threshold:.05});
+ const state=useWebGLScene(hostRef,loadScene,{id:'gallery-window',threshold:.05,minTier:'mobile'});
+ const tier=useMotionTier();
  return <figure className="gal-stage-fig">
   <div ref={hostRef} className="gal-stage">
    <div className="webgl-fallback gal-w2d" aria-hidden="true">
@@ -30,7 +32,7 @@ export function WindowStage(){
     </div>
    </div>
    <div className="webgl-host gal-canvas" data-webgl-canvas aria-hidden="true"/>
-   <p className="gal-stage-mark mono" aria-hidden="true"><span>GAL · Modell, vereinfacht</span><span>{state==='active'?'3D · Blick folgt der Maus ±2°':'Zeichnung'}</span></p>
+   <p className="gal-stage-mark mono" aria-hidden="true"><span>GAL · Modell, vereinfacht</span><span>{state==='active'?(tier==='desktop'?'3D · Blick folgt der Maus ±2°':'3D · Blick folgt dem Scrollen'):'Zeichnung'}</span></p>
   </div>
   <figcaption className="gal-stage-cap">
    <span className="mono">Schaufenster · Nachbildung</span>

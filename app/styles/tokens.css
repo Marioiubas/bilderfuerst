@@ -1,4 +1,6 @@
-/* Archivo Variable (OFL, via @fontsource-variable/archivo) self-hosted so the latin file can be preloaded. */
+/* Archivo Variable + Instrument Serif (OFL, via @fontsource) self-hosted so the LCP faces can be preloaded. */
+@font-face{font-family:'Instrument Serif';font-style:normal;font-display:swap;font-weight:400;src:url(/fonts/instrument-serif-latin-400-normal.woff2) format('woff2');unicode-range:}
+@font-face{font-family:'Instrument Serif';font-style:italic;font-display:swap;font-weight:400;src:url(/fonts/instrument-serif-latin-400-italic.woff2) format('woff2');unicode-range:}
 @font-face{font-family:'Archivo Variable';font-style:normal;font-display:swap;font-weight:100 900;font-stretch:62% 125%;src:url(/fonts/archivo-latin-ext-wdth-normal.woff2) format('woff2-variations'),url(/fonts/archivo-latin-ext-wdth-normal.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
 @font-face{font-family:'Archivo Variable';font-style:normal;font-display:swap;font-weight:100 900;font-stretch:62% 125%;src:url(/fonts/archivo-latin-wdth-normal.woff2) format('woff2-variations'),url(/fonts/archivo-latin-wdth-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
 /* Bilderfürst Design System V2 · Direction C "Analog Technology".
@@ -40,11 +42,16 @@
  --surface-light:var(--white);
  --surface-light-2:var(--paper-50);
  --surface-stage:#eceeec;   /* neutral product stage */
+ --ivory:#f3eee3;           /* archive paper: history chronicle on phones, archive chapters */
+ --ivory-line:#ddd4c2;
+ --ivory-line-strong:#c2b69f;
 
  /* — Text — */
  --text:#121416;
- --text-muted:#555c62;
- --text-faint:#5c6469;
+ --ink-muted:#555c62;       /* light-surface values, re-usable inside a zone-dark that turns light */
+ --ink-faint:#5c6469;
+ --text-muted:var(--ink-muted);
+ --text-faint:var(--ink-faint);
  --text-inverse:#f4f5f3;
  --text-inverse-muted:#a3abb0;
  --text-inverse-faint:#80888e;
@@ -58,6 +65,7 @@
  /* — Type — */
  --font-sans:'Archivo Variable','Archivo',ui-sans-serif,system-ui,sans-serif;
  --font-mono:'IBM Plex Mono',ui-monospace,'SFMono-Regular',monospace;
+ --font-serif:'Instrument Serif',ui-serif,Georgia,serif;   /* emotion, heritage, gallery, print room, store (final audit 2026-10-07) */
  --stretch-display:72%;     /* condensed, like film-box typography */
  --stretch-ui:100%;
  --fs-display-xl:clamp(60px,10.4vw,172px);

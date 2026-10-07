@@ -6,6 +6,7 @@ import {prints,windowPrints,shopPrints,galleryFacts,type Print} from './prints';
 function Slot({p,onOpen}:{p:Print;onOpen:(index:number)=>void}){
  const index=prints.indexOf(p);
  return <li><button type="button" className="gal-map-slot" onClick={()=>onOpen(index)} aria-label={`Platz ${p.id}, ${p.place==='fenster'?'Schaufenster':'im Laden'}: ${p.title} – vergrößern`}>
+  <img className="gal-map-thumb" src={p.src} width={p.w} height={p.h} alt="" loading="lazy" decoding="async"/>
   <span className="gal-map-no num">{p.id}</span><span className="gal-map-name">{p.title}</span>
  </button></li>;
 }

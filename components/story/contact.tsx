@@ -24,7 +24,7 @@ export function ContactPage(){
   <header className="wrap page-head vis-head">
    <nav className="breadcrumbs" aria-label="Brotkrumen"><Link href="/">Start</Link><span aria-hidden="true">/</span><span aria-current="page">Laden & Kontakt</span></nav>
    <p className="eyebrow"><b>FTH</b><span>Fürth · Ladengeschäft · Abgabestellen</span></p>
-   <h1 className="vis-title">Das echte Geschäft <span>hinter dem Shop.</span></h1>
+   <h1 className="vis-title h-serif">Das echte Geschäft <em>hinter dem Shop.</em></h1>
    <p className="lead">Alexanderstraße 2, Ecke Schwabacher Straße. Film abgeben, Passbild machen, Fragen stellen – und im Schaufenster hängt die Street Gallery.</p>
   </header>
 

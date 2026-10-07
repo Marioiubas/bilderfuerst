@@ -36,21 +36,23 @@
 }
 @media (prefers-reduced-motion:reduce){.pdp-plate-back{display:none}.pdp-stage[data-multi=true] .pdp-plate-front{inset:7% 9%}}
 .pdp-zoom{position:absolute;right:10px;bottom:10px;z-index:3;background:var(--white-pure);border:1px solid var(--line-strong)}
-.pdp-zoom:hover{background:var(--white-pure);border-color:var(--text)}
+@media (hover:hover){.pdp-zoom:hover{background:var(--white-pure);border-color:var(--text)}}
 .pdp-stage-nav{position:absolute;left:10px;bottom:10px;z-index:3;display:flex;gap:8px}
 .pdp-stage-nav .icon-btn{background:var(--white-pure);border:1px solid var(--line-strong)}
 .pdp-thumbs{display:flex;flex-wrap:wrap;gap:8px}
 .pdp-thumbs button{position:relative;width:76px;aspect-ratio:1;background:var(--surface-stage);border:1px solid var(--line);padding:6px;transition:border-color var(--t-fast)}
 .pdp-thumbs button img{width:100%;height:100%;object-fit:contain;mix-blend-mode:multiply}
 .pdp-thumbs button span{position:absolute;left:4px;top:2px;font-size:var(--fs-deco);color:var(--text-faint)}
-.pdp-thumbs button:hover{border-color:var(--text)}
+@media (hover:hover){.pdp-thumbs button:hover{border-color:var(--text)}}
 .pdp-thumbs button[aria-pressed=true]{border-color:var(--red);box-shadow:inset 0 -2px 0 var(--red)}
 /* Hints: touch wording by default, mouse wording only for (hover:hover) and (pointer:fine). */
 .pdp-hint{display:flex;flex-wrap:wrap;gap:4px 16px;font-size:var(--fs-mono);color:var(--text-muted)}
 .hint-mouse{display:none}
 @media (hover:hover) and (pointer:fine){.hint-mouse{display:inline}.hint-touch{display:none}}
 @media (max-width:639px){
- .pdp-stage{aspect-ratio:1/.7}
+ /* The packshot fills the frame width (natural size permitting, never upscaled) — FINAL-COMPARATIVE-AUDIT 7.2 */
+ .pdp-stage{aspect-ratio:4/3}
+ .pdp-plate-front{inset:2%}
  .pdp-stage-code{display:none}
  .pdp-gallery{gap:8px}
  .pdp-thumbs button{width:56px;padding:4px}
@@ -62,7 +64,8 @@
 .pdp-title{font-size:clamp(34px,3.6vw,58px);line-height:.92;max-width:none;overflow-wrap:anywhere;hyphens:auto}
 .pdp-price{font-weight:700;font-size:clamp(28px,2.4vw,36px);letter-spacing:-.015em;line-height:1;margin-top:4px}
 .pdp-price small{font-size:.5em;font-weight:560;color:var(--text-muted)}
-.pdp-price-note{color:var(--text-muted);font-size:var(--fs-mono);margin-top:-6px}
+/* One quiet sans line (OLD) instead of two mono uppercase lines — 7.3 */
+.pdp-price-note.mono{font-family:var(--font-sans);font-size:13px;letter-spacing:0;text-transform:none;color:var(--text-muted);margin-top:-6px}
 .pdp-stock{display:flex;flex-wrap:wrap;align-items:center;gap:6px 16px;font-size:13px}
 .pdp-stock .status{font-size:var(--fs-mono)}
 .pdp-variant>label{font-family:var(--font-mono);font-size:var(--fs-mono);letter-spacing:var(--track-mono);text-transform:uppercase;color:var(--text-muted)}
@@ -77,7 +80,7 @@
 .pdp-cta:disabled{--btn-bg:var(--silver-100);--btn-bd:var(--silver-200);--btn-fg:var(--text-muted);opacity:1}
 @media (max-width:419px){.pdp-cta-icon{display:none}}
 .pdp-source{display:inline-flex;align-items:center;gap:8px;justify-self:start;min-height:44px;margin-top:-8px;font-weight:620;font-size:14px;text-decoration:underline;text-decoration-color:var(--line-strong);text-underline-offset:4px;transition:color var(--t-fast),text-decoration-color var(--t-fast)}
-.pdp-source:hover{color:var(--red-ink);text-decoration-color:currentColor}
+@media (hover:hover){.pdp-source:hover{color:var(--red-ink);text-decoration-color:currentColor}}
 .pdp-ask{font-size:13.5px;color:var(--text-muted)}
 .pdp-config{justify-self:start;font-size:13.5px}
 .pdp-review{display:flex;align-items:center;gap:9px;padding:10px 12px;background:var(--paper-50);border:var(--hair);font-size:12.5px;color:var(--text-muted)}
@@ -113,13 +116,13 @@
 .contact-strip li{display:grid;gap:8px;align-content:start}
 .contact-frame{display:block;background:#000;outline-offset:2px}
 .contact-frame img{width:100%;aspect-ratio:1400/928;object-fit:cover;transition:filter var(--t-normal) var(--ease-shutter)}
-.contact-frame:hover img{filter:brightness(1.08)}
+@media (hover:hover){.contact-frame:hover img{filter:brightness(1.08)}}
 .contact-frame:focus-visible{outline:var(--focus-ring-dark)}
 .contact-cap{font-size:13px;font-weight:600;padding-inline:2px}
 .contact-cap .mono{font-size:var(--fs-mono);color:var(--text-inverse-muted);font-weight:500}
 .contact-cap .mono:first-child{color:var(--amber);margin-right:4px}
 .contact-link{display:inline-flex;align-items:center;min-height:44px;font-size:var(--fs-mono);color:var(--text-inverse-muted);padding-inline:2px}
-.contact-link:hover{color:var(--white)}
+@media (hover:hover){.contact-link:hover{color:var(--white)}}
 @media (max-width:767px){.contact-strip{grid-template-columns:repeat(2,minmax(0,1fr));padding:8px;gap:10px 4px}}
 
 /* Lightbox (PDP + strip). PDP photos are centred at most at their source pixel size (M1). */
@@ -148,3 +151,4 @@
 .pdp-row-grid{grid-template-columns:repeat(4,minmax(0,1fr))}
 @media (max-width:1023px){.pdp-row-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 .pcard-compact .pcard-title{font-size:14.5px}
+@media (pointer:coarse){.pdp-variant .select{font-size:16px}}

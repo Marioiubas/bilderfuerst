@@ -55,7 +55,7 @@ export function HistoryPage(){
    <div className="wrap">
     <p className="eyebrow"><b>ARC</b><span>Archiv · Familie Dittmer</span><span className="sec-index">1935 — heute</span></p>
     <div className="hist-intro-main">
-     <h1 id="hist-title" className="display hist-title">Drei Generationen <span className="outline-type">auf einem Film.</span></h1>
+     <h1 id="hist-title" className="display hist-title h-serif">Drei Generationen <em>auf einem Film.</em></h1>
      <div className="hist-intro-foot">
       <p className="lead">Von den Fotolaboren bei Foto Seitz in Nürnberg bis zum Analog Store mit eigenem Labor in der Alexanderstraße 2. Die Chronik der Familie Dittmer, Bild für Bild – so, wie sie das Geschäft selbst aufgeschrieben hat.</p>
       <nav className="hist-jump" aria-label="Chronik">
@@ -128,9 +128,24 @@ function Frame({chapter:c,index}:{chapter:Chapter;index:number}){
     <img src={c.image.src} srcSet={c.image.srcSet} sizes={c.image.srcSet?'(max-width: 1023px) calc(100vw - 96px), 52vw':undefined} width={c.image.w} height={c.image.h} alt={c.image.alt} loading="lazy" decoding="async"/>
     <figcaption className="mono">{c.image.caption}</figcaption>
    </figure>}
-   <div className="hist-copy">{c.body.map(t=><p key={t}>{t}</p>)}</div>
-   {c.note&&<p className="hist-note"><span className="mono">Quellenhinweis</span>{c.note}</p>}
+   <div className="hist-copy">
+    <p>{c.body[0]}</p>
+    {(c.body.length>1||c.note)&&<More>
+     {c.body.slice(1).map(t=><p key={t}>{t}</p>)}
+     {c.note&&<p className="hist-note"><span className="mono">Quellenhinweis</span>{c.note}</p>}
+    </More>}
+   </div>
    {c.links&&<p className="hist-links">{c.links.map(l=><Link key={l.href} className="link" href={l.href}>{l.label} <ArrowUpRight size={15}/></Link>)}</p>}
   </div>
  </article>;
+}
+
+// Phones read the first paragraph of each chapter; the rest (and the source note) folds behind "Weiterlesen".
+// Server-rendered open, so desktop and no-JS keep the full text; phones collapse after hydration.
+function More({children}:{children:React.ReactNode}){
+ const ref=useRef<HTMLDetailsElement>(null);
+ useEffect(()=>{const d=ref.current;if(!d)return;const mq=matchMedia('(max-width:767px)');
+  const sync=()=>{d.open=!mq.matches};sync();mq.addEventListener('change',sync);return()=>mq.removeEventListener('change',sync);
+ },[]);
+ return <details ref={ref} className="hist-more" open><summary><span className="hist-more-label">Weiterlesen</span></summary><div className="hist-more-body">{children}</div></details>;
 }

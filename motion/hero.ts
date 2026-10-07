@@ -1,7 +1,7 @@
 "use client";
 // Home hero motion (Anime.js v4, modular). Every function names its photographic metaphor.
-// Rules: copy is complete at first paint — animations start from visible states
-// (opacity ≥ .4, small translations); reduced motion = final state instantly.
+// Rules: copy is complete and fully opaque at first paint — text and controls move (rise), they
+// never fade (FINAL-COMPARATIVE-AUDIT §80); reduced motion = final state instantly.
 // The SSR start state is held by CSS `.hero[data-intro=pending]` (app/styles/hero.css),
 // which must mirror the `from` values used here.
 import {createTimeline} from 'animejs/timeline';
@@ -35,9 +35,8 @@ export function playHeroIntro(root:HTMLElement,tier:Tier):Revertible|undefined{
  all('[data-intro-step]').forEach((el,i)=>{
   const headline=i===1||i===2;
   const rise=small?INTRO_RISE.mobile:headline?INTRO_RISE.headline:INTRO_RISE.copy;
-  // Links and buttons keep full opacity from the first frame (audit O11): only the frame-lock slide.
-  const interactive=el.matches('a,button,.btn');
-  const props:Record<string,number[]>=interactive?{translateY:[rise,0]}:{opacity:[.4,1],translateY:[rise,0]};
+  // Every step stays at opacity 1 from the first frame (audit O11 + §80): only the frame-lock rise.
+  const props:Record<string,number[]>={translateY:[rise,0]};
   tl.add(el,{...props,duration:headline?duration.hero:duration.section,ease:headline?ease.advance:ease.shutter},STEP_AT[i]??STEP_AT[STEP_AT.length-1]);
  });
  const film=root.querySelector<HTMLElement>('.hero-film');

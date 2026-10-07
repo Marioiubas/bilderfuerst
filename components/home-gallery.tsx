@@ -21,10 +21,14 @@ const LOG:[string,string,string][]=[
  ['23.03.2024','Photowalk','im Shop ausgeschrieben'],
 ];
 
+/** Cell of /images/gallery-prints-sheet.webp (the twelve /galerie prints, 4 × 3, built from their grid renditions):
+ *  the window schema shows thumbnails instead of empty frames (audit D3) with one 59 KB request. */
+const sheetCell=(i:number)=>({'--sx':i%4,'--sy':Math.floor(i/4)}) as React.CSSProperties;
+
 export function HomeGallery(){
  const head=chapter('GAL');
- // Phones: the window schema repeats the facts list (hidden there); the past-events log is one tap away.
- const more=useMore();
+ // Phones: the window schema is hidden; facts and the past-events log are one tap away (audit 3.1).
+ const more=useMore(2);
  return <section className="hm-gal zone-dark grain" id={head.sectionId} aria-labelledby="hm-gal-title" data-more={more.attr}>
   <div className="wrap">
    <SectionHead code={head.code} label={head.label} index={head.index} id="hm-gal-title"
@@ -38,15 +42,15 @@ export function HomeGallery(){
     <div className="hm-gal-side">
      <div className="hm-window" role="img" aria-label="Schema der Street Gallery: neun Bilder im Schaufenster in drei Reihen zu je drei, drei weitere Bilder im Laden">
       <p className="hm-window-label mono" aria-hidden="true"><span>Schaufenster · 24 h</span><span>3 × 3</span></p>
-      <div className="hm-window-pane" aria-hidden="true">{Array.from({length:9},(_,i)=><span key={i} className="hm-window-frame"><span className="mono">{String(i+1).padStart(2,'0')}</span></span>)}</div>
+      <div className="hm-window-pane" aria-hidden="true">{Array.from({length:9},(_,i)=><span key={i} className="hm-window-frame" style={sheetCell(i)}><span className="mono">{String(i+1).padStart(2,'0')}</span></span>)}</div>
       <p className="hm-window-label mono" aria-hidden="true"><span>Im Laden · Öffnungszeiten</span><span>+3</span></p>
-      <div className="hm-window-inside" aria-hidden="true">{[10,11,12].map(n=><span key={n} className="hm-window-frame"><span className="mono">{n}</span></span>)}</div>
+      <div className="hm-window-inside" aria-hidden="true">{[10,11,12].map(n=><span key={n} className="hm-window-frame" style={sheetCell(n-1)}><span className="mono">{n}</span></span>)}</div>
      </div>
      <p className="hm-gal-invite">Du fotografierst analog? Komm mit deinen Aufnahmen in den Laden oder schreib uns.</p>
     </div>
    </div>
-   <dl className="hm-gal-facts">{FACTS.map(([k,v])=><div key={k}><dt className="mono">{k}</dt><dd>{v}</dd></div>)}</dl>
-   <MoreToggle more={more} className="hm-gal-more">Vergangene Termine</MoreToggle>
+   <dl className="hm-gal-facts hm-extra" id={more.ids[1]}>{FACTS.map(([k,v])=><div key={k}><dt className="mono">{k}</dt><dd>{v}</dd></div>)}</dl>
+   <MoreToggle more={more} className="hm-gal-more">Fakten und vergangene Termine</MoreToggle>
    <div className="hm-log hm-extra" id={more.ids[0]}>
     <p className="eyebrow" id="hm-log-title"><b>LOG</b><span>Zuletzt in der Community</span><span className="sec-index">vergangene Termine</span></p>
     <ol className="hm-log-list" aria-labelledby="hm-log-title">{LOG.map(([date,kind,what])=><li key={date}><time className="mono num" dateTime={date.split('.').reverse().join('-')}>{date}</time><span className="hm-log-kind">{kind}</span><span className="hm-log-what">{what}</span></li>)}</ol>

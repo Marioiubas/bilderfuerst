@@ -37,10 +37,10 @@ export const CHAPTERS=[
 ] as const;
 export type ChapterCode=(typeof CHAPTERS)[number]['code'];
 const pad=(n:number)=>String(n).padStart(2,'0');
-/** Props for SectionHead: "01 / Lichttisch" with the frame counter "Bild 01 / 08" on the right. */
+/** Props for SectionHead: "01 · Lichttisch" with the frame counter "Bild 01 / 08" on the right (counter and zone code are desktop-only). */
 export function chapter(code:ChapterCode){
  const c=CHAPTERS.find(x=>x.code===code)!;
- return{code:c.code,label:`${pad(c.n)} / ${c.label}`,index:`Bild ${pad(c.n)} / ${pad(CHAPTERS.length)}`,sectionId:c.id};
+ return{code:c.code,label:`${pad(c.n)} · ${c.label}`,index:`Bild ${pad(c.n)} / ${pad(CHAPTERS.length)}`,sectionId:c.id};
 }
 
 /* ───────── Opening hours (source: /i/kontakt-und-oeffnungszeiten, verified 05.10.2026) ───────── */

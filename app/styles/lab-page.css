@@ -67,7 +67,7 @@
 .pg-table tbody th span{font-weight:400;font-size:13px;color:var(--text-muted);margin-left:6px}
 .pg-table tr[data-first=true]:not(:first-child)>*{border-top:2px solid var(--text)}
 .pg-table td a{display:inline-flex;align-items:center;min-height:44px;min-width:44px;font-weight:620;background:linear-gradient(currentColor,currentColor) left calc(100% - 10px)/100% 1px no-repeat;transition:color var(--t-fast)}
-.pg-table td a:hover{color:var(--red-ink);background-image:linear-gradient(var(--red),var(--red))}
+@media (hover:hover){.pg-table td a:hover{color:var(--red-ink);background-image:linear-gradient(var(--red),var(--red))}}
 .pg-note{margin-top:var(--s-5);max-width:84ch;font-size:14px;line-height:1.6;color:var(--text-muted)}
 .pg-src{text-decoration:underline;text-underline-offset:3px}
 @media (max-width:600px){.pg-table{font-size:13.5px}.pg-table tbody th span{display:none}.pg-table th,.pg-table td{padding-right:8px}.pg-table .chip{padding:0 5px}}

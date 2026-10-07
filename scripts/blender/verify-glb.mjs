@@ -23,7 +23,9 @@ async function inspect(file) {
   const {json, bin} = chunks(buf);
   const tris = (json.meshes ?? []).map((m) => ({
     name: m.name,
-    tris: m.primitives.reduce((s, p) => s + (p.indices !== undefined ? json.accessors[p.indices].count / 3 : json.accessors[p.attributes.POSITION].count / 3), 0),
+    // mode 4 (default) = triangles; mode 1 = LINES (e.g. CartridgeEdges) → counted as segments, not triangles
+    tris: m.primitives.filter((p) => (p.mode ?? 4) === 4).reduce((s, p) => s + (p.indices !== undefined ? json.accessors[p.indices].count / 3 : json.accessors[p.attributes.POSITION].count / 3), 0),
+    segments: m.primitives.filter((p) => p.mode === 1).reduce((s, p) => s + (p.indices !== undefined ? json.accessors[p.indices].count / 2 : json.accessors[p.attributes.POSITION].count / 2), 0),
     verts: m.primitives.reduce((s, p) => s + json.accessors[p.attributes.POSITION].count, 0),
     attributes: [...new Set(m.primitives.flatMap((p) => Object.keys(p.attributes)))],
     materials: m.primitives.map((p) => json.materials?.[p.material]?.name),
@@ -39,7 +41,7 @@ async function inspect(file) {
     file, bytes: buf.length,
     extensionsUsed: json.extensionsUsed ?? [], extensionsRequired: json.extensionsRequired ?? [],
     nodes: json.nodes.map((n) => n.name),
-    triangles: tris.reduce((s, m) => s + m.tris, 0), vertices: tris.reduce((s, m) => s + m.verts, 0), meshes: tris,
+    triangles: tris.reduce((s, m) => s + m.tris, 0), lineSegments: tris.reduce((s, m) => s + m.segments, 0), vertices: tris.reduce((s, m) => s + m.verts, 0), meshes: tris,
     materials: (json.materials ?? []).map((m) => ({name: m.name, alphaMode: m.alphaMode ?? 'OPAQUE', doubleSided: !!m.doubleSided, ext: Object.keys(m.extensions ?? {})})),
     images, cameras: (json.cameras ?? []).map((c) => c.perspective ?? c.orthographic),
   };

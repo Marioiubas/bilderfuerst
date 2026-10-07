@@ -10,7 +10,7 @@ import {PortraitPlanner} from './portrait-planner';
 import {BOOKING,PHONE,SRC} from './facts';
 
 const DISCIPLINES=[
- {code:'STU',kind:'studio',name:'Studio',title:'Pass- & Bewerbungsbilder',facts:['Passbilder ohne Termin','Bewerbungsbilder mit Termin','ab 20,00 €'],href:'#studio',cta:'Zum Studio'},
+ {code:'STU',kind:'studio',name:'Studio',title:'Pass- & Bewerbungsbilder',facts:['Passbilder ohne Termin','Bewerbungsbilder mit Termin'],href:'#studio',cta:'Zum Studio'},
  {code:'LAB',kind:'lab',name:'Labor',title:'Filmentwicklung im eigenen Labor',facts:['C-41 · Schwarzweiß · E-6','135 · 120 · 110','Scans: Noritsu HS-1800','ab 7,00 € (135 · C-41)'],href:'/filmentwicklung',cta:'Film entwickeln'},
  {code:'SCN',kind:'archive',name:'Archiv',title:'Digitalisierung in der Manufaktur',facts:['Negative · Dias · Schmalfilm','Video · Audio','Digitalisierung seit 2001','Manufaktur Fürth-Dambach'],href:'/digitalisierung',cta:'Digitalisieren'},
  {code:'PRT',kind:'print',name:'Druck',title:'FineArt & Abzüge',facts:['Abzüge ab 0,45 € (10×15)','FineArt bis A3+ in Fürth','XL-Formate in Nürnberg'],href:'/i/fineart-prints',cta:'Zum Print Room'},
@@ -28,15 +28,24 @@ export function ServicesPage(){
   <section className="wrap svc-disciplines" aria-labelledby="svc-disc-title">
    <h2 id="svc-disc-title" className="sr-only">Die vier Disziplinen</h2>
    <ol className="svc-tiles">
-    {DISCIPLINES.map((d,i)=><li key={d.code} className={`svc-tile svc-tile-${d.kind}`}>
-     <Link href={d.href} className="svc-tile-link">
+    {DISCIPLINES.map((d,i)=>{
+     const body=<>
       <span className="svc-tile-code mono"><b>{d.code}</b><span>0{i+1} / 04</span></span>
       <span className="svc-tile-name">{d.name}</span>
       <h3>{d.title}</h3>
       <ul className="svc-tile-facts">{d.facts.map(f=><li key={f} className="mono">{f}</li>)}</ul>
-      <span className="svc-tile-cta">{d.cta} <ArrowRight size={15}/></span>
-     </Link>
-    </li>)}
+     </>;
+     // Studio is the most asked-for service: its card carries the Passbild price and a direct CTA (OLD had it at ≈520 px).
+     return <li key={d.code} className={`svc-tile svc-tile-${d.kind}`}>
+      {d.kind==='studio'?<div className="svc-tile-link svc-tile-card">{body}
+       <p className="svc-tile-price"><span className="mono">Passbild · 4er Set</span><strong className="num">20,00 €</strong></p>
+       <span className="svc-tile-actions">
+        <TrackedLink href="/kontakt" event="click_passbilder" payload={{target:'kontakt',source:'tile'}} className="btn btn-primary btn-sm">Ohne Termin vorbeikommen <ArrowRight size={15}/></TrackedLink>
+        <Link className="link" href={d.href}>Details</Link>
+       </span>
+      </div>:<Link href={d.href} className="svc-tile-link">{body}<span className="svc-tile-cta">{d.cta} <ArrowRight size={15}/></span></Link>}
+     </li>;
+    })}
    </ol>
   </section>
 

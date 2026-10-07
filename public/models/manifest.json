@@ -75,8 +75,9 @@
       "cartridge-base": 11160
     },
     "materials": 2,
-    "fileBytes": 250568,
+    "fileBytes": 269416,
     "nodes": [
+      "CartridgeEdges",
       "Cassette",
       "Leader",
       "LeaderTip",
@@ -120,7 +121,94 @@
     "posterBytes": 155996,
     "decorative": true,
     "documentary": false,
-    "status": "built 2026-10-07, not yet integrated"
+    "status": "in production 2026-10-07: home hero 3D workspace, desktop (full profile); phones/tablets use film-cartridge-v2-mobile",
+    "lineSegments": 1156,
+    "edges": "CartridgeEdges = feature lines of Cassette (dihedral >= 32 deg + open borders) as glTF LINES; replaces the runtime EdgesGeometry (scripts/blender/cartridge_135.py --stage export)."
+  },
+  {
+    "name": "film-cartridge-v2-mobile",
+    "file": "/models/film-cartridge-v2-mobile.glb",
+    "source": "Blender 5.2.2 procedural script scripts/blender/cartridge_135.py -- --variant mobile (same SDF outlines, coarser simplification, re-baked at 512)",
+    "higgsfieldTextureInputs": [
+      {
+        "jobId": "b5932950-fb40-4fe6-aa22-2dc416da5b3d",
+        "model": "gpt_image_2_5 (flare, high, 2k)",
+        "use": "brushed-metal micro detail, bake input only"
+      }
+    ],
+    "date": "2026-10-07",
+    "license": "Procedural Blender model written for this project (no third-party model). Higgsfield textures used only as bake inputs (owner-operated account; usage per Higgsfield/upstream terms). Generic, unbranded; not a merchant product, not documentary.",
+    "triangles": 2246,
+    "vertices": 2184,
+    "lineSegments": 835,
+    "textureSize": "512x512 x2 (baseColor with baked AO multiplied in, ORM with R=1; no normal map; WebP via EXT_texture_webp)",
+    "textureBytes": {
+      "cartridge-mobile-base": 4228,
+      "cartridge-mobile-orm": 11534
+    },
+    "materials": 2,
+    "fileBytes": 115716,
+    "gzipBytes": 53349,
+    "nodes": [
+      "CartridgeEdges",
+      "Cassette",
+      "Leader",
+      "LeaderTip",
+      "SlotExit",
+      "FilmCartridge"
+    ],
+    "bounds": {
+      "size": [
+        0.5922,
+        1.0,
+        0.7976
+      ],
+      "min": [
+        -0.2449,
+        -0.5,
+        -0.5527
+      ],
+      "max": [
+        0.3473,
+        0.5,
+        0.2449
+      ],
+      "note": "Y-up, 1.0 unit = full height incl. keyed hub (51.25 mm); origin on the spool axis at mid height; spool hub +Y; leader exits along (0.782, 0, -0.624) like v1."
+    },
+    "markers": {
+      "SlotExit": [
+        -0.0193,
+        -0.0522,
+        -0.2613
+      ],
+      "LeaderTip": [
+        0.3473,
+        -0.0522,
+        -0.5527
+      ]
+    },
+    "loaderRequirements": "Plain three GLTFLoader (EXT_texture_webp). No Draco/Meshopt/KTX2.",
+    "renderingNotes": "Lite hero profile shades the cassette with a studio matcap x baseColor (no PMREM pass on phones); identical node names, markers and bounds to film-cartridge-v2.",
+    "usage": "Hero film workspace on phones/tablets (lite profile, docs/MOBILE-3D-PLAN.md).",
+    "fallback": "DOM film drawing (components/hero-film.tsx)",
+    "decorative": true,
+    "documentary": false,
+    "status": "in production 2026-10-07: home hero 3D workspace, lite profile"
+  },
+  {
+    "name": "cartridge-contact-shadow",
+    "type": "texture",
+    "file": "/textures/cartridge-contact-shadow.webp",
+    "source": "Blender 5.2.2 Cycles shadow-catcher render, scripts/blender/cartridge_135.py (contact_shadow; --stage export)",
+    "date": "2026-10-07",
+    "license": "Rendered from the procedural cartridge model written for this project; no third-party content.",
+    "imageSize": "256x256 WebP with alpha (RGB black, alpha = shadow)",
+    "fileBytes": 11668,
+    "geometry": "2.0 x 2.0 model units (x the hero cartridge scale 1.3), centred on the spool-axis origin, axis-aligned to the hero world (image top = -Z); hero pose rotation.x = pi/2, roll -60 deg, FILM_YAW -0.12; key light direction (-4.5, 7.5, 5.5) as a 7 deg sun + soft sky.",
+    "usage": "Lite hero profile: baked contact shadow instead of the shadow map.",
+    "decorative": true,
+    "documentary": false,
+    "status": "in production 2026-10-07"
   },
   {
     "name": "street-window",
@@ -140,14 +228,14 @@
     ],
     "date": "2026-10-07",
     "license": "Procedural Blender model written for this project (no third-party model). Higgsfield textures used only as bake inputs (owner-operated account; usage per Higgsfield/upstream terms). Generic, unbranded; not a merchant product, not documentary.",
-    "triangles": 2360,
-    "vertices": 2631,
+    "triangles": 2384,
+    "vertices": 2679,
     "textureSize": "2048x1024 ×1 (baked albedo×light, AgX-tonemapped; WebP via EXT_texture_webp)",
     "textureBytes": {
       "street-window-baked": 42686
     },
     "materials": 3,
-    "fileBytes": 121580,
+    "fileBytes": 124016,
     "nodes": [
       "Camera_Window",
       "Glass",
@@ -163,6 +251,7 @@
       "Photo_10",
       "Photo_11",
       "Photo_12",
+      "Photos",
       "Spot_01",
       "Spot_02",
       "Spot_03",
@@ -202,14 +291,92 @@
         -0.4
       ]
     },
-    "photoSlots": "Photo_01…Photo_09 window (row-major from top-left, 0.506×0.336 m), Photo_10…Photo_12 shop wall (top→bottom, 0.385×0.255 m); material PhotoSlot (neutral grey placeholder).",
+    "photoSlots": "Photo_01…Photo_09 window (row-major from top-left, 0.506×0.336 m), Photo_10…Photo_12 shop wall (top→bottom, 0.385×0.255 m); material PhotoSlot (neutral grey placeholder). Photos = all 12 slots in one mesh: TEXCOORD_0 = fixed 4x3 atlas cells in Photo order (cell 4:3, 3:2 content full width, centred, v=0 at the top), TEXCOORD_1 = light map (street_window.py --stage variants).",
     "loaderRequirements": "Plain three GLTFLoader (KHR_materials_unlit, EXT_texture_webp). No normals exported (unlit).",
     "usage": "Gallery street-window scene; real gallery photos are assigned to Photo_* at runtime (docs/BLENDER-ASSETS.md §2).",
     "fallback": "/renders/street-window.webp",
     "posterBytes": 47990,
     "decorative": true,
     "documentary": false,
-    "status": "built 2026-10-07, not yet integrated"
+    "status": "in production 2026-10-07: gallery window scene, desktop (full profile); phones/tablets use street-window-mobile"
+  },
+  {
+    "name": "street-window-mobile",
+    "file": "/models/street-window-mobile.glb",
+    "source": "Blender 5.2.2 procedural script scripts/blender/street_window.py -- --stage variants (same Cycles bake, box-filtered to 1024x512, no re-bake)",
+    "higgsfieldTextureInputs": [
+      {
+        "jobId": "0971c483-574d-46f3-beb4-adeaeec7a59c",
+        "model": "gpt_image_2_5 (flare, high, 2k)",
+        "use": "façade sandstone, bake input only"
+      },
+      {
+        "jobId": "2dfcff3a-f704-423c-aaee-252d681a3c03",
+        "model": "gpt_image_2_5 (flare, high, 2k)",
+        "use": "tooled stone (reveals, sill, lintel), bake input only"
+      }
+    ],
+    "date": "2026-10-07",
+    "license": "Procedural Blender model written for this project (no third-party model). Higgsfield textures used only as bake inputs (owner-operated account; usage per Higgsfield/upstream terms). Generic, unbranded; not a merchant product, not documentary.",
+    "triangles": 2360,
+    "vertices": 2631,
+    "textureSize": "1024x512 x1 (baked albedo x light, AgX-tonemapped; WebP q80 via EXT_texture_webp)",
+    "textureBytes": {
+      "street-window-baked-mobile": 16184
+    },
+    "materials": 3,
+    "fileBytes": 87500,
+    "gzipBytes": 49306,
+    "nodes": [
+      "Camera_Window",
+      "Glass",
+      "Photos",
+      "Spot_01",
+      "Spot_02",
+      "Spot_03",
+      "WindowStatic",
+      "StreetWindow"
+    ],
+    "bake": "Light baked into baseColor of the static parts (TEXCOORD_0, KHR_materials_unlit). PhotoSlot quads: TEXCOORD_0 = 0–1 photo UV, TEXCOORD_1 = same atlas (light on white paper). Glass stays a runtime material.",
+    "bounds": {
+      "size": [
+        7.2,
+        4.2,
+        3.475
+      ],
+      "min": [
+        -3.4,
+        -1.9,
+        -3.4
+      ],
+      "max": [
+        3.8,
+        2.3,
+        0.075
+      ],
+      "note": "metres, Y-up; façade front plane z=0, display box towards -z (back wall z=-0.98), shop wall z=-3.40."
+    },
+    "camera": {
+      "node": "Camera_Window",
+      "yfovDeg": 28,
+      "position": [
+        0.13,
+        0.05,
+        5.3
+      ],
+      "target": [
+        0.13,
+        0.05,
+        -0.4
+      ]
+    },
+    "photoSlots": "Photos only (the twelve Photo_NN quads are not exported): TEXCOORD_0 = 4x3 atlas cells, TEXCOORD_1 = light map.",
+    "loaderRequirements": "Plain three GLTFLoader (KHR_materials_unlit, EXT_texture_webp). No normals exported (unlit).",
+    "usage": "Gallery window scene on phones/tablets (lite profile, docs/MOBILE-3D-PLAN.md).",
+    "fallback": "CSS window drawing (components/gallery/window-stage.tsx)",
+    "decorative": true,
+    "documentary": false,
+    "status": "in production 2026-10-07: gallery window scene, lite profile"
   },
   {
     "name": "format-objects",

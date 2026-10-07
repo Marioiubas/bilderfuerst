@@ -1,0 +1,114 @@
+/* Configurator · hybrid surface + order summary (audit 2.1–2.7, D5; Lead decision §8). /filmentwicklung.
+   PAPER = below 900 px and landscape phones: the choice steps lie on light photo paper (black text,
+   silver hairlines, a small red selection marker, amber C-41 / silver SW / blue E-6 accents; small
+   coloured text uses the *-ink tokens). Order: dark hero → paper steps → dark lab section (tank,
+   machines, expert content) → paper order summary. Tested at 768 and 900: 768–899 (tablet portrait,
+   single column) reads like the phone (film strip as a negative on the light table) and keeps one
+   surface per device class; at ≥ 900 the side column returns and the dark lab stays (§77).
+   COMPACT = < 768 px and landscape phones (lab.css): progress row, total dock, plain summary,
+   receipt collapsed. Tokens only; the paper re-inherits the :root light values (custom property
+   `inherit`) instead of repeating them. */
+
+/* — All sizes: lab section + summary scaffolding — */
+.fc-lab{display:grid;gap:var(--s-5);align-content:start;min-width:0}
+.fc-lab-head,.fc-lab-machines{display:none}
+.fc-summary{display:grid;gap:var(--s-4);align-content:start;min-width:0}
+.fc-sum-photo{margin:0;overflow:hidden;background:var(--white);border-radius:var(--r-1);box-shadow:var(--shadow-print)}
+.fc-sum-photo img{display:block;width:100%;height:auto;aspect-ratio:16/10;object-fit:cover;object-position:42% 62%}
+.fc-sum,.fc-note-btn{display:none}
+@media (min-width:1024px){
+ .fc-side{grid-template-rows:auto minmax(0,1fr);align-content:stretch}
+ .fc-summary{display:flex;flex-direction:column;gap:var(--s-5)}
+}
+
+/* — Paper surface — */
+@media (max-width:899px),(max-height:500px) and (max-width:1023px){
+ .fc .fc-bench{background:var(--paper-50);color:var(--text);--line:inherit;--hair:inherit;--line-strong:inherit;--text-muted:inherit;--text-faint:inherit;
+  --fc-card:var(--white-pure);--fc-card-hi:var(--white-pure);--fc-line:var(--line);--fc-line-hi:var(--line-strong);--fc-hover:var(--silver-400);--fc-fg:var(--text);
+  --fc-sel:var(--red);--fc-sel-line:var(--text);--fc-sel-ink:var(--red-ink);--fc-amber-ink:var(--amber-ink);--fc-silver:var(--silver-400);--fc-spec:var(--text-muted);--fc-plate:transparent;--fc-dock-bg:var(--paper-50);--tk-hole:var(--paper-50)}
+ .fc .fc-bench :focus-visible{outline:var(--focus-ring)}
+ .fc .fc-bench .chip{border-color:var(--line-strong);color:var(--text)}
+ .fc .fc-lab :focus-visible{outline:var(--focus-ring-dark)}
+ .fc .fc-lab .chip{border-color:var(--line-dark-strong);color:var(--text-inverse)}
+ .fc-proc[data-kind=e6]{--accent:var(--blue-ink)}
+ .fc-strip-dock{margin-inline:calc(-1 * var(--gutter));padding-inline:var(--gutter)}
+ /* The film strip stays a dark negative lying on the light table. */
+ .fs{--text-faint:var(--text-inverse-faint);--text-muted:var(--text-inverse-muted)}
+ .fs-readout{color:var(--amber-ink)}
+ .fs-readout[data-frame=num]::before{color:var(--text-muted)}
+ @media (hover:hover){
+ .fc-opt:hover,.fc-proc:hover{box-shadow:0 10px 22px -18px rgb(10 11 12 / .5)}}
+ .fc-opt[aria-pressed=true],.fc-proc[data-selected=true]{box-shadow:0 1px 0 rgb(10 11 12 / .06),0 12px 22px -20px rgb(10 11 12 / .55)}
+ /* Dark lab section: full bleed between the paper steps and the paper summary. */
+ .fc-side{grid-template-columns:minmax(0,1fr);gap:0;margin-top:0}
+ .fc-lab{margin-inline:calc(-1 * var(--gutter));padding:var(--s-7) var(--gutter)}
+ .fc-lab-head{display:grid;gap:var(--s-2)}
+ .fc-lab-title{font-size:clamp(30px,8vw,44px);font-stretch:74%;font-weight:760;line-height:.95;text-transform:uppercase}
+ .fc-lab-machines{display:grid;border-top:1px solid var(--line-dark)}
+ .fc-lab-machines>div{display:grid;grid-template-columns:96px minmax(0,1fr);gap:12px;align-items:center;min-height:44px;padding:6px 0;border-bottom:1px solid var(--line-dark);font-size:14px;line-height:1.4;color:var(--text-inverse-muted)}
+ .fc-lab-toggle{justify-self:start}
+ .fc-lab .fc-expert{margin:0;padding:var(--s-5) 0 0;border:0;border-top:1px solid var(--line-dark);background:none}
+ .fc-summary{padding-top:var(--s-7)}
+ .fc-summary .tk-ticket{box-shadow:var(--shadow-print)}
+}
+/* Wider paper (tablet portrait, landscape phones): tank beside the machine list, photo beside the receipt. */
+@media (min-width:640px) and (max-width:899px),(min-width:640px) and (max-height:500px) and (max-width:1023px){
+ .fc-lab{grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);align-items:start;column-gap:var(--s-6)}
+ .fc-lab-head,.fc-lab .fc-expert{grid-column:1/-1}
+ .fc-lab .pt{grid-column:1;grid-row:2/span 2}
+ .fc-lab-machines,.fc-lab-toggle{grid-column:2}
+}
+@media (min-width:768px) and (max-width:899px) and (min-height:501px){.fc-summary{grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:start}}
+
+/* — Compact (phones): dense tiles, plain summary, receipt behind a disclosure — */
+@media (max-width:767px),(max-height:500px) and (max-width:1023px){
+ .fc-formats,.fc-deliveries{grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+ .fc-formats .fc-opt{gap:2px;padding:8px 8px 9px;align-items:stretch}
+ .fc-formats .fg{width:min(100%,150px);margin:0 0 4px}
+ .fc-formats .fc-opt-title{font-size:26px}
+ .fc-formats .fc-opt-sub{font-size:13px;line-height:1.3}
+ .fc-formats .fc-opt-hint,.fc-formats .fc-opt-warn{font-size:var(--fs-mono);letter-spacing:.02em;line-height:1.3;text-transform:none}
+ .fc-formats .fc-price{padding-top:6px;margin-top:auto}
+ .fc-formats .fc-price-sel{display:none}
+ .fc-procs{grid-template-columns:repeat(2,minmax(0,1fr));align-items:stretch;gap:8px}
+ .fc-proc-btn{flex:1;gap:6px;padding:10px 10px 9px 13px}
+ .fc-proc-top{flex-wrap:wrap;gap:6px}
+ .fc-proc .fc-opt-title{font-size:16px;line-height:1.15;hyphens:auto}
+ .fc-proc .fc-price{padding-top:6px}
+ .fc-proc .fc-price-sel{display:none}
+ .fc-proc-details{display:none}
+ .fc-proc-note{display:block;margin-top:10px;padding-left:12px;border-left:3px solid var(--fc-silver);font-size:14px;line-height:1.5;color:var(--text-muted)}
+ .fc-proc-note[data-kind=c41]{border-color:var(--amber)}
+ .fc-proc-note[data-kind=e6]{border-color:var(--blue-ink)}
+ .fc-proc-note:empty{display:none}
+ .fc-scans{gap:8px}
+ .fc-scans .fc-opt{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:baseline;gap:2px 12px;padding:12px 14px}
+ .fc-scans .fc-opt-title{grid-area:1/1;font-size:17px}
+ .fc-scans .fc-opt>.fc-price{grid-area:1/2;width:auto;margin:0;padding:0;border:0}
+ .fc-scans .fc-opt-sub,.fc-scans .fc-opt-spec{grid-column:1/-1;font-size:14px}
+ .fc[data-expert=false] .fc-scans .fc-opt-spec{display:none}
+ .fc-delivery{min-height:56px;padding:10px}
+ .fc-delivery .fc-opt-title{font-size:15px;line-height:1.2}
+ /* Plain summary above the receipt. */
+ .fc-sum{display:grid;gap:var(--s-3)}
+ .fc-sum-title{font-size:30px;font-stretch:74%;font-weight:760;line-height:1;text-transform:uppercase}
+ .fc-sum-title:focus{outline:none}
+ .fc-sum-list{display:grid;border-top:1px solid var(--line)}
+ .fc-sum-list>div{display:grid;grid-template-columns:76px minmax(0,1fr);gap:10px;padding:9px 0;border-bottom:1px solid var(--line);font-size:15px;line-height:1.35}
+ .fc-sum-list dt{padding-top:2px;font-family:var(--font-mono);font-size:var(--fs-mono);letter-spacing:var(--track-mono);text-transform:uppercase;color:var(--text-muted)}
+ .fc-sum-open{color:var(--text-muted)}
+ .fc-sum-total{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:end;gap:0 12px;padding-top:6px}
+ .fc-sum-label,.fc-sum-vat{grid-column:1;font-family:var(--font-mono);font-size:var(--fs-mono);letter-spacing:var(--track-mono);text-transform:uppercase;color:var(--text-muted)}
+ .fc-sum-total strong{grid-area:1/2/3/3;font-stretch:72%;font-weight:780;font-size:46px;line-height:.92;letter-spacing:-.01em;white-space:nowrap}
+ .fc-sum-missing{font-size:13px;color:var(--text-muted)}
+ .fc-sum-added{display:flex;gap:8px;align-items:center;font-size:13px}
+ .fc-sum-added::before{content:'';width:7px;height:7px;background:var(--red);flex:none}
+ .fc-note-btn{display:flex;align-items:center;gap:10px;width:100%;min-height:48px;padding:0 2px;border-block:1px solid var(--line-strong);text-align:left;color:var(--text)}
+ .fc-note-name{font-weight:650;font-size:15px}
+ .fc-note-hint{margin-left:auto;font-size:13px;color:var(--text-muted)}
+ .fc-note-btn svg{flex:none;transition:transform var(--t-fast) var(--ease-shutter)}
+ .fc-note-btn[aria-expanded=true] svg{transform:rotate(180deg)}
+ .fc-ticket-dock[data-open=false]{display:none}
+ .fc-summary .tk-cta{display:none}
+}
+@media (hover:hover) and (max-width:899px){.fc .fc-bench .link:hover{color:var(--red-ink);background-image:linear-gradient(var(--red),var(--red))}.fc .fc-lab .link:hover{color:var(--white)}}

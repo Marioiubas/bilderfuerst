@@ -1,7 +1,8 @@
 // Real business photographs shown as frames of the hero negative strip / contact sheet.
 // Sources: public/images (photostudio.de originals, see docs/ASSET-PROVENANCE.md and
-// docs/BRAND-VISUAL-RESEARCH.md). Captions only name what the picture shows; the 2018
-// storefront keeps its year because its Fuji X signage is historic (SOURCE-CONFLICTS #9).
+// docs/BRAND-VISUAL-RESEARCH.md). Captions only name what the picture shows. Each photo appears once on
+// the homepage (FINAL-COMPARATIVE-AUDIT 3.5): the 2018 corner shot lives in Street Gallery, so the strip opens
+// on the window close-up instead.
 export type HeroFrame={
  /** Large rendition (used by the DOM strip via srcSet). */
  src:string;
@@ -19,8 +20,8 @@ export type HeroFrame={
 };
 
 export const heroFrames:HeroFrame[]=[
- {src:'/images/store-exterior-gallery-window.webp',thumb:'/images/store-exterior-gallery-window-t.webp',small:'/images/store-exterior-gallery-window.webp',srcSet:'/images/store-exterior-gallery-window-t.webp 480w, /images/store-exterior-gallery-window.webp 1063w',width:1063,height:709,
-  alt:'Das Eckgeschäft Alexanderstraße 2 in Fürth mit der Schaufenster-Galerie, Aufnahme von 2018',caption:'Fürth · 2018',edge:12},
+ {src:'/images/store-front-l.webp',thumb:'/images/store-front-t.webp',small:'/images/store-front.webp',srcSet:'/images/store-front-t.webp 480w, /images/store-front-l.webp 1063w',width:1063,height:709,
+  alt:'Schaufenster der Street Gallery in der Alexanderstraße 2: gerahmte Schwarzweiß-Abzüge hinter Glas',caption:'Fürth · Fenster',edge:12},
  {src:'/images/film-rolls-l.webp',thumb:'/images/film-rolls-t.webp',small:'/images/film-rolls.webp',srcSet:'/images/film-rolls-t.webp 480w, /images/film-rolls-l.webp 1600w',width:1600,height:1067,
   alt:'Belichtete Kleinbild-Farbfilme für den C-41-Prozess, aufgereiht im Labor',caption:'Labor · C-41',edge:13},
  {src:'/images/scan-adonal-l.webp',thumb:'/images/scan-adonal-t.webp',small:'/images/scan-adonal.webp',srcSet:'/images/scan-adonal-t.webp 480w, /images/scan-adonal-l.webp 1400w',width:1400,height:928,
@@ -33,8 +34,8 @@ export const heroFrames:HeroFrame[]=[
   alt:'Ein gerahmtes Dia, gehalten mit einem weißen Baumwollhandschuh',caption:'Digital · Dia',edge:17},
  {src:'/images/film-shelf-l.webp',thumb:'/images/film-shelf-t.webp',small:'/images/film-shelf.webp',srcSet:'/images/film-shelf-t.webp 480w, /images/film-shelf-l.webp 1600w',width:1600,height:1067,
   alt:'Filmpackungen im Analog Store, unter anderem von Kodak, CineStill und Ilford',caption:'Store · Filme',edge:18},
- {src:'/images/store-front-l.webp',thumb:'/images/store-front-t.webp',small:'/images/store-front.webp',srcSet:'/images/store-front-t.webp 480w, /images/store-front-l.webp 1063w',width:1063,height:709,
-  alt:'Schaufenster der Street Gallery mit gerahmten Schwarzweiß-Abzügen',caption:'Street Gallery',edge:19},
+ {src:'/images/lab-film-l.webp',thumb:'/images/lab-film.webp',small:'/images/lab-film.webp',srcSet:'/images/lab-film.webp 600w, /images/lab-film-l.webp 1600w',width:1600,height:1066,
+  alt:'Belichtete Kleinbildpatronen für den C-41-Prozess, darunter Kodak Portra 800',caption:'Belichtet · Portra',edge:19},
 ];
 
 /** Frame marked with the red grease pencil on the contact sheet (index into heroFrames). */

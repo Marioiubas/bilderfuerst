@@ -1,0 +1,153 @@
+/* Area stylesheet: home rhythm (final comparative audit, 2026-10-07) — loaded after home.css on "/".
+   Colour rhythm (router white, archive ivory), type roles, one eyebrow per chapter and the phone length pass.
+   Also holds the phone density rules (audit M2) moved from the end of home.css; both files stay under 500 lines. */
+/* ───────── Phones: density (audit M2) — same facts, less height ─────────
+   48 px section rhythm, compact section heads, 4 films on the light table, wider photo crops, secondary content
+   (lab machines + developer samples, Pentax spec table, past events) behind one 44 px disclosure per chapter. */
+@media (max-width:767px){
+ :is(.hm-ltb,.hm-lab,.hm-str,.hm-scn,.hm-prt,.hm-gal,.hm-arc,.hm-fth){padding-block:var(--s-7)}
+ .hm-router{padding-block:var(--s-7)}
+ :is(.hm-ltb,.hm-lab,.hm-str,.hm-scn,.hm-prt,.hm-gal,.hm-arc,.hm-fth) .sec-head{row-gap:var(--s-3);margin-bottom:var(--s-6)}
+ .hm-router-head{gap:12px;margin-bottom:var(--s-6)}
+ :is(.hm-lab-grid,.hm-str-feature,.hm-scn-grid,.hm-prt-grid,.hm-gal-grid,.hm-fth-grid){row-gap:var(--s-6)}
+ :is(.hm-lab-lead,.hm-scn-lead,.hm-router-lead){font-size:16px}
+ /* photos as 16:9 crops (captions stay true: same photograph, less sky/floor) */
+ :is(.hm-lab-photo-main,.hm-scn-frame,.hm-prt-photo,.hm-fth-photo) img{aspect-ratio:16/9;object-fit:cover}
+
+ .hm-more{display:flex;align-items:center;justify-content:space-between;gap:16px;width:100%;min-height:48px;padding:0 14px;border:1px solid var(--line-strong);border-radius:var(--r-1);font-weight:620;font-size:14px;text-align:left}
+ .hm-more-icon{position:relative;flex:none;width:12px;height:12px}
+ .hm-more-icon::before,.hm-more-icon::after{content:'';position:absolute;left:0;right:0;top:50%;height:1.5px;margin-top:-.75px;background:currentColor;transition:transform var(--t-fast) var(--ease-shutter)}
+ .hm-more-icon::after{transform:rotate(90deg)}
+ .hm-more[aria-expanded=true] .hm-more-icon::after{transform:none}
+ section:not([data-more]) .hm-extra{display:none}
+
+ /* 01 · LTB: four films (the shop has the rest), Quellstand stated once in the note */
+ .hm-ltb-item:nth-child(n+5){display:none}
+ .hm-ltb .hm-ltb-src{display:none}
+
+ /* 02 · LAB: photo · lead · CTA · ticket (prices) · [Maschinen und Entwickler] */
+ .hm-lab-copy{display:contents}
+ .hm-lab-grid>*,.hm-lab-copy>*{grid-column:1/-1}
+ .hm-lab-photo-main{order:0}.hm-lab-lead{order:1}.hm-lab-actions{order:2}.hm-ticket{order:3}.hm-lab-more{order:4}.hm-lab-machines{order:5}.hm-lab-side{order:6}
+ .hm-ticket-table tbody th,.hm-ticket-table td{padding-block:6px}
+ .hm-ticket-table .hm-ticket-group td{padding:12px 8px 4px}
+ .hm-ticket-head{padding-block:12px 10px}
+
+ /* 03 · STR: name · claim · price · CTA · [Technische Daten] · index · used cameras */
+ .hm-str-spec{display:flex;flex-direction:column}
+ .hm-str-spec .hm-spec{order:2}
+ .hm-str-more{margin-top:12px}
+ .hm-str-spec>.hm-spec{margin-top:12px}
+ .hm-str-claim{margin-bottom:var(--s-4)}
+ .hm-str-buy{margin:0 0 var(--s-4)}
+ .hm-str-lower{margin-top:var(--s-7);row-gap:var(--s-6)}
+ .hm-used{padding:18px}
+ /* Sortiment index in two columns: name · count, 48 px rows (numbers are decorative print) */
+ .hm-index ol{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:16px}
+ .hm-index li a{grid-template-columns:minmax(0,auto) minmax(6px,1fr) auto;gap:8px;align-items:center;min-height:48px;padding:6px 0}
+ .hm-index li a>.hm-index-no,.hm-index li a>svg{display:none}
+ .hm-index-name{font-size:18px}
+ .hm-index-rule{transform:translateY(4px)}
+
+ /* 04 · SCN: one photograph on phones (the slide-in-glove detail adds no fact) */
+ .hm-scn-side{display:none}
+ .hm-scn-year{font-size:56px}
+
+ /* 05 · PRT */
+ .hm-prt-stack{margin:var(--s-5) 0 var(--s-4)}
+
+ /* 06 · GAL: the window schema repeats the facts list → facts only; past events behind a disclosure */
+ .hm-window{display:none}
+ .hm-gal-facts{margin-top:var(--s-6)}
+ .hm-gal-more{margin-top:var(--s-6)}
+ .hm-log{margin-top:var(--s-4)}
+
+ /* 07 · ARC */
+ .hm-arc-facades{margin-top:var(--s-6)}
+
+ /* 08 · FTH: call + route side by side */
+ .hm-fth-actions .btn{flex:1 1 40%;padding-inline:12px}
+ .hm-hours-table th,.hm-hours-table td{padding-block:6px}
+}
+@media (max-width:639px){
+ /* Router drawers: 72 px rows */
+ .hm-drawer{padding:8px 14px}
+ .hm-drawer-face{height:56px}
+ .hm-drawer-face .hm-sym{transform:scale(.74)}
+}
+
+/* Router on white (FINAL-COMPARATIVE-AUDIT 3.2): the quick-service drawers break the 1,875 px dark run after the
+   hero. Same drawers, symbols and microinteractions — light lab furniture instead of graphite. */
+.hm-router.zone-light :focus-visible{outline:var(--focus-ring)}
+.hm-router.zone-light .hm-router-head .eyebrow b{color:var(--red)}
+.hm-router.zone-light .hm-drawers{border-color:var(--line-strong);background:var(--white-pure)}
+.hm-router.zone-light .hm-drawers>li{border-color:var(--line-strong)}
+.hm-router.zone-light .hm-drawer{color:var(--text)}
+.hm-router.zone-light .hm-drawer:focus-visible{background:var(--paper-50)}
+.hm-router.zone-light .hm-drawer::after{background:var(--red)}
+.hm-router.zone-light .hm-drawer-top{color:var(--text-faint)}
+.hm-router.zone-light .hm-drawer:focus-visible .hm-drawer-top svg{color:var(--red)}
+.hm-router.zone-light .hm-drawer-face{border-color:var(--line);background:var(--surface-stage);box-shadow:inset 0 10px 22px -16px rgb(0 0 0 / .28)}
+.hm-router.zone-light .hm-drawer-holder{border-color:var(--line-strong);background:var(--white-pure)}
+.hm-router.zone-light .hm-drawer-holder::before,.hm-router.zone-light .hm-drawer-holder::after{background:var(--silver-400)}
+.hm-router.zone-light .hm-drawer-dest{color:var(--text-muted)}
+.hm-router.zone-light .hm-drawer:focus-visible .hm-drawer-dest{color:var(--text)}
+.hm-router.zone-light .hm-drawer-pull{border-color:var(--line-strong);background:linear-gradient(var(--white-pure),var(--paper-50));box-shadow:inset 0 2px 3px rgb(0 0 0 / .12)}
+.hm-router.zone-light .hm-sym{color:var(--graphite-600)}
+.hm-router.zone-light .hm-drawer:focus-visible .hm-sym{color:var(--text)}
+.hm-router.zone-light .hm-sym-mark{color:var(--text-faint)}
+.hm-router.zone-light .hm-sym-odo{background:var(--white-pure)}
+.hm-router.zone-light .hm-sym-odo-col b{color:var(--text)}
+.hm-router.zone-light .hm-sym-sheet{background:var(--white-pure);box-shadow:0 0 0 1px var(--line)}
+.hm-router.zone-light .hm-sym-slot{background:var(--silver-200)}
+.hm-router.zone-light .hm-jump-list{border-color:var(--line)}
+.hm-router.zone-light .hm-jump-list li{border-color:var(--line)}
+.hm-router.zone-light .hm-jump-list a{color:var(--text)}
+.hm-router.zone-light .hm-jump-list a::after{background:var(--red)}
+.hm-router.zone-light .hm-jump-list a:focus-visible{background:var(--paper-50)}
+.hm-router.zone-light .hm-jump-no{color:var(--text-faint)}
+@media (hover:hover){
+ .hm-router.zone-light .hm-drawer:hover,.hm-router.zone-light .hm-jump-list a:hover{background:var(--paper-50)}
+ .hm-router.zone-light .hm-drawer:hover .hm-drawer-top svg{color:var(--red)}
+ .hm-router.zone-light .hm-drawer:hover .hm-drawer-dest,.hm-router.zone-light .hm-drawer:hover .hm-sym{color:var(--text)}
+ .hm-router.zone-light .hm-drawer:hover .hm-sym-sheet{background:var(--white-pure)}
+}
+/* ───────── Type roles + label diet (FINAL-COMPARATIVE-AUDIT 3.3 / 3.4) ─────────
+   Serif for the emotional chapters (Druckraum, Street Gallery, Archiv, Laden); condensed caps stay for the
+   lab/store/scanner chapters. Phones carry one eyebrow per chapter ("01 · Lichttisch"): the zone code and the
+   "Bild NN / 08" counter are desktop furniture. Film-edge numbers inside images stay (they are the film). */
+:is(.hm-prt,.hm-gal,.hm-arc,.hm-fth) .sec-head h2{font-family:var(--font-serif);font-weight:400;font-stretch:normal;text-transform:none;letter-spacing:-.01em;line-height:.95;font-size:clamp(42px,4.8vw,76px)}
+@media (max-width:767px){
+ :is(.hm-ltb,.hm-lab,.hm-str,.hm-scn,.hm-prt,.hm-gal,.hm-arc,.hm-fth) .sec-head .eyebrow :is(b,.sec-index),
+ :is(.hm-router-head,.hm-jump) .eyebrow :is(b,.sec-index){display:none}
+ /* the archive photo runs full width on phones (3.7) */
+ .hm-arc-facades{margin-inline:calc(-1 * var(--gutter))}
+ .hm-arc-facades img{border-inline:0}
+ .hm-arc-facades figcaption{padding-inline:var(--gutter)}
+}
+/* Phones, home length by composition (audit 3.1): the chapter index becomes one swipeable row of chips, the hours
+   collapse to one line (today's state stays above it, the full table is on /kontakt). */
+.hm-hours-summary{display:none}
+@media (max-width:639px){
+ .hm-jump-list{display:flex;gap:8px;overflow-x:auto;margin-inline:calc(-1 * var(--gutter));padding:2px var(--gutter) 6px;border:0;scroll-padding-inline:var(--gutter);scroll-snap-type:x proximity;scrollbar-width:none}
+ .hm-jump-list li{flex:none;border:1px solid var(--line-strong);scroll-snap-align:start}
+ .hm-jump-list a{min-height:44px;padding:6px 14px;white-space:nowrap}
+ .hm-hours-table{display:none}
+ .hm-hours-summary{display:block;margin-top:6px;font-size:15px;line-height:1.5}
+}
+@media (max-width:767px){
+ /* one eyebrow per chapter: inner labels keep their words, lose the codes and counters */
+ :is(.hm-str,.hm-gal,.hm-lab,.hm-scn,.hm-prt,.hm-arc,.hm-fth,.hm-ltb) .eyebrow :is(b,.sec-index){display:none}
+ /* light table: borderless tiles (3.6); the per-card source date repeats the note below the grid */
+ .hm-ltb-card{border-color:transparent;box-shadow:none;background:transparent}
+ .hm-ltb .hm-ltb-meta{padding-inline:0}
+ .hm-ltb-src{display:none}
+}
+
+
+/* Desktop spacing pass (audit D1): tighter chapter rhythm on the homepage only — same content, ≈1,000 px shorter at 1440 */
+@media (min-width:768px){
+ :is(.hm-ltb,.hm-lab,.hm-str,.hm-scn,.hm-prt,.hm-gal,.hm-arc,.hm-fth){padding-block:clamp(64px,6.4vw,104px)}
+ :is(.hm-ltb,.hm-lab,.hm-str,.hm-scn,.hm-prt,.hm-gal,.hm-arc,.hm-fth) .sec-head{margin-bottom:var(--s-7)}
+}
+.hm-fth-quote footer a{display:inline-flex;align-items:center;min-height:44px}

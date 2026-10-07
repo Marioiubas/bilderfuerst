@@ -58,7 +58,8 @@
 .dz-hero-grid{position:relative;z-index:2;display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:clamp(40px,6vw,104px);align-items:center}
 .dz-hero .eyebrow{margin-bottom:var(--s-6);flex-wrap:wrap}
 .dz-title{display:grid;font-size:clamp(50px,7.4vw,124px)}
-.dz-title .outline-type{-webkit-text-stroke-color:var(--silver-300)}
+/* Solid H1 (outline type is reserved for the footer sign-off); second line in silver */
+.dz-title-2{color:var(--silver-300)}
 .dz-dot{font-style:normal;color:var(--cyan);-webkit-text-stroke:0}
 .dz-hero .lead{margin-top:var(--s-6);color:var(--text-inverse-muted)}
 .dz-hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:var(--s-7)}
@@ -93,7 +94,7 @@
 .dz-index-list li{min-width:0}
 .dz-index-list li+li{border-left:1px solid var(--line-dark)}
 .dz-index-link{display:flex;align-items:center;gap:10px;min-height:56px;height:100%;padding:8px 16px;font-weight:620;font-size:14px;line-height:1.25;color:var(--text-inverse);transition:background-color var(--t-fast) var(--ease-shutter)}
-.dz-index-link:hover{background:var(--graphite-800)}
+@media (hover:hover){.dz-index-link:hover{background:var(--graphite-800)}}
 .dz-index-link:focus-visible{outline:var(--focus-ring-dark);outline-offset:-3px}
 .dz-index-n{flex:none;color:var(--cyan)}
 
@@ -104,7 +105,7 @@
 .dz-tiles{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));margin:0;padding:0;border:1px solid var(--line-dark);min-inline-size:0}
 .dz-tile{position:relative;display:grid;align-content:start;gap:6px;padding:14px 14px 18px;cursor:pointer;overflow:hidden;border-right:1px solid var(--line-dark);transition:background-color var(--t-fast) var(--ease-shutter)}
 .dz-tile:last-of-type{border-right:0}
-.dz-tile:hover{background:var(--graphite-800)}
+@media (hover:hover){.dz-tile:hover{background:var(--graphite-800)}}
 .dz-tile::before{content:'';position:absolute;left:0;right:0;top:0;height:2px;background:var(--red-glow);transform:scaleX(0);transform-origin:left;transition:transform var(--t-normal) var(--ease-shutter)}
 .dz-tile[data-state=on],.dz-tile[data-state=preview]{background:var(--graphite-800)}
 .dz-tile[data-state=on]::before,.dz-tile[data-state=preview]::before{transform:scaleX(1)}
@@ -124,7 +125,8 @@
 .dz-sil .g{stroke-opacity:.4}
 .dz-sil .ph{fill:var(--graphite-950)}
 .dz-sil .sc{fill:none;stroke:var(--text-inverse-faint);stroke-width:1}
-.dz-tile:hover .dz-sil,.dz-tile[data-state] .dz-sil{color:var(--silver-200)}
+.dz-tile[data-state] .dz-sil{color:var(--silver-200)}
+@media (hover:hover){.dz-tile:hover .dz-sil{color:var(--silver-200)}}
 .dz-tile[data-state] .dz-sil .h{stroke:var(--cyan)}
 .dz-tile[data-state] .dz-sil .ph{fill:var(--cyan)}
 .dz-tiles-foot{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:4px 24px;margin-top:8px}
@@ -205,7 +207,7 @@
 .dz-mode{position:relative;display:grid;gap:3px;padding:11px 12px;cursor:pointer;font-size:14px;font-weight:600;transition:background-color var(--t-fast)}
 .dz-mode+.dz-mode{border-left:1px solid var(--line-dark-strong)}
 .dz-mode .mono{font-size:var(--fs-mono-s);color:var(--text-inverse-faint)}
-.dz-mode:hover{background:var(--graphite-800)}
+@media (hover:hover){.dz-mode:hover{background:var(--graphite-800)}}
 .dz-mode:has(input:checked){background:var(--graphite-700);box-shadow:inset 0 -2px 0 var(--red-glow)}
 .dz-mode:has(input:checked) .mono{color:var(--cyan)}
 .dz-mode:has(input:focus-visible){outline:var(--focus-ring-dark);outline-offset:-3px}
@@ -218,7 +220,7 @@
 .dz-range{width:100%;margin:0;height:44px;cursor:pointer}
 .dz-presets{display:flex;flex-wrap:wrap;gap:8px}
 .dz-presets .chip{min-height:44px;padding:0 14px;font-size:var(--fs-mono);cursor:pointer;transition:border-color var(--t-fast),background-color var(--t-fast)}
-.dz-presets .chip:hover{border-color:var(--silver-300)}
+@media (hover:hover){.dz-presets .chip:hover{border-color:var(--silver-300)}}
 .dz-presets .chip[aria-pressed=true]{border-color:var(--red-glow);color:var(--white)}
 .dz-hint{font-size:13px;line-height:1.5;color:var(--text-inverse-muted);max-width:56ch}
 .dz-checks-row{display:grid;gap:4px}
@@ -323,6 +325,11 @@
  .dz-hero{min-height:0}
  .dz-hero-grid{grid-template-columns:1fr}
  .dz-hero-object{max-width:620px;padding-bottom:0}
+ /* The slide photo comes before the stat row (OLD showed the Noritsu photo in the fold) */
+ .dz-hero-grid{gap:0}
+ .dz-hero-copy{display:contents}
+ .dz-hero-object{order:1;margin-top:var(--s-6)}
+ .dz-readout{order:2}
  .dz-plate-sm{display:none}
  .dz-estimator{grid-template-columns:1fr}
  .dz-est-out{border-left:0;border-top:1px solid var(--line-dark)}
@@ -374,18 +381,21 @@
  .dz-index-link{min-height:48px;padding:6px 12px 6px 0;font-size:14px}
  .dz-index-list li:nth-child(even) .dz-index-link{padding-left:12px}
 
- /* Chooser: a one-column list, so the detail panel opens directly under the chosen tile. */
- .dz-tiles{grid-template-columns:1fr}
- .dz-tile{grid-template-columns:64px minmax(0,1fr) auto;grid-template-areas:"sil name code" "sil hint code";align-items:center;column-gap:14px;row-gap:2px;min-height:64px;padding:8px 16px 8px 12px;border-right:0}
- .dz-tile:last-of-type{grid-column:auto}
- .dz-tile .dz-sil{grid-area:sil;width:64px;height:48px}
- .dz-tile-code{grid-area:code}
- .dz-tile-name{grid-area:name;align-self:end;margin-top:0}
- .dz-tile-hint{grid-area:hint;align-self:start;font-size:13px}
- .dz-tile::before{left:0;right:auto;top:0;bottom:0;width:2px;height:auto;transform:scaleY(0);transform-origin:top}
- .dz-tile[data-state=on]::before{transform:scaleY(1)}
+ /* Chooser: two-column picture tiles (OLD's illustrated tiles, all seven objects); the detail panel still opens
+    directly after the chosen tile's row (--o-sm = row end of 2 columns). */
+ .dz-tiles{grid-template-columns:repeat(2,minmax(0,1fr));border-bottom:0}
+ .dz-tile{gap:3px;padding:10px 12px 14px;border-bottom:1px solid var(--line-dark)}
+ .dz-tile:nth-of-type(2n){border-right:0}
+ .dz-tile:last-of-type{grid-column:1/-1;grid-template-columns:minmax(0,1fr) minmax(0,1fr);grid-template-areas:"code code" "sil name" "sil hint";column-gap:12px;align-items:center}
+ .dz-tile:last-of-type .dz-tile-code{grid-area:code}
+ .dz-tile:last-of-type .dz-sil{grid-area:sil}
+ .dz-tile:last-of-type .dz-tile-name{grid-area:name;align-self:end}
+ .dz-tile:last-of-type .dz-tile-hint{grid-area:hint;align-self:start}
+ .dz-tile .dz-sil{margin:2px 0 6px;background:radial-gradient(70% 70% at 50% 45%,var(--graphite-800),transparent 75%)}
+ .dz-tile-name{margin-top:0;font-size:15px}
+ .dz-tile-hint{font-size:12.5px}
  .dz-tile[data-state=preview]{background:transparent}
- .dz-tile[data-state=preview]::before{transform:scaleY(0)}
+ .dz-tile[data-state=preview]::before{transform:scaleX(0)}
  .dz-tile[data-state=preview] .dz-tile-code{color:var(--text-inverse-faint)}
  .dz-tile[data-state=preview] .dz-sil{color:var(--silver-400)}
  .dz-tile[data-state=preview] .dz-sil .h{stroke:currentColor}

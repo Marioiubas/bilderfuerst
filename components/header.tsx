@@ -49,17 +49,17 @@ export function Header(){
   <a className="skip-link" href="#main">Zum Inhalt springen</a>
   <div className="utility" role="region" aria-label="Ladeninformation und Vorschau-Hinweis">
    <span className="utility-addr">Alexanderstraße 2 · 90762 Fürth</span>
-   <span className="review-flag"><i className="led"/>Demo / Owner Review · keine Bestellungen</span>
+   <span className="review-flag"><i className="led"/>Demo<span className="rf-long"> / Owner Review</span> · keine Bestellungen</span>
    <Link className="utility-extra" href="/kontakt">Mo–Fr 9:30–18:30 · Sa 9:30–16:30 <ArrowUpRight size={11}/></Link>
   </div>
   <header className={`site-header ${compact?'is-compact':''}`} data-tone={dark?'dark':'light'} ref={megaRef}>
-   <Link href="/" className="wordmark" aria-label="Analog Store – Bilderfürst Fürth, Startseite"><BrandLogo/><span className="brand-lab" aria-hidden="true">Film Lab<br/>Fürth</span></Link>
+   <Link href="/" className="wordmark" aria-label="Analog Store – Bilderfürst Fürth · Film Lab Fürth · Startseite"><BrandLogo/><span className="brand-lab" aria-hidden="true">Film Lab<br/>Fürth</span></Link>
    <nav className="primary-nav" aria-label="Hauptnavigation">
     <button className="nav-trigger" aria-expanded={mega} aria-controls="mega-shop" data-active={isActive('/shop')} onClick={()=>setMega(v=>!v)}>Shop <ChevronDown size={14} style={{transform:mega?'rotate(180deg)':undefined,transition:'transform .2s'}}/></button>
     {NAV.slice(1).map(n=><Link key={n.href} href={n.href} aria-current={isActive(n.href)?'page':undefined}>{n.label}</Link>)}
    </nav>
    <div className="header-tools">
-    <button className="search-trigger" onClick={()=>setSearchOpen(true)} aria-label="Shop und Services durchsuchen (Strg+K)"><Search size={18}/><span>Suchen</span><kbd>⌘K</kbd></button>
+    <button className="search-trigger" onClick={()=>setSearchOpen(true)} aria-label="Suchen – Shop und Services" aria-keyshortcuts="Meta+K Control+K"><Search size={18}/><span>Suchen</span><kbd aria-hidden="true">⌘K</kbd></button>
     <button className="icon-btn cart-trigger" onClick={()=>setCartOpen(true)} aria-label={`Vorschau-Warenkorb öffnen, ${count} Artikel`}><ShoppingBag size={20}/><span className="cart-count" data-empty={count===0}>{count}</span></button>
     <button className="icon-btn menu-trigger" onClick={()=>setMobile(true)} aria-label="Menü öffnen" aria-haspopup="dialog"><Menu size={22}/></button>
    </div>

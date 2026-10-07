@@ -26,7 +26,7 @@ export function Gallery(){
    <div className="wrap gal-intro-grid">
     <div className="gal-intro-head">
      <p className="eyebrow"><b>GAL</b><span>Street Gallery · Fürth</span><span className="gal-since">seit Anfang 2020</span></p>
-     <h1 id="gal-title" className="display gal-title">Bilder gehören <span className="outline-type">nach draußen.</span></h1>
+     <h1 id="gal-title" className="display gal-title h-serif">Bilder gehören <em>nach draußen.</em></h1>
      <p className="lead">Seit Anfang 2020 haben wir aus unserer Schaufenster-Galerie eine Street Gallery mit analogen Aufnahmen aufgebaut – mit wechselnden Ausstellungen an der Ecke Schwabacher Straße / Alexanderstraße.</p>
     </div>
     <figure className="gal-evidence">

@@ -8,6 +8,11 @@ export function displayName(p:Product){
  let n=p.name.replace(/^Bild\s*\d+\s*-\s*/i,'').replace(/\s{2,}/g,' ').trim();
  const words=n.split(' ');
  if(words.length>5){const head=words.slice(0,2).join(' ');const at=n.indexOf(` ${head}`,head.length);if(at>12)n=n.slice(0,at).trim()}
+ // Sentence/brand case for display (audit 4.2): "CINESTILL CineStill 800 T" → "CineStill 800 T", "PENTAX 17" → "Pentax 17".
+ // Only a shouted leading brand word changes; model names such as TRI-X or HP5 stay as written.
+ const [first,second]=n.split(' ');
+ if(second&&first.toLowerCase()===second.toLowerCase())n=n.slice(first.length+1);
+ else if(/^[A-ZÄÖÜ]{4,}$/.test(first))n=first[0]+first.slice(1).toLowerCase()+n.slice(first.length);
  return n;
 }
 export const processLabel=(process:string)=>process==='Schwarzweiß'?'S/W':process;

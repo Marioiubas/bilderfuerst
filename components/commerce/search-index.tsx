@@ -49,6 +49,11 @@ export function SearchIndex(){
 
  // Dialog (child) has already called showModal() when this effect runs, so focus is safe here.
  useEffect(()=>{if(searchOpen)input.current?.focus()},[searchOpen]);
+ // Phone keyboards shrink only the visual viewport; size the sheet to it so results never sit under the keyboard (DEVICE-QA D2).
+ useEffect(()=>{const vv=window.visualViewport;const el=document.querySelector<HTMLElement>('dialog.search-index');if(!searchOpen||!vv||!el)return;
+  const fit=()=>el.style.setProperty('--vvh',`${Math.round(vv.height)}px`);fit();vv.addEventListener('resize',fit);
+  return()=>{vv.removeEventListener('resize',fit);el.style.removeProperty('--vvh')};
+ },[searchOpen]);
  useEffect(()=>{if(!q.trim())return;const t=window.setTimeout(()=>track('search',{q:q.trim(),source:'index'}),700);return()=>window.clearTimeout(t)},[q]);
 
  const {groups,parsed,flat}=useMemo(()=>{
@@ -111,8 +116,9 @@ export function SearchIndex(){
        return <Link key={e.id} id={`${uid}-${e.id}`} href={e.href} role="option" aria-selected={sel} tabIndex={-1} className="si-row" onClick={close} onMouseMove={()=>{if(cursor!==i)setCursor(i)}}>
         <span className="si-no mono num" aria-hidden="true">{String(i+1).padStart(3,'0')}</span>
         <span className="si-thumb" aria-hidden="true">{e.image?<img src={e.image} alt="" width={44} height={44} loading={i<6?'eager':'lazy'} decoding="async"/>:<span className="mono">{e.code}</span>}</span>
-        <span className="si-text"><strong className="si-title">{e.title}</strong>{e.line&&<span className="si-line mono">{e.line}</span>}
-         {e.price&&<span className="si-buy"><span className="si-price num">{e.price}</span><span className={`status ${e.inStock?'status-ok':'status-ask'}`}>{e.stock}</span></span>}</span>
+        <span className="si-text"><strong className="si-title">{e.title}</strong>
+         {e.price&&<span className="si-buy"><span className="si-price num">{e.price}</span><span className={`status ${e.inStock?'status-ok':'status-ask'}`}>{e.stock}</span></span>}
+         {e.line&&<span className="si-line mono">{e.line}</span>}</span>
         <span className="si-code-col mono" aria-hidden="true">{e.product?e.code:''}{sel&&<CornerDownLeft size={14}/>}</span>
        </Link>})}
       {g.more&&<Link className="si-more mono" href={g.more} onClick={close}>+ {g.total-g.entries.length} weitere im Shop →</Link>}

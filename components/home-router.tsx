@@ -77,7 +77,7 @@ function JumpIndex(){
 }
 
 export function HomeRouter(){
- return <section className="hm-router zone-graphite" aria-labelledby="hm-router-title" id="entdecken">
+ return <section className="hm-router zone-light" aria-labelledby="hm-router-title" id="entdecken">
   <div className="wrap">
    <header className="hm-router-head">
     <p className="eyebrow"><b>IDX</b><span>Index · Was du mitbringst</span><span className="sec-index">5 Schubladen</span></p>

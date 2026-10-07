@@ -29,7 +29,7 @@ export function DigitizationHero(){
   <div className="wrap dz-hero-grid">
    <div className="dz-hero-copy">
     <p className="eyebrow"><b>SCN</b><span>Digitalisierung</span><span aria-hidden="true">/</span><span>bilderfürst Manufaktur Fürth</span></p>
-    <h1 id="dz-title" className="display dz-title"><span>Gestern belichtet.</span><span className="outline-type">Heute digital<i className="dz-dot">.</i></span></h1>
+    <h1 id="dz-title" className="display dz-title"><span>Gestern belichtet.</span><span className="dz-title-2">Heute digital<i className="dz-dot">.</i></span></h1>
     <p className="lead">Dias, Negative, Schmalfilm, Videokassetten, Tonband und Schallplatte: Seit 2001 digitalisieren wir analoges Material – heute in der eigenen bilderfürst Manufaktur in Fürth-Dambach, die auch für andere Fotohändler arbeitet.</p>
     <div className="dz-hero-actions">
      <a href="#was-hast-du" className="btn btn-primary">Objekt wählen <ArrowDown size={17}/></a>
