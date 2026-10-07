@@ -11,7 +11,7 @@ import {WindowStage} from './window-stage';
 import {PrintWall} from './print-wall';
 import {PrintLightbox} from './lightbox';
 import {WindowMap} from './window-map';
-import {galleryFacts} from './prints';
+import {galleryFacts,DEVELOPER_COMPARISON} from './prints';
 
 const Arrow=()=><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg>;
 const ArrowUp=()=><svg className="btn-arrow-up" width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true"><path d="M4 12L12 4M5.5 4H12v6.5"/></svg>;
@@ -30,7 +30,7 @@ export function Gallery(){
      <p className="lead">Seit Anfang 2020 haben wir aus unserer Schaufenster-Galerie eine Street Gallery mit analogen Aufnahmen aufgebaut – mit wechselnden Ausstellungen an der Ecke Schwabacher Straße / Alexanderstraße.</p>
     </div>
     <figure className="gal-evidence">
-     <div className="gal-evidence-photo"><img src="/images/store-exterior-gallery-window.webp" width={1063} height={709} fetchPriority="high" decoding="async"
+     <div className="gal-evidence-photo"><img src="/images/store-exterior-gallery-window.webp" srcSet="/images/store-exterior-gallery-window-t.webp 480w, /images/store-exterior-gallery-window.webp 1063w" sizes="(max-width: 1023px) calc(100vw - 32px), 46vw" width={1063} height={709} fetchPriority="high" decoding="async"
       alt="Die Ladenecke von bilderfürst in Fürth: rechts das Schaufenster mit neun schwarz gerahmten Schwarzweiß-Abzügen in drei Reihen hinter Glas."/></div>
      <figcaption><span className="mono">Das echte Fenster · Foto vom 12.03.2018</span><span>Damalige Beschilderung und Ausstellung. Heute hängen dort neun analoge Aufnahmen, rund um die Uhr sichtbar.</span></figcaption>
     </figure>
@@ -63,7 +63,7 @@ export function Gallery(){
   <section className="gal-wall-section zone-graphite section" aria-labelledby="gal-wall-title">
    <div className="wrap">
     <SectionHead code="GAL" label="Wand · 12 Abzüge" index="02 / 04" id="gal-wall-title" title="Vom Kontaktbogen an die Wand."/>
-    <p className="gal-notice"><b className="mono">Darstellung</b><span>Das ist <strong>nicht die aktuelle Ausstellung.</strong> Welche Bilder gerade im Fenster hängen, siehst du nur vor Ort – die Ausstellungen wechseln. Hier hängen Labormuster und Fotos aus Laden und Labor, damit du die Hängung kennenlernst.</span></p>
+    <div className="gal-notice"><b className="mono">Darstellung</b><p>Das ist <strong>nicht die aktuelle Ausstellung.</strong> Welche Bilder gerade im Fenster hängen, siehst du nur vor Ort – die Ausstellungen wechseln. Hier hängen ein Labormuster und Fotos aus Laden, Labor und Digitalisierung, damit du die Hängung kennenlernst.</p><p className="gal-notice-lab">Das Porsche-Motiv (01) ist ein Labormuster auf Kodak Tri-X. <Link className="link" href={DEVELOPER_COMPARISON}>Vier Entwickler im Vergleich <Arrow/></Link></p></div>
     <PrintWall onOpen={setOpen}/>
    </div>
   </section>
@@ -74,7 +74,7 @@ export function Gallery(){
     <div className="gal-plan-grid">
      <WindowMap onOpen={setOpen}/>
      <figure className="gal-evidence gal-evidence-plan">
-      <div className="gal-evidence-photo"><img src="/images/store-front-l.webp" width={1063} height={709} loading="lazy" decoding="async"
+      <div className="gal-evidence-photo"><img src="/images/store-front-l.webp" srcSet="/images/store-front.webp 600w, /images/store-front-l.webp 1063w" sizes="(max-width: 1023px) calc(100vw - 32px), 42vw" width={1063} height={709} loading="lazy" decoding="async"
        alt="Das Schaufenster aus der Nähe: neun schwarze Rahmen mit weißen Passepartouts in drei Reihen, davor drei kleine Strahler auf der Fensterbank."/></div>
       <figcaption><span className="mono">Zum Vergleich · Foto vom 12.03.2018</span><span>Drei Reihen à drei Rahmen, Strahler auf der Fensterbank. Die Nummern im Plan folgen diesem Raster.</span></figcaption>
      </figure>

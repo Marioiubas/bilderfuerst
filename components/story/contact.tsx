@@ -82,7 +82,7 @@ export function ContactPage(){
     <SectionHead code="ARC" label="Aus dem Archiv · 2018" id="vis-archive-title" title="Der Laden im März 2018."/>
     <p className="lead vis-archive-lead">Archivaufnahmen mit der damaligen Fuji-X-Ausstattung. Heute ist das Ladengeschäft auf analoge Fotografie spezialisiert.</p>
     <ul className="vis-archive-strip">
-     <li><figure><img src="/images/store-inside-l.webp" width={1063} height={709} loading="lazy" decoding="async" alt="Verkaufsraum mit Blick zum Eingang und „bilderfürst“-Schild über der Tür, März 2018"/><figcaption className="mono">Archivaufnahme 2018 · Blick zum Eingang</figcaption></figure></li>
+     <li><figure><img src="/images/store-inside-l.webp" srcSet="/images/store-inside.webp 600w, /images/store-inside-l.webp 1063w" sizes="(max-width: 620px) calc(100vw - 32px), 46vw" width={1063} height={709} loading="lazy" decoding="async" alt="Verkaufsraum mit Blick zum Eingang und „bilderfürst“-Schild über der Tür, März 2018"/><figcaption className="mono">Archivaufnahme 2018 · Blick zum Eingang</figcaption></figure></li>
      <li><figure><img src="/images/store-interior-wide.webp" width={1063} height={709} loading="lazy" decoding="async" alt="Verkaufsraum mit Holztisch und der damaligen Fujifilm-X-Serie-Wand, März 2018"/><figcaption className="mono">Archivaufnahme 2018 · damalige X-Serie-Wand</figcaption></figure></li>
     </ul>
    </div>

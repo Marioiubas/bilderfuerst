@@ -34,7 +34,7 @@ export function WindowStage(){
   </div>
   <figcaption className="gal-stage-cap">
    <span className="mono">Schaufenster · Nachbildung</span>
-   <span>Neun gerahmte Abzüge hinter Glas, rechts durch das schmale Fenster drei weitere im Laden. Vereinfachte Nachbildung, kein Foto – die Motive sind Labormuster und Fotos aus Laden und Labor, nicht die aktuelle Ausstellung.</span>
+   <span>Neun gerahmte Abzüge hinter Glas, rechts durch das schmale Fenster drei weitere im Laden. Vereinfachte Nachbildung, kein Foto – die Motive sind ein Labormuster und Fotos aus Laden und Labor, nicht die aktuelle Ausstellung.</span>
   </figcaption>
  </figure>;
 }

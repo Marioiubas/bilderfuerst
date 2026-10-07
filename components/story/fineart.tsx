@@ -39,7 +39,7 @@ export function PrintRoomPage({focus}:{focus:'fineart'|'preisliste'}){
     <SectionHead code="PRT" label="Abzüge & kleine Prints" id="prt-small-title" title="Vom Handy, von SD-Karte oder USB-Stick."/>
     <div className="prt-small-grid">
      <figure className="prt-kiosk">
-      <img src="/images/print-kiosk-screens.webp" width={1400} height={933} loading="lazy" decoding="async" alt="Bestellterminal für Abzüge mit Bildauswahl auf dem Bildschirm, dahinter weitere Terminals"/>
+      <img src="/images/print-kiosk-screens-l.webp" srcSet="/images/print-kiosk-screens.webp 1400w, /images/print-kiosk-screens-l.webp 1600w" sizes="(max-width: 900px) calc(100vw - 32px), 46vw" width={1600} height={1067} loading="lazy" decoding="async" alt="Bestellterminal für Abzüge mit Bildauswahl auf dem Bildschirm, dahinter weitere Terminals"/>
       <figcaption className="mono">Bestellterminals für Abzüge · Foto von der Website des Geschäfts</figcaption>
      </figure>
      <div className="prt-small-copy">

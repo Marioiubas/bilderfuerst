@@ -215,7 +215,8 @@ input[type=range]{accent-color:var(--red)}
 .page-head .eyebrow{margin-bottom:var(--s-5)}
 .page-head h1{max-width:16ch}
 .page-head .lead{margin-top:var(--s-5)}
-.breadcrumbs{display:flex;flex-wrap:wrap;gap:8px;padding-block:18px;font-family:var(--font-mono);font-size:var(--fs-mono-s);letter-spacing:.06em;text-transform:uppercase;color:var(--text-muted)}
+.breadcrumbs{display:flex;flex-wrap:wrap;align-items:center;gap:0 8px;padding-block:6px;font-family:var(--font-mono);font-size:var(--fs-mono-s);letter-spacing:.06em;text-transform:uppercase;color:var(--text-muted)}
+.breadcrumbs a{display:inline-flex;align-items:center;min-height:44px}
 .breadcrumbs a:hover{color:var(--red-ink)}
 .breadcrumbs [aria-current]{color:var(--text)}
 

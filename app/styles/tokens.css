@@ -70,7 +70,7 @@
  --fs-body:15px;
  --fs-small:13px;
  --fs-mono:12px;            /* informational floor (external audit 2026-10-06) */
- --fs-mono-s:11px;          /* secondary codes; 12px on phones */
+ --fs-mono-s:12px;          /* secondary codes; same floor as --fs-mono (audit 2026-10-06) */
  --fs-deco:9px;             /* decorative-only edge print / frame numbers (aria-hidden) */
  --lh-display:.86;
  --lh-heading:1;
@@ -110,4 +110,4 @@
  /* — Textures (static, cheap) — */
  --grain:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .5 0 0 0 0 .5 0 0 0 0 .5 0 0 0 .9 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
-@media (max-width:767px){:root{--header-h:60px;--fs-body:15px;--fs-mono-s:12px}}
+@media (max-width:767px){:root{--header-h:60px;--fs-body:15px}}

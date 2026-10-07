@@ -54,19 +54,21 @@ export function HistoryPage(){
   <section className="zone-dark grain hist-intro" aria-labelledby="hist-title">
    <div className="wrap">
     <p className="eyebrow"><b>ARC</b><span>Archiv · Familie Dittmer</span><span className="sec-index">1935 — heute</span></p>
-    <h1 id="hist-title" className="display hist-title">Drei Generationen <span className="outline-type">auf einem Film.</span></h1>
-    <div className="hist-intro-foot">
-     <p className="lead">Von den Fotolaboren bei Foto Seitz in Nürnberg bis zum Analog Store mit eigenem Labor in der Alexanderstraße 2. Die Chronik der Familie Dittmer, Bild für Bild – so, wie sie das Geschäft selbst aufgeschrieben hat.</p>
-     <nav className="hist-jump" aria-label="Chronik">
-      <a className="btn btn-light" href={`#${anchor(CHAPTERS[0])}`}>Chronik starten <ArrowDown size={16}/></a>
-      <a className="link" href="#uebersicht">Zur Übersicht</a>
-     </nav>
+    <div className="hist-intro-main">
+     <h1 id="hist-title" className="display hist-title">Drei Generationen <span className="outline-type">auf einem Film.</span></h1>
+     <div className="hist-intro-foot">
+      <p className="lead">Von den Fotolaboren bei Foto Seitz in Nürnberg bis zum Analog Store mit eigenem Labor in der Alexanderstraße 2. Die Chronik der Familie Dittmer, Bild für Bild – so, wie sie das Geschäft selbst aufgeschrieben hat.</p>
+      <nav className="hist-jump" aria-label="Chronik">
+       <a className="btn btn-light" href={`#${anchor(CHAPTERS[0])}`}>Chronik starten <ArrowDown size={16}/></a>
+       <a className="link" href="#uebersicht">Zur Übersicht</a>
+      </nav>
+     </div>
     </div>
    </div>
    <figure className="wrap hist-archive">
     <div className="hist-archive-film">
      <div className="sprockets" aria-hidden="true"/>
-     <img ref={archive} src="/images/history-l.webp" width={1600} height={457} fetchPriority="high" decoding="async" alt="Drei Archivaufnahmen nebeneinander: eine Bilderfürst-Ladenfront mit „Farbfotos in 1 Stunde“ und Datumsstempel ’88, das Schaufenster von Foto Seitz in Schwarzweiß und ein Verkaufsraum mit „Farbfotos in 1 Stunde“."/>
+     <img ref={archive} src="/images/history-l.webp" srcSet="/images/history.webp 600w, /images/history-l.webp 1600w" sizes="(max-width: 767px) 100vw, min(1328px, 100vw - 112px)" width={1600} height={457} fetchPriority="high" decoding="async" alt="Drei Archivaufnahmen nebeneinander: eine Bilderfürst-Ladenfront mit „Farbfotos in 1 Stunde“ und Datumsstempel ’88, das Schaufenster von Foto Seitz in Schwarzweiß und ein Verkaufsraum mit „Farbfotos in 1 Stunde“."/>
      <div className="sprockets" aria-hidden="true"/>
      <p className="hist-archive-edge" aria-hidden="true"><span>▸ 1</span><span>▸ 2</span><span>▸ 3</span></p>
     </div>
@@ -123,7 +125,7 @@ function Frame({chapter:c,index}:{chapter:Chapter;index:number}){
    <p className="hist-frame-year num" aria-hidden="true">{c.year}</p>
    <h3 id={`${id}-t`}>{c.title}</h3>
    {c.image&&<figure className="hist-frame-img">
-    <img src={c.image.src} width={c.image.w} height={c.image.h} alt={c.image.alt} loading="lazy" decoding="async"/>
+    <img src={c.image.src} srcSet={c.image.srcSet} sizes={c.image.srcSet?'(max-width: 1023px) calc(100vw - 96px), 52vw':undefined} width={c.image.w} height={c.image.h} alt={c.image.alt} loading="lazy" decoding="async"/>
     <figcaption className="mono">{c.image.caption}</figcaption>
    </figure>}
    <div className="hist-copy">{c.body.map(t=><p key={t}>{t}</p>)}</div>

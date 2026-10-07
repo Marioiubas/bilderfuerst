@@ -2,11 +2,18 @@
 // Lightbox for one print, opened through the Street Gallery's signature aperture (only used on /galerie).
 // Escape, backdrop click and the close button run the quick closing iris, then close the native <dialog>.
 import {useCallback,useEffect,useRef,type CSSProperties,type KeyboardEvent} from 'react';
+import Link from 'next/link';
 import {Dialog} from '@/components/dialog';
 import {track} from '@/lib/analytics';
 import {apertureClose,apertureHold,apertureOpen,type Revertible} from '@/motion/gallery';
-import {prints} from './prints';
+import {prints,DEVELOPER_COMPARISON,type Print} from './prints';
 import {placeLabel} from './print-wall';
+
+/** Every real rendition of the print (never an upscale): grid, optional middle, large. */
+const srcSetOf=(p:Print)=>{
+ const list:Array<[string,number]>=[[p.src,p.w],...(p.mid?[[p.mid.src,p.mid.w] as [string,number]]:[]),[p.large,p.lw]];
+ return list.filter(([,w],i)=>list.findIndex(([,x])=>x===w)===i).map(([u,w])=>`${u} ${w}w`).join(', ');
+};
 
 const Arrow=({dir}:{dir:'l'|'r'})=><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true"><path d={dir==='r'?'M2 8h11M9 4l4 4-4 4':'M14 8H3M7 4L3 8l4 4'}/></svg>;
 
@@ -39,8 +46,8 @@ export function PrintLightbox({index,onIndex,onClose}:{index:number|null;onIndex
 
  return <Dialog open={index!==null} onClose={requestClose} kind="lightbox" className="gal-lightbox" label={p?`Druck ${p.id} von ${prints.length}: ${p.title}`:'Galeriebild'}>
   {p&&<div className="gal-lb" onKeyDown={key}>
-   <div className="gal-lb-stage" style={{'--ar':p.lw/p.lh} as CSSProperties}>
-    <img ref={imgRef} key={p.id} src={p.large} width={p.lw} height={p.lh} alt={p.alt} decoding="async"/>
+   <div className="gal-lb-stage" style={{'--ar':p.lw/p.lh,'--lw':`${p.lw}px`} as CSSProperties}>
+    <img ref={imgRef} key={p.id} src={p.large} srcSet={srcSetOf(p)} sizes="(max-width: 900px) calc(100vw - 24px), min(1040px, 100vw - 360px)" width={p.lw} height={p.lh} alt={p.alt} decoding="async"/>
     <svg ref={svgRef} key={`iris-${p.id}`} className="gal-iris" aria-hidden="true" focusable="false"><path data-iris="mask" fillRule="evenodd" d="M0 0H9999V9999H0Z"/><path data-iris="edges"/></svg>
    </div>
    <div className="gal-lb-side">
@@ -55,10 +62,11 @@ export function PrintLightbox({index,onIndex,onClose}:{index:number|null;onIndex
      <div><dt>Quelle</dt><dd>{p.source}</dd></div>
      <div><dt>Kamera · Fotograf</dt><dd>nicht angegeben</dd></div>
     </dl>
-    <p className="gal-lb-note">Darstellung mit Labormustern und Fotos aus Laden und Labor – nicht die aktuelle Ausstellung im Fenster.</p>
+    {p.lab&&<p className="gal-lb-lab"><Link className="link" href={DEVELOPER_COMPARISON}>Vier Entwickler im Vergleich <Arrow dir="r"/></Link></p>}
+    <p className="gal-lb-note">Darstellung mit einem Labormuster und Fotos aus Laden und Labor – nicht die aktuelle Ausstellung im Fenster.</p>
     <div className="gal-lb-nav">
-     <button type="button" className="btn btn-ghost btn-sm" onClick={()=>step(-1)}><Arrow dir="l"/> Vorheriges</button>
-     <button type="button" className="btn btn-ghost btn-sm" onClick={()=>step(1)}>Nächstes <Arrow dir="r"/></button>
+     <button type="button" className="btn btn-ghost" onClick={()=>step(-1)}><Arrow dir="l"/> Vorheriges</button>
+     <button type="button" className="btn btn-ghost" onClick={()=>step(1)}>Nächstes <Arrow dir="r"/></button>
     </div>
    </div>
   </div>}
